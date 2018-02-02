@@ -9,8 +9,18 @@
 <html <?php language_attributes(); ?>">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title><?php bloginfo('name'); ?></title>
+    <title><?php 
+    wp_title( '|', true, 'right' );
+    bloginfo('name');
+
+    //add the blog description for the home/front page.
+    $site_description = get_bloginfo( 'description', 'display' );
+    if ( $site_description && ( is_home() || is_front_page() ) )
+        echo " | $site_description";
+
+    ?></title>
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <?php wp_head(); ?>
@@ -18,24 +28,14 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed site">
-    <div id="sidebar" class="sidebar">
-        <header id="masthead" class="site-header" role="banner">
-            <div class="site-branding">
-                <?php
-                    if ( is_front_page() && is_home() ) : ?>
-                        <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-                    <?php else : ?>
-                        <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-                    <?php endif;
-
-                    $description = get_bloginfo( 'description', 'display' );
-                    if ( $description || is_customize_preview() ) : ?>
-                        <p class="site-description"><?php echo $description; ?></p>
-                    <?php endif;
-                ?>
-            </div><!-- .site-branding -->
-        </header><!-- .site-header -->
-    </div><!-- .sidebar -->
-
-    <div id="content" class="site-content">
+<header id="topbar">
+    <div class="wrapper">
+    <hgroup class="alignleft">
+            <h2 class="alignleft"><p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p></h2>
+            <h2 class="alignleft"><?php bloginfo( 'description' ); ?></h2>
+    </hgroup>
+    <div class="alignleft search">
+     <?php dynamic_sidebar('hander_sidebar_search'); ?>
+     </div>
+    </div>
+</header>

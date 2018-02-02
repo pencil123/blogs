@@ -6,8 +6,7 @@
  */
 
 get_header(); ?>
-
-<div class="wrap">
+<div id="content" class="wrapper">
 Content
-</div><!-- .wrap -->
+</div>
 <?php get_footer();

@@ -9,10 +9,7 @@
  * @since Twenty Fifteen 1.0
  */
 ?>
-
-    </div><!-- .site-content -->
-
-    <footer id="colophon" class="site-footer" role="contentinfo">
+    <footer id="footer" class="wrapper" role="contentinfo">
         <div class="site-info">
             <?php
                 /**
