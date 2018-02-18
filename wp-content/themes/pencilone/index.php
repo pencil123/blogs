@@ -15,6 +15,7 @@ get_header(); ?>
              <td><strong>Post Header</strong></td>
          </tr>
      <?php $count_posts = wp_count_posts(); $published_posts = $count_posts->publish;
+     echo $published_posts;
      query_posts( 'posts_per_page=-1' );
      while ( have_posts() ) : the_post();
          echo '<tr>';
@@ -30,5 +31,9 @@ get_header(); ?>
      endwhile;
      wp_reset_query(); ?>
      </table>
+
+
+
+
 </div>
 <?php get_footer();
