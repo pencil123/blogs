@@ -26,9 +26,13 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     background: #f7f7f7;
     border-bottom: 1px solid #000;
 }
+
+#topbar a:hover{text-decoration: blink;color:blue;}
+
 .wrapper {
     width: 960px;
     margin: 0 auto;
+    clear: both;
 }
 
 #footer {
@@ -42,6 +46,60 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	float:left;
 }
 
+.alignright {
+    float:right;
+}
+
 .search {
 	margin-right: 50px;
 }
+
+#content {
+    width:600px;
+    padding-top: 10px;
+    float: left;
+}
+
+
+
+/*   post item list   */
+.item-list {
+    padding:5px 5px 5px;
+    clear:both;
+    border-left-width: 1px;
+}
+
+.post-box-title {
+    padding-bottom: 10px;
+}
+
+.post-meta {
+    padding-bottom:10px;
+}
+
+.summary {
+    padding-bottom: 10px;
+}
+
+
+
+/*  sidebar list */
+#sidebar {
+    float: left;
+    width: 200px;
+    padding:20px 10px 10px;
+}
+
+.sidebox {
+    padding:2px;
+}
+
+.side-list {
+    margin-left:35px;
+}
+
+
+
+a:link {text-decoration: blink;color:blue;}
+a:active {text-decoration: none;color:red;}
+a:hover {text-decoration: none;color:red;}
