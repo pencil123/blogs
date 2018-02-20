@@ -9,23 +9,13 @@
  * @since Twenty Fifteen 1.0
  */
 ?>
-    <footer id="footer" class="wrapper" role="contentinfo">
-        <div class="site-info">
-            <?php
-                /**
-                 * Fires before the Twenty Fifteen footer text for footer customization.
-                 *
-                 * @since Twenty Fifteen 1.0
-                 */
-                do_action( 'twentyfifteen_credits' );
-            ?>
-            <a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentyfifteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentyfifteen' ), 'WordPress' ); ?></a>
-        </div><!-- .site-info -->
-    </footer><!-- .site-footer -->
+<footer id="footer">
+<div class="wrapper footer-info">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 粤ICP备12040927号.
+</div>
+</footer><!-- .site-footer -->
 
-</div><!-- .site -->
-
-<?php wp_footer(); ?>
-
+<!-- .site -->
+<script type="text/javascript" src="./js/wp-embed.min.js"></script>
 </body>
 </html>

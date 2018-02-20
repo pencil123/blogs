@@ -6,34 +6,28 @@
  */
 
 get_header(); ?>
-<div id="content" class="wrapper">
-     <table>
-         <strong>All Post</strong>
-         <tr>
-             <td><strong>S.No</strong></td>
-             <td><strong>Published Date</strong></td>
-             <td><strong>Post Header</strong></td>
-         </tr>
-     <?php $count_posts = wp_count_posts(); $published_posts = $count_posts->publish;
-     echo $published_posts;
-     query_posts( 'posts_per_page=-1' );
-     while ( have_posts() ) : the_post();
-         echo '<tr>';
-         echo '<td>'.$published_posts.'</td>';
-         echo '<td width="120">';
-         the_time(get_option( 'date_format' ));
-         echo '</td><td><a href="';
-         the_permalink();
-         echo '" title="'.esc_attr( get_the_title() ).'">';
-         the_title();
-         echo '</a></td></tr>';
-         $published_posts--;
-     endwhile;
-     wp_reset_query(); ?>
-     </table>
-
-
-
-
+<div id="breadcrumb" class="wrapper">
+现在位置>首页
 </div>
+<div class="wrapper">
+<div id="content">
+<?php
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+query_posts( 'posts_per_page=10&paged='.$paged );
+while ( have_posts() ): the_post();?>
+<div class="item-list">
+<h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>
+<div class="post-meta">
+<span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
+<span class="entry-author"><?php echo get_the_author(); ?></span>
+<span class="update"><?php echo get_the_modified_time();?></span>
+</div>
+<div class="summary"><?php echo wp_trim_words( get_the_content(), 100 );?>
+</div>
+</div>
+<?php endwhile;?>
+</div>
+</div>
+
+
 <?php get_footer();
