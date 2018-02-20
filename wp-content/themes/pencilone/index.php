@@ -27,6 +27,7 @@ while ( have_posts() ): the_post();?>
 </div>
 <?php endwhile;?>
 </div>
+<div class="pagenav"><?php native_pagenavi();?></div>
 </div>
 
 
