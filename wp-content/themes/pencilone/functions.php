@@ -28,15 +28,19 @@ $wp_query->query_vars["paged"] > 1 ? $current = $wp_query->query_vars["paged"] :
 $pagination = array(
 "base" => @add_query_arg("page","%#%"),
 "format" => "",
+"end_size" => 3,
+"before_page_number" =>"hello",
 "total" => $wp_query->max_num_pages,
 "current" => $current,
-"prev_text" => "? ",
-"next_text" => " ?"
+"prev_text" => "上一页",
+"next_text" => "下一页"
 );
 if( $wp_rewrite->using_permalinks() )
 $pagination["base"] = user_trailingslashit( trailingslashit( remove_query_arg("s",get_pagenum_link(1) ) ) . "page/%#%/", "paged");
 if( !empty($wp_query->query_vars["s"]) )
 $pagination["add_args"] = array("s"=>get_query_var("s"));
+var_dump($pagination);
+echo "<br />";
 echo paginate_links($pagination);
 }
 
