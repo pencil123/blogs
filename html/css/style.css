@@ -114,6 +114,34 @@ body {
 code {
     background: #f1f1f1;
 }
+
+
+/*  pagenav    */
+.pagenav {
+    margin-top:5px;
+    clear:both;
+    border-left-width: 1px;
+    background: white;
+    padding: 10px;
+}
+
+.page-numbers {
+    text-align: center;
+    height: 22px;
+    line-height: 24px;
+    margin: 0px 2px 0px 2px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.current {
+    color:#D9534F;
+}
+
+.prev,.next {
+    font-weight: bold;
+}
+
 /*  sidebar list */
 #sidebar {
     float: left;
