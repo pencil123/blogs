@@ -74,6 +74,33 @@ body {
     float: left;
 }
 
+#content table{
+    border-spacing:0px;
+}
+
+#content table tr{
+    border:1px solid black;
+}
+
+#content table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+.nav-links {
+    background-color: white;
+    margin-top:3px;
+    padding: 7px 10px 1px;
+    height: 30px;
+}
+.screen-reader-text {
+    display:none;
+}
+
+.nav-previous {
+    float:left;
+}
+.nav-next {
+    float:right;
+}
 /*   post item list   */
 .item-list {
     margin-top:5px;
@@ -151,20 +178,17 @@ code {
 
 .sidebox {
     background: white;
-    margin-top:10px;
+    padding:auto 10px auto;
+    margin-top:15px;
 }
 
-.side-title {
+.widgettitle {
     font-weight: bold;
     color: white;
     background-color: #3D4450;
 }
 
-.side-list {
-    margin-left:5px;
-}
-
-.side-list ul {
+.sidebox ul {
     list-style-position: inside;
 }
 

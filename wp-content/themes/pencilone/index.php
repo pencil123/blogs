@@ -33,5 +33,9 @@ while ( have_posts() ): the_post();?>
 </div>
 </div>
 
+<div id="sidebar">
+<?php dynamic_sidebar('rightsidebar'); ?>
+</div>
+
 
 <?php get_footer();

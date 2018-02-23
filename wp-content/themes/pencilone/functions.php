@@ -18,8 +18,19 @@ function daxiawp_sidebar(){
           'before_title'=>'<h2>',
           'after_title'=>'</h2>'
     ));
+    register_sidebar(array(
+      'id' => 'rightsidebar',
+      'name' => 'right_sidebar',
+      'description' => 'hello',
+      'before_widget' => '<div class="sidebox">',
+      'after_widget' => '</div>',
+      ));
 }
 add_action('widgets_init','daxiawp_sidebar');
+
+
+
+
 
 /*@分页功能*/
 function native_pagenavi(){
