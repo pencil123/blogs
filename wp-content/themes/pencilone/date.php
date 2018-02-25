@@ -42,10 +42,11 @@ if ( is_null($page_navi) != ture ): ?>
 <?php endif; ?>
 
 </div>
-</div>
-
 <div id="sidebar">
 <?php dynamic_sidebar('rightsidebar'); ?>
 </div>
+</div>
+
+
 
 <?php get_footer();

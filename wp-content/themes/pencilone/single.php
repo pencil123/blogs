@@ -6,8 +6,7 @@
  */
 get_header(); ?>
 
-<div class="wrapper">
-    <main id="content">
+<main class="wrapper">
         <?php
         // Start the loop.
         while ( have_posts() ) : the_post();
@@ -35,10 +34,6 @@ get_header(); ?>
         endwhile;
         ?>
 
-        </main>
-    </div><!-- .content-area -->
-<div id="sidebar">
-<?php dynamic_sidebar('rightsidebar'); ?>
-</div>
+</main><!-- .content-area -->
 
 <?php get_footer(); ?>

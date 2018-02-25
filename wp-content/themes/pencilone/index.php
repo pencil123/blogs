@@ -32,13 +32,12 @@ while ( have_posts() ): the_post();?>
 if ( is_null($page_navi) != ture ): ?>
 <div class="pagenav"><?php echo $page_navi; ?></div>
 <?php endif; ?>
-
-</div>
 </div>
 
 <div id="sidebar">
 <?php dynamic_sidebar('rightsidebar'); ?>
 </div>
 
+</div>
 
 <?php get_footer();
