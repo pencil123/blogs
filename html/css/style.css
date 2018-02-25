@@ -91,15 +91,15 @@ html {
     float: left;
 }
 
-#content table{
+.entry-content table{
     border-spacing:0px;
 }
 
-#content table tr{
+.entry-content table tr{
     border:1px solid black;
 }
 
-#content table tr:nth-child(even) {
+.entry-content table tr:nth-child(even) {
     background: #f2f2f2;
 }
 .nav-links {
