@@ -18,6 +18,10 @@
         echo " | $site_description";?>
     </title>
     <meta name="viewport" content="width=device-width">
+<?php if (is_single() || is_page() ) : $post_id = get_the_ID(); ?>
+    <meta name="keywords"  content="<?php echo get_post_meta($post_id,'keywords',true);?>" />
+    <meta name="description"  content="<?php echo get_post_meta($post_id,'description',true);?>" />
+<?php endif;?>
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
@@ -32,10 +36,11 @@
     <h2 class="alignleft"><p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p></h2>
     </hgroup>
     <?php bloginfo( 'description' ); ?>
-    <div class="alignright search">
-    <div><form role="search" method="get" id="searchform" class="searchform" action="http://www2.cn-blogs.cn/">
-    <div><input type="text" value="" name="s" id="s"><input type="submit" id="searchsubmit" value="搜索"></div>
-    </form></div>
-    </div>
+
+
+<div class="alignright search">
+<?php dynamic_sidebar('hander_sidebar_search'); ?>
+</div>
+
     </div>
 </header>

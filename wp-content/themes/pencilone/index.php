@@ -28,7 +28,10 @@ while ( have_posts() ): the_post();?>
 <?php endwhile;?>
 
 
-<div class="pagenav"><?php native_pagenavi();?></div>
+<?php $page_navi = native_pagenavi();
+if ( is_null($page_navi) != ture ): ?>
+<div class="pagenav"><?php echo $page_navi; ?></div>
+<?php endif; ?>
 
 </div>
 </div>

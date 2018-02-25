@@ -7,22 +7,16 @@
 
 get_header(); ?>
 <div id="breadcrumb" class="wrapper">
-现在位置>首页>日期列表页
+现在位置>首页>搜索页
 </div>
 <div class="wrapper">
 <div id="content">
 <?php
-$year = get_query_var('year');
-$monthnum = get_query_var('monthnum');
-$day = get_query_var('day');
-
-if ($day) 
-    { $query_string = "year=".$year."&monthnum=".$monthnum."&day=".$day;}
-else
-    { $query_string = "year=".$year."&monthnum=".$monthnum;}
-
+$search = get_query_var('s');
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-query_posts( $query_string.'&posts_per_page=10&paged='.$paged );
+query_posts( 'posts_per_page=10&paged='.$paged."&s=".$search );
+
+if ( have_posts() ) : 
 while ( have_posts() ): the_post();?>
 <div class="item-list">
 <h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>
@@ -41,11 +35,19 @@ if ( is_null($page_navi) != ture ): ?>
 <div class="pagenav"><?php echo $page_navi; ?></div>
 <?php endif; ?>
 
+<?php else : ?>
+<div class="post-box-title">未找到</div>
+<div class="entry-content">
+抱歉，没有符合您搜索条件的结果。请换其它关键词再试。
+</div>
+<?php  endif;?>
+
 </div>
 </div>
 
 <div id="sidebar">
 <?php dynamic_sidebar('rightsidebar'); ?>
 </div>
+
 
 <?php get_footer();

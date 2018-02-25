@@ -7,7 +7,7 @@
 
 get_header(); ?>
 <div id="breadcrumb" class="wrapper">
-现在位置>首页
+现在位置>首页>分类列表页
 </div>
 <div class="wrapper">
 <div id="content">
@@ -28,7 +28,10 @@ while ( have_posts() ): the_post();?>
 </div>
 <?php endwhile;?>
 
-<div class="pagenav"><?php native_pagenavi();?></div>
+<?php $page_navi = native_pagenavi();
+if ( is_null($page_navi) != ture ): ?>
+<div class="pagenav"><?php echo $page_navi; ?></div>
+<?php endif; ?>
 
 </div>
 </div>

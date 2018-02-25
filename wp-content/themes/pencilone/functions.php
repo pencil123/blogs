@@ -15,8 +15,6 @@ function daxiawp_sidebar(){
           'class'=>'',
           'before_widget'=>'<div>',
           'after_widget'=>'</div>',
-          'before_title'=>'<h2>',
-          'after_title'=>'</h2>'
     ));
     register_sidebar(array(
       'id' => 'rightsidebar',
@@ -36,11 +34,15 @@ add_action('widgets_init','daxiawp_sidebar');
 function native_pagenavi(){
 global $wp_query, $wp_rewrite;
 $wp_query->query_vars["paged"] > 1 ? $current = $wp_query->query_vars["paged"] : $current = 1;
+
+$total_pages = $wp_query->max_num_pages;
+if ($total_pages == 1) 
+  return null;
 $pagination = array(
 "base" => @add_query_arg("page","%#%"),
 "format" => "",
 "end_size" => 2,
-"total" => $wp_query->max_num_pages,
+"total" => $total_pages,
 "current" => $current,
 "prev_text" => "上一页",
 "next_text" => "下一页"
@@ -49,7 +51,7 @@ if( $wp_rewrite->using_permalinks() )
 $pagination["base"] = user_trailingslashit( trailingslashit( remove_query_arg("s",get_pagenum_link(1) ) ) . "page/%#%/", "paged");
 if( !empty($wp_query->query_vars["s"]) )
 $pagination["add_args"] = array("s"=>get_query_var("s"));
-echo paginate_links($pagination);
+  return paginate_links($pagination);
 }
 
 
