@@ -1,1 +1,217 @@
-../../../html/css/style.css
+/*
+Theme Name: pencilone
+Version: 1.0
+------- */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    background: #f1f1f1;
+    position: relative;
+    margin: 0;
+    padding-bottom: 60px;
+    min-height: 100%;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#topbar {
+	height: 34px;
+    line-height: 34px;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #000;
+}
+
+#topbar a:hover{text-decoration: blink;color:blue;}
+
+.wrapper {
+    width: 960px;
+    margin: 0 auto;
+    clear: both;
+    overflow:auto;
+}
+
+
+/* footer page  */
+#footer {
+    background: white;
+    border-bottom: 1px solid #000;
+    float: left;
+    margin-top: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.footer-info {
+    text-align: center;
+}
+
+
+
+.alignleft {
+	float:left;
+}
+
+.alignright {
+    float:right;
+}
+
+.search {
+	margin-right: 50px;
+}
+
+#content {
+    width:600px;
+    float: left;
+}
+
+.entry-content table{
+    border-spacing:0px;
+}
+
+.entry-content table tr{
+    border:1px solid black;
+}
+
+.entry-content table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+.nav-links {
+    background-color: white;
+    margin-top:3px;
+    padding: 7px 10px 1px;
+    height: 30px;
+}
+.screen-reader-text {
+    display:none;
+}
+
+.nav-previous {
+    float:left;
+}
+.nav-next {
+    float:right;
+}
+/*   post item list   */
+.item-list {
+    margin-top:5px;
+    clear:both;
+    height: 109px;
+    border-left-width: 1px;
+    background: white;
+    padding: 10px;
+}
+
+.post-box-title {
+    color: #000;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.3em;
+    background:white;
+}
+
+.post-meta {
+    line-height: 2em;
+    background:white;
+}
+
+
+.update {
+    display: none;
+}
+.summary {
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.entry-content {
+    background:white;
+    margin-top: 2px;
+    padding: 10px;
+}
+
+code {
+    background: #f1f1f1;
+}
+
+
+/*  pagenav    */
+.pagenav {
+    margin-top:5px;
+    clear:both;
+    border-left-width: 1px;
+    background: white;
+    padding: 10px;
+}
+
+.page-numbers {
+    text-align: center;
+    height: 22px;
+    line-height: 24px;
+    margin: 0px 2px 0px 2px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.current {
+    color:#D9534F;
+}
+
+.prev,.next {
+    font-weight: bold;
+}
+
+/*  sidebar list */
+#sidebar {
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+}
+
+.sidebox {
+    background: white;
+    padding:auto 10px auto;
+    margin-top:15px;
+}
+
+.widgettitle {
+    font-weight: bold;
+    color: white;
+    background-color: #3D4450;
+}
+
+.sidebox ul {
+    list-style-position: inside;
+}
+
+a {color:black;}
+a:link {text-decoration: none;color:black;}
+a:active {text-decoration: none;color:#D9534F;}
+a:hover {text-decoration: none;color:#D9534F;}
+a:visited {text-decoration: none;}

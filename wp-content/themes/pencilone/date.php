@@ -22,7 +22,7 @@ else
     { $query_string = "year=".$year."&monthnum=".$monthnum;}
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-query_posts( $query_string.'&posts_per_page=10&paged='.$paged );
+query_posts( $query_string.'&posts_per_page=11&paged='.$paged );
 while ( have_posts() ): the_post();?>
 <div class="item-list">
 <h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>

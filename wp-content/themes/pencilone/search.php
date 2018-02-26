@@ -14,7 +14,7 @@ get_header(); ?>
 <?php
 $search = get_query_var('s');
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-query_posts( 'posts_per_page=10&paged='.$paged."&s=".$search );
+query_posts( 'posts_per_page=11&paged='.$paged."&s=".$search );
 
 if ( have_posts() ) : 
 while ( have_posts() ): the_post();?>
