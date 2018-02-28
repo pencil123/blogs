@@ -15,7 +15,5 @@ Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
 </div>
 </footer><!-- .site-footer -->
 
-<!-- .site -->
-<script type="text/javascript" src="./js/wp-embed.min.js"></script>
 </body>
 </html>
