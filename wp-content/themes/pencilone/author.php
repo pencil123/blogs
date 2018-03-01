@@ -18,13 +18,10 @@ get_header(); ?>
 
 
 
-
-
-
-
 <?php
+$author_id = get_the_author_meta('ID');
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-query_posts( 'posts_per_page=11&paged='.$paged );
+query_posts( 'posts_per_page=11&paged='.$paged.'&author='.$author_id );
 while ( have_posts() ): the_post();?>
 <div class="item-list">
 <h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>
