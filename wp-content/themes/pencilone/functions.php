@@ -55,8 +55,21 @@ $pagination["add_args"] = array("s"=>get_query_var("s"));
 }
 
 
+function my_get_the_author_posts_link() {
+  global $authordata;
+  if ( ! is_object( $authordata ) ) {
+    return;
+  }
 
+  $link = sprintf( '<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
+    esc_url( get_author_posts_url( $authordata->ID, $authordata->nickname ) ),
+    /* translators: %s: author's display name */
+    esc_attr( sprintf( __( 'Posts by %s' ), get_the_author() ) ),
+    get_the_author()
+  );
 
+  return apply_filters( 'the_author_posts_link', $link );
+}
 
 
  ?>
