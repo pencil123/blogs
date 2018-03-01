@@ -73,6 +73,28 @@ html {
 }
 
 
+/****author profile page **/
+#profile {
+    background-color: white;
+    margin-top:10px;
+    margin-bottom: 10px;
+    padding:20px;
+}
+
+#profile span {
+    display: block;
+    width:40%;
+    float:left;
+}
+
+.statement {
+    clear: both;
+    display: block;
+    background-color: #f1f1f1;
+    padding:10px;
+    line-height: 25px;
+}
+
 
 .alignleft {
 	float:left;
@@ -118,6 +140,8 @@ html {
 .nav-next {
     float:right;
 }
+
+
 /*   post item list   */
 .item-list {
     margin-top:5px;

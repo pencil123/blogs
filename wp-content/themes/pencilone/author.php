@@ -7,10 +7,21 @@
 
 get_header(); ?>
 <div id="breadcrumb" class="wrapper">
-现在位置>首页
 </div>
 <div class="wrapper">
-<div id="content">
+<div id="profile">
+<h2><?php the_author_meta('user_nicename')?></h2>
+<span>昵称：<?php the_author_meta('nickname')?></span>
+<span>邮件地址:<?php the_author_meta('user_email')?></span>
+<div class="statement"><?php the_author_meta('description')?></div>
+</div>
+
+
+
+
+
+
+
 <?php
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 query_posts( 'posts_per_page=11&paged='.$paged );
@@ -32,12 +43,6 @@ while ( have_posts() ): the_post();?>
 if ( is_null($page_navi) != ture ): ?>
 <div class="pagenav"><?php echo $page_navi; ?></div>
 <?php endif; ?>
-</div>
-
-<div id="sidebar">
-<?php dynamic_sidebar('rightsidebar'); ?>
-</div>
-
 </div>
 
 <?php get_footer();

@@ -28,7 +28,7 @@ while ( have_posts() ): the_post();?>
 <h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>
 <div class="post-meta">
 <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
-<span class="entry-author"><?php echo get_the_author(); ?></span>
+<span class="entry-author"><?php echo get_the_author_posts_link(); ?></span>
 <span class="update"><?php echo get_the_modified_time();?></span>
 </div>
 <div class="summary"><?php echo wp_trim_words( get_the_content(), 100 );?>
