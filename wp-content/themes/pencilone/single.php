@@ -15,11 +15,13 @@ get_header(); ?>
              * use this in a child theme, then include a file called content-___.php
              * (where ___ is the post format) and that will be used instead.
              */?>
-            <div class="post-box-title"><?php the_title();?></div>
+<div class="entry-header">
+<div class="post-box-title"><?php the_title();?></div>
 <div class="post-meta">
 <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
-<span class="entry-author"><?php echo get_the_author(); ?></span>
+<span class="entry-author"><?php the_author_posts_link(); ?></span>
 <span class="update"><?php echo get_the_modified_time();?></span>
+</div>
 </div>
             <div class="entry-content"><?php the_content();?></div>
 <?php 

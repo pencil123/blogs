@@ -85,6 +85,8 @@ html {
     display: block;
     width:40%;
     float:left;
+    margin-bottom: 7px;
+    margin-top:5px;
 }
 
 .statement {
@@ -108,21 +110,17 @@ html {
 	margin-right: 50px;
 }
 
+.entry-header {
+    margin-top: 10px;
+    clear: both;
+    border-left-width: 1px;
+    background: white;
+    padding: 5px;
+}
+
 #content {
     width:600px;
     float: left;
-}
-
-.entry-content table{
-    border-spacing:0px;
-}
-
-.entry-content table tr{
-    border:1px solid black;
-}
-
-.entry-content table tr:nth-child(even) {
-    background: #f2f2f2;
 }
 .nav-links {
     background-color: white;
@@ -146,7 +144,7 @@ html {
 .item-list {
     margin-top:5px;
     clear:both;
-    height: 109px;
+    height: 119px;
     border-left-width: 1px;
     background: white;
     padding: 10px;
@@ -170,20 +168,37 @@ html {
     display: none;
 }
 .summary {
-    padding-bottom: 10px;
+    padding-left: 7px;
     font-size: 15px;
 }
 
 .entry-content {
     background:white;
-    margin-top: 2px;
-    padding: 10px;
+    margin-top: 7px;
+    padding: 10px 30px;
+}
+
+.entry-content table{
+    border-spacing:0px;
+    text-align:left;
+    border-right: 1px solid black;
+}
+
+.entry-content table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+.entry-content th {
+    border-left: 1px solid black;
 }
 
 code {
     background: #f1f1f1;
 }
 
+/* pre and next post */
+.navigation {
+    margin-top: 7px;
+}
 
 /*  pagenav    */
 .pagenav {
@@ -220,8 +235,8 @@ code {
 
 .sidebox {
     background: white;
-    padding:auto 10px auto;
-    margin-top:15px;
+    padding:10px;
+    margin-top:5px;
 }
 
 .widgettitle {
@@ -232,6 +247,11 @@ code {
 
 .sidebox ul {
     list-style-position: inside;
+    margin-top: 5px;
+}
+
+#calendar_wrap a{
+    color:#D9534F;
 }
 
 a {color:black;}
@@ -259,4 +279,29 @@ a:visited {text-decoration: none;}
 
 .indexlist a {
     text-decoration: underline;
+}
+
+#not_found {
+    margin-top: 10px;
+    background: black;
+    padding: 5px;
+    text-align: center;
+}
+
+#not_found h1 {
+    font-size: 220px;
+    color:white;
+    top: 50%;
+}
+
+#not_found h2 {
+    font-size: 80px;
+    color:white;
+}
+
+#not_found span {
+    height: 50px;
+    display: block;
+    font-size: 40px;
+    color:white;
 }

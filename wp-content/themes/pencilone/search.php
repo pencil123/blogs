@@ -25,7 +25,7 @@ while ( have_posts() ): the_post();?>
 <span class="entry-author"><?php echo get_the_author_posts_link(); ?></span>
 <span class="update"><?php echo get_the_modified_time();?></span>
 </div>
-<div class="summary"><?php echo wp_trim_words( get_the_content(), 100 );?>
+<div class="summary"><?php echo wp_trim_words( get_the_content(), 110 );?>
 </div>
 </div>
 <?php endwhile;?>
