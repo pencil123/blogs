@@ -27,9 +27,6 @@ function daxiawp_sidebar(){
 add_action('widgets_init','daxiawp_sidebar');
 
 
-
-
-
 /*@分页功能*/
 function native_pagenavi(){
 global $wp_query, $wp_rewrite;

@@ -51,6 +51,28 @@ html {
     overflow:auto;
 }
 
+/* header page */
+.site-description {
+    float: left;
+    line-height: 20px;
+    margin-left: 15px;
+    padding-top: 14px;
+}
+
+.site-menu {
+    float:left;
+    margin-left:150px;
+}
+
+.site-menu-li {
+    float: left;
+    margin-left: 10px;
+}
+
+.site-menu-li:hover {
+        background: #f1f1f1;
+        border-bottom: 1px solid #000;
+}
 
 /* footer page  */
 #footer {
@@ -61,11 +83,11 @@ html {
     padding-top: 30px;
     padding-bottom: 30px;
     position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
 }
 
 .footer-info {
@@ -119,7 +141,7 @@ html {
 }
 
 #content {
-    width:600px;
+    width:720px;
     float: left;
 }
 .nav-links {
