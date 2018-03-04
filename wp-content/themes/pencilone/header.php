@@ -45,10 +45,10 @@
 
     <h3 class="site-menu">
     <div class="site-menu-li">
-    索引
+    <a href="/pages/index.html">索引</a>
     </div>
     <div class="site-menu-li">
-    About
+    <a href="/about">About</a>
     </div>
     </h3>
 

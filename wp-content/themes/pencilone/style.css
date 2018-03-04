@@ -295,6 +295,7 @@ a:visited {text-decoration: none;}
 
 .indexlist ul {
     margin-top:10px;
+    margin-bottom: 10px;
     margin-left:30px;
     list-style-type: decimal;
 }
