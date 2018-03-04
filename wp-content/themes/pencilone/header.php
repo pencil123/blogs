@@ -37,10 +37,20 @@
 <header id="topbar">
     <div class="wrapper">
     <hgroup class="alignleft">
-    <h2 class="alignleft"><p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p></h2>
+    <h2 class="alignleft"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h2>
     </hgroup>
+    <div class="site-description">
     <?php bloginfo( 'description' ); ?>
+    </div>
 
+    <h3 class="site-menu">
+    <div class="site-menu-li">
+    索引
+    </div>
+    <div class="site-menu-li">
+    About
+    </div>
+    </h3>
 
 <div class="alignright search">
 <?php dynamic_sidebar('hander_sidebar_search'); ?>
