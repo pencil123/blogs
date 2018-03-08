@@ -28,7 +28,7 @@ function check_static ()
 	$posts_sql = "select ID from wp_posts where post_status = 'publish' and post_type='post' order by id asc";
 	$posts = query_sql($posts_sql);
 	foreach($posts as $post_num) {
-		$file_path = '../archives/'.$post_num.'.html';
+		$file_path = dirname(__FILE__).'/../archives/'.$post_num.'.html';
 		if ( ! file_exists($file_path)) {
 			post_update($post_num);
 		}
@@ -40,7 +40,7 @@ function check_update()
 	$select_sql = "select wp_posts.ID from wp_posts,my_static where wp_posts.ID = my_static.post_id and wp_posts.post_modified != my_static.post_modified";
 	$posts = query_sql($select_sql);
 	foreach($posts as $post_num) {
-		$file_path = '../archives/'.$post_num.'.html';
+		$file_path = dirname(__FILE__).'/../archives/'.$post_num.'.html';
 		unlink($file_path);
 		post_update($post_num);
 	}
@@ -80,7 +80,7 @@ function post_update($post_num)
 function curl_down($post_num)
 {
 	$ch = curl_init();
-	$url = "http://www2.cn-blogs.cn/archives/".$post_num.".html";
+	$url = "http://www.cn-blogs.cn/archives/".$post_num.".html";
 	curl_setopt($ch,CURLOPT_URL,$url);
 	curl_setopt($ch,CURLOPT_HEADER,false);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
@@ -91,7 +91,7 @@ function curl_down($post_num)
 
 function write_post($filenum,$content)
 {
-	$post_file = "../archives/".$filenum.".html";
+	$post_file = dirname(__FILE__)."/../archives/".$filenum.".html";
 	$file_handler = fopen($post_file,"w");
 	fwrite($file_handler,$content);
 	fclose($file_handler);
