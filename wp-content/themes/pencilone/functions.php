@@ -26,6 +26,8 @@ function daxiawp_sidebar(){
 }
 add_action('widgets_init','daxiawp_sidebar');
 
+/**   激活友情链接功能 **/
+add_filter( 'pre_option_link_manager_enabled', '__return_true');
 
 /*@分页功能*/
 function native_pagenavi(){

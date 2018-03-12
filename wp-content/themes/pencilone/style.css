@@ -23,7 +23,7 @@ body {
     background: #f1f1f1;
     position: relative;
     margin: 0;
-    padding-bottom: 60px;
+    padding-bottom: 81px;
     min-height: 100%;
     box-sizing: border-box;
     font-family: "Helvetica Neue", Arial, sans-serif;
@@ -80,6 +80,7 @@ html {
     border-bottom: 1px solid #000;
     float: left;
     margin-top: 10px;
+    height:42px;
     padding-top: 30px;
     padding-bottom: 30px;
     position: absolute;
@@ -94,6 +95,25 @@ html {
     text-align: center;
 }
 
+.link {
+    background: #f1f1f1;
+}
+.link ul{
+    list-style-type:none;
+    color:#0161de;
+    padding-left:15px;
+    width:100%; 
+}
+
+.link li {
+    margin-right: 15px;
+    float:left;
+    list-style-type: none;
+}
+
+.link a {
+    color: blue;
+}
 
 /****author profile page **/
 #profile {

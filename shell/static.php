@@ -3,24 +3,21 @@
  * static archives pages
  * @package pencilone
  */
-
 /** WordPress数据库的名称 */
 define('DB_NAME', 'blogs');
-
 /** MySQL数据库用户名 */
 define('DB_USER', 'blogs');
-
 /** MySQL数据库密码 */
 define('DB_PASSWORD', 'blogs');
-
 /** MySQL主机 */
 define('DB_HOST', '127.0.0.1');
-
 /** 创建数据表时默认的文字编码 */
 define('DB_CHARSET', 'utf8');
-
 $table_prefix  = 'wp_';
 
+$sql_string = 'select option_value from wp_options where option_name="siteurl"';
+$result = select_sql($sql_string);
+$domain = $result['option_value'];
 
 /**************functions ***************/
 function check_static ()
@@ -46,6 +43,8 @@ function check_update()
 	}
 }
 
+
+
 function query_sql ($sql_string)
 {
 	$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,'blogs');
@@ -64,6 +63,18 @@ function query_sql ($sql_string)
 	return $result;
 }
 
+function select_sql($sql_string)
+{
+	$con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,'blogs');
+	if (!$con)
+	{die('Could not connect: ' . mysql_error());}
+	$results = $con->query($sql_string);
+	if ($results->num_rows == 0) {return 0;}
+	$results = $results->fetch_assoc();
+	return $results;
+}
+
+
 function post_update($post_num)
 {
 	$content = curl_down($post_num);
@@ -79,8 +90,11 @@ function post_update($post_num)
 
 function curl_down($post_num)
 {
+	global $domain;
 	$ch = curl_init();
-	$url = "http://www.cn-blogs.cn/archives/".$post_num.".html";
+	$seteurl = select_sql('');
+	$url = $domain."/archives/".$post_num.".html";
+	echo $url;
 	curl_setopt($ch,CURLOPT_URL,$url);
 	curl_setopt($ch,CURLOPT_HEADER,false);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
