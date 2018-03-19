@@ -17,7 +17,6 @@
     if ( $site_description && ( is_home() || is_front_page() ) )
         echo " | $site_description";?>
     </title>
-    <meta name="viewport" content="width=device-width">
 <?php if (is_single() || is_page() ) : $post_id = get_the_ID(); ?>
     <meta name="keywords"  content="<?php echo get_post_meta($post_id,'keywords',true);?>" />
     <meta name="description"  content="<?php echo get_post_meta($post_id,'description',true);?>" />
@@ -25,6 +24,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php wp_head(); ?>
 
 <meta name="viewport"
@@ -34,21 +34,23 @@
 </head>
 
 <body <?php body_class(); ?>>
-<header id="topbar">
-    <div class="wrapper">
-    <hgroup class="alignleft">
-    <h2 class="alignleft"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h2>
-    </hgroup>
+<header class="navbar">
+    <div class="container">
+    <hgroup class="navbar-item">
+<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
     <div class="site-description">
     <?php bloginfo( 'description' ); ?>
     </div>
+    </hgroup>
 
-    <h3 class="site-menu">
-    <div class="site-menu-li">
+    <h3 class="navbarMenu">
+    <div class="navbar-end">
+    <div class="navbar-item">
     <a href="/pages/index.html">索引</a>
     </div>
-    <div class="site-menu-li">
+    <div class="navbar-item">
     <a href="/about">About</a>
+    </div>
     </div>
     </h3>
 
