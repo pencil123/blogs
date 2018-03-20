@@ -6,7 +6,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>">
+<html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <title><?php 
@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php wp_head(); ?>
 
@@ -35,28 +36,40 @@
 
 <body <?php body_class(); ?>>
 <header class="navbar">
-    <div class="container">
-    <hgroup class="navbar-item">
-<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-    <div class="site-description">
-    <?php bloginfo( 'description' ); ?>
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/"><?php bloginfo( 'description' ); ?></a>
+        </p>
+        </div>
     </div>
-    </hgroup>
-
-    <h3 class="navbarMenu">
+    <div class="navbar-menu is-active">
     <div class="navbar-end">
-    <div class="navbar-item">
-    <a href="/pages/index.html">索引</a>
-    </div>
-    <div class="navbar-item">
-    <a href="/about">About</a>
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
     </div>
     </div>
-    </h3>
-
-<div class="alignright search">
-<?php dynamic_sidebar('hander_sidebar_search'); ?>
+    </div>
 </div>
-
-    </div>
 </header>
+<hgroup class="container my-margin">
+    <div class="columns">
+        <div class="column is-9">
+             <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li>现在位置</li>
+                <li>首页</li>
+            </ul>
+            </nav>
+        </div>
+  <div class="column is-3">
+<?php dynamic_sidebar('hander_sidebar_search'); ?>
+  </div>
+</div>
+</hgroup>

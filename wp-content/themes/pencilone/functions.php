@@ -20,7 +20,7 @@ function daxiawp_sidebar(){
       'id' => 'rightsidebar',
       'name' => 'right_sidebar',
       'description' => 'hello',
-      'before_widget' => '<div class="sidebox">',
+      'before_widget' => '<div class="box content">',
       'after_widget' => '</div>',
       ));
 }
@@ -40,7 +40,8 @@ if ($total_pages == 1)
 $pagination = array(
 "base" => @add_query_arg("page","%#%"),
 "format" => "",
-"end_size" => 2,
+"end_size" => 4,
+"mid_size" => 3,
 "total" => $total_pages,
 "current" => $current,
 "prev_text" => "上一页",
