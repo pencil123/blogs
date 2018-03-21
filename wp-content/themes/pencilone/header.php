@@ -58,6 +58,9 @@
     </div>
 </div>
 </header>
+
+<?php 
+if (! is_single()) :?>
 <hgroup class="container my-margin">
     <div class="columns">
         <div class="column is-9">
@@ -73,3 +76,4 @@
   </div>
 </div>
 </hgroup>
+<?php endif;?>

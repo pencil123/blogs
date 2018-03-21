@@ -14,13 +14,13 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 query_posts( 'posts_per_page=11&paged='.$paged );
 while ( have_posts() ): the_post();?>
 <div class="box content">
-<div class="title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></div>
-<div class="subtitle">
+<div class="title is-4"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></div>
+<div class="subtitle is-6">
 <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
 <span class="entry-author"><?php the_author_posts_link(); ?></span>
 <span class="update"><?php echo get_the_modified_time();?></span>
 </div>
-<div class="message is-light"><?php echo wp_trim_words( get_the_content(), 110 );?>
+<div class="message is-light"><?php echo wp_trim_words( get_the_content(), 210 );?>
 </div>
 </div>
 <?php endwhile;?>
