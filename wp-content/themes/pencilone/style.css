@@ -5763,7 +5763,7 @@ a.dropdown-item.is-active {
 }
 
 .level.is-mobile .level-left,
-.level.is-mobile .level-right {
+.level.is-mobile .level-right{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10754,4 +10754,20 @@ label.panel-block:hover {
 .margin-top20 {
   margin-top:20px;
   margin-bottom: 20px;
+}
+
+.post-categories{
+  list-style-type:none;
+  margin:0;
+  width:100%;
+}
+
+.post-categories li{
+  margin-left: 10px;
+  float:left;
+}
+
+.categproe-name{
+  width:50px;
+  float: left;
 }

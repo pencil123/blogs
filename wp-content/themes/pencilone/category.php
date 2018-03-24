@@ -6,39 +6,53 @@
  */
 
 get_header(); ?>
-<div id="breadcrumb" class="wrapper">
-现在位置>首页>分类列表页
-</div>
-<div class="wrapper">
-<div id="content">
-<?php
-$category_name  = get_query_var('category_name');
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-query_posts( 'posts_per_page=11&paged='.$paged."&category_name=".$category_name );
-while ( have_posts() ): the_post();?>
-<div class="item-list">
-<h2 class="post-box-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a></h2>
-<div class="post-meta">
-<span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
-<span class="entry-author"><?php echo get_the_author_posts_link(); ?></span>
-<span class="update"><?php echo get_the_modified_time();?></span>
-</div>
-<div class="summary"><?php echo wp_trim_words( get_the_content(), 110 );?>
-</div>
-</div>
-<?php endwhile;?>
+<div class="container">
+    <div class="columns">
+        <!-- 文章列表 -->
+        <div class="column is-9">
+        <?php
+        $category_name  = get_query_var('category_name');
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        query_posts( 'posts_per_page=11&paged='.$paged."&category_name=".$category_name );
+        while ( have_posts() ): the_post();?>
 
-<?php $page_navi = native_pagenavi();
-if ( is_null($page_navi) != ture ): ?>
-<div class="pagenav"><?php echo $page_navi; ?></div>
-<?php endif; ?>
+                <div class="box content">
+                    <!-- 标题 -->
+                    <div class="title is-4">
+                        <a href="<?php echo get_permalink(); ?>"><?php echo get_the_title();?></a>
+                    </div>
+                    <!-- 发布时间，作者，更新时间 -->
+                    <div class="subtitle is-6">
+                        <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
+                        <span class="entry-author"><?php the_author_posts_link(); ?></span>
+                        <span class="update"><?php echo get_the_modified_time('Y/m/d');?></span>
+                    </div>
+                    <!-- 文章前210个字符 -->
+                    <div class="message is-light">
+                        <?php echo wp_trim_words( get_the_content(), 210 );?>
+                    </div>
+                </div>
+            <?php endwhile;?>
+            <!-- 文件列表循环结束 -->
 
-</div>
-<div id="sidebar">
-<?php dynamic_sidebar('rightsidebar'); ?>
-</div>
-</div>
+            <!-- 文件列表翻页；如果不够两页，则不输出 -->
+            <?php $page_navi = native_pagenavi();
+            if ( is_null($page_navi) != ture ): ?>
+                <div class="pagination is-rounded" role="navigation" aria-label="pagination">
+                    <?php echo $page_navi; ?>
+                </div>
+            <?php endif; ?>
+            <!-- 文件列表翻页结束 -->
+        </div>
+        <!-- 文件列表结束 -->
 
-
+        <!-- 小工具栏 -->
+        <div class="column is-3">
+            <?php dynamic_sidebar('rightsidebar'); ?>
+        </div>
+        <!-- 小工具栏结束 -->
+        
+    </div>
+</div>
 
 <?php get_footer();
