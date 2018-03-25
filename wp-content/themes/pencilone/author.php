@@ -12,11 +12,14 @@ get_header(); ?>
     <!-- 作者信息 -->
     <?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     if ( $paged ==1) :?>
-    <div id="profile">
-        <h2><?php the_author_meta('user_nicename')?></h2>
-        <span>昵称：<?php the_author_meta('nickname')?></span>
-        <span>邮件地址:<?php the_author_meta('user_email')?></span>
-        <div class="statement"><?php the_author_meta('description')?></div>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-child box code">
+            <p class="title"><?php the_author_meta('user_nicename')?></p>
+            <p class="subtitle">邮件地址:<?php the_author_meta('user_email')?></p>
+            <div class="message"><?php the_author_meta('description')?></div>
+            </div>
+        </div>
     </div>
     <?php endif;?>
     <!-- 作者信息结束 -->
@@ -44,13 +47,14 @@ get_header(); ?>
                 </div>
     <?php endwhile;?>
 
-    <!-- 文章列表翻页 -->
+    <!-- 文件列表翻页；如果不够两页，则不输出 -->
     <?php $page_navi = native_pagenavi();
     if ( is_null($page_navi) != ture ): ?>
-        <div class="pagenav">
+        <div class="pagination is-rounded" role="navigation" aria-label="pagination">
             <?php echo $page_navi; ?>
         </div>
     <?php endif; ?>
+    <!-- 文件列表翻页结束 -->
 
     </div>
 </main>

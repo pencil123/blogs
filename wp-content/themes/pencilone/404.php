@@ -5,14 +5,12 @@
  * @version 1.0
  */
 get_header(); ?>
+<section class="section">
+<main class="container has-text-centered">
 
-<main class="wrapper">
-<div id="not_found">
-<h1>404</h1>
-<h2>Not Found</h2>
-<span>您访问的页面已经搬家了...</span>
-<span></span>
-</div>
+    <h1 class="title-404">404</h1>
+    <p class="message-404"><strong>Sorry,The article youj tried cannot be found</strong></p>
+    <p class="message-404">Please check the address of the page you were looking for,or go back to the previous page.</p>
+
 </main><!-- .content-area -->
-
-<?php get_footer(); ?>
+</section>

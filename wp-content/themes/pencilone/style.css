@@ -10771,3 +10771,17 @@ label.panel-block:hover {
   width:50px;
   float: left;
 }
+
+.title-404{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 160px;
+    font-weight: bold;
+}
+
+.message-404{
+  font-size:20px;
+  line-height: 50px;
+  margin-top:20px;
+  margin-bottom: 20px;
+}

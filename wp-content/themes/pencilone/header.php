@@ -64,10 +64,10 @@ if (! is_single()) :?>
 <hgroup class="container my-margin">
     <div class="columns">
         <div class="column is-9">
-             <nav class="breadcrumb" aria-label="breadcrumbs">
+             <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
             <ul>
                 <li>现在位置</li>
-                <li>首页</li>
+                <li><a href="/"><span class="icon is-small"><i class="fas fa-home"></i>首页</span></a></li>
             </ul>
             </nav>
         </div>
