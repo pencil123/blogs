@@ -25,7 +25,7 @@ get_header(); ?>
                     <div class="subtitle is-6">
                         <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
                         <span class="entry-author"><?php the_author_posts_link(); ?></span>
-                        <span class="update"><?php echo get_the_modified_time('Y/m/d');?></span>
+                        <span class="update is-hidden"><?php echo get_the_modified_time('Y/m/d');?></span>
                     </div>
                     <!-- 文章前210个字符 -->
                     <div class="message is-light">
