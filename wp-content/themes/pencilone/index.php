@@ -12,7 +12,7 @@ get_header(); ?>
         <div class="column is-9">
             <?php
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            query_posts( 'posts_per_page=11&paged='.$paged );
+            query_posts( 'paged='.$paged );
             /*文件列表循环
                 每页11篇别表*/
             while ( have_posts() ): the_post();?>

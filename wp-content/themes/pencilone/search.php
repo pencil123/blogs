@@ -13,7 +13,7 @@ get_header(); ?>
         <?php
         $search = get_query_var('s');
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-        query_posts( 'posts_per_page=11&paged='.$paged."&s=".$search );
+        query_posts( 'paged='.$paged."&s=".$search );
             /*文件列表循环
                 每页11篇别表*/
         if ( have_posts() ) : 

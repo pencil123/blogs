@@ -27,7 +27,7 @@ get_header(); ?>
     <!-- 作者文章列表 -->
     <?php
     $author_id = get_the_author_meta('ID');
-    query_posts( 'posts_per_page=11&paged='.$paged.'&author='.$author_id );
+    query_posts( 'paged='.$paged.'&author='.$author_id );
     while ( have_posts() ): the_post();?>
                 <div class="box content">
                     <!-- 标题 -->

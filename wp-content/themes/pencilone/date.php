@@ -19,7 +19,7 @@ get_header(); ?>
             else
                 { $query_string = "year=".$year."&monthnum=".$monthnum;}
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            query_posts( $query_string.'&posts_per_page=11&paged='.$paged );
+            query_posts( $query_string.'&paged='.$paged );
             while ( have_posts() ): the_post();?>
                 <div class="box content">
                     <!-- 标题 -->

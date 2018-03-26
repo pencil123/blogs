@@ -13,7 +13,7 @@ get_header(); ?>
         <?php
         $category_name  = get_query_var('category_name');
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-        query_posts( 'posts_per_page=11&paged='.$paged."&category_name=".$category_name );
+        query_posts( 'paged='.$paged."&category_name=".$category_name );
         while ( have_posts() ): the_post();?>
 
                 <div class="box content">
