@@ -11,11 +11,16 @@ get_header(); ?>
         <!-- 文章列表 -->
         <div class="column is-9">
         <?php
-        $category_name  = get_query_var('category_name');
+/*      $this_category = get_category(get_query_var('cat'),false);
+        $category_ID = $this_category->cat_ID;
+        echo $category_ID;*/
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-        query_posts( 'paged='.$paged."&category_name=".$category_name );
+        /*$category_name  = get_query_var('category_name');
+        query_posts( 'paged='.$paged."&category_name=".$category_name );*/
+        wp_reset_query();
+        query_posts(array('category__in' => array(get_query_var('cat'))),'paged='.$paged);
         while ( have_posts() ): the_post();?>
-
+                
                 <div class="box content">
                     <!-- 标题 -->
                     <div class="title is-4">
@@ -33,6 +38,7 @@ get_header(); ?>
                     </div>
                 </div>
             <?php endwhile;?>
+
             <!-- 文件列表循环结束 -->
 
             <!-- 文件列表翻页；如果不够两页，则不输出 -->
