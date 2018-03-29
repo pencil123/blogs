@@ -18,7 +18,7 @@ get_header(); ?>
         /*$category_name  = get_query_var('category_name');
         query_posts( 'paged='.$paged."&category_name=".$category_name );*/
         wp_reset_query();
-        query_posts(array('category__in' => array(get_query_var('cat'))),'paged='.$paged);
+        query_posts(array('category__in' => array(get_query_var('cat')),'paged'=>$paged));
         while ( have_posts() ): the_post();?>
                 
                 <div class="box content">
