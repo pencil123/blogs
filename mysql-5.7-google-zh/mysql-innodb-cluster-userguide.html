@@ -1,15 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0079)/mysql-5.7-google-zh/mysql-innodb-cluster-userguide.html -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>第20章InnoDB集群</title>
-<link rel="stylesheet" href="./mysql-innodb-cluster-userguide_files/mvl.css" type="text/css">
+<link rel="stylesheet" href="./images/mvl.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets + chunker.py v1.9.2">
 <link rel="start" href="/mysql-5.7-google-zh/index.html" title="{书名}">
 <link rel="up" href="/mysql-5.7-google-zh/mysql-innodb-cluster-userguide.html" title="">
 <link rel="prev" href="/mysql-5.7-google-zh/document-store.html" title="第19章使用MySQL作为文档存储">
 <link rel="next" href="/mysql-5.7-google-zh/mysql-cluster.html" title="Chapter 21 MySQL NDB Cluster 7.5 and NDB Cluster 7.6">
-<link type="text/css" rel="stylesheet" charset="UTF-8" href="./mysql-innodb-cluster-userguide_files/translateelement.css"></head>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="./images/translateelement.css"></head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
@@ -79,7 +78,7 @@
 <div class="figure-contents">
 
 <div class="mediaobject">
-<img src="./mysql-innodb-cluster-userguide_files/innodb_cluster_overview.png" width="600" height="753" alt="三台MySQL服务器组合为一个高可用性群集。 其中一个服务器是读/写主实例，另外两个是只读辅助实例。 组复制用于将数据从主实例复制到辅助实例。 MySQL路由器将客户端应用程序（在本例中为MySQL连接器）连接到主实例。 MySQL Shell中的集群管理功能可以使用MySQL X AdminAPI直接连接到主实例，也可以像其他客户端应用程序一样通过MySQL路由器连接。">
+<img src="./images/innodb_cluster_overview.png" width="600" height="753" alt="三台MySQL服务器组合为一个高可用性群集。 其中一个服务器是读/写主实例，另外两个是只读辅助实例。 组复制用于将数据从主实例复制到辅助实例。 MySQL路由器将客户端应用程序（在本例中为MySQL连接器）连接到主实例。 MySQL Shell中的集群管理功能可以使用MySQL X AdminAPI直接连接到主实例，也可以像其他客户端应用程序一样通过MySQL路由器连接。">
 </div>
 
 </div>
@@ -520,7 +519,7 @@ mysql-js&gt;</font></font><strong class="userinput"><code>\connect root@localhos
 <div class="figure-contents">
 
 <div class="mediaobject">
-<img src="./mysql-innodb-cluster-userguide_files/production_servers.png" width="600" height="837" alt="三台MySQL服务器被组合在一起作为一个生产InnoDB集群。 其中一台服务器是主要实例，另外两台是次要实例。 主服务器的IP地址为139.59.177.10，两个备份实例的IP地址分别为139.59.177.11和139.59.177.12。 MySQL路由器将客户端应用程序连接到主实例。 MySQL Shell中的管理功能直接与生产InnoDB集群交互。">
+<img src="./images/production_servers.png" width="600" height="837" alt="三台MySQL服务器被组合在一起作为一个生产InnoDB集群。 其中一台服务器是主要实例，另外两台是次要实例。 主服务器的IP地址为139.59.177.10，两个备份实例的IP地址分别为139.59.177.11和139.59.177.12。 MySQL路由器将客户端应用程序连接到主实例。 MySQL Shell中的管理功能直接与生产InnoDB集群交互。">
 </div>
 
 </div>
@@ -2172,7 +2171,7 @@ MySQL的-JS&gt; </font></font><strong class="userinput"><code>cluster.dissolve({
 <td width="40%" align="right" valign="top"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第21章MySQL NDB集群7.5和NDB集群7.6</font></font></td>
 </tr>
 </tbody></table>
-</div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./mysql-innodb-cluster-userguide_files/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+</div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./images/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
 <div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
