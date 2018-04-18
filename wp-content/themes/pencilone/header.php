@@ -14,8 +14,14 @@
     bloginfo('name');
     //add the blog description for the home/front page.
     $site_description = get_bloginfo( 'description', 'display' );
-    if ( $site_description && ( is_home() || is_front_page() ) )
-        echo " | $site_description";?>
+    if ( $site_description && ( is_home() || is_front_page() ) ){
+        echo " | $site_description";
+    }
+
+    $paged = (get_query_var('paged')) ? get_query_var('paged') : 0;
+    if ($paged) echo " - 第".$paged."页";
+
+    ?>
     </title>
 <?php if (is_single() || is_page() ) : $post_id = get_the_ID(); ?>
     <meta name="keywords"  content="<?php echo get_post_meta($post_id,'keywords',true);?>" />
