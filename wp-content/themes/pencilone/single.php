@@ -51,7 +51,7 @@ get_header(); ?>
         <div class="subtitle is-5 has-text-centered">
             <span class="entry-author"><?php the_author_posts_link(); ?></span>
             <span class="entry-date"><?php echo get_the_date('Y/m/d');?></span>
-            <span class="update is-hidden"><?php echo get_the_modified_time();?></span>
+            <span class="update is-hidden"><?php echo get_the_modified_date();?></span>
         </div>
         <!-- 文章作者、发布时间、更新时间结束 -->
 
