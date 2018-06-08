@@ -34,7 +34,7 @@ function check_static ()
 
 function check_update()
 {
-	$select_sql = "select wp_posts.ID from wp_posts,my_static where wp_posts.ID = my_static.post_id and wp_posts.post_modified != my_static.post_modified";
+	$select_sql = "select wp_posts.ID from wp_posts,my_static where wp_posts.ID = my_static.post_id and wp_posts.post_modified != my_static.post_modified and wp_posts.post_status = 'publish'";
 	$posts = query_sql($select_sql);
 	foreach($posts as $post_num) {
 		$file_path = dirname(__FILE__).'/../archives/'.$post_num.'.html';
