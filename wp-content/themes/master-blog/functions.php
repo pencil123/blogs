@@ -142,7 +142,8 @@ function master_blog_fonts_url() {
  */
 function master_blog_theme_stylesheets() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'master-blog-fonts', master_blog_fonts_url(), array(), null );
+    // 不加载fonts-google 字体样式
+	//wp_enqueue_style( 'master-blog-fonts', master_blog_fonts_url(), array(), null ); 
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css', array(), '3.3.7' );
 	// Theme stylesheet.
 	wp_enqueue_style( 'master-blog-stylesheet', get_stylesheet_uri(), array('bootstrap'), '1.0.5'  );
