@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>strace 跟踪进程 | 青春部落    </title>
+    <meta name="keywords"  content="Linux,strace,跟踪进程" />
+    <meta name="description"  content="Strace用来跟踪进程执行时的系统调用和所接收的信号" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; strace 跟踪进程评论Feed" href="https://cn-blogs.cn/archives/281.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='vmstat 虚拟内存统计' href='https://cn-blogs.cn/archives/276.html' />
+<link rel='next' title='CPU 平均负载' href='https://cn-blogs.cn/archives/287.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/281.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=281' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F281.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F281.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-281 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel" rel="category tag">操作系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/276.html" rel="prev">上一篇：vmstat 虚拟内存统计</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/287.html" rel="next">下一篇：CPU 平均负载</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            strace 跟踪进程        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/09/16</span>
+            <span class="update is-hidden">2018-02-12</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Strace用来跟踪进程执行时的系统调用和所接收的信号。<br />
+Linux系统中进程不能直接访问硬件设备，当进程需要访问硬件设备(比如读取磁盘文件，接收网络数据等等)时，必须由用户态模式切换至内核态模式，通过系统调用访问硬件设备。<br />
+strace可以跟踪到一个进程产生的系统调用,包括参数，返回值，执行消耗的时间。</p>
+<h2>usage</h2>
+<p><code>strace [-CdffhiqrtttTvVxxy] [-I n] [-e expr]...<br />
+[-a column] [-o file] [-s strsize] [-P path]...<br />
+-p pid... / [-D] [-E var=val]... [-u username] PROG [ARGS]</code></p>
+<p><code>or: strace -c[df] [-I n] [-e expr]... [-O overhead] [-S sortby]<br />
+-p pid... / [-D] [-E var=val]... [-u username] PROG [ARGS]</code></p>
+<h2>常用参数</h2>
+<table>
+<tbody>
+<tr>
+<th>-c</th>
+<th>统计每一系统调用的所执行的时间,次数和出错的次数等</th>
+</tr>
+<tr>
+<th>-d</th>
+<th>启用调试输出到stderr</th>
+</tr>
+<tr>
+<th>-D</th>
+<th>将追踪进程作为独立的子进程运行，not as parent</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-f</span></th>
+<th>跟随fork的子进程，-ff &#8211; 输出到单独的文件中</th>
+</tr>
+<tr>
+<th>-i</th>
+<th>系统调用时的打印指令指针</th>
+</tr>
+<tr>
+<th>-q</th>
+<th>禁止关于附加，分离等的消息</th>
+</tr>
+<tr>
+<th>-r</th>
+<th>打印出相对时间 -t 绝对时间 -tt &#8212; with usecs</th>
+</tr>
+<tr>
+<th>-T</th>
+<th>显示每一调用所耗的时间.</th>
+</tr>
+<tr>
+<th>-v</th>
+<th>输出所有的系统调用.一些调用关于环境变量,状态,输入输出等调用由于使用频繁,默认不输出</th>
+</tr>
+<tr>
+<th>-x</th>
+<th>以十六进制形式输出非标准字符串</th>
+</tr>
+<tr>
+<th>-y</th>
+<th>打印与文件描述符参数关联的路径</th>
+</tr>
+<tr>
+<th>-a column</th>
+<th>设置返回值的输出位置.默认 为40</th>
+</tr>
+<tr>
+<th>-b execve</th>
+<th>分离此系统调用</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-o file</span></th>
+<th>将strace的输出写入文件filename</th>
+</tr>
+<tr>
+<th>-O overhead</th>
+<th>设置系统调用到OVERHEAD usecs的开销</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-p pid</span></th>
+<th>追踪指定的进程Id的进程,可以重复</th>
+</tr>
+<tr>
+<th>-s strsize</th>
+<th>将打印字符串的长度限制为STRSIZE字符（默认值为32）</th>
+</tr>
+<tr>
+<th>-S sortby</th>
+<th>按系统调用排序：time，calls，name，nothing（默认时间）</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-u username</span></th>
+<th>运行命令作为用户名处理setuid、setgid</th>
+</tr>
+<tr>
+<th>-E var=val 在</th>
+<th>命令的环境中放置var = val</th>
+</tr>
+<tr>
+<th>-E var</th>
+<th>从命令环境中删除var</th>
+</tr>
+<tr>
+<th>-P path</th>
+<th>跟踪访问路径</th>
+</tr>
+</tbody>
+</table>
+<h2>-I 可中断 &#8212;</h2>
+<p>1: 没有信号被阻塞<br />
+2: 解码系统调用时，致命信号被阻塞（默认）<br />
+3: 致命的信号总是被阻塞（如果&#8217;-o FILE PROG&#8217;则是默认的）<br />
+4: 致命信号和SIGTSTP（^ Z）总是被阻塞</p>
+<h2>-e expr</h2>
+<p>指定一个表达式,用来控制如何跟踪.格式：[qualifier=][!]value1[,value2]&#8230;<br />
+qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一。<br />
+value是用来限定的符号或数字.<br />
+默认的 qualifier是 trace。<br />
+感叹号是否定符号。<br />
+例如:-eopen等价于 -e trace=open,表示只跟踪open调用。<br />
+而-etrace!=open 表示跟踪除了open以外的其他调用。<br />
+有两个特殊的符号 all 和 none。<br />
+注意有些shell使用!来执行历史记录里的命令,所以要使用\\。</p>
+<table>
+<tbody>
+<tr>
+<th>-e trace=set</th>
+<th>只跟踪指定的系统 调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all.</th>
+</tr>
+<tr>
+<th>-e trace=file</th>
+<th>只跟踪有关文件操作的系统调用.</th>
+</tr>
+<tr>
+<th>-e trace=process</th>
+<th>只跟踪有关进程控制的系统调用.</th>
+</tr>
+<tr>
+<th>-e trace=network</th>
+<th>跟踪与网络有关的所有系统调用.</th>
+</tr>
+<tr>
+<th>-e strace=signal</th>
+<th>跟踪所有与系统信号有关的 系统调用</th>
+</tr>
+<tr>
+<th>-e trace=ipc</th>
+<th>跟踪所有与进程通讯有关的系统调用</th>
+</tr>
+<tr>
+<th>-e abbrev=set</th>
+<th>设定strace输出的系统调用的结果集.-v 等与 abbrev=none.默认为abbrev=all.</th>
+</tr>
+<tr>
+<th>-e raw=set</th>
+<th>将指定的系统调用的参数以十六进制显示.</th>
+</tr>
+<tr>
+<th>-e signal=set</th>
+<th>指定跟踪的系统信号.默认为all.如 signal=!SIGIO(或者signal=!io),表示不跟踪SIGIO信号.</th>
+</tr>
+<tr>
+<th>-e read=set</th>
+<th>输出从指定文件中读出 的数据.例如: -e read=3,5</th>
+</tr>
+<tr>
+<th>-e write=set</th>
+<th>输出写入到指定文件中的数据</th>
+</tr>
+</tbody>
+</table>
+<h2>追踪的结果</h2>
+<p>每一行都是一条系统调用，等号左边是系统调用的函数名及其参数，右边是该调用的返回值。<br />
+strace 显示这些调用的参数并返回符号形式的值。<br />
+strace 从内核接收信息，而且不需要以任何特殊的方式来构建内核。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

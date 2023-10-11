@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>POST 提交数据方式 | 青春部落    </title>
+    <meta name="keywords"  content="WEB服务,Post,提交数据" />
+    <meta name="description"  content="WEB服务POST提交数据的4中方式说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; POST 提交数据方式评论Feed" href="https://cn-blogs.cn/archives/2733.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='json结构' href='https://cn-blogs.cn/archives/2707.html' />
+<link rel='next' title='Gearman 任务管理' href='https://cn-blogs.cn/archives/2736.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2733.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2733' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2733.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2733.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2733 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development" rel="category tag">编程开发</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2707.html" rel="prev">上一篇：json结构</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2736.html" rel="next">下一篇：Gearman 任务管理</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            POST 提交数据方式        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/11/23</span>
+            <span class="update is-hidden">2018-06-02</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>WEB服务中使用POST方式提交数据的方式有好几种；这里说明其中4种。</p>
+<ul>
+<li>1、application/x-www-form-urlencoded</li>
+<li>2、multipart/form-data</li>
+<li>3、application/json</li>
+<li>4、text/xml</li>
+</ul>
+<p>HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：状态行、请求头、消息主体。<br />
+<code>&lt;method&gt; &lt;request-URL&gt; &lt;version&gt;<br />
+&lt;headers&gt;<br />
+&lt;entity-body&gt;</code><br />
+协议规定 POST 提交的数据必须放在消息主体（entity-body）中，协议并没有规定数据必须使用什么编码方式。开发者可以选择合适自己的消息主体格式，并在服务器端正确的接受解析即可。<br />
+一般服务端语言如 php、python 等，以及它们的 framework，都内置了自动解析常见数据格式的功能。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。</p>
+<p>所以说到 POST 提交数据方案，<strong>涉及了 Content-Type 和消息主体编码方式两部分</strong>。</p>
+<h3>常用的两种方式</h3>
+<p>提交表单数据和上传文件的两种POST方式，浏览器原生支持。现在原生表单form支持的方式。</p>
+<h4>application/x-www-form-urlencoded</h4>
+<p>这应该是最常见的 POST 提交数据的方式了。<br />
+浏览器的原生 &lt;form&gt; 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。<br />
+<code>POST http://www.example.com HTTP/1.1<br />
+Content-Type: application/x-www-form-urlencoded;charset=utf-8<br />
+title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</code></p>
+<p>1、Content-Type 被指定为 application/x-www-form-urlencoded；<br />
+2、提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。<br />
+例如 PHP 中，$_POST[&#8216;title&#8217;] 可以获取到 title 的值，$_POST[&#8216;sub&#8217;] 可以得到 sub 数组。<br />
+很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。</p>
+<h4>multipart/form-data</h4>
+<p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 &lt;form&gt; 表单的 enctype 等于 multipart/form-data。<br />
+<code>POST http://www.example.com HTTP/1.1<br />
+Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA<br />
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA<br />
+Content-Disposition: form-data; name="text"<br />
+title<br />
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA<br />
+Content-Disposition: form-data; name="file"; filename="chrome.png"<br />
+Content-Type: image/png<br />
+PNG ... content of chrome.png ...<br />
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</code></p>
+<p>1、生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。<br />
+2、 Content-Type 里指明了数据是以 multipart/form-data 来编码，本次请求的 boundary 是什么内容。<br />
+消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 &#8211;boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。<br />
+消息主体最后以 &#8211;boundary&#8211; 标示结束。关于 multipart/form-data 的详细定义，请前往 rfc1867 查看。<br />
+这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。</p>
+<h3>新的数据提交方式</h3>
+<p>为了方便开发过程中提交复杂的结构化数据，新的数据提交方式被创造出来。</p>
+<h4>application/json</h4>
+<p><code>Content-Type：application/json</code> 请求头，用来告诉服务器端请求的消息主体为序列化后的JSON字符串。<br />
+由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数。</p>
+<p>这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug、Fiddler，都会以树形结构展示 JSON 数据，非常友好。<br />
+但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 $_POST 对象从上面的请求中获得内容。<br />
+这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 php://input 里获得原始输入流，再 json_decode 成对象。</p>
+<h4>text/xml</h4>
+<p>XML-RPC（XML Remote Procedure Call）是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。<br />
+<code>POST http://www.example.com HTTP/1.1<br />
+Content-Type: text/xml<br />
+&lt;?xml version="1.0"?&gt;<br />
+&lt;methodCall&gt;<br />
+&lt;methodName&gt;examples.getStateName&lt;/methodName&gt;<br />
+&lt;params&gt;<br />
+&lt;param&gt;<br />
+&lt;value&gt;&lt;i4&gt;41&lt;/i4&gt;&lt;/value&gt;<br />
+&lt;/param&gt;<br />
+&lt;/params&gt;<br />
+&lt;/methodCall&gt;</code></p>
+<p>XML-RPC 协议简单、功能够用，各种语言的实现都有。它的使用也很广泛，如 WordPress 的 XML-RPC Api，搜索引擎的 ping 服务等等。JavaScript 中，也有现成的库支持以这种方式进行数据交互，能很好的支持已有的 XML-RPC 服务。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

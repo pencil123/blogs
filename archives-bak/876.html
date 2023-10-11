@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XSRF 跨站伪造请求 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; XSRF 跨站伪造请求评论Feed" href="https://cn-blogs.cn/archives/876.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='user_authentication 用户认证' href='https://cn-blogs.cn/archives/874.html' />
+<link rel='next' title='静态文件 static' href='https://cn-blogs.cn/archives/879.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/876.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=876' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F876.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F876.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-876 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python/tornado" rel="category tag">Tornado</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/874.html" rel="prev">上一篇：user_authentication 用户认证</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/879.html" rel="next">下一篇：静态文件 static</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            XSRF 跨站伪造请求        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/10/26</span>
+            <span class="update is-hidden">2016-10-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>跨站伪造请求(Cross-site request forgery)</strong>， 简称为 XSRF，是个性化 Web 应用中常见的一个安全问题。前面的链接也详细讲述了 XSRF 攻击的实现方式。</p>
+<p>当前防范 XSRF 的一种通用的方法，是对每一个用户都记录一个无法预知的 cookie 数据，然后要求所有提交的请求中都必须带有这个 cookie 数据。如果此数据不匹配 ，那么这个请求就可能是被伪造的。</p>
+<p>Tornado 有内建的 XSRF 的防范机制，要使用此机制，你需要在应用配置中加上 xsrf_cookies 设定：</p>
+<p>settings = {<br />
+————&#8221;cookie_secret&#8221;: &#8220;61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=&#8221;,<br />
+————&#8221;login_url&#8221;: &#8220;/login&#8221;,<br />
+————&#8221;xsrf_cookies&#8221;: True,<br />
+}<br />
+application = tornado.web.Application([<br />
+————(r&#8221;/&#8221;, MainHandler),<br />
+————(r&#8221;/login&#8221;, LoginHandler),<br />
+], **settings)<br />
+如果设置了 xsrf_cookies，那么 Tornado 的 Web 应用将对所有用户设置一个 _xsrf 的 cookie 值，如果 POST PUT DELET 请求中没有这 个 cookie 值，那么这个请求会被直接拒绝。如果你开启了这个机制，那么在所有 被提交的表单中，你都需要加上一个域来提供这个值。你可以通过在模板中使用 专门的函数 xsrf_form_html() 来做到这一点：</p>
+<form action="/new_message" method="post">
+  {{ xsrf_form_html() }}<br />
+  <input type="text" name="message"/><br />
+  <input type="submit" value="Post"/><br />
+</form>
+<p>如果你提交的是 AJAX 的 POST 请求，你还是需要在每一个请求中通过脚本添加上 _xsrf 这个值。下面是在 FriendFeed 中的 AJAX 的 POST 请求，使用了 jQuery 函数来为所有请求组东添加 _xsrf 值：</p>
+<p>function getCookie(name) {<br />
+————var r = document.cookie.match(&#8220;\\b&#8221; + name + &#8220;=([^;]*)\\b&#8221;);<br />
+————return r ? r[1] : undefined;<br />
+}</p>
+<p>jQuery.postJSON = function(url, args, callback) {<br />
+————args._xsrf = getCookie(&#8220;_xsrf&#8221;);<br />
+————$.ajax({url: url, data: $.param(args), dataType: &#8220;text&#8221;, type: &#8220;POST&#8221;,<br />
+————————success: function(response) {<br />
+————————callback(eval(&#8220;(&#8221; + response + &#8220;)&#8221;));<br />
+————}});<br />
+};<br />
+对于 PUT 和 DELETE 请求（以及不使用将 form 内容作为参数的 POST 请求） 来说，你也可以在 HTTP 头中以 X-XSRFToken 这个参数传递 XSRF token。</p>
+<p>如果你需要针对每一个请求处理器定制 XSRF 行为，你可以重写 RequestHandler.check_xsrf_cookie()。例如你需要使用一个不支持 cookie 的 API， 你可以通过将 check_xsrf_cookie() 函数设空来禁用 XSRF 保护机制。然而如果 你需要同时支持 cookie 和非 cookie 认证方式，那么只要当前请求是通过 cookie 进行认证的，你就应该对其使用 XSRF 保护机制，这一点至关重要。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>分布式版本管理 Git | 青春部落    </title>
+    <meta name="keywords"  content="Git,版本管理,分布式版本管理" />
+    <meta name="description"  content="分布式版本管理工具 Git" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 分布式版本管理 Git评论Feed" href="https://cn-blogs.cn/archives/2296.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Anslysis分析' href='https://cn-blogs.cn/archives/1141.html' />
+<link rel='next' title='Git 环境配置' href='https://cn-blogs.cn/archives/2298.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2296.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2296' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2296.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2296.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2296 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/git" rel="category tag">版本管理</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1141.html" rel="prev">上一篇：Anslysis分析</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2298.html" rel="next">下一篇：Git 环境配置</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            分布式版本管理 Git        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/01/28</span>
+            <span class="update is-hidden">2018-05-01</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>git是一个分布式版本控制软件，最初由林纳斯·托瓦兹（Linus Torvalds）创作，于2005年以GPL发布。最初目的是为更好地管理Linux内核开发而设计。</p>
+<h3>主要功能</h3>
+<p>1、采用了分布式版本库的作法，与CVS、Subversion一类的集中式版本控制工具不同，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便。<br />
+2、git的速度很快，这对于诸如Linux内核这样的大项目来说自然很重要。<br />
+3、git最为出色的是它的合并追踪（merge tracing）能力。<br />
+4、git没有对版本库的浏览和修改做任何的权限限制，作为开源自由原教旨主义项目，通过其他工具也可以达到有限的权限控制，比如：gitosis、CodeBeamer MR。<br />
+5、git的源代码中也已经加入了对Cygwin与MinGW编译环境的支持且逐渐完善，为Windows用户带来福音。</p>
+<h3>实现原理</h3>
+<h4>文件</h4>
+<p>git和其他版本控制系统（如CVS）有不少的差别，git本身关心文件的整体性是否有改变，但多数的版本控制系统如CVS或Subversion系统则在乎文件内容的差异。<br />
+git拒绝保持每个文件的版本修订关系。因此查看一个文件的历史需要遍历各个history快照；<br />
+git隐式处理文件更名，即同名文件默认为其前身，如果没有同名文件则在前一个版本中搜索具有类似内容的文件。</p>
+<h4>分布式</h4>
+<p>git更像一个文件系统，直接在本机上获取数据，不必连接到主机端获取数据。 每个开发者都可有全部开发历史的本地副本，changes从这种本地repository复制给其他开发者。这些changes作为新增的开发分支被导入，可以与本地开发分支合并。</p>
+<h4>分支</h4>
+<p>分支是非常轻量级的，一个分支仅是对一个commit的引用。</p>
+<h4>开发</h4>
+<p>git是用C语言开发的，以追求最高的性能。git自动完成垃圾回收，也可以用命令git gc &#8211;prune直接调用。</p>
+<h4>对象管理</h4>
+<p>git存储每个新创建的object作为一个单独文件。<br />
+为了压缩存储空间占用， packs操作把很多文件（启发式类似名字的文件往往具有类似内容）使用差分压缩入一个文件中（packfile），并创建一个对应的索引文件，指明object在packfile中的偏移值。新创建的对象仍然作为单独文件存在。<br />
+repacks操作非常费时间，git会在空闲时间自动做此操作。也可用命令git gc来直接启动repack。packfile与索引文件都用SHA-1作为校验和并作为文件名。git fsck命令做校验和的完整性验证。</p>
+<h4>通信</h4>
+<p>Git服务器典型的listen TCP port为9418。</p>
+<h3>库目录</h3>
+<p>hooks：存储钩子的文件夹<br />
+logs：存储日志的文件夹<br />
+refs：存储指向各个分支的指针（SHA-1标识）文件<br />
+objects：存放git对象<br />
+config：存放各种设置文档<br />
+HEAD：指向当前所在分支的指针文件路径，一般指向refs下的某文件</p>
+<h3>数据结构</h3>
+<p>Git有两种数据结构：可变的索引（index或stage或cache)用于缓冲工作目录信息与下一次提交的版本信息；不变的、仅追加的对象数据库。</p>
+<h4>对象数据库包含4类对象</h4>
+<p>blob (二进制大对象)是一个文件的内容。Blobs没有适当的文件名、时间戳、或其他元数据。一个blob的内部名字是它的内容的hash。<br />
+tree对象等效于目录。包含文件名列表以及文件的类型比特、到blob或tree对象的引用。tree对象是源树(source tree)的快照。用默克树实现。<br />
+commit对象链接tree对象在一起而成为history. 包含顶层源目录的tree对象名字、一个时间戳、log信息、0个或多个父commit对象的名字。<br />
+tag对象是一个容器，包含了到另一个对象的引用，也可以增加关于另外对象的元数据。通常它保存需要追溯的特定版本数据的一个commit对象的数字签名。</p>
+<p>每个对象用其内容的SHA-1 hash来标识。对象放入它的hash值得前两个字符标识的目录中，其余hash字符作为这个对象的文件名。<br />
+Git数据库中不变引用的对象将会被垃圾回收清除。Git命令可以创建、移动、删除引用。&#8221;git show-ref&#8221;列出所有引用。</p>
+<h4>某些引用类型：</h4>
+<p>heads: 引用一个本地对象，是commit的指针。每个head可以指任意一个这样的指针。可以包含任意数量的heads。而&#8221;HEAD&#8221;（全部大写），仅仅指的是当前有效的head。默认情况下，在每个仓库下都有一个head，叫做master。<br />
+remotes: 引用远程repository中的一个对象<br />
+stash: 引用一个还没有committed的一个对象<br />
+meta: 例如一个bare repository中的一个配置, 用户权限; refs/meta/config命名空间等<br />
+tags:</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

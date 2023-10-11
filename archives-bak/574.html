@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>nginx 502 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; nginx 502评论Feed" href="https://cn-blogs.cn/archives/574.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='nginx stub_status 服务运行状态' href='https://cn-blogs.cn/archives/1136.html' />
+<link rel='next' title='Nginx 编译安装和增加扩展与升级' href='https://cn-blogs.cn/archives/1583.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/574.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=574' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F574.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F574.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-574 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1136.html" rel="prev">上一篇：nginx stub_status 服务运行状态</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1583.html" rel="next">下一篇：Nginx 编译安装和增加扩展与升级</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            nginx 502        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/05/12</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>1.request_terminate_timeout引起的资源问题</strong><br />
+request_terminate_timeout的值如果设置为0或者过长的时间，可能会引起file_get_contents的资源问题。<br />
+如果file_get_contents请求的远程资源如果反应过慢，file_get_contents就会一直卡在那里不会超时。<br />
+我们知道 php.ini 里面max_execution_time 可以设置 PHP 脚本的最大执行时间，但是，在 php-cgi(php-fpm) 中，该参数不会起效。真正控制 PHP 脚本最大执行时间的是php-fpm.conf 配置文件中的request_terminate_timeout参数。<br />
+request_terminate_timeout默认值为 0 秒，也就是说，PHP 脚本会一直执行下去。这样，当所有的 php-cgi 进程都卡在 file_get_contents() 函数时，这台 Nginx无法再处理新请求了，Nginx 将给用户返回“502 Bad Gateway”。<br />
+修改该参数，设置 PHP 脚本最大执行时间是必要的，但是，治标不治本。例如改成 30s，如果发生 file_get_contents() 获取网页内容较慢的情况，这就意味着 150 个 php-cgi进程，每秒钟只能处理 5 个请求，WebServer 同样很难避免”502 BadGateway”。<br />
+解决办法是request_terminate_timeout设置为10s或者一个合理的值，或者给 file_get_contents加一个超时参数。<br />
+$ctx = stream_context_create(array(<br />
+&#8216;http&#8217; =&gt; array(<br />
+&#8216;timeout&#8217; =&gt; 10 //设置一个超时时间，单位为秒<br />
+)<br />
+));</p>
+<p>file_get_contents($str, 0, $ctx);</p>
+<p><strong>2.max_requests参数配置不当，可能会引起间歇性502错误：</strong><br />
+pm.max_requests = 1000<br />
+设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 ’0′ 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.<br />
+这段配置的意思是，当一个 PHP-CGI 进程处理的请求数累积到 500 个后，自动重启该进程。<br />
+但是为什么要重启进程呢？<br />
+一般在项目中，我们多多少少都会用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。<br />
+正是因为这个机制，在高并发的站点中，经常导致 502 错误，我猜测原因是 PHP-FPM 对从 NGINX 过来的请求队列没处理好。不过我目前用的还是 PHP 5.3.2，不知道在PHP5.3.3 中是否还存在这个问题。<br />
+目前我们的解决方法是，把这个值尽量设置大些，尽可能减少 PHP-CGI 重新 SPAWN 的次数，同时也能提高总体性能。在我们自己实际的生产环境中发现，内存泄漏并不明显，因此我们将这个值设置得非常大（204800）。大家要根据自己的实 际情况设置这个值，不能盲目地加大。<br />
+话说回来，这套机制目的只为保证 PHP-CGI 不过分地占用内存，为何不通过检测内存的方式来处理呢？我非常认同高春辉所说的，通过设置进程的峰值内在占用量来重启 PHP-CGI 进程，会是更好的一个解决方案。<br />
+<strong>在php.ini和php-fpm.conf中分别有这样两个配置项：max_execution_time和</strong>request_terminate_timeout。<br />
+这两项都是用来配置一个PHP脚本的最大执行时间的。当超过这个时间时，PHP-FPM不只会终止脚本的执行，<br />
+还会终止执行脚本的Worker进程。所以Nginx会发现与自己通信的连接断掉了，就会返回给客户端502错误。</p>
+<p>以PHP-FPM的request_terminate_timeout=30秒时为例，报502 Bad Gateway错误的具体信息如下：<br />
+1）Nginx错误访问日志：<br />
+2013/09/19 01:09:00 [error] 27600#0: *78887 recv() failed (104: Connection reset by peer) while reading response header from upstream,<br />
+client: 192.168.1.101, server: test.com, request: &#8220;POST /index.php HTTP/1.1&#8221;, upstream: &#8220;fastcgi://unix:/dev/shm/php-fcgi.sock:&#8221;,<br />
+host: &#8220;test.com&#8221;, referrer: &#8220;http://test.com/index.php&#8221;</p>
+<p><strong>2）PHP-FPM报错日志：</strong><br />
+WARNING: child 25708 exited on signal 15 (SIGTERM) after 21008.883410 seconds from start</p>
+<p>所以只需将这两项的值调大一些就可以让PHP脚本不会因为执行时间长而被终止了。request_terminate_timeout可以覆盖max_execution_time，<br />
+所以如果不想改全局的php.ini，那只改PHP-FPM的配置就可以了。</p>
+<p>此外要注意的是Nginx的upstream模块中的max_fail和fail_timeout两项。有时Nginx与上游服务器（如Tomcat、FastCGI）的通信只是偶然断掉了，<br />
+但max_fail如果设置的比较小的话，那么在接下来的fail_timeout时间内，Nginx都会认为上游服务器挂掉了，都会返回502错误。<br />
+所以可以将max_fail调大一些，将fail_timeout调小一些。</p>
+<p><strong>2.504 和 nginx.conf</strong><br />
+部分PHP程序的执行时间超过了Nginx的等待时间，可以适当增加nginx.conf配置文件中FastCGI的timeout时间，例如：<br />
+http<br />
+{<br />
+&#8230;&#8230;<br />
+fastcgi_connect_timeout 300;<br />
+fastcgi_send_timeout 300;<br />
+fastcgi_read_timeout 300;<br />
+&#8230;&#8230;<br />
+}<br />
+也可以写到server段：</p>
+<p><strong>3.413 Request Entity Too Large</strong><br />
+增大client_max_body_size<br />
+client_max_body_size:指令指定允许客户端连接的最大请求实体大小,它出现在请求头部的Content-Length字段. 如果请求大于指定的值,客户端将收到一个&#8221;Request EntityTooLarge&#8221; (413)错误. 记住,浏览器并不知道怎样显示这个错误.解决办法是在php.ini中增大post_max_size 和upload_max_filesize</p>
+<p>PHP-FPM设置的脚本最大执行时间已经够长了，但执行耗时PHP脚本时，发现Nginx报错从502变为504了。这是为什么呢？<br />
+因为我们修改的只是PHP的配置，Nginx中也有关于与上游服务器通信超时时间的配置factcgi_connect/read/send_timeout。</p>
+<p>以Nginx超时时间为90秒，PHP-FPM超时时间为300秒为例，报504 Gateway Timeout错误时的Nginx错误访问日志如下：<br />
+2013/09/19 00:55:51 [error] 27600#0: *78877 upstream timed out (110: Connection timed out) while reading response header from upstream,<br />
+client: 192.168.1.101, server: test.com, request: &#8220;POST /index.php HTTP/1.1&#8221;, upstream: &#8220;fastcgi://unix:/dev/shm/php-fcgi.sock:&#8221;,<br />
+host: &#8220;test.com&#8221;, referrer: &#8220;http://test.com/index.php&#8221;</p>
+<p>调高这三项的值（主要是read和send两项，默认不配置的话Nginx会将超时时间设为60秒）之后，504错误也解决了。<br />
+而且这三项配置可以配置在http、server级别，也可以配置在location级别。担心影响其他应用的话，就配置在自己应用的location中吧。<br />
+要注意的是factcgi_connect/read/send_timeout是对FastCGI生效的，而proxy_connect/read/send_timeout是对proxy_pass生效的。</p>
+<p>配置举例：<br />
+location ~ \.php$ {<br />
+root /home/cdai/test.com;<br />
+include fastcgi_params;<br />
+fastcgi_connect_timeout 180;<br />
+fastcgi_read_timeout 600;<br />
+fastcgi_send_timeout 600;<br />
+fastcgi_pass unix:/dev/shm/php-fcgi.sock;<br />
+fastcgi_index index.php;<br />
+fastcgi_param SCRIPT_FILENAME /home/cdai/test.com$fastcgi_script_name;<br />
+}</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

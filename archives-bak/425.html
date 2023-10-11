@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>rpc 远程过程调用协议 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; rpc 远程过程调用协议评论Feed" href="https://cn-blogs.cn/archives/425.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='html tabindex' href='https://cn-blogs.cn/archives/2777.html' />
+<link rel='next' title='PHP command' href='https://cn-blogs.cn/archives/572.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/425.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=425' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F425.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F425.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-425 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/php" rel="category tag">PHP服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2777.html" rel="prev">上一篇：html tabindex</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/572.html" rel="next">下一篇：PHP command</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            rpc 远程过程调用协议        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/02/11</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>RPC名词说明</strong><br />
+RPC（Remote Procedure Call Protocol）——远程过程调用协议，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。<br />
+RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复信息，然后等待下一个调用信息，最后，客户端调用进程接收答复信息，获得进程结果，然后调用执行继续进行。<br />
+有多种 RPC模式和执行。最初由 Sun 公司提出。IETF ONC 宪章重新修订了 Sun 版本，使得 ONC RPC 协议成为 IETF 标准协议。现在使用最普遍的模式和执行是开放式软件基础的分布式计算环境（DCE）。</p>
+<p><strong>PHP使用安装RPC的扩展</strong><br />
+PHP中集成了XML-RPC和SOAP两种协议的访问，都是集中在xmlrpc扩展当中。另外，在PHP的PEAR中，不管是PHP 4还是PHP 5，都已经默认集成了XML-RPC扩展，而且该扩展跟xmlrpc扩展无关，能够独立实现XML-RPC的协议交互，如果没有xmlrpc扩展，建议使用PEAR::XML-RPC扩展。</p>
+<p><strong>php安装xmlrpc</strong><br />
+在Unix/Linux平台下，如果没有安装xmlrpc扩展，请在重新编译PHP，在configure的时候请加入 &#8211;with-xmlrpc 选项，然后查看phpinfo()看是否正常安装xmlrpc。</p>
+<p><strong>pear安装 XML_RPC2</strong><br />
+使用PEAR命令安装<br />
+<strong>pear install pear/XML_RPC2</strong></p>
+<p>命令执行报错<br />
+Warning: PHP Startup: Invalid library (maybe not a PHP library) &#8216;mbstring.so&#8217; in Unknown on line<br />
+WARNING: channel &#8220;pear.php.net&#8221; has updated its protocols, use &#8220;pear channel-update pear.php.net<br />
+pear/HTTP_Request2 requires PEAR Installer (version &gt;= 1.9.2), installed version is 1.9.1<br />
+pear/HTTP_Request2 requires package &#8220;pear/PEAR&#8221; (version &gt;= 1.9.2), installed version is 1.9.1<br />
+pear/XML_RPC2 requires package &#8220;pear/HTTP_Request2&#8221; (version &gt;= 2.0.0)<br />
+pear/Cache_Lite requires PHP (version &gt;= 5.4.0), installed version is 5.3.3<br />
+pear/Cache_Lite requires package &#8220;pear/PEAR&#8221; (version &gt;= 1.10.1), installed version is 1.9.1<br />
+No valid packages found<br />
+install failed</p>
+<p>更新pear命令<br />
+<strong># pear upgrade PEAR</strong><br />
+pear/PEAR dependency package &#8220;pear/Console_Getopt&#8221; downloaded version 1.3.1 is not the recommended version 1.2.3, but may be compatible, use &#8211;force to install<br />
+pear/Archive_Tar requires PEAR Installer (version &gt;= 1.5.4), installed version is 1.4.9<br />
+pear/Console_Getopt requires PEAR Installer (version &gt;= 1.8.0), installed version is 1.4.9<br />
+No valid packages found<br />
+upgrade failed</p>
+<p>强制更新pear命令<br />
+<strong># pear upgrade &#8211;force PEAR</strong><br />
+Warning: PHP Startup: Invalid library (maybe not a PHP library) &#8216;mbstring.so&#8217; in Unknown on line<br />
+WARNING: &#8220;pear/Console_Getopt&#8221; is deprecated in favor of &#8220;pear/Console_GetoptPlus&#8221;<br />
+warning: pear/PEAR dependency package &#8220;pear/Structures_Graph&#8221; installed version 1.1.1 is not the<br />
+warning: pear/PEAR dependency package &#8220;pear/XML_Util&#8221; installed version 1.3.0 is not the recomme<br />
+warning: pear/Console_Getopt requires PHP (version &gt;= 5.4.0), installed version is 5.3.3<br />
+downloading PEAR-1.9.5.tgz &#8230;<br />
+Starting to download PEAR-1.9.5.tgz (294,984 bytes)<br />
+&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;.done: 294,984 bytes<br />
+downloading Console_Getopt-1.4.1.tgz &#8230;<br />
+Starting to download Console_Getopt-1.4.1.tgz (5,672 bytes)<br />
+&#8230;done: 5,672 bytes<br />
+upgrade ok: channel://pear.php.net/Console_Getopt-1.4.1<br />
+upgrade ok: channel://pear.php.net/PEAR-1.9.5<br />
+PEAR: Optional feature webinstaller available (PEAR&#8217;s web-based installer)<br />
+PEAR: Optional feature gtkinstaller available (PEAR&#8217;s PHP-GTK-based installer)<br />
+PEAR: Optional feature gtk2installer available (PEAR&#8217;s PHP-GTK2-based installer)<br />
+PEAR: To install optional features use &#8220;pear install pear/PEAR#featurename&#8221;<br />
+更新成功</p>
+<p><strong># pear install pear/XML_RPC</strong><br />
+Starting to download XML_RPC2-1.1.3.tgz (67,900 bytes)<br />
+&#8230;&#8230;&#8230;&#8230;&#8230;..done: 67,900 bytes<br />
+downloading HTTP_Request2-2.3.0.tgz &#8230;<br />
+Starting to download HTTP_Request2-2.3.0.tgz (119,717 bytes)<br />
+&#8230;done: 119,717 bytes<br />
+downloading Cache_Lite-1.7.16.tgz &#8230;<br />
+Starting to download Cache_Lite-1.7.16.tgz (33,236 bytes)<br />
+&#8230;done: 33,236 bytes<br />
+install ok: channel://pear.php.net/HTTP_Request2-2.3.0<br />
+install ok: channel://pear.php.net/Cache_Lite-1.7.16<br />
+install ok: channel://pear.php.net/XML_RPC2-1.1.3<br />
+安装成功；以上为Pear安装RPC记录 ；</p>
+<p><strong>PS:</strong><br />
+如果要调用远端的一个方法，可以使用RMI和RPC，这是2种截然不同的风格。<br />
+RMI: (Remote Method Invocation) 直接获取远端方法的签名，进行调用。优点是强类型、编译期可检查错误；缺点是只限于java语言<br />
+RPC: (Remote Procedure Call) 采用客户端/服务器方式(请求/响应)，发送请求到服务器端，服务端执行方法后返回结果。优点是跨语言跨平台，缺点是编译期无法排错，只能在运行时检查。</p>
+<p>&nbsp;</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Linux 设备说明 | 青春部落    </title>
+    <meta name="keywords"  content="Linux,系统设备,设备名称,主设备号,次设备号" />
+    <meta name="description"  content="Linux系统设备说明包括设备分类、设备名称、主设备号|次设备号和SYS系统目录" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Linux 设备说明评论Feed" href="https://cn-blogs.cn/archives/4427.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PHP IO编程之异步阻塞、非阻塞' href='https://cn-blogs.cn/archives/4425.html' />
+<link rel='next' title='Zabbix 监控磁盘I/O' href='https://cn-blogs.cn/archives/4432.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4427.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4427' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4427.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4427.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4427 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4425.html" rel="prev">上一篇：PHP IO编程之异步阻塞、非阻塞</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/4432.html" rel="next">下一篇：Zabbix 监控磁盘I/O</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Linux 设备说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/05/11</span>
+            <span class="update is-hidden">2018-05-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>设备的分类</h2>
+<p>以 Linux 的方式看待设备可区分为 3 种基本设备类型。 每个设备常常实现 3 种类型中的 1 种, 因此可分类成字符设备, 块设备, 或者一个网络设备。这种将设备分成不同类型或类别的方法并非是固定不变的。</p>
+<h4>字符设备</h4>
+<p>一个字符( char ) 设备是一种可以当作一个字节流来存取的设备( 如同一个文件 ); 字符驱动模块负责实现这种行为。<br />
+这样的驱动模块至少实现 open, close, read, 和 write 系统调用。文本控制台( /dev/console )和串口( /dev/ttyS0 及其他 )是字符设备的例子, 因为它们很好地展现了流的抽象。字符设备通过文件系统结点来存取, 例如 /dev/tty1 和 /dev/lp0。</p>
+<h4>块设备</h4>
+<p>如同字符设备, 块设备通过位于 /dev 目录的文件系统结点来存取. 一个块设备(例如一个磁盘)应该是可以驻有一个文件系统的。<br />
+在大部分的 Unix 系统, 一个块设备只能处理特定的 I/O 操作, 即传送一个或多个长度经常是 512 字节( 或一个更大的 2 的幂的数 )的整块。<br />
+Linux, 相反, 允许应用程序读写一个块设备象一个字符设备一样；它允许一次传送任意数目的字节。 结果就是, 块和字符设备的区别仅仅在内核内部管理数据的方式上, 和在内核/驱动的软件接口上不同。<br />
+如同一个字符设备, 每个块设备都通过一个文件系统结点被存取的, 它们之间的区别对用户是透明的。 块驱动和字符驱动相比, 与内核的接口完全不同。</p>
+<h4>网络接口设备</h4>
+<p>任何网络事务都通过一个接口来进行, 就是说, 一个能够与其他主机交换数据的设备。<br />
+通常, 一个接口是一个硬件设备, 但是它也可能是一个纯粹的软件设备, 比如环回接口。一个网络接口负责发送和接收数据报文, 在内核网络子系统的驱动下, 不必知道单个事务是如何映射到实际的被发送的报文上的。很多网络连接( 特别那些使用 TCP 的)是面向流的, 但是网络设备却常常设计成处理报文的发送和接收。网络驱动对单个连接一无所知; 它只处理报文。</p>
+<h4>补充</h4>
+<p>网络接口不是一个面向流的设备,就不像 /dev/tty1 那么容易映射到文件系统的一个结点上。Unix 提供的对接口的存取的方式仍然是通过分配一个名子给它们( 例如 eth0 ), 但是这个名子在文件系统中没有对应的入口。内核与网络设备驱动间的通讯与字符设备和块设备驱动所用的完全不同。不用 read 和 write, 内核调用和报文传递相关的函数.</p>
+<p>有其他的划分驱动模块的方式, 与上面的设备类型是正交的。<br />
+通常, 某些类型的驱动与给定类型设备的其他层的内核支持函数一起工作。 例如, 你可以说 USB 模块, 串口模块, SCSI 模块, 等等. 每个 USB 设备由一个 USB 模块驱动, 与 USB 子系统一起工作, 但是设备自身在系统中表现为一个字符设备( 比如一个 USB 串口 ), 一个块设备( 一个 USB 内存读卡器 ), 或者一个网络设备( 一个 USB 以太网接口 )。</p>
+<h3>设备名称</h3>
+<table>
+<tbody>
+<tr>
+<th>fb::frame缓冲<br />
+fd:&#8212;&#8211;:软驱<br />
+hd:&#8212;&#8211;:IDE 硬盘/光驱<br />
+md:&#8212;&#8211;:RAID设备(Metadisk)<br />
+dm:&#8212;&#8211;:LVM设备(DeviceMapper)<br />
+xd:&#8212;&#8211;:虚拟机中的硬盘驱动器<br />
+tty:&#8212;&#8211;:终端设备<br />
+psaux:&#8212;&#8211;:PS/2 鼠标设备<br />
+lp:&#8212;&#8211;:打印机<br />
+par:&#8212;&#8211;:并口<br />
+pt:&#8212;&#8211;:伪终端</th>
+<th>s:&#8212;&#8211;:SCSI设备<br />
+scd:&#8212;&#8211;:SCSI音频光驱<br />
+sd:&#8212;&#8211;:SCSI硬盘<br />
+sg:&#8212;&#8211;:SCSI通用设备<br />
+sr:&#8212;&#8211;:SCSI数据光驱<br />
+st:&#8212;&#8211;:SCSI磁带<br />
+cdrom:&#8212;&#8211;:光驱的符号链接<br />
+mouse:&#8212;&#8211;:鼠标设备的符号链接<br />
+gpmdata:&#8212;&#8211;:伪设备<br />
+null:&#8212;&#8211;:写入消失<br />
+zero:&#8212;&#8211;:一直产生零</th>
+</tr>
+</tbody>
+</table>
+<h3>主设备号和次设备号</h3>
+<p>一个字符设备或者块设备都有一个主设备号和次设备号。主设备号和次设备号统称为设备号。<br />
+主设备号用来表示一个特定的驱动程序。次设备号用来表示使用该驱动程序的各设备。<br />
+在同一个系统中，一类设备的主设备号是唯一的。次设备号只是在驱动程序内部使用，系统内核直接把次设备号传递给应用程序，由驱动程序管理。为了保证驱动程序的通用性，避免驱动程序移植过程中出现主设备号冲突，理想的方式是给每个设备驱动动态的分配主设备号</p>
+<h2>SYS 系统目录</h2>
+<p>sysfs 虚拟文件系统提供了一种比 proc 更为理想的访问内核数据的途径。sysfs 文件系统总是被挂载在 /sys 挂载点上。</p>
+<p>sysfs 与 proc 相比有很多优点，最重要的莫过于设计上的清晰。一个 proc 虚拟文件可能有内部格式，如 /proc/scsi/scsi ，它是可读可写的，并且读写格式不一样，代表不同的操作，应用程序中读到了这个文件的内容一般还需要进行字符串解析，而在写入时需要先用字符串格式化按指定的格式写入字符串进行操作。<br />
+相比而言，sysfs 的设计原则是一个属性文件只做一件事情，sysfs属性文件一般只有一个值，直接读取或写入。</p>
+<h4>SYS 系统目录结构</h4>
+<table>
+<tbody>
+<tr>
+<th>/sys</th>
+<th>下的目录结构是经过精心设计的：在 /sys/devices 下是所有设备的真实对象，包括如视频卡和以太网卡等真实的设备，也包括 ACPI 等不那么显而易见的真实设备、还有 tty, bonding 等纯粹虚拟的设备；在其它目录如 class, bus 等中则在分类的目录中含有大量对 devices 中真实对象引用的符号链接文件。</th>
+</tr>
+<tr>
+<th>/sys/devices</th>
+<th>这是内核对系统中所有设备的分层次表达模型，也是 /sys 文件系统管理设备的最重要的目录结构</th>
+</tr>
+<tr>
+<th>/sys/dev</th>
+<th>这个目录下维护一个按字符设备和块设备的主次号码(major:minor)链接到真实的设备(/sys/devices下)的符号链接文件，它是在内核 2.6.26 首次引入；</th>
+</tr>
+<tr>
+<th>/sys/bus</th>
+<th>这是内核设备按总线类型分层放置的目录结构，devices 中的所有设备都是连接于某种总线之下，在这里的每一种具体总线之下可以找到每一个具体设备的符号链接，它也是构成 Linux 统一设备模型的一部分；</th>
+</tr>
+<tr>
+<th>/sys/class</th>
+<th>这是按照设备功能分类的设备模型，如系统所有输入设备都会出现在 /sys/class/input 之下，而不论它们是以何种总线连接到系统。它也是构成 Linux 统一设备模型的一部分；</th>
+</tr>
+<tr>
+<th>/sys/block</th>
+<th>这里是系统中当前所有的块设备所在，按照功能来说放置在 /sys/class 之下会更合适，在 2.6.26 内核中已正式移到 /sys/class/block</th>
+</tr>
+<tr>
+<th>/sys/firmware</th>
+<th>这里是系统加载固件机制的对用户空间的接口，关于固件有专用于固件加载的一套API</th>
+</tr>
+<tr>
+<th>/sys/fs</th>
+<th>这里按照设计是用于描述系统中所有文件系统，包括文件系统本身和按文件系统分类存放的已挂载点，但目前只有 fuse,gfs2 等少数文件系统支持 sysfs 接口，一些传统的虚拟文件系统(VFS)层次控制参数仍然在 sysctl (/proc/sys/fs) 接口中中；</th>
+</tr>
+<tr>
+<th>/sys/kernel</th>
+<th>这里是内核所有可调整参数的位置，目前只有 uevent_helper, kexec_loaded, mm, 和新式的 slab 分配器等几项较新的设计在使用它，其它内核可调整参数仍然位于 sysctl (/proc/sys/kernel) 接口中</th>
+</tr>
+<tr>
+<th>/sys/module</th>
+<th>这里有系统中所有模块的信息，不论这些模块是以内联(inlined)方式编译到内核映像文件(vmlinuz)中还是编译为外部模块(ko文件)，都可能会出现在 /sys/module 中</th>
+</tr>
+<tr>
+<th>/sys/power</th>
+<th>这里是系统中电源选项，这个目录下有几个属性文件可以用于控制整个机器的电源状态，如可以向其中写入控制命令让机器关机、重启等。</th>
+</tr>
+<tr>
+<th>/sys/slab</th>
+<th>(内核2.6.24 以后移至 /sys/kernel/slab)SLAB 内存分配器的实现</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

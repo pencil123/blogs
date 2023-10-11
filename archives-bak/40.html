@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>多视窗管理工具 Screen | 青春部落    </title>
+    <meta name="keywords"  content="多视窗管理工具,screen,linux" />
+    <meta name="description"  content="Linux 系统管理工具：多视窗管理工具Screen" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 多视窗管理工具 Screen评论Feed" href="https://cn-blogs.cn/archives/40.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='tr 文本字符替换' href='https://cn-blogs.cn/archives/28.html' />
+<link rel='next' title='memory used devel' href='https://cn-blogs.cn/archives/61.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/40.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=40' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F40.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F40.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-40 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/28.html" rel="prev">上一篇：tr 文本字符替换</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/61.html" rel="next">下一篇：memory used devel</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            多视窗管理工具 Screen        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/08/14</span>
+            <span class="update is-hidden">2018-04-29</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>当远程登录到linux系统上时，如果执行一个长时间运行的任务或者是在后台运行的任务时；用户要么不能关闭终端，要么就需要使用nohup或者screen这样命令。<br />
+GNU Screen是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。<br />
+GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</p>
+<h4>会话恢复</h4>
+<p>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</p>
+<h4>多窗口</h4>
+<p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。</p>
+<h4>会话共享</h4>
+<p>Screen可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。<br />
+GNU&#8217;s Screen 官方站点：http://www.gnu.org/software/screen/</p>
+<h3>Usage 使用说明</h3>
+<p><code>yum install screen</code><br />
+<code># screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</code></p>
+<table>
+<tbody>
+<tr>
+<th>-A</th>
+<th>将所有的视窗都调整为目前终端机的大小。</th>
+</tr>
+<tr>
+<th>-d &lt;作业名称&gt;</th>
+<th>将指定的screen作业离线。</th>
+</tr>
+<tr>
+<th>-h &lt;行数&gt;</th>
+<th>指定视窗的缓冲区行数。</th>
+</tr>
+<tr>
+<th>-m</th>
+<th>即使目前已在作业中的screen作业，仍强制建立新的screen作业。</th>
+</tr>
+<tr>
+<th><strong>-r &lt;作业名称&gt; 　</strong></th>
+<th>恢复离线的screen作业。</th>
+</tr>
+<tr>
+<th>-R</th>
+<th>先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</th>
+</tr>
+<tr>
+<th><strong>-s 　</strong></th>
+<th>指定建立新视窗时，所要执行的shell。</th>
+</tr>
+<tr>
+<th><strong>-S &lt;作业名称&gt; 　</strong></th>
+<th>指定screen作业的名称。</th>
+</tr>
+<tr>
+<th>-v</th>
+<th>显示版本信息。</th>
+</tr>
+<tr>
+<th>-x</th>
+<th>恢复之前离线的screen作业。</th>
+</tr>
+<tr>
+<th>-ls或&#8211;list</th>
+<th>显示目前所有的screen作业。</th>
+</tr>
+<tr>
+<th>-wipe</th>
+<th>检查目前所有的screen作业，并删除已经无法使用的screen作业。</th>
+</tr>
+</tbody>
+</table>
+<h3>常用Screen参数</h3>
+<table>
+<tbody>
+<tr>
+<th>screen -S yourname</th>
+<th>新建一个叫yourname的session</th>
+</tr>
+<tr>
+<th>screen -ls</th>
+<th>列出当前所有的session</th>
+</tr>
+<tr>
+<th>screen -r yourname</th>
+<th>回到yourname这个session</th>
+</tr>
+<tr>
+<th>screen -d yourname</th>
+<th>远程detach某个session</th>
+</tr>
+<tr>
+<th>screen -d -r yourname</th>
+<th>结束当前session并回到yourname这个session</th>
+</tr>
+</tbody>
+</table>
+<h3>Screen 管理</h3>
+<p>在每个screen session 下，所有命令都以 ctrl+a(C-a) 开始。</p>
+<p>&nbsp;</p>
+<table>
+<tbody>
+<tr>
+<th>C-a ?</th>
+<th>显示所有键绑定信息</th>
+</tr>
+<tr>
+<th>C-a c</th>
+<th>创建一个新的运行shell的窗口并切换到该窗口</th>
+</tr>
+<tr>
+<th>C-a n</th>
+<th>Next，切换到下一个 window</th>
+</tr>
+<tr>
+<th>C-a p</th>
+<th>Previous，切换到前一个 window</th>
+</tr>
+<tr>
+<th>C-a 0..9</th>
+<th>切换到第 0..9 个 window</th>
+</tr>
+<tr>
+<th>Ctrl+a [Space]</th>
+<th>由视窗0循序切换到视窗9</th>
+</tr>
+<tr>
+<th>C-a C-a</th>
+<th>在两个最近使用的 window 间切换</th>
+</tr>
+<tr>
+<th>C-a x</th>
+<th>锁住当前的 window，需用用户密码解锁</th>
+</tr>
+<tr>
+<th><strong>C-a d </strong></th>
+<th>detach，暂时离开当前session</th>
+</tr>
+<tr>
+<th>C-a z</th>
+<th>把当前session放到后台执行，用 shell 的 fg 命令则可回去。</th>
+</tr>
+<tr>
+<th>C-a w</th>
+<th>显示所有窗口列表</th>
+</tr>
+<tr>
+<th>C-a t</th>
+<th>Time，显示当前时间，和系统的 load</th>
+</tr>
+<tr>
+<th><strong>C-a k </strong></th>
+<th>kill window，强行关闭当前的 window</th>
+</tr>
+<tr>
+<th>C-a ]</th>
+<th>Paste，把刚刚在 copy mode 选定的内容贴上</th>
+</tr>
+</tbody>
+</table>
+<h3>Screen 高级应用</h3>
+<h4>会话共享</h4>
+<p><code>screen -x</code><br />
+这个命令会将你朋友的终端Attach到你的Screen会话上，并且你的终端不会被Detach；实现会话共享。</p>
+<h4>会话锁定与解锁</h4>
+<p><code>快捷键C-a s锁定会话</code><br />
+锁定以后，再进行任何输入屏幕都不会再有反应了。但是要注意虽然屏幕上看不到反应，但你的输入都会被Screen中的进程接收到。<br />
+<code>也可以使用C-a x锁定会话</code><br />
+不同的是这样锁定之后，会话会被Screen所属用户的密码保护，需要输入密码才能继续访问这个会话。<br />
+<code>快捷键C-a q解锁会话</code></p>
+<h4>发送命令到screen会话</h4>
+<p><code>screen -S sandy -X screen ping www.baidu.com</code><br />
+这个命令在一个叫做sandy的screen会话中创建一个新窗口，并在其中运行ping命令。</p>
+<h4>C/P模式和操作</h4>
+<p>screen的另一个很强大的功能就是可以在不同窗口之间进行复制粘贴了。<br />
+使用快捷键C-a &lt;Esc&gt;或者C-a [可以进入copy/paste模式，这个模式下可以像在vi中一样移动光标，并可以使用空格键设置标记。其实在这个模式下有很多类似vi的操作，譬如使用/进行搜索，使用y快速标记一行，使用w快速标记一个单词等。</p>
+<h4>更多screen功能</h4>
+<p>同大多数UNIX程序一样，GNU Screen提供了丰富强大的定制功能。<br />
+你可以在Screen的默认两级配置文件/etc/screenrc和$HOME/.screenrc中指定更多，例如设定screen选项，定制绑定键，设定screen会话自启动窗口，启用多用户模式，定制用户访问权限控制等等。如果你愿意的话，也可以自己指定screen配置文件。<br />
+以多用户功能为例，screen默认是以单用户模式运行的，你需要在配置文件中指定multiuser on 来打开多用户模式，通过acl*（acladd,acldel,aclchg&#8230;）命令，你可以灵活配置其他用户访问你的screen会话。更多配置文件内容请参考screen的man页。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

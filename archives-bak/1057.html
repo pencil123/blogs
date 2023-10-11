@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>wsgi 服务器 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; wsgi 服务器评论Feed" href="https://cn-blogs.cn/archives/1057.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='return tuple' href='https://cn-blogs.cn/archives/1052.html' />
+<link rel='next' title='tornado ioloop  1、  linux epoll' href='https://cn-blogs.cn/archives/1060.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1057.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1057' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1057.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1057.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1057 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1052.html" rel="prev">上一篇：return tuple</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1060.html" rel="next">下一篇：tornado ioloop  1、  linux epoll</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            wsgi 服务器        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/12/27</span>
+            <span class="update is-hidden">2016-12-27</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>编写一个简单的 http server</strong></p>
+<p>在实现 wsgi server 之前我们先要做一些准备工作。首先，http server 使用 http 协议，而 http 协议封装在 tcp 协议中，所以要建立一个 http server 我们先要建立一个 tcp server。要使用 tcp 协议我们不可能自己实现一个，现在比较流行的解决方案就是使用 socket 套接字编程， socket 已经帮我们实现了 tcp 协议的细节，我们可以直接拿来使用不用关心细节。 socket 编程是语言无关的，不管是以前博主用 MFC 写聊天室还是用 C# 写网络延迟计算还是现在写 http server，它的使用流程都是一样的：<br />
+<strong>server</strong></p>
+<ul>
+<li>初始化 socket；</li>
+<li>绑定套接字到端口(bind)；</li>
+<li>监听端口(listen)；</li>
+<li>接受连接请求(accept)；</li>
+<li>通信(send/recv)；</li>
+<li>关闭连接(close)；</li>
+</ul>
+<p><strong>client</strong></p>
+<ul>
+<li>初始化 socket；</li>
+<li>发出连接请求(connect)；</li>
+<li>通信(send/recv)；</li>
+<li>关闭连接(close)；</li>
+</ul>
+<p><strong>server 的具体实现：</strong></p>
+<blockquote><p># coding: utf-8<br />
+# server.py<br />
+import socket<br />
+HOST, PORT = &#8221;, 8888<br />
+# 初始化<br />
+listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br />
+listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)<br />
+# 绑定<br />
+listen_socket.bind((HOST, PORT))<br />
+# 监听<br />
+listen_socket.listen(1)<br />
+print &#8216;Serving HTTP on port %s &#8230;&#8217; % PORT<br />
+while True:<br />
+&#8212;-# 接受请求<br />
+&#8212;-client_connection, client_address = listen_socket.accept()<br />
+&#8212;-# 通信<br />
+&#8212;-request = client_connection.recv(1024)<br />
+&#8212;-print request<br />
+&#8212;-http_response = &#8220;&#8221;&#8221;<br />
+HTTP/1.1 200 OK<br />
+Hello, World!<br />
+&#8220;&#8221;&#8221;<br />
+&#8212;-client_connection.sendall(http_response)<br />
+&#8212;-# 关闭连接<br />
+&#8212;-client_connection.close()</p></blockquote>
+<p>而 client 不需要我们自己实现，我们的浏览器就是一个 client ，现在运行python server.py，然后在浏览器中打开 localhost:8888即可看到浏览器中显示 hello world!，这么快就实现了一个 http server 有木有 hin 激动！</p>
+<p>然而想要 Django 这类框架的 app 在我们写的 http server 中运行起来还远远不够，现在我们就需要引入 wsgi 规范，根据这个规范我们就可以让自己的 server 也能运行这些框架的 app啦。</p>
+<p><strong>编写一个标准的 wsgi server</strong></p>
+<p>首先，我们要看官方文档里 wsgi 的解释：PEP 3333<br />
+嗯，就是一篇很长的英语阅读理解，大概意思就是如果你想让你的服务器和应用程序一起好好工作，你要遵循这个标准来写你的 web app 和 web server：</p>
+<p>server–middleware–application<br />
+application</p>
+<p>application 是一个接受接受两个参数environ, start_response的标准 wsgi app:</p>
+<blockquote><p>environ:&#8212;&#8212;&#8211; 一个包含请求信息及环境信息的字典，server 端会详细说明<br />
+start_response: 一个接受两个参数`status, response_headers`的方法:<br />
+status:&#8212;&#8212;&#8211; 返回状态码，如http 200、404等<br />
+response_headers: 返回信息头部列表</p></blockquote>
+<p>具体实现：</p>
+<blockquote><p>def application(environ, start_response):<br />
+&#8212;-status = &#8216;200 OK&#8217;<br />
+&#8212;-response_headers = [(&#8216;Content-Type&#8217;, &#8216;text/plain&#8217;)]<br />
+&#8212;-start_response(status, response_headers)<br />
+&#8212;-return [&#8216;Hello world&#8217;]</p></blockquote>
+<p>这样一个标准的 wsgi app 就写好了，虽然这看上去和我们写的 Django app、 tornado app 大相径庭，但实际上这些 app 都会经过相应的处理来适配 wsgi 标准，这个之后会详谈。</p>
+<p>server</p>
+<p>wsgi server 的实现要复杂一些，所以我先贴自己实现的 wsgi server 代码，然后再讲解：</p>
+<blockquote><p>
+# server.py<br />
+# coding: utf-8<br />
+from __future__ import unicode_literals<br />
+import socket<br />
+import StringIO<br />
+import sys<br />
+import datetime<br />
+class WSGIServer(object):<br />
+&#8212;-socket_family = socket.AF_INET<br />
+&#8212;-socket_type = socket.SOCK_STREAM<br />
+&#8212;-request_queue_size = 10<br />
+&#8212;-def __init__(self, address):<br />
+&#8212;&#8212;&#8211;self.socket = socket.socket(self.socket_family, self.socket_type)<br />
+&#8212;&#8212;&#8211;self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)<br />
+&#8212;&#8212;&#8211;self.socket.bind(address)<br />
+&#8212;&#8212;&#8211;self.socket.listen(self.request_queue_size)<br />
+&#8212;&#8212;&#8211;host, port = self.socket.getsockname()[:2]<br />
+&#8212;&#8212;&#8211;self.host = host<br />
+&#8212;&#8212;&#8211;self.port = port<br />
+&#8212;-def set_application(self, application):<br />
+&#8212;&#8212;&#8211;self.application = application<br />
+&#8212;-def serve_forever(self):<br />
+&#8212;&#8212;&#8211;while 1:<br />
+&#8212;&#8212;&#8212;&#8212;self.connection, client_address = self.socket.accept()<br />
+&#8212;&#8212;&#8212;&#8212;self.handle_request()<br />
+&#8212;-def handle_request(self):<br />
+&#8212;&#8212;&#8211;self.request_data = self.connection.recv(1024)<br />
+&#8212;&#8212;&#8211;self.request_lines = self.request_data.splitlines()<br />
+&#8212;&#8212;&#8211;try:<br />
+&#8212;&#8212;&#8212;&#8212;self.get_url_parameter()<br />
+&#8212;&#8212;&#8212;&#8212;env = self.get_environ()<br />
+&#8212;&#8212;&#8212;&#8212;app_data = self.application(env, self.start_response)<br />
+&#8212;&#8212;&#8212;&#8212;self.finish_response(app_data)<br />
+&#8212;&#8212;&#8212;&#8212;print &#8216;[{0}] &#8220;{1}&#8221; {2}&#8217;.format(datetime.datetime.now().strftime(&#8216;%Y-%m-%d %H:%M:%S&#8217;),<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- self.request_lines[0], self.status)<br />
+&#8212;&#8212;&#8211;except Exception, e:<br />
+&#8212;&#8212;&#8212;&#8212;pass<br />
+&#8212;-def get_url_parameter(self):<br />
+&#8212;&#8212;&#8211;self.request_dict = {&#8216;Path&#8217;: self.request_lines[0]}<br />
+&#8212;&#8212;&#8211;for itm in self.request_lines[1:]:<br />
+&#8212;&#8212;&#8212;&#8212;if &#8216;:&#8217; in itm:<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-self.request_dict[itm.split(&#8216;:&#8217;)[0]] = itm.split(&#8216;:&#8217;)[1]<br />
+&#8212;&#8212;&#8211;self.request_method, self.path, self.request_version = self.request_dict.get(&#8216;Path&#8217;).split()<br />
+&#8212;-def get_environ(self):<br />
+&#8212;&#8212;&#8211;env = {<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.version&#8217;: (1, 0),<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.url_scheme&#8217;: &#8216;http&#8217;,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.input&#8217;: StringIO.StringIO(self.request_data),<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.errors&#8217;: sys.stderr,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.multithread&#8217;: False,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.multiprocess&#8217;: False,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;wsgi.run_once&#8217;: False,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;REQUEST_METHOD&#8217;: self.request_method,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;PATH_INFO&#8217;: self.path,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;SERVER_NAME&#8217;: self.host,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;SERVER_PORT&#8217;: self.port,<br />
+&#8212;&#8212;&#8212;&#8212;&#8216;USER_AGENT&#8217;: self.request_dict.get(&#8216;User-Agent&#8217;)<br />
+&#8212;&#8212;&#8211;}<br />
+&#8212;&#8212;&#8211;return env<br />
+&#8212;-def start_response(self, status, response_headers):<br />
+&#8212;&#8212;&#8211;headers = [<br />
+&#8212;&#8212;&#8212;&#8212;(&#8216;Date&#8217;, datetime.datetime.now().strftime(&#8216;%a, %d %b %Y %H:%M:%S GMT&#8217;)),<br />
+&#8212;&#8212;&#8212;&#8212;(&#8216;Server&#8217;, &#8216;RAPOWSGI0.1&#8217;),<br />
+&#8212;&#8212;&#8211;]<br />
+&#8212;&#8212;&#8211;self.headers = response_headers + headers<br />
+&#8212;&#8212;&#8211;self.status = status<br />
+&#8212;-def finish_response(self, app_data):<br />
+&#8212;&#8212;&#8211;try:<br />
+&#8212;&#8212;&#8212;&#8212;response = &#8216;HTTP/1.1 {status}\r\n&#8217;.format(status=self.status)<br />
+&#8212;&#8212;&#8212;&#8212;for header in self.headers:<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-response += &#8216;{0}: {1}\r\n&#8217;.format(*header)<br />
+&#8212;&#8212;&#8212;&#8212;response += &#8216;\r\n&#8217;<br />
+&#8212;&#8212;&#8212;&#8212;for data in app_data:<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-response += data<br />
+&#8212;&#8212;&#8212;&#8212;self.connection.sendall(response)<br />
+&#8212;&#8212;&#8211;finally:<br />
+&#8212;&#8212;&#8212;&#8212;self.connection.close()<br />
+if __name__ == &#8216;__main__&#8217;:<br />
+&#8212;-port = 8888<br />
+&#8212;-if len(sys.argv) &lt; 2: &#8212;&#8212;&#8211;sys.exit(&#8216;请提供可用的wsgi应用程序, 格式为: 模块名.应用名 端口号&#8217;) &#8212;-elif len(sys.argv) &gt; 2:<br />
+&#8212;&#8212;&#8211;port = sys.argv[2]<br />
+&#8212;-def generate_server(address, application):<br />
+&#8212;&#8212;&#8211;server = WSGIServer(address)<br />
+&#8212;&#8212;&#8211;server.set_application(TestMiddle(application))<br />
+&#8212;&#8212;&#8211;return server<br />
+&#8212;-app_path = sys.argv[1]<br />
+&#8212;-module, application = app_path.split(&#8216;.&#8217;)<br />
+&#8212;-module = __import__(module)<br />
+&#8212;-application = getattr(module, application)<br />
+&#8212;-httpd = generate_server((&#8221;, int(port)), application)<br />
+&#8212;-print &#8216;RAPOWSGI Server Serving HTTP service on port {0}&#8217;.format(port)<br />
+&#8212;-print &#8216;{0}&#8217;.format(datetime.datetime.now().<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; strftime(&#8216;%a, %d %b %Y %H:%M:%S GMT&#8217;))<br />
+&#8212;-httpd.serve_forever()</p></blockquote>
+<p>首先我们看 WSGIServer 类__init__方法主要是初始化 socket 与服务器地址，绑定并监听端口;<br />
+其次，serve_forever(self): 持续运行 server；<br />
+handle_request(self):处理请求；<br />
+最后，finish_response(self, app_data):返回请求响应。<br />
+再来看__main__里是如何运行 WSGIServer的：<br />
+获得地址和端口后先初始化 WSGIServer：server = WSGIServer(address)，然后设置加载的wsgi app：server.set_application(TestMiddle(application))，接着持续运行 server：httpd.serve_forever()<br />
+那么根据以上信息，可以总结出 wsgi server 应该是这样一个过程：</p>
+<p>初始化，建立套接字，绑定监听端口；<br />
+设置加载的 web app；<br />
+开始持续运行 server；<br />
+处理访问请求（在这里可以加入你自己的处理过程，比如我加入了打印访问信息，字典化访问头部信息等功能）；<br />
+获取请求信息及环境信息（get_environ(self)）；<br />
+用environ运行加载的 web app 得到返回信息；<br />
+构造返回信息头部；<br />
+返回信息；<br />
+只要实现了以上过程，一个标准的 wsgi server 就写好了。仔细观察，其实一个 wsgi server 的重要之处就在于用environ去跑 web app 得到返回结果这一步，这一步和前面的 application 实现相辅相成，然后框架和服务器都根据这套标准，大家就可以愉快的一起工作了。<br />
+现在运行python server.py app.app 8000, 然后浏览器访问localhost:8000：</p>
+<p>到此，我们的 wsgi server 已经可以正常运行了，这时我们再来看看 middleware：</p>
+<p>middleware</p>
+<p>middleware 中间件的作用就是在server 拿到请求数据给 application 前如果想做一些处理或者验证等等功能，这时候 middleware 就派上用场了，当然你愿意的话也可以写在你的 server 里，只是 wsgi 规范更建议把这些写在中间件里，下面我来实现一个检查请求’User-Agent’是否为正常浏览器，不是就把请求拒绝掉的中间件：</p>
+<blockquote><p># coding: utf-8<br />
+# middleware.py<br />
+from __future__ import unicode_literals<br />
+class TestMiddle(object):<br />
+&#8212;-def __init__(self, application):<br />
+&#8212;&#8212;&#8211;self.application = application<br />
+&#8212;-def __call__(self, environ, start_response):<br />
+&#8212;&#8212;&#8211;if &#8216;postman&#8217; in environ.get(&#8216;USER_AGENT&#8217;):<br />
+&#8212;&#8212;&#8212;&#8212;start_response(&#8216;403 Not Allowed&#8217;, [])<br />
+&#8212;&#8212;&#8212;&#8212;return [&#8216;not allowed!&#8217;]<br />
+&#8212;&#8212;&#8211;return self.application(environ, start_response)</p></blockquote>
+<p>初始化用来接收 application，然后在__call__方法里写入处理过程，最后返回 application 这样我们的中间件就能像函数一样被调用了。</p>
+<p>然后引入中间件：</p>
+<blockquote><p>from middleware import TestMiddle<br />
+&#8230;<br />
+server.set_application(TestMiddle(application))</p></blockquote>
+<p>现在重启 server 然后用 postman 访问服务器：<br />
+可以看到，中间件起作用了！</p>
+<p>接下来，我们再谈谈 Django 和 tornado 对于 wsgi 的支持：</p>
+<p><strong>Django WSGI:</strong></p>
+<p>Django WSGI application</p>
+<p>django 本身的应用体系比较复杂，所以没有办法直接拿来用在我们写的 wsgi server 上，不过 Django 考虑到了这一点， 所以提供了 WSGIHandler：</p>
+<blockquote><p>class WSGIHandler(base.BaseHandler):<br />
+&#8212;-request_class = WSGIRequest<br />
+&#8212;-def __init__(self, *args, **kwargs):<br />
+&#8212;&#8212;&#8211;super(WSGIHandler, self).__init__(*args, **kwargs)<br />
+&#8212;&#8212;&#8211;self.load_middleware()<br />
+&#8212;-def __call__(self, environ, start_response):<br />
+&#8212;&#8212;&#8211;set_script_prefix(get_script_name(environ))<br />
+&#8212;&#8212;&#8211;signals.request_started.send(sender=self.__class__, environ=environ)<br />
+&#8212;&#8212;&#8211;try:<br />
+&#8212;&#8212;&#8212;&#8212;request = self.request_class(environ)<br />
+&#8212;&#8212;&#8211;except UnicodeDecodeError:<br />
+&#8212;&#8212;&#8212;&#8212;logger.warning(<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-&#8216;Bad Request (UnicodeDecodeError)&#8217;,<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-exc_info=sys.exc_info(),<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-extra={<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;&#8216;status_code&#8217;: 400,<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-}<br />
+&#8212;&#8212;&#8212;&#8212;)<br />
+&#8212;&#8212;&#8212;&#8212;response = http.HttpResponseBadRequest()<br />
+&#8212;&#8212;&#8211;else:<br />
+&#8212;&#8212;&#8212;&#8212;response = self.get_response(request)<br />
+&#8212;&#8212;&#8211;response._handler_class = self.__class__<br />
+&#8212;&#8212;&#8211;status = &#8216;%d %s&#8217; % (response.status_code, response.reason_phrase)<br />
+&#8212;&#8212;&#8211;response_headers = [(str(k), str(v)) for k, v in response.items()]<br />
+&#8212;&#8212;&#8211;for c in response.cookies.values():<br />
+&#8212;&#8212;&#8212;&#8212;response_headers.append((str(&#8216;Set-Cookie&#8217;), str(c.output(header=&#8221;))))<br />
+&#8212;&#8212;&#8211;start_response(force_str(status), response_headers)<br />
+&#8212;&#8212;&#8211;if getattr(response, &#8216;file_to_stream&#8217;, None) is not None and environ.get(&#8216;wsgi.file_wrapper&#8217;):<br />
+&#8212;&#8212;&#8212;&#8212;response = environ[&#8216;wsgi.file_wrapper&#8217;](response.file_to_stream)<br />
+&#8212;&#8212;&#8211;return response</p></blockquote>
+<p>可以看到，这里 WSGIHandler 一样使用start_response(force_str(status), response_headers)把 Django app 封装成了 标准 wsgi app ，然后返回 response。</p>
+<p><strong>Django WSGI server</strong></p>
+<p>Django 同样也实现了 wsgi server：</p>
+<p><strong>class WSGIServer(simple_server.WSGIServer, object):<br />
+&#8212;-&#8220;&#8221;&#8221;BaseHTTPServer that implements the Python WSGI protocol&#8221;&#8221;&#8221;<br />
+&#8212;-request_queue_size = 10<br />
+&#8212;-def __init__(self, *args, **kwargs):<br />
+&#8212;&#8212;&#8211;if kwargs.pop(&#8216;ipv6&#8217;, False):<br />
+&#8212;&#8212;&#8212;&#8212;self.address_family = socket.AF_INET6<br />
+&#8212;&#8212;&#8211;self.allow_reuse_address = kwargs.pop(&#8216;allow_reuse_address&#8217;, True)<br />
+&#8212;&#8212;&#8211;super(WSGIServer, self).__init__(*args, **kwargs)<br />
+&#8212;-def server_bind(self):<br />
+&#8212;&#8212;&#8211;&#8220;&#8221;&#8221;Override server_bind to store the server name.&#8221;&#8221;&#8221;<br />
+&#8212;&#8212;&#8211;super(WSGIServer, self).server_bind()<br />
+&#8212;&#8212;&#8211;self.setup_environ()<br />
+&#8212;-def handle_error(self, request, client_address):<br />
+&#8212;&#8212;&#8211;if is_broken_pipe_error():<br />
+&#8212;&#8212;&#8212;&#8212;logger.info(&#8220;- Broken pipe from %s\n&#8221;, client_address)<br />
+&#8212;&#8212;&#8211;else:<br />
+&#8212;&#8212;&#8212;&#8212;super(WSGIServer, self).handle_error(request, client_address)</strong><br />
+基本全部继承于wsgiref.simple_server.WSGIServer:</p>
+<p><strong>class WSGIServer(HTTPServer):<br />
+&#8212;-&#8220;&#8221;&#8221;BaseHTTPServer that implements the Python WSGI protocol&#8221;&#8221;&#8221;<br />
+&#8212;-application = None<br />
+&#8212;-def server_bind(self):<br />
+&#8212;&#8212;&#8211;&#8220;&#8221;&#8221;Override server_bind to store the server name.&#8221;&#8221;&#8221;<br />
+&#8212;&#8212;&#8211;HTTPServer.server_bind(self)<br />
+&#8212;&#8212;&#8211;self.setup_environ()<br />
+&#8212;-def setup_environ(self):<br />
+&#8212;&#8212;&#8211;# Set up base environment<br />
+&#8212;&#8212;&#8211;env = self.base_environ = {}<br />
+&#8212;&#8212;&#8211;env[&#8216;SERVER_NAME&#8217;] = self.server_name<br />
+&#8212;&#8212;&#8211;env[&#8216;GATEWAY_INTERFACE&#8217;] = &#8216;CGI/1.1&#8217;<br />
+&#8212;&#8212;&#8211;env[&#8216;SERVER_PORT&#8217;] = str(self.server_port)<br />
+&#8212;&#8212;&#8211;env[&#8216;REMOTE_HOST&#8217;]=&#8221;<br />
+&#8212;&#8212;&#8211;env[&#8216;CONTENT_LENGTH&#8217;]=&#8221;<br />
+&#8212;&#8212;&#8211;env[&#8216;SCRIPT_NAME&#8217;] = &#8221;<br />
+&#8212;-def get_app(self):<br />
+&#8212;&#8212;&#8211;return self.application<br />
+&#8212;-def set_app(self,application):<br />
+&#8212;&#8212;&#8211;self.application = application</strong><br />
+可以看到，和我们实现的 wsgi server 是差不多的。</p>
+<p><strong>Tornado WSGI</strong></p>
+<p>tornado 直接从底层用 epoll 自己实现了 事件池操作、tcp server、http server，所以它是一个完全不同当异步框架，但 tornado 同样也提供了对 wsgi 对支持，不过这种情况下就没办法用 tornado 异步的特性了。</p>
+<p>与其说 tornado 提供了 wsgi 支持，不如说它只是提供了 wsgi 兼容，tornado 提供两种方式：</p>
+<p><strong>WSGIContainer</strong></p>
+<p>其他应用要在 tornado server 运行， tornado 提供 WSGIContainer。<br />
+今天这里主要讨论 wsgi ，所以这里就不分析 tornado 这部分代码，之后做 tornado 源码分析会再分析这里。</p>
+<p><strong>WSGIAdapter</strong></p>
+<p>tornado 应用要在 wsgi server 上运行， tornado 提供 WSGIAdapter:</p>
+<blockquote><p>class WSGIAdapter(object):<br />
+&#8212;-def __init__(self, application):<br />
+&#8212;&#8212;&#8211;if isinstance(application, WSGIApplication):<br />
+&#8212;&#8212;&#8212;&#8212;self.application = lambda request: web.Application.__call__(<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-application, request)<br />
+&#8212;&#8212;&#8211;else:<br />
+&#8212;&#8212;&#8212;&#8212;self.application = application<br />
+&#8212;-def __call__(self, environ, start_response):<br />
+&#8212;&#8212;&#8211;method = environ[&#8220;REQUEST_METHOD&#8221;]<br />
+&#8212;&#8212;&#8211;uri = urllib_parse.quote(from_wsgi_str(environ.get(&#8220;SCRIPT_NAME&#8221;, &#8220;&#8221;)))<br />
+&#8212;&#8212;&#8211;uri += urllib_parse.quote(from_wsgi_str(environ.get(&#8220;PATH_INFO&#8221;, &#8220;&#8221;)))<br />
+&#8212;&#8212;&#8211;if environ.get(&#8220;QUERY_STRING&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;uri += &#8220;?&#8221; + environ[&#8220;QUERY_STRING&#8221;]<br />
+&#8212;&#8212;&#8211;headers = httputil.HTTPHeaders()<br />
+&#8212;&#8212;&#8211;if environ.get(&#8220;CONTENT_TYPE&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;headers[&#8220;Content-Type&#8221;] = environ[&#8220;CONTENT_TYPE&#8221;]<br />
+&#8212;&#8212;&#8211;if environ.get(&#8220;CONTENT_LENGTH&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;headers[&#8220;Content-Length&#8221;] = environ[&#8220;CONTENT_LENGTH&#8221;]<br />
+&#8212;&#8212;&#8211;for key in environ:<br />
+&#8212;&#8212;&#8212;&#8212;if key.startswith(&#8220;HTTP_&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-headers[key[5:].replace(&#8220;_&#8221;, &#8220;-&#8220;)] = environ[key]<br />
+&#8212;&#8212;&#8211;if headers.get(&#8220;Content-Length&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;body = environ[&#8220;wsgi.input&#8221;].read(<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;-int(headers[&#8220;Content-Length&#8221;]))<br />
+&#8212;&#8212;&#8211;else:<br />
+&#8212;&#8212;&#8212;&#8212;body = b&#8221;&#8221;<br />
+&#8212;&#8212;&#8211;protocol = environ[&#8220;wsgi.url_scheme&#8221;]<br />
+&#8212;&#8212;&#8211;remote_ip = environ.get(&#8220;REMOTE_ADDR&#8221;, &#8220;&#8221;)<br />
+&#8212;&#8212;&#8211;if environ.get(&#8220;HTTP_HOST&#8221;):<br />
+&#8212;&#8212;&#8212;&#8212;host = environ[&#8220;HTTP_HOST&#8221;]<br />
+&#8212;&#8212;&#8211;else:<br />
+&#8212;&#8212;&#8212;&#8212;host = environ[&#8220;SERVER_NAME&#8221;]<br />
+&#8212;&#8212;&#8211;connection = _WSGIConnection(method, start_response,<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; _WSGIRequestContext(remote_ip, protocol))<br />
+&#8212;&#8212;&#8211;request = httputil.HTTPServerRequest(<br />
+&#8212;&#8212;&#8212;&#8212;method, uri, &#8220;HTTP/1.1&#8221;, headers=headers, body=body,<br />
+&#8212;&#8212;&#8212;&#8212;host=host, connection=connection)<br />
+&#8212;&#8212;&#8211;request._parse_body()<br />
+&#8212;&#8212;&#8211;self.application(request)<br />
+&#8212;&#8212;&#8211;if connection._error:<br />
+&#8212;&#8212;&#8212;&#8212;raise connection._error<br />
+&#8212;&#8212;&#8211;if not connection._finished:<br />
+&#8212;&#8212;&#8212;&#8212;raise Exception(&#8220;request did not finish synchronously&#8221;)<br />
+&#8212;&#8212;&#8211;return connection._write_buffer</p></blockquote>
+<p>可以看到 tornado 也是将自己的应用使用前文那个流程改为标准 wsgi app，最后我们来试试让我们自己的服务器运行 tornado app：</p>
+<blockquote><p># coding: utf-8<br />
+# tornado_wsgi.py<br />
+from __future__ import unicode_literals<br />
+import datetime<br />
+import tornado.web<br />
+import tornado.wsgi<br />
+from middleware import TestMiddle<br />
+from server import WSGIServer<br />
+class MainHandler(tornado.web.RequestHandler):<br />
+&#8212;-def get(self):<br />
+&#8212;&#8212;&#8211;self.write(&#8220;this is a tornado wsgi application&#8221;)<br />
+if __name__ == &#8220;__main__&#8221;:<br />
+&#8212;-application = tornado.web.Application([<br />
+&#8212;&#8212;&#8211;(r&#8221;/&#8221;, MainHandler),<br />
+&#8212;-])<br />
+&#8212;-wsgi_app = tornado.wsgi.WSGIAdapter(application)<br />
+&#8212;-server = WSGIServer((&#8221;, 9090))<br />
+&#8212;-server.set_application(TestMiddle(wsgi_app))<br />
+&#8212;-print &#8216;RAPOWSGI Server Serving HTTP service on port {0}&#8217;.format(9090)<br />
+&#8212;-print &#8216;{0}&#8217;.format(datetime.datetime.now().<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; strftime(&#8216;%a, %d %b %Y %H:%M:%S GMT&#8217;))<br />
+&#8212;-server.serve_forever()</p></blockquote>
+<p>运行：python tornado_wsgi.py，打开浏览器：localhost:9090，完美运行，中间件也运行正常：</p>
+<p>原文地址: https://www.rapospectre.com/blog/write-a-wsgi-server-by-yourself</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

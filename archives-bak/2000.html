@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CentOS 系统目录和文件权限 | 青春部落    </title>
+    <meta name="keywords"  content="系统文件,一般权限,特殊权限,ACL管理,系统目录" />
+    <meta name="description"  content="操作系统的文件目录和文件目录权限" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; CentOS 系统目录和文件权限评论Feed" href="https://cn-blogs.cn/archives/2000.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='自定义函数' href='https://cn-blogs.cn/archives/1524.html' />
+<link rel='next' title='discuz部分表结构' href='https://cn-blogs.cn/archives/2025.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2000.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2000' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2000.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2000.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2000 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1524.html" rel="prev">上一篇：自定义函数</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2025.html" rel="next">下一篇：discuz部分表结构</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            CentOS 系统目录和文件权限        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/05/11</span>
+            <span class="update is-hidden">2018-04-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>一般权限</h2>
+<p>文件和目录的权限主要是：读、写和执行。<br />
+字面意思很容易让大家产生模糊的认识；但是细究起来还是很有意思的。</p>
+<h4>文件的权限</h4>
+<p>文件是实际含有数据的地方，包括一般文本文件、数据库内容文件、二进制可执行文件(binary program)等等。<br />
+权限对文件的意义：</p>
+<ul>
+<li>r (read)：可读取此一文件的实际内容，如读取文本文件的文字内容等；</li>
+<li>w (write)：可以编辑、新增或者是修改该文件的内容(但不含删除该文件)；</li>
+<li>x (execute)：该文件具有可以被系统执行的权限。</li>
+</ul>
+<p>对于文件的rwx来说， 主要都是针对“文件的内容”而言，而对于文件本身的存在没有关系。</p>
+<h4>目录的权限</h4>
+<p>一切皆是文件，目录也是文件。目录文件的主要内容就是这个目录下的文件名列表。<br />
+权限对目录的意义：</p>
+<p><strong>r (read contents in directory)：</strong><br />
+表示具有读取目录结构列表的权限，所以当你具有读取(r)一个目录的权限时，表示你可以查询该目录下的文件名数据。</p>
+<p><strong>w (modify contents of directory)：</strong><br />
+对目录文件内容修改的权限；也就是可以操作此目录下的文件。包括：<br />
+1、建立新的文件与目录；<br />
+2、删除已经存在的文件与目录(不论该文件的权限为何！)<br />
+3、将已存在的文件或目录进行更名；<br />
+4、搬移该目录内的文件、目录位置。</p>
+<p><strong>x (access directory)：</strong><br />
+用户能否进入该目录成为工作目录。</p>
+<h2>特殊权限</h2>
+<p>Linux 系统的文件特殊权限能使系统更安全。<br />
+1、一个可执行文件一般执行时，只继承执行者的系统权限。这样就避免了一些普通用户提权操作。<br />
+<strong>setuid</strong>：可以设置文件执行时，拥有文件拥有者的权限。如/usr/bin/passwd<br />
+<strong>setgid</strong>：该权限只对目录有效。用户在此目录下创建的文件，其所属组和目录所属组一致<br />
+<strong>sticky bit</strong>：文件保护；只有文件所有者，目录所有者或Root用户才能删除修改。</p>
+<h4>使用案例</h4>
+<p>setuid标志<br />
+<code>chmod u+s /tmpfile<br />
+rwsrw-r– </code></p>
+<p>setgid标志<br />
+<code>chmod g+s /tmpdir<br />
+rwxrwsrw- </code></p>
+<p>sticky标志<br />
+<code>chmod o+t /tmpfile | /tmpdir<br />
+rwxrw-rwt </code></p>
+<p>setuid,setgid,sticky 在文件权限上分别显示s,s,t。如果修改的文件/目录原本没有执行权限(x)；则显示为大写S,S,T</p>
+<h4>补充</h4>
+<p>更多的文件特殊权限设置管理，请使用chattr和lsattr</p>
+<h2>文件ACL管理</h2>
+<p><strong>getfacl</strong>:取得某个文件/目录的ACL设置<br />
+<strong>setfacl</strong>:设置某个目录/文件的ACL规定</p>
+<p><code># setfacl --help<br />
+setfacl2.2.39--set fileaccess control lists<br />
+Usage:setfacl[-bkndRLP]{-m|-M|-x|-X...}file... # -m|-M|-x|-X</code></p>
+<h4>部分参数列表</h4>
+<table>
+<tbody>
+<tr>
+<th><span style="color: #ff0000;">-m,&#8211;modify</span></th>
+<th>acl modify the current ACL(s)of file(s)</th>
+<th>修改文件的当前ACL</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-x,&#8211;remove</span></th>
+<th>acl remove entries from the ACL(s)of file(s)</th>
+<th>删除文件的acl规则</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-b,&#8211;remove-all</span></th>
+<th>remove all extended ACL entries</th>
+<th>删除所有扩展的acl规则，基本的acl规则将被保留.</th>
+</tr>
+<tr>
+<th>-k,&#8211;remove-default</th>
+<th>remove the defaultACL</th>
+<th>删除默认ACL</th>
+</tr>
+<tr>
+<th>&#8211;set</th>
+<th>acl set the ACL of file(s),replacing the current ACL.</th>
+<th>设置文件的ACL，替换当前的ACL</th>
+</tr>
+<tr>
+<th>&#8211;mask</th>
+<th>dorecalculate the effective rights mask</th>
+<th>重新计算有效的MASK</th>
+</tr>
+<tr>
+<th>-n,&#8211;no-mask</th>
+<th>don&#8217;trecalculate the effective rights mask</th>
+<th>不重新计算有效的权限掩码</th>
+</tr>
+<tr>
+<th>-d,&#8211;default</th>
+<th>operations apply tothe defaultACL</th>
+<th>设定默认的acl规则，针对目录而言.</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-R,&#8211;recursive</span></th>
+<th>recurse into subdirectories</th>
+<th>递归的对所有文件及目录进行操作</th>
+</tr>
+<tr>
+<th>-L,&#8211;logical</th>
+<th>logical walk,follow symbolic links</th>
+<th>跟踪符号链接，默认情况下只跟踪符号链接文件，跳过符号链接目录</th>
+</tr>
+<tr>
+<th>-P,&#8211;physical</th>
+<th>physical walk,donotfollow symbolic links</th>
+<th>跳过所有符号链接，包括符号链接文件。</th>
+</tr>
+<tr>
+<th>&#8211;test</th>
+<th>testmode(ACLs are notmodified)</th>
+<th>测试模式（ACL不被修改）</th>
+</tr>
+</tbody>
+</table>
+<p>当使用-M，-X选项从文件中读取规则时，setfacl接受getfacl命令输出的格式。<br />
+每行至少一条规则，以#开始的行将被视为注释.</p>
+<h4>Setfacl命令用法</h4>
+<p><code>setfacl [d[efault]:][u[ser]:]uid[:perms]</code><br />
+指定用户的权限，文件所有者的权限（如果uid没有指定）。<br />
+<code>setfacl [d[efault]:]g[roup]:gid[:perms]</code><br />
+指定群组的权限，文件所有群组的权限（如果gid未指定）<br />
+<code>setfacl [d[efault]:]m[ask][:][:perms]</code><br />
+有效权限掩码<br />
+<code>setfacl [d[efault]:]o[ther][:perms]</code><br />
+#perms域是一个代表各种权限的字母的组合：读：r 写：w 执行：x，执行只适合目录和一些可执行的文件。<br />
+perms域也可设置为八进制格式0~7。</p>
+<h4>使用案例</h4>
+<p><strong>为用户添加权限</strong><br />
+<code>setfacl -R -m u:gudc:rwx /www</code></p>
+<p><strong>删除所有扩展的acl规则</strong><br />
+<code>setfacl -b /www</code></p>
+<p><strong>删除特定的用户权限</strong><br />
+<code>setfacl -x u:gudc /www</code></p>
+<p><strong>设置目录默认规则</strong><br />
+<code>setfacl -d -R -m u:gudc:rw- /www</code></p>
+<p><strong>设置默认mask的ACL</strong><br />
+<code>setfacl -R -m m::rwx /www;<br />
+setfacl -d -R -m m::rw- /www;</code></p>
+<h2>Redhat/CentOS系统目录布置</h2>
+<p>/sbin：存放着系统命令和工具,一般是根用户使用的命令<br />
+/bin： 常用的命令和工具</p>
+<p>/boot：Linux就是从这里开始启动的<br />
+/etc：存放着LINUX下大量的配置文件<br />
+/proc：这其实是一个虚拟目录，可以通过此目录来访问内存<br />
+/mnt：挂载目录或称挂载点<br />
+/dev：存放这LINUX下所有的设备文件</p>
+<p>/var：通常用来存放这一些变化中的东西<br />
+/var/log：存放这系统日志<br />
+/var/spool：存放一些邮件、新闻、打印队列等等<br />
+/lost+found：可以在此目录下查找已丢失的文件</p>
+<p>/usr：通常用来安装各种软件的目录，类似于windows里面的program File目录<br />
+/usr/x11R6 XWindow目录 图形界面<br />
+/usr/bin ：一些安装程序后的命令和工具<br />
+/usr/sbin：与/usr/bin相同</p>
+<p>系统自带<br />
+头文件：/usr/include/<br />
+库文件：/lib、/usr/lib</p>
+<p>第三方<br />
+头文件：/usr/include、/usr/local/include<br />
+库文件：/usr/local/lib</p>
+<p>查找库文件<br />
+/etc/ld.so.conf.d/local.conf<br />
+/etc/ld.so.conf</p>
+<p>ldconfig</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

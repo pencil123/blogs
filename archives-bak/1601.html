@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 架构和扩展 | 青春部落    </title>
+    <meta name="keywords"  content="Nginx,master,http,IMAP,POP3,email" />
+    <meta name="description"  content="Nginx服务进程说明和对http服务和email服务的支持" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 架构和扩展评论Feed" href="https://cn-blogs.cn/archives/1601.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx 日志配置' href='https://cn-blogs.cn/archives/1152.html' />
+<link rel='next' title='Nginx 配置Main和Event' href='https://cn-blogs.cn/archives/1604.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1601.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1601' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1601.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1601.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1601 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1152.html" rel="prev">上一篇：Nginx 日志配置</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1604.html" rel="next">下一篇：Nginx 配置Main和Event</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 架构和扩展        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/06/21</span>
+            <span class="update is-hidden">2018-04-19</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>服务进程说明</h3>
+<p>一个主进程和多个工作进程。工作进程是单线程的，且不需要特殊授权即可运行；<br />
+kqueue (FreeBSD 4.1+),epoll (Linux 2.6+),rt signals (Linux 2.2.19+),/dev/poll (Solaris 7 11/99+),select，以及 poll 支持；<br />
+kqueue支持的不同功能包括 EV_CLEAR,EV_DISABLE （临时禁止事件）， NOTE_LOWAT,EV_EOF，有效数据的数目，错误代码；<br />
+sendfile (FreeBSD 3.1+),sendfile (Linux 2.2+),sendfile64 (Linux 2.4.21+），和 sendfilev (Solaris 8 7/01+) 支持；<br />
+输入过滤 (FreeBSD 4.1+) 以及 TCP_DEFER_ACCEPT (Linux 2.4+) 支持；<br />
+10,000 非活动的 HTTP keep-alive 连接仅需要 2.5M内存。<br />
+最小化的数据拷贝操作；</p>
+<h3>HTTP基础功能</h3>
+<p>处理静态文件，索引文件以及自动索引；<br />
+反向代理加速（无缓存），简单的负载均衡和容错；<br />
+FastCGI，简单的负载均衡和容错；<br />
+模块化的结构。过滤器包括gzipping,byte ranges,chunked responses，以及 SSI-filter。在SSI过滤器中，到同一个 proxy 或者FastCGI 的多个子请求并发处理；<br />
+SSL 和 TLS SNI 支持；</p>
+<h3>其他HTTP功能：</h3>
+<p>基于IP 和名称的虚拟主机服务；<br />
+Memcached 的 GET 接口；<br />
+支持 keep-alive 和管道连接；<br />
+灵活简单的配置；<br />
+重新配置和在线升级而无须中断客户的工作进程；<br />
+可定制的访问日志，日志写入缓存，以及快捷的日志回卷；<br />
+4xx-5xx错误代码重定向；<br />
+基于 PCRE 的 rewrite 重写模块；<br />
+基于客户端IP 地址和 HTTP 基本认证的访问控制；<br />
+PUT,DELETE，和 MKCOL 方法；<br />
+支持 FLV （Flash 视频）；<br />
+带宽限制。<br />
+实验特性<br />
+内嵌的 perl；<br />
+通过 aio_read()/aio_write() 的套接字工作的实验模块，仅在 FreeBSD 下；<br />
+对线程的实验化支持，FreeBSD 4.x 的实现基于 rfork()；<br />
+Nginx 主要的英语站点是 http://sysoev. ru/en/；<br />
+英语文档草稿由 Aleksandar Lazic 完成。</p>
+<h3>IMAP/POP3代理服务功能：</h3>
+<p>使用外部 HTTP 认证服务器重定向用户到 IMAP/POP3 后端；<br />
+使用外部 HTTP 认证服务器认证用户后连接重定向到内部的 SMTP 后端；<br />
+其他HTTP功能<br />
+基于名称和基于IP的虚拟服务器；<br />
+Keep-alive and pipelined connections support；保持活动和支持管线连接；<br />
+Flexible configuration；灵活的配置；<br />
+Reconfiguration and online upgrade without interruption of the client processing；重载配置，无间断程序升级；<br />
+Access log formats,bufferred log writing,and quick log rotation；访问日志格式，bufferred日志写，快速登录旋转；<br />
+3xx-5xx error codes redirection; 3xx的- 5xx错误代码重定向；<br />
+The rewrite module；重写模块;<br />
+Access control based on client IP address and HTTP Basic authentication；基于客户端IP地址访问控制和HTTP基本认证；<br />
+The PUT,DELETE,MKCOL,COPY and MOVE methods; 提交，删除，MKCOL，复制和移动方法；<br />
+FLV streaming;FLV视频流;<br />
+Speed limitation；速度限制；<br />
+Limitation of simultaneous connections or requests from one address.限制同个IP地址请求数量。<br />
+Embedded perl.嵌入式的Perl。</p>
+<h3>邮件代理服务器功能</h3>
+<p>用户重定向到IMAP/POP3后端使用外部HTTP认证服务器；<br />
+User authentication using an external HTTP authentication server and connection redirection to internal SMTP backend；用户身份验证使用外部HTTP认证服务器和连接重定向到内部的SMTP后端；<br />
+Authentication methods：验证方法：<br />
+POP3: USER/PASS,APOP,AUTH LOGIN/PLAIN/CRAM-MD5；的POP3：用户名/密码，的APOP，AUTH的LOGIN/PLAIN/CRAM-MD5;<br />
+IMAP: LOGIN,AUTH LOGIN/PLAIN/CRAM-MD5; IMAP的：登录，AUTH的LOGIN/PLAIN/CRAM-MD5;<br />
+SMTP: AUTH LOGIN/PLAIN/CRAM-MD5；的SMTP：AUTH的LOGIN/PLAIN/CRAM-MD5;</p>
+<h4>认证方法</h4>
+<p>POP3: POP3 USER/PASS,APOP,AUTH LOGIN PLAIN CRAM-MD5;<br />
+IMAP: IMAP LOGIN;<br />
+SMTP: AUTH LOGIN PLAIN CRAM-MD5;</p>
+<h4>SSL 支持；</h4>
+<p>在 IMAP 和 POP3 模式下的 STARTTLS 和 STLS 支持。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

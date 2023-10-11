@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>InnoDB存储引擎和事务说明 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,InnoDB,数据库,事务,ACID" />
+    <meta name="description"  content="MySQL数据库中的InnoDB存储引擎说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; InnoDB存储引擎和事务说明评论Feed" href="https://cn-blogs.cn/archives/3016.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Engine 存储引擎' href='https://cn-blogs.cn/archives/3011.html' />
+<link rel='next' title='MySQL 日志概述' href='https://cn-blogs.cn/archives/3025.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3016.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3016' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3016.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3016.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3016 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3011.html" rel="prev">上一篇：Engine 存储引擎</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3025.html" rel="next">下一篇：MySQL 日志概述</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            InnoDB存储引擎和事务说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/02/23</span>
+            <span class="update is-hidden">2018-04-17</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>InnoDB 存储引擎说明</h2>
+<p>InnoDB是一款平衡高可靠性和高性能的通用存储引擎。在MySQL 5.7中，InnoDB是默认的MySQL存储引擎。除非您配置了其他默认存储引擎，否则发出CREATE TABLE不带ENGINE= 子句的语句会创建一个InnoDB表。</p>
+<h3>InnoDB的主要优势</h3>
+<p>1、其DML操作遵循ACID模型，具有提交，回滚和崩溃恢复功能的事务保护用户数据。<br />
+2、行级锁定和Oracle样式的一致读取提高了多用户并发性和性能。<br />
+3、InnoDB表将您的数据安排在磁盘上基于主键优化查询。每个InnoDB表都有一个主键索引，称为聚集索引 ，它组织数据以最大限度地减少主键查找的I/O。<br />
+4、为了维护数据完整性，InnoDB支持 FOREIGN KEY约束。使用外键时，将检查插入，更新和删除操作，以确保它们不会导致不同表之间的不一致。</p>
+<h3>使用InnoDB表的好处</h3>
+<p>1、如果您的服务器因硬件或软件问题而崩溃，无论当时数据库中发生了什么情况，重新启动数据库后无需执行任何特殊操作。InnoDB 崩溃恢复会 自动完成崩溃前提交的任何更改，并撤消所有正在处理但未提交的更改。<br />
+2、该InnoDB存储引擎维护它自己的缓冲池，当表和索引数据被访问后缓存在主内存中。<br />
+常用数据直接从内存中处理。<br />
+3、如果将相关数据分解到不同的表中，则可以设置强制执行 参照完整性的外键。<br />
+4、如果数据在磁盘或内存中损坏，则在使用它之前，校验和机制会提醒您使用伪造数据。<br />
+5、当您为每个表使用适当的主键列设计数据库时 ，涉及这些列的操作会自动进行优化。引用WHERE 子句，ORDER BY子句， GROUP BY 子句和连接操作中的主键列是非常快的 。<br />
+6、插入，更新和删除通过称为变更缓冲的自动机制进行优化。InnoDB不仅可以对同一个表进行并发读取和写入访问，还可以缓存更改的数据以简化磁盘I/O。<br />
+7、性能优势不限于具有长时间运行查询的巨型表。当从表中反复访问相同的行时，称为 自适应哈希索引的功能会继续执行，以使这些查找更快，就像它们从哈希表中出来一样。<br />
+8、您可以压缩表和关联的索引。<br />
+9、您可以创建和删除索引，而对性能和可用性影响更小。<br />
+10、截断每个表的文件表空间非常快，可以腾出磁盘空间供操作系统重复使用，而不是释放系统表空间中只能InnoDB重用的空间。<br />
+11、表格数据的存储布局对于BLOB长文本字段和DYNAMIC行格式来说效率更高 。<br />
+12、您可以通过查询INFORMATION_SCHEMA 表来监视存储引擎的内部运作情况 。<br />
+13、您可以通过查询性能架构表来监控存储引擎的性能细节 。<br />
+14、InnoDB即使在相同的语句中， 您也可以自由地将表与来自其他MySQL存储引擎的表混合。例如，您可以使用 连接操作将单个查询中的数据InnoDB和 MEMORY表中的数据组合在一起。<br />
+15、InnoDB 设计用于处理大量数据时的CPU效率和最高性能。<br />
+16、InnoDB 即使在文件大小限制为2GB的操作系统上，表格也可以处理大量数据。</p>
+<h3>InnoDB表的最佳实践</h3>
+<p>本节介绍使用InnoDB引擎时的最佳做法。<br />
+1、使用最频繁查询的一列或多列为每个表的主键， 如果没有明显的主键，则指定一个 自动递增值。<br />
+2、根据来自这些表的相同ID值从多个表中提取数据的地方使用连接。为了加快连接性能，请在连接列上定义 外键，并在每个表中声明具有相同数据类型的列。添加外键可确保引用的列进行索引，从而提高性能。外键还传播删除或更新所有受影响的表，并防止在父表中不存在相应的ID时将数据插入到子表中。<br />
+3、关闭自动提交。每秒提交数百次会限制性能（受存储设备写入速度的限制）。<br />
+4、分组组相关的DML 操作成事务，通过包围他们START TRANSACTION和 COMMIT报表。<br />
+5、不使用LOCK TABLES 语句。InnoDB可以一次处理多个会话全部读取和写入同一个表，而不会牺牲可靠性或高性能。要获得对一组行的独占写权限，请使用 SELECT &#8230; FOR UPDATE语法来锁定您想要更新的行。<br />
+6、启用该 innodb_file_per_table选项或使用常规表空间将表的数据和索引放入单独的文件中，而不是系统表空间。该innodb_file_per_table 选项默认启用。<br />
+7、评估您的数据和访问模式是否受益于InnoDB表或页面 压缩功能。您可以压缩InnoDB表而不牺牲读/写功能。</p>
+<h2>事务的ACID模型</h2>
+<p>ACID模式在数据库设计原则强调的是，对于业务数据和关键任务应用重要的可靠性方面。<br />
+MySQL包含的组件如InnoDB存储引擎紧密结合ACID模型，以便数据不被破坏，并且结果不会因特殊情况（如软件崩溃和硬件故障）而失真。<br />
+当您依赖ACID兼容功能时，您不需要重新发明一致性检查和崩溃恢复机制。<br />
+如果您有其他软件保护措施，超可靠硬件或可以容忍少量数据丢失或不一致的应用程序，则可以调整MySQL设置以交换部分ACID可靠性以获得更高的性能或吞吐量。</p>
+<h3>原子性（Atomicity）</h3>
+<p>整个事务中的所有操作要么全部成功执行，要么全部失败而回滚。<br />
+ACID模型 的原子性方面主要涉及InnoDB 事务。相关的MySQL功能包括：</p>
+<blockquote><p>自动提交设置。<br />
+COMMIT 声明。<br />
+ROLLBACK 声明。<br />
+来自INFORMATION_SCHEMA 表的操作数据。</p></blockquote>
+<h3>一致性（Consistency）</h3>
+<p>数据库总是从一个一致性状态转换为另一个一致性状态。<br />
+ACID模型 的一致性方面主要涉及内部InnoDB处理以保护数据免受崩溃。相关的MySQL功能包括：</p>
+<blockquote><p>InnoDB 双写缓冲区。<br />
+InnoDB 崩溃恢复。</p></blockquote>
+<h3>隔离（Isolation）</h3>
+<p>有多种隔离级别；一个事务所做出的操作在提交之前，其他会话是否可见。<br />
+ACID模型 的隔离方面主要涉及InnoDB 事务，特别是适用于每个事务的隔离级别。相关的MySQL功能包括：</p>
+<blockquote><p>自动提交设置。<br />
+SET ISOLATION LEVEL 声明。<br />
+InnoDB 锁定的低级细节。在性能调优期间，您可以通过INFORMATION_SCHEMA表格查看这些细节 。</p></blockquote>
+<h3>持久性（Durability）</h3>
+<p>软、硬件崩溃后，InnoDB数据表驱动会利用事务日志文件重构数据，保证数据不丢失。<br />
+ACID模型 的持久性方面涉及MySQL软件功能与您的特定硬件配置进行交互。由于CPU，网络和存储设备的功能有很多可能性，因此提供具体的指导方针是最复杂的。相关的MySQL功能包括：</p>
+<blockquote><p>InnoDB 双写缓冲区，由innodb_doublewrite 配置选项打开和关闭 。<br />
+配置选项 innodb_flush_log_at_trx_commit。<br />
+配置选项 sync_binlog。<br />
+配置选项 innodb_file_per_table。<br />
+在存储设备（如磁盘驱动器，SSD或RAID阵列）中写入缓冲区。<br />
+存储设备中的电池备份缓存。<br />
+用于运行MySQL的操作系统，特别是它对fsync()系统调用的支持。<br />
+不间断电源（UPS）保护运行MySQL服务器和存储MySQL数据的所有计算机服务器和存储设备的电源。<br />
+您的备份策略，例如备份频率和类型以及备份保留期。<br />
+对于分布式或托管数据应用程序，MySQL服务器硬件所在数据中心的特定特征以及数据中心之间的网络连接。</p></blockquote>
+<h2>InnoDB 多版本并发控制MVCC</h2>
+<p>InnoDB是一个多版本的存储引擎。它保存在之前被修改的信息，来支持事务功能；如并发和回滚。<br />
+这些信息存储在表空间中的数据结构中，称为回滚段。InnoDB使用回滚段中的信息执行事务回滚中所需的撤回操作。它还使用这些信息构建被修改的数据的之前版本，处理并发下的数据一致性。</p>
+<h3>撤销日志回滚段</h3>
+<p>撤销日志回滚段分为插入和更新撤消日志。<br />
+插入撤消日志只在事务回滚中需要，并且只要事务提交就可以丢弃。<br />
+更新撤消日志也用于一致性读取，但只有当没有事务存在时才会被丢弃，该事务 InnoDB已分配了一个快照，在一致的读取中可能需要更新撤消日志中的信息来构建数据库的较早版本行。</p>
+<p>定期提交您的处理，包括只发布一致读取的处理。否则， InnoDB不能从更新撤消日志中丢弃数据，并且回滚段可能变得太大，从而填满你的表空间。</p>
+<p>回滚段中撤销日志记录的物理大小通常小于相应的插入或更新行。您可以使用此信息来计算回滚段所需的空间。</p>
+<p>在InnoDB 多版本并发控制中，当使用SQL语句删除数据行时，数据行并不会立即从数据库中删除。只有当此删除操作的回滚记录被删除掉时，才会从物理上删除相应的数据行和其索引记录。这个删除操作成为&#8217;清除&#8217;,处理非常快。</p>
+<h2>InnoDB 各种锁</h2>
+<h4>共享锁</h4>
+<p>一种锁，允许其他事务读取锁定的对象，并在对象上设置共享锁；但不能写入。</p>
+<h4>排他锁</h4>
+<p>一种防止任何其他事务锁定同一行的锁。<br />
+根据事务隔离级别的不同，这种类型的锁可能会阻止其他事务写入同一行，也可能会阻止其他事务读取同一行。<br />
+默认的InnoDB隔离级别REPEATABLE READ允许事务读取具有独占锁定的行，这种技术称为一致性读取，从而实现更高的并发性。</p>
+<h4>意向锁</h4>
+<p>InnoDB支持多个粒度锁定，允许行锁和表锁共存。为了实现多个粒度级别的锁定，InnoDB使用 意向锁。意向锁是表级锁，用于指示事务对表中某一行的事务需要哪种类型的锁（共享或排他）</p>
+<h4>记录锁</h4>
+<p>记录锁是索引记录上的锁。即使没有索引定义表，记录锁始终锁定索引记录。对于这种情况， InnoDB创建一个隐藏的聚集索引并使用此索引进行记录锁定。</p>
+<h4>间隙锁</h4>
+<p>间隙锁定是索引记录之间的间隙的锁定，或者是第一个或最后一个索引记录之前的间隙锁定。</p>
+<h4>Next-Key锁</h4>
+<p>下一个键锁定是索引记录上的记录锁定和索引记录之前的间隙上的间隙锁的组合。</p>
+<h4>插入意向锁</h4>
+<p>插入意向锁定是INSERT在行插入之前通过操作设置的一种间隙锁。</p>
+<h4>AUTO-INC锁定</h4>
+<p>AUTO-INC锁是通过事务将与表中取得一个特殊的表级锁 AUTO_INCREMENT列。</p>
+<h4>谓词锁定空间索引</h4>
+<p>InnoDB支持SPATIAL 对包含空间列的列进行索引</p>
+<h2>InnoDB事务模型</h2>
+<p>在InnoDB事务模型中，目标是将多版本并发控制(MVCC)数据库的最佳属性与传统的两阶段锁定相结合。<br />
+默认情况下，InnoDB在行级别执行锁定并将查询作为非锁定一致读取运行 。</p>
+<h3>事务隔离级别</h3>
+<p>事务隔离是数据库处理的基础之一。隔离级别是在多个事务进行更改并同时执行查询时，对性能和可靠性之间的平衡，结果的一致性和再现性进行微调的设置。</p>
+<h4>隔离级别列表</h4>
+<table>
+<tbody>
+<tr>
+<th>read uncommitted （读未提交）</th>
+<th>在一个事务中，可以读到其他事务未提交的修改操纵。产生脏读。</th>
+</tr>
+<tr>
+<th>read committed （读提交）</th>
+<th>在一个事务中执行中；其他事务提交前和提交后产生的数据修改，造成多次查询数据不一致的情况。在本事务中产生“不可重复读”。</th>
+</tr>
+<tr>
+<th>repeatable read （可重读）</th>
+<th>一个事务开始时，建立快照；事务执行时，不受其他会话修改数据影响。事务执行中，真实数据可能已经被修改了，造成幻读。</th>
+</tr>
+<tr>
+<th>serializable （可串行化）</th>
+<th>事务串行化的读；本事务读写的数据，会锁定；拒绝其他事务读写。</th>
+</tr>
+</tbody>
+</table>
+<h4>不同隔离级别存在的问题</h4>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读（Dirty Read）</th>
+<th>不可重复读（NonRepeatable Read）</th>
+<th>幻读（Phantom Read）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未提交读（Read uncommitted）</td>
+<td>可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>已提交读（Read committed）</td>
+<td>不可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可重复读（Repeatable read）</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可串行化（Serializable ）</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>不可能</td>
+</tr>
+</tbody>
+</table>
+<h4>名词解释</h4>
+<p>脏读（Dirty Read）:一个事务处理过程里读取了另一个未提交的事务中的数据<br />
+不可重复读（NonRepeatable Read）:一个事务范围内多次查询却返回了不同的数据值，这是由于在查询的间隔期间，另外一个事务修改并提交了该数据<br />
+幻读（Phantom Read）:在一个事务内多次查询数据都是一致的，不过真实数据可能已经被其他事务更改。造成无法读取到真实数据（幻读），事务提交时，可能造成数据错误</p>
+<h4>设置隔离级别</h4>
+<p>InnoDB支持使用不同的锁定策略在每个事务隔离级别。<br />
+用户可以更改单个会话的隔离级别，也可以更改该SET TRANSACTION语句的所有后续连接。要为所有连接设置服务器的默认隔离级别，请使用 &#8211;transaction-isolation命令行或选项文件中的选项。<br />
+<code>set [global | session] transaction isolation level</code> ；用来设置事务的隔离级别。<br />
+<code>REPEATABLE READ （default）</code></p>
+<h2>事务操作语句</h2>
+<h4>自动提交</h4>
+<p>在中InnoDB，所有的用户活动都发生在一个事务中。如果autocommit启用了模式，则每个SQL语句都会自行形成一个事务。默认情况下，MySQL在autocommit 启用时为每个新连接启动会话，所以如果该语句没有返回错误，则MySQL会在每个SQL语句后执行提交。如果语句返回错误，则提交或回滚行为取决于错误。<br />
+如果要显式地开启一个事务务须使用命令 BEGIN 或 START TRANSACTION，或者执行命令 SET AUTOCOMMIT=0，用来禁止使用当前会话的自动提交。</p>
+<h4>事务控制语句</h4>
+<p><code>begin或start transaction；显式地开启一个事务；<br />
+commit；也可以使用commit work，不过二者是等价的。commit会提交事务，并使已对数据库进行的所有修改称为永久性的；<br />
+rollback；有可以使用rollback work，不过二者是等价的。回滚会结束用户的事务，并撤销正在进行的所有未提交的修改；</code></p>
+<h4>SavePoint 支持</h4>
+<p><code>savepoint identifier；savepoint允许在事务中创建一个保存点，一个事务中可以有多个savepoint；<br />
+rollback to identifier；把事务回滚到标记点；<br />
+release savepoint identifier；删除一个事务的保存点，当没有指定的保存点时，执行该语句会抛出一个异常；</code></p>
+<h4>MYSQL 事务处理主要有两种方法</h4>
+<p>1、用 BEGIN, ROLLBACK, COMMIT来实现<br />
+<code>BEGIN 开始一个事务<br />
+ROLLBACK 事务回滚<br />
+COMMIT 事务确认</code><br />
+2、直接用 SET 来改变 MySQL 的自动提交模式:<br />
+<code>SET AUTOCOMMIT=0 禁止自动提交<br />
+SET AUTOCOMMIT=1 开启自动提交</code></p>
+<h2>InnoDB中的死锁</h2>
+<p>死锁是由于每个事务持有另一个需要的锁而导致不同事务无法继续的情况。因为两个事务都在等待资源变为可用，所以既不释放它拥有的锁。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Event 对象 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; DOM Event 对象评论Feed" href="https://cn-blogs.cn/archives/2626.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='DOM Attribute 对象' href='https://cn-blogs.cn/archives/2624.html' />
+<link rel='next' title='JS函数' href='https://cn-blogs.cn/archives/2659.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2626.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2626' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2626.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2626.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2626 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/html-css-js" rel="category tag">前端</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2624.html" rel="prev">上一篇：DOM Attribute 对象</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2659.html" rel="next">下一篇：JS函数</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            DOM Event 对象        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/11/13</span>
+            <span class="update is-hidden">2018-01-14</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。<br />
+事件通常与函数结合使用，函数不会在事件发生前被执行！</p>
+<h2><strong>事件句柄　(Event Handlers)</strong></h2>
+<p>HTML 4.0 的新特性之一是能够使 HTML 事件触发浏览器中的行为，比如当用户点击某个 HTML 元素时启动一段 JavaScript。下面是一个属性列表，可将之插入 HTML 标签以定义事件的行为。</p>
+<table class="dataintable">
+<tbody>
+<tr>
+<th style="width: 30%;">属性</th>
+<th>此事件发生在何时&#8230;</th>
+</tr>
+<tr>
+<td>onabort</td>
+<td>图像的加载被中断。</td>
+</tr>
+<tr>
+<td>onblur</td>
+<td>元素失去焦点。</td>
+</tr>
+<tr>
+<td>onchange</td>
+<td>域的内容被改变。</td>
+</tr>
+<tr>
+<td>onclick</td>
+<td>当用户点击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td>ondblclick</td>
+<td>当用户双击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>在加载文档或图像时发生错误。</td>
+</tr>
+<tr>
+<td>onfocus</td>
+<td>元素获得焦点。</td>
+</tr>
+<tr>
+<td>onkeydown</td>
+<td>某个键盘按键被按下。</td>
+</tr>
+<tr>
+<td>onkeypress</td>
+<td>某个键盘按键被按下并松开。</td>
+</tr>
+<tr>
+<td>onkeyup</td>
+<td>某个键盘按键被松开。</td>
+</tr>
+<tr>
+<td>onload</td>
+<td>一张页面或一幅图像完成加载。</td>
+</tr>
+<tr>
+<td>onmousedown</td>
+<td>鼠标按钮被按下。</td>
+</tr>
+<tr>
+<td>onmousemove</td>
+<td>鼠标被移动。</td>
+</tr>
+<tr>
+<td>onmouseout</td>
+<td>鼠标从某元素移开。</td>
+</tr>
+<tr>
+<td>onmouseover</td>
+<td>鼠标移到某元素之上。</td>
+</tr>
+<tr>
+<td>onmouseup</td>
+<td>鼠标按键被松开。</td>
+</tr>
+<tr>
+<td>onreset</td>
+<td>重置按钮被点击。</td>
+</tr>
+<tr>
+<td>onresize</td>
+<td>窗口或框架被重新调整大小。</td>
+</tr>
+<tr>
+<td>onselect</td>
+<td>文本被选中。</td>
+</tr>
+<tr>
+<td>onsubmit</td>
+<td>确认按钮被点击。</td>
+</tr>
+<tr>
+<td>onunload</td>
+<td>用户退出页面。</td>
+</tr>
+</tbody>
+</table>
+<div>
+<h2><strong>鼠标 / 键盘属性</strong></h2>
+<table class="dataintable">
+<tbody>
+<tr>
+<th style="width: 30%;">属性</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>altKey</td>
+<td>返回当事件被触发时，&#8221;ALT&#8221; 是否被按下。</td>
+</tr>
+<tr>
+<td>button</td>
+<td>返回当事件被触发时，哪个鼠标按钮被点击。</td>
+</tr>
+<tr>
+<td>clientX</td>
+<td>返回当事件被触发时，鼠标指针的水平坐标。</td>
+</tr>
+<tr>
+<td>clientY</td>
+<td>返回当事件被触发时，鼠标指针的垂直坐标。</td>
+</tr>
+<tr>
+<td>ctrlKey</td>
+<td>返回当事件被触发时，&#8221;CTRL&#8221; 键是否被按下。</td>
+</tr>
+<tr>
+<td>metaKey</td>
+<td>返回当事件被触发时，&#8221;meta&#8221; 键是否被按下。</td>
+</tr>
+<tr>
+<td>relatedTarget</td>
+<td>返回与事件的目标节点相关的节点。</td>
+</tr>
+<tr>
+<td>screenX</td>
+<td>返回当某个事件被触发时，鼠标指针的水平坐标。</td>
+</tr>
+<tr>
+<td>screenY</td>
+<td>返回当某个事件被触发时，鼠标指针的垂直坐标。</td>
+</tr>
+<tr>
+<td>shiftKey</td>
+<td>返回当事件被触发时，&#8221;SHIFT&#8221; 键是否被按下。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<h2><strong>IE 属性</strong></h2>
+<p>除了上面的鼠标/事件属性，IE 浏览器还支持下面的属性：</p>
+<table class="dataintable">
+<tbody>
+<tr>
+<th style="width: 30%;">属性</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>cancelBubble</td>
+<td>如果事件句柄想阻止事件传播到包容对象，必须把该属性设为 true。</td>
+</tr>
+<tr>
+<td>fromElement</td>
+<td>对于 mouseover 和 mouseout 事件，fromElement 引用移出鼠标的元素。</td>
+</tr>
+<tr>
+<td>keyCode</td>
+<td>对于 keypress 事件，该属性声明了被敲击的键生成的 Unicode 字符码。对于 keydown 和 keyup 事件，它指定了被敲击的键的虚拟键盘码。虚拟键盘码可能和使用的键盘的布局相关。</td>
+</tr>
+<tr>
+<td>offsetX,offsetY</td>
+<td>发生事件的地点在事件源元素的坐标系统中的 x 坐标和 y 坐标。</td>
+</tr>
+<tr>
+<td>returnValue</td>
+<td>如果设置了该属性，它的值比事件句柄的返回值优先级高。把这个属性设置为 fasle，可以取消发生事件的源元素的默认动作。</td>
+</tr>
+<tr>
+<td>srcElement</td>
+<td>对于生成事件的 Window 对象、Document 对象或 Element 对象的引用。</td>
+</tr>
+<tr>
+<td>toElement</td>
+<td>对于 mouseover 和 mouseout 事件，该属性引用移入鼠标的元素。</td>
+</tr>
+<tr>
+<td>x,y</td>
+<td>事件发生的位置的 x 坐标和 y 坐标，它们相对于用CSS动态定位的最内层包容元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<h2><strong>标准 Event 属性</strong></h2>
+<p>下面列出了 2 级 DOM 事件标准定义的属性。</p>
+<table class="dataintable">
+<tbody>
+<tr>
+<th style="width: 30%;">属性</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>bubbles</td>
+<td>返回布尔值，指示事件是否是起泡事件类型。</td>
+</tr>
+<tr>
+<td>cancelable</td>
+<td>返回布尔值，指示事件是否可拥可取消的默认动作。</td>
+</tr>
+<tr>
+<td>currentTarget</td>
+<td>返回其事件监听器触发该事件的元素。</td>
+</tr>
+<tr>
+<td>eventPhase</td>
+<td>返回事件传播的当前阶段。</td>
+</tr>
+<tr>
+<td>target</td>
+<td>返回触发此事件的元素（事件的目标节点）。</td>
+</tr>
+<tr>
+<td>timeStamp</td>
+<td>返回事件生成的日期和时间。</td>
+</tr>
+<tr>
+<td>type</td>
+<td>返回当前 Event 对象表示的事件的名称。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<h2><strong>标准 Event 方法</strong></h2>
+<p>下面列出了 2 级 DOM 事件标准定义的方法。IE 的事件模型不支持这些方法：</p>
+<table class="dataintable">
+<tbody>
+<tr>
+<th style="width: 30%;">方法</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>initEvent()</td>
+<td>初始化新创建的 Event 对象的属性。</td>
+</tr>
+<tr>
+<td>preventDefault()</td>
+<td>通知浏览器不要执行与事件关联的默认动作。</td>
+</tr>
+<tr>
+<td class="no_wrap">stopPropagation()</td>
+<td>不再派发事件。</td>
+</tr>
+</tbody>
+</table>
+</div>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

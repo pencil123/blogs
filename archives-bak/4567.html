@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MongoDB 存储引擎 WiredTiger和In-Memory | 青春部落    </title>
+    <meta name="keywords"  content="MongoDB,存储引擎,WiredTiger,InMemory" />
+    <meta name="description"  content="MongoDB 存储引擎 WiredTiger和In-Memory" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MongoDB 存储引擎 WiredTiger和In-Memory评论Feed" href="https://cn-blogs.cn/archives/4567.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='NMAP  端口状态' href='https://cn-blogs.cn/archives/4564.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4567.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4567' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4567.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4567.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4567 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mongodb" rel="category tag">MongoDB</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4564.html" rel="prev">上一篇：NMAP  端口状态</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MongoDB 存储引擎 WiredTiger和In-Memory        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/10/11</span>
+            <span class="update is-hidden">2018-10-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>存储引擎（Storage Engine）是MongoDB的核心组件，负责管理数据如何存储在硬盘（Disk）和内存（Memory）上。<br />
+从MongoDB 3.2 版本开始，MongoDB 支持多数据存储引擎（Storage Engine），MongoDB支持的存储引擎有：WiredTiger，MMAPv1和In-Memory。<br />
+从MongoDB 3.2 版本开始，WiredTiger成为MongDB默认的Storage Engine，用于将数据持久化存储到硬盘文件中，WiredTiger提供文档级别（Document-Level）的并发控制，检查点（CheckPoint），数据压缩和本地数据加密（ Native Encryption）等功能。<br />
+MongoDB不仅能将数据持久化存储到硬盘文件中，而且还能将数据只保存到内存中；In-Memory存储引擎用于将数据只存储在内存中，只将少量的元数据和诊断日志（Diagnostic）存储到硬盘文件中，由于不需要Disk的IO操作，就能获取索取的数据，In-Memory存储引擎大幅度降低了数据查询的延迟（Latency）。</p>
+<h3>一、指定MongoDB实例的存储引擎</h3>
+<p><code>mongod 参数： --storageEngine  wiredTiger | inMemory</code><br />
+指定Storage Engine的类型，<br />
+如果参数值是wiredTiger，MongoDB使用的存储引擎是WiredTiger，将数据持久化存储在Disk Files中<br />
+如果参数值是inMemory，MongoDB使用的存储引擎是In-Memory，将数据存储在内存中<br />
+从MongoDB 3.2 版本开始，MongoDB默认的存储引擎是WiredTiger</p>
+<h3>二、WiredTiger 存储引擎将数据存储到硬盘文件（Disk Files）</h3>
+<p>WiredTiger和MMAPv1都用于持久化存储数据，相对而言，WiredTiger比MMAPv1更新，功能更强大。</p>
+<h4>1，文档级别的并发控制（Document-Level Concurrency Control）</h4>
+<p>MongoDB在执行写操作时，WiredTiger 在文档级别进行并发控制，就是说，在同一时间，多个写操作能够修改同一个集合中的不同文档；当多个写操作修改同一个文档时，必须以序列化方式执行；<br />
+这意味着，如果该文档正在被修改，其他写操作必须等待，直到在该文档上的写操作完成之后，其他写操作相互竞争，获胜的写操作在该文档上执行修改操作。</p>
+<p>对于大多数读写操作，WiredTiger使用乐观并发控制（optimistic concurrency control），只在Global，database和Collection级别上使用意向锁（Intent Lock），如果WiredTiger检测到两个操作发生冲突时，导致MongoDB将其中一个操作重新执行，这个过程是系统自动完成的。</p>
+<p>For most read and write operations, WiredTiger uses optimistic concurrency control. WiredTiger uses only intent locks at the global, database and collection levels. When the storage engine detects conflicts between two operations, one will incur a write conflict causing MongoDB to transparently retry that operation.</p>
+<h4>2，检查点（Checkpoint）</h4>
+<p>在Checkpoint操作开始时，WiredTiger提供指定时间点（point-in-time）的数据库快照（Snapshot），该Snapshot呈现的是内存中数据的一致性视图。<br />
+当向Disk写入数据时，WiredTiger将Snapshot中的所有数据以一致性方式写入到数据文件（Disk Files）中。一旦Checkpoint创建成功，WiredTiger保证数据文件和内存数据是一致性的，因此，Checkpoint担当的是还原点（Recovery Point），Checkpoint操作能够缩短MongoDB从Journal日志文件还原数据的时间。</p>
+<p>当WiredTiger创建Checkpoint时，MongoDB将数据刷新到数据文件（Disk Files）中，在默认情况下，WiredTiger创建Checkpoint的时间间隔是60s，或产生2GB的Journal文件。在WiredTiger创建新的Checkpoint期间，上一个Checkpoint仍然是有效的，这意味着，即使MongoDB在创建新的Checkpoint期间遭遇到错误而异常终止运行，只要重启，MongoDB就能从上一个有效的Checkpoint开始还原数据。</p>
+<p>当MongoDB以原子方式更新WiredTiger的元数据表，使其引用新的Checkpoint时，表明新的Checkpoint创建成功，MongoDB将老的Checkpoint占用的Disk空间释放。使用WiredTiger 存储引擎，如果没有记录数据更新的日志，MongoDB只能还原到上一个Checkpoint；如果要还原在上一个Checkpoint之后执行的修改操作，必须使用Jounal日志文件。</p>
+<h4>3，预先记录日志（Write-ahead Transaction Log）</h4>
+<p>WiredTiger使用预写日志的机制，在数据更新时，先将数据更新写入到日志文件，然后在创建Checkpoint操作开始时，将日志文件中记录的操作，刷新到数据文件，就是说，通过预写日志和Checkpoint，将数据更新持久化到数据文件中，实现数据的一致性。WiredTiger 日志文件会持久化记录从上一次Checkpoint操作之后发生的所有数据更新，在MongoDB系统崩溃时，通过日志文件能够还原从上次Checkpoint操作之后发生的数据更新。</p>
+<p>The WiredTiger journal persists all data modifications between checkpoints. If MongoDB exits between checkpoints, it uses the journal to replay all data modified since the last checkpoint.</p>
+<h4>3，内存使用</h4>
+<h5>3.1 WiredTiger 利用系统内存资源缓存两部分数据：</h5>
+<p>内部缓存（Internal Cache）<br />
+文件系统缓存（Filesystem Cache）<br />
+从MongoDB 3.2 版本开始，WiredTiger内部缓存的使用量，默认值是：1GB 或 60% of RAM &#8211; 1GB，取两值中的较大值；文件系统缓存的使用量不固定，MongoDB自动使用系统空闲的内存，这些内存不被WiredTiger缓存和其他进程使用，数据在文件系统缓存中是压缩存储的。</p>
+<h5>3.2 调整WiredTiger内部缓存的大小</h5>
+<p>使用 mongod的参数 &#8211;wiredTigerCacheSizeGB 来修改MongoDB实例中WiredTiger内部缓存的大小，计算内部缓存大小的公式是：</p>
+<p>Starting in MongoDB 3.2, the WiredTiger internal cache, by default, will use the larger of either: 60% of RAM minus 1 GB, or 1 GB.<br />
+For systems with up to 10 GB of RAM, the new default setting is less than or equal to the 3.0 default setting<br />
+For systems with more than 10 GB of RAM, the new default setting is greater than the 3.0 setting.</p>
+<h5>4，数据压缩（Data Compression）</h5>
+<p>WiredTiger压缩存储集合（Collection）和索引（Index），压缩减少Disk空间消耗，但是消耗额外的CPU执行数据压缩和解压缩的操作。</p>
+<p>默认情况下，WiredTiger使用块压缩（Block Compression）算法来压缩Collections，使用前缀压缩（Prefix Compression）算法来压缩Indexes，Journal日志文件也是压缩存储的。对于大多数工作负载（Workload），默认的压缩设置能够均衡（Balance）数据存储的效率和处理数据的需求，即压缩和解压的处理速度是非常高的。</p>
+<h5>5，Disk空间回收</h5>
+<p>当从MongoDB中删除文档（Documents）或集合（Collections）后，MongoDB不会将Disk空间释放给OS，MongoDB在数据文件（Data Files）中维护Empty Records的列表。当重新插入数据后，MongoDB从Empty Records列表中分配存储空间给新的Document，因此，不需要重新开辟空间。为了更新有效的重用Disk空间，必须重新整理数据碎片。</p>
+<p>WiredTiger使用compact 命令，移除集合（Collection）中数据和索引的碎片，并将unused的空间释放，调用语法：</p>
+<p>db.runCommand ( { compact: &#8221; } )<br />
+在执行compact命令时，MongoDB会对当前的database加锁，阻塞其他操作。在compact命令执行完成之后，mongod会重建集合的所有索引。</p>
+<p>On WiredTiger, compact will rewrite the collection and indexes to minimize disk space by releasing unused disk space to the operating system. This is useful if you have removed a large amount of data from the collection, and do not plan to replace it.</p>
+<h3>三、In-Memory 存储引擎将数据存储到内存（Memory）</h3>
+<p>In-Memory存储引擎将数据存储在内存中，除了少量的元数据和诊断（Diagnostic）日志，In-Memory存储引擎不会维护任何存储在硬盘上的数据（On-Disk Data），避免Disk的IO操作，减少数据查询的延迟。</p>
+<h4>1，指定In-Memory存储引擎</h4>
+<p><code>mongod --storageEngine inMemory --dbpath </code><br />
+在选择In-Memory存储引擎时，需要指定两个参数：</p>
+<p>设置mongod参数： &#8211;storageEngine ，设置参数的值是 inMemory；<br />
+设置mongod参数： &#8211;dbpath ，设置参数的值是数据存储的目录；<br />
+使用Disk存储元数据，诊断数据和临时数据：虽然 In-Memory 存储引擎不会向文件系统写入数据，但是它需要使用 &#8211;dbpath 维护少量的元数据和诊断（Diagnostic ）日志，在创建Large Index时，使用Disk存储临时数据；Although the in-memory storage engine does not write data to the filesystem, it maintains in the &#8211;dbpath small metadata files and diagnostic data as well temporary files for building large indexes.</p>
+<h4>2，文档级别的并发（document-level concurrency）</h4>
+<p>In-Memory存储引擎在执行写操作时，使用文件级别的并发控制，就是说，在同一时间，多个写操作能够同时修改同一个集合中的不同文档；当多个写操作修改同一个文档时，必须以序列化方式执行；这意味着，如果该文档正在被修改，其他写操作必须等待。</p>
+<h4>3，内存使用</h4>
+<p>In-Mmeory 存储引擎需要将Data，Index，Oplog等存储到内存中，通过mongod参数： &#8211;inMemorySizeGB 设置占用的内存数量，默认值是：50% of RAM-1GB。指定In-Memory 存储引擎使用的内存数据量，单位是GB：<br />
+<code>mongod --storageEngine inMemory --dbpath  --inMemorySizeGB </code></p>
+<h4>4，持久化（Durable）</h4>
+<p>由于In-Memory 存储引擎不会持久化存储数据，只将数据存储在内存中，读写操作直接在内存中完成，不会将数据写入到Disk文件中，因此，不需要单独的日志文件，不存在记录日志和等待数据持久化的问题，当MongoDB实例关机或系统异常终止时，所有存储在内存中的数据都将会丢失。</p>
+<h4>5，记录oplog</h4>
+<p>In-Memory 存储引擎不会将数据更新写入到Disk，但是会记录oplog，该oplog是存储在内存中的集合，MongoDB通过Replication将Primary成员的oplog推送给同一副本集的其他成员。如果一个MongoDB实例是Replica Set的Primary成员，该实例使用In-Memory存储引擎，通过Replication将oplog推送到其他成员，在其他成员中重做oplog中记录的操作，这样，就能将在Primary成员中执行的数据修改持久化存储。</p>
+<p>You can deploy mongod instances that use in-memory storage engine as part of a replica set. For example, as part of a three-member replica set, you could have:</p>
+<p>two mongod instances run with in-memory storage engine.<br />
+one mongod instance run with WiredTiger storage engine. Configure the WiredTiger member as a hidden member (i.e. hidden: true and priority: 0).<br />
+With this deployment model, only the mongod instances running with the in-memory storange engine can become the primary. Clients connect only to the in-memory storage engine mongod instances. Even if both mongod instances running in-memory storage engine crash and restart, they can sync from the member running WiredTiger. The hidden mongod instance running with WiredTiger persists the data to disk, including the user data, indexes, and replication configuration information.</p>
+<h3>四、记录日志</h3>
+<p>数据是MongoDB的核心，MongoDB必须保证数据的安全，不能丢失，Journal 是顺序写入的日志文件，用于记录上一个Checkpoint之后发生的数据更新，能够将数据库从系统异常终止事件中还原到一个有效的状态。<br />
+MongoDB使用预写日志机制实现数据的持久化：WiredTiger 存储引擎在执行写操作时，先将数据更新写入到Journal文件。Journal Files是存储在硬盘的日志文件，每个Journal File大约是100MB，存储在&#8211;dbpath下的Journal子目录中，在执行Checkpoint操作，将数据的更新同步到数据文件。</p>
+<p>每隔一定的时间间隔，WiredTiger 存储引擎都会执行Checkpoint操作，将缓存的数据更新日志同步到硬盘上的数据文件中（On-Disk Files），在默认情况下，MongoDB启用日志记录，也可以显式启用，只需要在启动mongod 时使用&#8211;journal 参数：<br />
+<code>mongod --journal</code></p>
+<h4>1，使用Journal日志文件还原的过程</h4>
+<p>WiredTiger创建Checkpoint，能够将MongoDB数据库还原到上一个CheckPoint创建时的一致性状态，如果MongoDB在上一个Checkpoint之后异常终止，必须使用Journal日志文件，重做从上一个Checkpoint之后发生的数据更新操作，将数据还原到Journal记录的一致性状态，使用Journal日志还原的过程是：</p>
+<ol>
+<li>获取上一个Checkpoint创建的标识值：从数据文件（Data Files）中查找上一个Checkpoint发生的标识值（Identifier）；</li>
+<li>根据标识值匹配日志记录：从Journal Files 中搜索日志记录（Record），查找匹配上一个Checkpoint的标识值的日志记录；</li>
+<li>重做日志记录：重做从上一个Checkpoint之后，记录在Journal Files中的所有日志记录；</li>
+</ol>
+<h4>2，缓存日志</h4>
+<p>MongoDB配置WiredTiger使用内存缓冲区来存储Journal Records，所有没有达到128KB的Journal Records都会被缓存在缓冲区中，直到大小超过128KB。在执行写操作时，WiredTiger将Journal Records存储在缓冲区中，如果MongoDB异常关机，存储在内存中的Journal Records将丢失，这意味着，WiredTiger将丢失最大128KB的数据更新。</p>
+<p>WiredTiger syncs the buffered journal records to disk according to the following intervals or conditions:<br />
+New in version 3.2: Every 50 milliseconds.<br />
+MongoDB sets checkpoints to occur in WiredTiger on user data at an interval of 60 seconds or when 2 GB of journal data has been written, whichever occurs first.<br />
+If the write operation includes a write concern of j: true, WiredTiger forces a sync of the WiredTiger journal files.<br />
+Because MongoDB uses a journal file size limit of 100 MB, WiredTiger creates a new journal file approximately every 100 MB of data. When WiredTiger creates a new journal file, WiredTiger syncs the previous journal file.</p>
+<h4>3，日志文件（Journal Files）</h4>
+<p>关于Journal文件，MongoDB在 &#8211;dbpath 目录下创建 journal子目录，WiredTiger将Journal 文件存储在该目录下，每一个Journal文件大约是100M，命名格式是：WiredTigerLog.，sequence是一个左边填充0的10位数字，从0000000001开始，依次递增。</p>
+<p>对于WiredTiger存储引擎，Journal 文件具有以下特性：</p>
+<p>标识日志记录：Journal文件的每一个日志记录（Record）代表一个写操作；每一个记录都有一个ID，用于唯一标识该记录；<br />
+压缩Journal文件：WiredTiger会压缩存储在Journal文件中的数据；<br />
+Journal文件大小的上限：每一个Journal文件大小的上限大约是100MB，一旦文件超过该限制，WiredTiger创建一个新的Journal文件；<br />
+自动移除Journal文件：WiredTiger自动移除老的Journal文件，只维护从上一个Checkpoint还原时必需的Journal文件；<br />
+预先分配Journal文件：WiredTiger预先分配Journal文件；</p>
+<h4>4，在异常宕机后恢复数据</h4>
+<p>在MongoDB实例异常宕机后，重启mongod实例，MongoDB自动重做（redo）所有的Journal Files，在还原Journal Files期间，MongoDB数据库是无法访问的。</p>
+<h3>五、mongod 跟存储引擎相关的参数</h3>
+<p>1，使用WiredTiger的参数设置<br />
+<code>mongod<br />
+--storageEngine wiredTiger<br />
+--dbpath<br />
+--journal --wiredTigerCacheSizeGB<br />
+--wiredTigerJournalCompressor<br />
+--wiredTigerCollectionBlockCompressor<br />
+--wiredTigerIndexPrefixCompression </code></p>
+<p>2，使用In-Memory的参数设置<br />
+<code>mongod<br />
+--storageEngine inMemory<br />
+--dbpath --inMemorySizeGB<br />
+--replSet<br />
+--oplogSize</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

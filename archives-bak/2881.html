@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 内置函数和操作符 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,内置函数,操作符" />
+    <meta name="description"  content="MySQL 数据库服务中内置函数和操作符" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 内置函数和操作符评论Feed" href="https://cn-blogs.cn/archives/2881.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='ANSI SQL' href='https://cn-blogs.cn/archives/2863.html' />
+<link rel='next' title='Redis持久化配置' href='https://cn-blogs.cn/archives/2006.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2881.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2881' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2881.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2881.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2881 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2863.html" rel="prev">上一篇：ANSI SQL</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2006.html" rel="next">下一篇：Redis持久化配置</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 内置函数和操作符        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/03/10</span>
+            <span class="update is-hidden">2018-04-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>概述</h2>
+<p>根据MySQL 5.7 的官方文档，列出了442个内置函数和表达式。</p>
+<blockquote><p>默认情况下，函数名和它后面的括号之间不能有空格。这有助于MySQL解析器区分函数调用和对具有与函数相同名称的表或列的引用。但是，函数参数周围的空格是允许的。</p></blockquote>
+<h3>表达式中的类型转换</h3>
+<p>表达式是由数字、算符、数字分组符号（括号）、自由变量和约束变量等以能求得数值的有意义排列方法所得的组合。<br />
+涉及到的场景有：</p>
+<ul>
+<li>数字型转换为字符型</li>
+<li>字符型转换为数字型</li>
+<li>注意比较操作中的类型转换</li>
+</ul>
+<h3>运算符概述</h3>
+<h4>运算符优先级</h4>
+<p>运算符的优先级决定了表达式中条件的评估顺序。要显式重写此顺序和组术语，请使用括号。</p>
+<h4>比较函数和比较运算符</h4>
+<p>比较操作的结果是1 （TRUE），0 （FALSE）或NULL。这些操作适用于数字和字符串。必要时，字符串会自动转换为数字和数字。<br />
+<code>=、&lt;=&gt;、&lt;&gt; (!=)、&lt;=、&gt;=、&gt;<br />
+IS NULL<br />
+ISNULL<br />
+IS NOT NULL<br />
+IN (element1,element2...)<br />
+NOT IN<br />
+LEAST<br />
+GREATEST<br />
+BETWEEN . . . AND. . .<br />
+LIKE<br />
+RLIKE<br />
+REGEXP:匹配字符串可用正则表达式模式</code></p>
+<h4>逻辑运算符</h4>
+<p>逻辑运算符的运算结果：TRUE、FALSE或NULL<br />
+<code>NOT 或者 !<br />
+AND 或者 &amp;&amp;<br />
+OR 或者 ||<br />
+XOR（异或）</code></p>
+<h4>赋值运算符</h4>
+<table>
+<tbody>
+<tr>
+<th>=</th>
+<th>赋值（作为SET 语句的一部分 ，或作为语句中的SET子句的 一部分UPDATE）</th>
+</tr>
+<tr>
+<th>:=</th>
+<th>分配一个值</th>
+</tr>
+</tbody>
+</table>
+<h3>控制语句</h3>
+<p>流程控制语句有:<code>case\if()\ifnull()\nullif()</code></p>
+<h3>字符串函数</h3>
+<ul>
+<li>字符串比较函数</li>
+<li>正则表达式</li>
+<li>字符集和函数结果整理</li>
+</ul>
+<h3>数字函数和操作符</h3>
+<ul>
+<li>算数运算符</li>
+<li>数学函数</li>
+</ul>
+<h3>日期和时间函数</h3>
+<p><code>CURTIME()	返回当前时间<br />
+DATE()	提取日期或日期时间表达式的日期部分<br />
+DATE_ADD()	将时间值（间隔）添加到日期值<br />
+...</code></p>
+<h3>日历</h3>
+<p>MySQL uses what is known as a proleptic Gregorian calendar.</p>
+<h3>全文搜索功能</h3>
+<p>自然语言全文搜索、全文限制&#8230;</p>
+<h3>cast功能和操作符</h3>
+<p>Cast函数和运算符可以将值从一种数据类型转换为另一种数据类型。</p>
+<h3>XML函数</h3>
+<p><code>ExtractValue() 使用XPath符号从XML字符串提取值<br />
+UpdateXML() 返回替换XML片段</code></p>
+<h3>位操作符和函数</h3>
+<p><code>BIT_COUNT() 返回设置的位数<br />
+位或（|）<br />
+位与（&amp;）<br />
+位异或（^ ）<br />
+位左移（&lt;&lt;）<br />
+位右移（&lt;&lt;）<br />
+位取反（~）</code></p>
+<h3>加密和压缩函数</h3>
+<p><code>AES_DECRYPT() 使用AES解密<br />
+AES_ENCRYPT() 使用AES加密<br />
+...</code></p>
+<h3>信息函数</h3>
+<p><code>CONNECTION_ID() 返回连接的连接ID（线程ID）<br />
+CURRENT_USER()， CURRENT_USER 经过验证的用户名和主机名<br />
+...</code></p>
+<h3>空间分析函数</h3>
+<p>MySQL提供了对空间数据执行各种操作的功能。</p>
+<h3>JSON函数</h3>
+<p>对于采用JSON参数的函数，如果参数不是有效的JSON值，则会发生错误。解析为JSON的参数表示为json_doc; 表示的参数val不被解析。<br />
+<code>JSON_APPEND() （不赞成5.7.9） 将数据追加到JSON文档<br />
+JSON_ARRAY() 创建JSON数组<br />
+...</code></p>
+<h3>用于全局事务ID的函数</h3>
+<p>所有这些函数都以GTID集的字符串表示作为参数，这一点非常重要 &#8211; 因此，GTID集必须始终在与它们一起使用时引用</p>
+<h3>MySQL企业加密函数</h3>
+<p>MySQL Enterprise Encryption是MySQL企业版（一种商业产品）中的扩展。<br />
+从MySQL 5.7.9开始，MySQL企业版包含一组基于OpenSSL库的加密函数，这些函数在SQL级别提供OpenSSL功能</p>
+<h3>聚合（GROUP BY）函数</h3>
+<p><code>AVG() 返回参数的平均值<br />
+BIT_AND() 按位返回AND<br />
+...</code></p>
+<h3>其他函数</h3>
+<p><code>INET_ATON() 返回IP地址的数字值<br />
+INET_NTOA() 从数值中返回IP地址<br />
+INET6_ATON() 返回IPv6地址的数字值<br />
+...</code></p>
+<h3>精度数学</h3>
+<p>精确值操作的精确数学范围包括精确值数据类型（整数和 DECIMAL类型）和精确值数字文字</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

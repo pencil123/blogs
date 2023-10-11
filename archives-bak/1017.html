@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Python编程SQLite数据库：连接类\游标类\execute方法 | 青春部落    </title>
+    <meta name="keywords"  content="SQLite,python,链接类,游标类" />
+    <meta name="description"  content="python语言编程SQLite数据库的扩展包中的链接类和游标类" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Python编程SQLite数据库：连接类\游标类\execute方法评论Feed" href="https://cn-blogs.cn/archives/1017.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='with 异常处理' href='https://cn-blogs.cn/archives/1010.html' />
+<link rel='next' title='MongoDB安装配置' href='https://cn-blogs.cn/archives/1028.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1017.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1017' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1017.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1017.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1017 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li>
+	<li><a href="https://cn-blogs.cn/archives/category/databases/sqlite" rel="category tag">SQLite</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1010.html" rel="prev">上一篇：with 异常处理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1028.html" rel="next">下一篇：MongoDB安装配置</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Python编程SQLite数据库：连接类\游标类\execute方法        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/11/11</span>
+            <span class="update is-hidden">2018-03-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>逻辑关系</h2>
+<p>sqlite3类中的connect方法返回的是连接类；<br />
+连接类中的cursor方法返回的是游标类。</p>
+<h2>sqlite3类</h2>
+<p>version<br />
+version_info<br />
+sqlite_version<br />
+sqlite_version_info<br />
+PARSE_DECLTYPES<br />
+PARSE_COLNAMES<br />
+connect(database[, timeout, detect_types, isolation_level, check_same_thread, factory, cached_statements])<br />
+#Opens a connection to the SQLite database file database.<br />
+register_converter(typename, callable)<br />
+register_adapter(type, callable)<br />
+complete_statement(sql)<br />
+enable_callback_tracebacks(flag)</p>
+<h2>sqlite3连接类</h2>
+<p>isolation_level<br />
+#获取或设置当前的隔离级别。None,DEFERRED,IMMEDIATE,EXCLUSIVE;设置为None时，游标执行的语句会自动提交。<br />
+cursor(factory=Cursor)<br />
+commit()<br />
+rollback()<br />
+close()<br />
+execute(sql[, parameters])<br />
+#这是一个非标准的快捷方式，它通过调用cursor方法创建一个中间游标对象，然后使用给定的参数调用游标的execute方法。<br />
+executemany(sql[, parameters])<br />
+executescript(sql_script)<br />
+create_function(name, num_params, func)<br />
+#创建一个用户定义的函数，以后可以在函数名称下的SQL语句中使用该函数。<br />
+create_aggregate(name, num_params, aggregate_class)<br />
+#创建一个用户定义的聚合函数。<br />
+create_collation(name, callable)<br />
+#创建具有指定名称和可调用的归类。<br />
+interrupt()<br />
+#您可以从不同的线程调用此方法来中止可能在连接上执行的任何查询。 查询将中止，调用者将会得到一个异常。<br />
+set_authorizer(authorizer_callback)<br />
+set_progress_handler(handler, n)<br />
+enable_load_extension(enabled)<br />
+load_extension(path)<br />
+row_factory<br />
+#您可以将此属性更改为可以接受游标和原始行作为元组的可调用，并返回真实的结果行。<br />
+text_factory<br />
+total_changes<br />
+#Returns the total number of database rows that have been modified, inserted, or deleted since the database connection was opened.<br />
+iterdump<br />
+#返回一个迭代器以SQL文本格式转储数据库。</p>
+<h2>sqlite3游标类</h2>
+<p>class sqlite3.Cursor：<br />
+#A Cursor instance has the following attributes and methods.<br />
+execute(sql[, parameters])<br />
+executemany(sql, seq_of_parameters)<br />
+executescript(sql_script)<br />
+fetchone()：<br />
+#Fetches the next row of a query result set, returning a single sequence, or None when no more data is available.<br />
+fetchmany([size=cursor.arraysize])<br />
+fetchall()<br />
+rowcount<br />
+lastrowid<br />
+description<br />
+connection</p>
+<h2>execute(sql,[,parameters])</h2>
+<p>执行一条SQL语句。<br />
+方法1、直接将完整的sql提交；这样要自己处理好转码的问题，并防止SQL注入。<br />
+方法2、使用占位符；这种形式已经考虑到转码的问题。<br />
+<strong>注意：</strong>不过占位符只是针对value；不能用于设置表明，字段等。</p>
+<h2>sqlite3支持两种占位符</h2>
+<p>？问号（qmark样式）和命名占位符</p>
+<h3>1、qmark样式</h3>
+<p><code>cur.execute("insert into people values (?, ?)", (who, age))</code><br />
+使用问号占位符，参数为元组形式。</p>
+<h3>2、命名占位符</h3>
+<p><code>cur.execute("select * from people where name_last=:who and age=:age", {"who": who, "age": age})</code><br />
+冒号加key为占位符，参数以字典形式。</p>
+<h3>注意事项：</h3>
+<h4>1、中文报错</h4>
+<p>如果要对中文进行处理，需要使用将字符串进行解码为Unicode；<br />
+str_var.decode(‘utf-8’)</p>
+<h4>2、元组单个参数形式</h4>
+<p>需要加逗号，表明参数为一个元组</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

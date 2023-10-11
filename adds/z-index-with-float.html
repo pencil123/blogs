@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stacking and float</title>
+    <style type="text/css">
+
+    div {
+        font: 12px Arial;
+        text-align: center;
+    }
+
+    .bold { font-weight: bold; }
+    .opacity{ opacity: 0.7;}
+
+    #absdiv1 {
+        position: absolute;
+        width: 150px;
+        height: 200px;
+        top: 10px;
+        right: 140px;
+        border: 1px dashed #990000;
+        background-color: #ffdddd;
+    }
+
+    #normdiv {
+/*         opacity: 0.7; */
+        height: 100px;
+        border: 1px dashed #999966;
+        background-color: #ffffcc;
+        margin: 0px 10px 0px 10px;
+        text-align: left;
+    }
+
+    #flodiv1 {
+        margin: 0px 10px 0px 20px;
+        float: left;
+        width: 150px;
+        height: 200px;
+        border: 1px dashed #009900;
+        background-color: #ccffcc;
+    }
+
+    #flodiv2 {
+        margin: 0px 20px 0px 10px;
+        float: right;
+        width: 150px;
+        height: 200px;
+        border: 1px dashed #009900;
+        background-color: #ccffcc;
+    }
+
+    #absdiv2 {
+        position: absolute;
+        width: 150px;
+        height: 100px;
+        top: 130px;
+        left: 100px;
+        border: 1px dashed #990000;
+        background-color: #ffdddd;
+    }
+
+</style>
+</head>
+
+<body>
+    <br /><br />
+
+    <div id="absdiv1" class="opacity">
+        <br /><span class="bold">DIV #1</span>
+        <br />position: absolute;
+    </div>
+
+    <div id="flodiv1" class="opacity">
+        <br /><span class="bold">DIV #2</span>
+        <br />float: left;
+    </div>
+
+    <div id="flodiv2" class="opacity">
+        <br /><span class="bold">DIV #3</span>
+        <br />float: right;
+    </div>
+
+    <br />
+
+    <div id="normdiv">
+        <br /><span class="bold">DIV #4</span>
+        <br />no positioning
+    </div>
+
+    <div id="absdiv2" class="opacity">
+        <br /><span class="bold">DIV #5</span>
+        <br />position: absolute;
+    </div>
+<div>
+<ul>
+<li>#4是正常流中非定位的元素，所以先被渲染，在最底层。
+</li><li>#2 #3一个左浮动，一个右浮动，接着被渲染。彼此不会因为z-index值被覆盖。见下图。
+</li><li>#1 #5为已定位的元素，最后被渲染，当浏览器窗口变小时，#5在#1上面，因为HTML文档中#5在#1后面。
+</li></ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQLDump 工具参数补充 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,MySQLDump,数据备份" />
+    <meta name="description"  content="MySQL数据库中MySQLDump工具备份参数补充" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQLDump 工具参数补充评论Feed" href="https://cn-blogs.cn/archives/2793.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQLDump 锁表和主从' href='https://cn-blogs.cn/archives/2790.html' />
+<link rel='next' title='Explain 查询语句优化' href='https://cn-blogs.cn/archives/3003.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2793.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2793' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2793.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2793.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2793 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2790.html" rel="prev">上一篇：MySQLDump 锁表和主从</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3003.html" rel="next">下一篇：Explain 查询语句优化</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQLDump 工具参数补充        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/10/30</span>
+            <span class="update is-hidden">2018-04-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>事务、触发器、存储过程</h3>
+<table>
+<tbody>
+<tr>
+<th>&#8211;events, -E</th>
+<th>导出事件。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;events</th>
+</tr>
+<tr>
+<th>&#8211;triggers</th>
+<th>导出触发器。该选项默认启用，用&#8211;skip-triggers禁用它。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;triggers</th>
+</tr>
+<tr>
+<th>&#8211;routines, -R</th>
+<th>导出存储过程以及自定义函数。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;routines</th>
+</tr>
+</tbody>
+</table>
+<h3>表空间</h3>
+<table>
+<tbody>
+<tr>
+<th>&#8211;all-tablespaces , -Y：</th>
+<th>导出全部表空间。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;all-tablespaces</th>
+</tr>
+<tr>
+<th>&#8211;no-tablespaces , -y：</th>
+<th>不导出任何表空间信息。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;no-tablespaces</th>
+</tr>
+</tbody>
+</table>
+<h3>刷新数据库</h3>
+<table>
+<tbody>
+<tr>
+<th>flush-logs</th>
+<th>开始导出之前刷新日志。<br />
+请注意：假如一次导出多个数据库(使用选项&#8211;databases或者&#8211;all-databases)，将会逐个数据库刷新日志。除使用&#8211;lock-all-tables或者&#8211;master-data外。<br />
+在这种情况下，日志将会被刷新一次，相应的所以表同时被锁定。因此，如果打算同时导出和刷新日志应该使用&#8211;lock-all-tables 或者&#8211;master-data 和&#8211;flush-logs。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;flush-logs</th>
+</tr>
+<tr>
+<th>&#8211;flush-privileges</th>
+<th>在导出mysql数据库之后，发出一条FLUSH PRIVILEGES 语句。为了正确恢复，该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;flush-privileges</th>
+</tr>
+</tbody>
+</table>
+<h3>二进制字段</h3>
+<table>
+<tbody>
+<tr>
+<th>&#8211;hex-blob</th>
+<th>使用十六进制格式导出二进制字符串字段。如果有二进制数据就必须使用该选项。影响到的字段类型有BINARY、VARBINARY、BLOB。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;hex-blob</th>
+</tr>
+</tbody>
+</table>
+<h3>其他</h3>
+<table>
+<tbody>
+<tr>
+<th>&#8211;allow-keywords</th>
+<th>允许创建是关键词的列名字。这由表名前缀于每个列名做到。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;allow-keywords</th>
+</tr>
+<tr>
+<th>&#8211;compatible</th>
+<th>导出的数据将和其它数据库或旧版本的MySQL 相兼容。值可以为ansi、mysql323、mysql40、postgresql、oracle、mssql、db2、maxdb、no_key_options、no_tables_options、no_field_options等，<br />
+要使用几个值，用逗号将它们隔开。它并不保证能完全兼容，而是尽量兼容。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;compatible=ansi</th>
+</tr>
+<tr>
+<th>&#8211;delayed-insert</th>
+<th>采用延时插入方式（INSERT DELAYED）导出数据<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;delayed-insert</th>
+</tr>
+<tr>
+<th>&#8211;force</th>
+<th>在导出过程中忽略出现的SQL错误。<br />
+mysqldump -uroot -p &#8211;all-databases &#8211;force</th>
+</tr>
+<tr>
+<th>&#8211;lines-terminated-by</th>
+<th>输出文件的每行用给定字符串划分。与&#8211;tab选项一起使用，不能用于&#8211;databases和&#8211;all-databases选项。<br />
+mysqldump -uroot -p &#8211;host=localhost test test &#8211;tab=”/tmp/mysql” &#8211;lines-terminated-by=”##”</th>
+</tr>
+<tr>
+<th>&#8211;log-error</th>
+<th>附加警告和错误信息到给定文件<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;log-error=/tmp/mysqldump_error_log.err</th>
+</tr>
+<tr>
+<th>&#8211;no-autocommit</th>
+<th>使用autocommit/commit 语句包裹表。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;no-autocommit</th>
+</tr>
+<tr>
+<th>&#8211;no-set-names, -N</th>
+<th>等同于&#8211;skip-set-charset<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;no-set-names</th>
+</tr>
+<tr>
+<th>&#8211;opt</th>
+<th>等同于&#8211;add-drop-table, &#8211;add-locks, &#8211;create-options, &#8211;quick, &#8211;extended-insert, &#8211;lock-tables, &#8211;set-charset, &#8211;disable-keys 该选项默认开启, 可以用&#8211;skip-opt禁用.<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;opt</th>
+</tr>
+<tr>
+<th>&#8211;order-by-primary</th>
+<th>如果存在主键，或者第一个唯一键，对每个表的记录进行排序。在导出MyISAM表到InnoDB表时有效，但会使得导出工作花费很长时间。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;order-by-primary</th>
+</tr>
+<tr>
+<th>&#8211;pipe(windows系统可用)</th>
+<th>使用命名管道连接mysql<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;pipe</th>
+</tr>
+<tr>
+<th>&#8211;quick, -q</th>
+<th>不缓冲查询，直接导出到标准输出。默认为打开状态，使用&#8211;skip-quick取消该选项。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;skip-quick</th>
+</tr>
+<tr>
+<th>&#8211;quote-names,-Q</th>
+<th>使用（`）引起表和列名。默认为打开状态，使用&#8211;skip-quote-names取消该选项。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;skip-quote-names</th>
+</tr>
+<tr>
+<th>&#8211;replace</th>
+<th>使用REPLACE INTO 取代INSERT INTO.<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;replace</th>
+</tr>
+<tr>
+<th>&#8211;result-file, -r</th>
+<th>直接输出到指定文件中。该选项应该用在使用回车换行对（\\r\\n）换行的系统上（例如：DOS，Windows）。该选项确保只有一行被使用。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;result-file=/tmp/mysqldump_result_file.txt</th>
+</tr>
+<tr>
+<th>&#8211;dump-date</th>
+<th>将导出时间添加到输出文件中。默认为打开状态，使用&#8211;skip-dump-date关闭选项。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;skip-dump-date</th>
+</tr>
+<tr>
+<th>&#8211;skip-opt</th>
+<th>禁用–opt选项.<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;skip-opt</th>
+</tr>
+<tr>
+<th>&#8211;tz-utc</th>
+<th>在导出顶部设置时区TIME_ZONE=&#8217;+00:00&#8242; ，以保证在不同时区导出的TIMESTAMP 数据或者数据被移动其他时区时的正确性。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;tz-utc</th>
+</tr>
+<tr>
+<th>&#8211;verbose, &#8211;v</th>
+<th>输出多种平台信息。</th>
+</tr>
+<tr>
+<th>&#8211;where, -w</th>
+<th>只转储给定的WHERE条件选择的记录。请注意如果条件包含命令解释符专用空格或字符，一定要将条件引用起来。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;where=” user=’root’”</th>
+</tr>
+<tr>
+<th>&#8211;xml, -X</th>
+<th>导出XML格式.<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;xml</th>
+</tr>
+<tr>
+<th>&#8211;plugin_dir</th>
+<th>客户端插件的目录，用于兼容不同的插件版本。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;plugin_dir=”/usr/local/lib/plugin”</th>
+</tr>
+<tr>
+<th>&#8211;default_auth</th>
+<th>客户端插件默认使用权限。<br />
+mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;default-auth=”/usr/local/lib/plugin/”</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

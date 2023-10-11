@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Validate | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; jQuery Validate评论Feed" href="https://cn-blogs.cn/archives/2774.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='JS几种对象创建方法' href='https://cn-blogs.cn/archives/2768.html' />
+<link rel='next' title='jquery preventDeafult方法' href='https://cn-blogs.cn/archives/2780.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2774.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2774' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2774.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2774.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2774 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/html-css-js" rel="category tag">前端</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2768.html" rel="prev">上一篇：JS几种对象创建方法</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2780.html" rel="next">下一篇：jquery preventDeafult方法</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            jQuery Validate        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/11/28</span>
+            <span class="update is-hidden">2018-01-14</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>插件为表单提供了强大的验证功能，让客户端表单验证变得更简单，同时提供了大量的定制选项，满足应用程序各种需求。该插件捆绑了一套有用的验证方法，包括 URL 和电子邮件验证，同时提供了一个用来编写用户自定义方法的 API。</p>
+<p>在整个文档中，经常使用两个术语，因此，在验证插件的上下文中了解它们的含义非常重要：</p>
+<p><strong>方法：</strong>验证方法实现了验证元素的逻辑，就像一个电子邮件方法，用来检查文本输入值的正确格式。一套标准的方法是可用的，很容易写你自己的。</p>
+<p><strong>规则：</strong>验证规则将元素与验证方法相关联，like &#8220;validate input with name &#8220;primary-mail&#8221; with methods &#8220;required&#8221; and &#8220;email&#8221;.</p>
+<p><strong>插件方法</strong></p>
+<p>这个库增加了三个jQuery插件方法，主入口点是验证方法：<br />
+validate() &#8211; 验证选定的表单。<br />
+valid() &#8211; 检查选定的表单或选定的元素是否有效。<br />
+rules() &#8211; 读取，添加和移除元素的规则。</p>
+<p><strong>自定义选择器</strong></p>
+<p>这个库也用三个自定义选择器来扩展jQuery：<br />
+:blank &#8211; 选择所有具有空白值的元素。<br />
+:filled &#8211; 选择所有具有填充值的元素。<br />
+:unchecked &#8211; 选择所有未选中的元素。</p>
+<p><strong>验证器</strong></p>
+<p>validate方法返回一个Validator对象，该对象具有一些公共方法，您可以使用该对象以编程方式触发验证或更改表单的内容。验证器对象有更多的方法，但只有那些在这里记录的是用于使用。<br />
+Validator.form() &#8211; 验证表单。<br />
+Validator.element() &#8211; 验证一个单一的元素。<br />
+Validator.resetForm() &#8211; 重置受控表单。<br />
+Validator.showErrors() &#8211; 显示指定的消息。<br />
+Validator.numberOfInvalids() &#8211; 返回无效字段的数量。<br />
+Validator.destroy() &#8211; 销毁验证器的这个实例。<br />
+验证器对象上有几个静态方法：<br />
+jQuery.validator.addMethod() &#8211; 添加一个自定义验证方法。<br />
+jQuery.validator.format() &#8211; 用参数替换{n}占位符。<br />
+jQuery.validator.setDefaults() &#8211; 修改验证的默认设置。<br />
+jQuery.validator.addClassRules() &#8211; 添加一个复合类的方法。</p>
+<p><strong>validate()属性</strong></p>
+<table>
+<tbody>
+<tr>
+<th>debug：</th>
+<th>进行调试模式（表单不提交）。</th>
+</tr>
+<tr>
+<th>submitHandler：</th>
+<th>通过验证后运行的函数，里面要加上表单提交的函数，否则表单不会提交。</th>
+</tr>
+<tr>
+<th>ignore：</th>
+<th>对某些元素不进行验证。</th>
+</tr>
+<tr>
+<th>rules：</th>
+<th>自定义规则，key:value 的形式，key 是要验证的元素，value 可以是字符串或对象。</th>
+</tr>
+<tr>
+<th>messages：</th>
+<th>自定义的提示信息，key:value 的形式，key 是要验证的元素，value 可以是字符串或函数。</th>
+</tr>
+<tr>
+<th>groups：</th>
+<th>对一组元素的验证，用一个错误提示，用 errorPlacement 控制把出错信息放在哪里。</th>
+</tr>
+<tr>
+<th>OnSubmit：</th>
+<th>类型 Boolean，默认 true，指定是否提交时验证。</th>
+</tr>
+<tr>
+<th>onfocusout：</th>
+<th>类型 Boolean，默认 true，指定是否在获取焦点时验证。</th>
+</tr>
+<tr>
+<th>onkeyup：</th>
+<th>类型 Boolean，默认 true，指定是否在敲击键盘时验证。</th>
+</tr>
+<tr>
+<th>onclick：</th>
+<th>类型 Boolean，默认 true，指定是否在鼠标点击时验证（一般验证 checkbox、radiobox）。</th>
+</tr>
+<tr>
+<th>focusInvalid：</th>
+<th>类型 Boolean，默认 true。提交表单后，未通过验证的表单（第一个或提交之前获得焦点的未通过验证的表单）会获得焦点。</th>
+</tr>
+<tr>
+<th>focusCleanup：</th>
+<th>类型 Boolean，默认 false。当未通过验证的元素获得焦点时，移除错误提示（避免和 focusInvalid 一起使用）。</th>
+</tr>
+<tr>
+<th>errorClass：</th>
+<th>类型 String，默认 &#8220;error&#8221;。指定错误提示的 css 类名，可以自定义错误提示的样式。</th>
+</tr>
+<tr>
+<th>errorElement：</th>
+<th>类型 String，默认 &#8220;label&#8221;。指定使用什么标签标记错误。</th>
+</tr>
+<tr>
+<th>wrapper：</th>
+<th>类型 String，指定使用什么标签再把上边的 errorELement 包起来。</th>
+</tr>
+<tr>
+<th>errorLabelContainer：</th>
+<th>类型 Selector，把错误信息统一放在一个容器里面。</th>
+</tr>
+<tr>
+<th>showErrors：</th>
+<th>跟一个函数，可以显示总共有多少个未通过验证的元素。</th>
+</tr>
+<tr>
+<th>errorPlacement：</th>
+<th>跟一个函数，可以自定义错误放到哪里。</th>
+</tr>
+<tr>
+<th>success：</th>
+<th>要验证的元素通过验证后的动作，如果跟一个字符串，会当作一个 css 类，也可跟一个函数。</th>
+</tr>
+<tr>
+<th>highlight：</th>
+<th>可以给未通过验证的元素加效果、闪烁等。</th>
+</tr>
+</tbody>
+</table>
+<p><strong>内置的验证方法列表</strong><br />
+提供了一套标准的验证方法：</p>
+<table>
+<tbody>
+<tr>
+<th>required</th>
+<th>使需要的元素。</th>
+</tr>
+<tr>
+<th>remote</th>
+<th>请求资源检查元素的有效性。</th>
+</tr>
+<tr>
+<th>minlength</th>
+<th>使元素需要给定的最小长度。</th>
+</tr>
+<tr>
+<th>maxlength</th>
+<th>使元素需要给定的最大长度。</th>
+</tr>
+<tr>
+<th>rangelength</th>
+<th>使元素需要一个给定的值范围。</th>
+</tr>
+<tr>
+<th>min</th>
+<th>使元素需要给定的最小值。</th>
+</tr>
+<tr>
+<th>max</th>
+<th>使元素需要给定的最大值。</th>
+</tr>
+<tr>
+<th>range</th>
+<th>使元素需要一个给定的值范围。</th>
+</tr>
+<tr>
+<th>step</th>
+<th>使元素需要一个给定的步骤。</th>
+</tr>
+<tr>
+<th>email</th>
+<th>使元素需要一个有效的电子邮件</th>
+</tr>
+<tr>
+<th>url</th>
+<th>使元素需要一个有效的网址</th>
+</tr>
+<tr>
+<th>date</th>
+<th>使元素需要一个日期。</th>
+</tr>
+<tr>
+<th>dateISO</th>
+<th>使元素需要ISO日期。</th>
+</tr>
+<tr>
+<th>number</th>
+<th>使元素需要一个十进制数。</th>
+</tr>
+<tr>
+<th>digits</th>
+<th>使元素只需要数字。</th>
+</tr>
+<tr>
+<th>equalTo</th>
+<th>要求元素与另一个元素相同</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

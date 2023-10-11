@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>yield 生成器 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; yield 生成器评论Feed" href="https://cn-blogs.cn/archives/658.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='class 迭代器' href='https://cn-blogs.cn/archives/653.html' />
+<link rel='next' title='Python 扩展包|模块' href='https://cn-blogs.cn/archives/661.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/658.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=658' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F658.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F658.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-658 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/653.html" rel="prev">上一篇：class 迭代器</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/661.html" rel="next">下一篇：Python 扩展包|模块</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            yield 生成器        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/01/11</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>您可能听说过，带有 yield 的函数在 Python 中被称之为 generator（生成器），何谓 generator ？<br />
+我们先抛开 generator，以一个常见的编程题目来展示 yield 的概念。<br />
+<strong>如何生成斐波那契數列</strong><br />
+斐波那契（Fibonacci）數列是一个非常简单的递归数列，除第一个和第二个数外，任意一个数都可由前两个数相加得到。用计算机程序输出斐波那契數列的前 N 个数是一个非常简单的问题，许多初学者都可以轻易写出如下函数：<br />
+清单 1. 简单输出斐波那契數列前 N 个数<br />
+def fab(max):<br />
+———n, a, b = 0, 0, 1<br />
+———while n &lt; max:<br />
+——————print b<br />
+——————a, b = b, a + b<br />
+——————n = n + 1<br />
+执行 fab(5)，我们可以得到如下输出：<br />
+&gt;&gt;&gt; fab(5)<br />
+1<br />
+1<br />
+2<br />
+3<br />
+5<br />
+结果没有问题，但有经验的开发者会指出，直接在 fab 函数中用 print 打印数字会导致该函数可复用性较差，因为 fab 函数返回 None，其他函数无法获得该函数生成的数列。<br />
+要提高 fab 函数的可复用性，最好不要直接打印出数列，而是返回一个 List。以下是 fab 函数改写后的第二个版本：<br />
+<strong>清单 2. 输出斐波那契數列前 N 个数第二版</strong><br />
+def fab(max):<br />
+———n, a, b = 0, 0, 1<br />
+———L = []<br />
+———while n &lt; max:<br />
+——————L.append(b)<br />
+——————a, b = b, a + b<br />
+——————n = n + 1<br />
+———return L<br />
+可以使用如下方式打印出 fab 函数返回的 List：<br />
+&gt;&gt;&gt; for n in fab(5):<br />
+&#8230;——— print n<br />
+&#8230;<br />
+1<br />
+1<br />
+2<br />
+3<br />
+5<br />
+改写后的 fab 函数通过返回 List 能满足复用性的要求，但是更有经验的开发者会指出，该函数在运行中占用的内存会随着参数 max 的增大而增大，如果要控制内存占用，最好不要用 List<br />
+来保存中间结果，而是通过 iterable 对象来迭代。例如，在 Python2.x 中，代码：<br />
+<strong>清单 3. 通过 iterable 对象来迭代</strong><br />
+for i in range(1000): pass<br />
+会导致生成一个 1000 个元素的 List，而代码：<br />
+for i in xrange(1000): pass<br />
+则不会生成一个 1000 个元素的 List，而是在每次迭代中返回下一个数值，内存空间占用很小。因为 xrange 不返回 List，而是返回一个 iterable 对象。<br />
+利用 iterable 我们可以把 fab 函数改写为一个支持 iterable 的 class，以下是第三个版本的 Fab：<br />
+<strong>清单 4. 第三个版本</strong><br />
+class Fab(object):</p>
+<p>———def __init__(self, max):<br />
+——————self.max = max<br />
+——————self.n, self.a, self.b = 0, 0, 1</p>
+<p>———def __iter__(self):<br />
+——————return self</p>
+<p>———def next(self):<br />
+——————if self.n &lt; self.max:<br />
+—————————r = self.b<br />
+—————————self.a, self.b = self.b, self.a + self.b<br />
+—————————self.n = self.n + 1<br />
+—————————return r<br />
+——————raise StopIteration()<br />
+Fab 类通过 next() 不断返回数列的下一个数，内存占用始终为常数：<br />
+&gt;&gt;&gt; for n in Fab(5):<br />
+&#8230;——— print n<br />
+&#8230;<br />
+1<br />
+1<br />
+2<br />
+3<br />
+5<br />
+然而，使用 class 改写的这个版本，代码远远没有第一版的 fab 函数来得简洁。如果我们想要保持第一版 fab 函数的简洁性，同时又要获得 iterable 的效果，yield 就派上用场了：<br />
+<strong>清单 5. 使用 yield 的第四版</strong><br />
+def fab(max):<br />
+———n, a, b = 0, 0, 1<br />
+———while n &lt; max:<br />
+——————yield b<br />
+——————# print b<br />
+——————a, b = b, a + b<br />
+——————n = n + 1</p>
+<p>&#8221;&#8217;<br />
+第四个版本的 fab 和第一版相比，仅仅把 print b 改为了 yield b，就在保持简洁性的同时获得了 iterable 的效果。<br />
+调用第四版的 fab 和第二版的 fab 完全一致：<br />
+&gt;&gt;&gt; for n in fab(5):<br />
+&#8230;——— print n<br />
+&#8230;<br />
+1<br />
+1<br />
+2<br />
+3<br />
+5<br />
+简单地讲，yield 的作用就是把一个函数变成一个 generator，带有 yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，调用 fab(5) 不会执行 fab 函数，而是返回一个 iterable 对象！在 for 循环执行时，每次循环都会执行 fab 函数内部的代码，执行到 yield b 时，fab 函数就返回一个迭代值，下次迭代时，代码从 yield b 的下一条语句继续执行，而函数的本地变量看起来和上次中断执行前是完全一样的，于是函数继续执行，直到再次遇到 yield。<br />
+也可以手动调用 fab(5) 的 next() 方法（因为 fab(5) 是一个 generator 对象，该对象具有 next() 方法），这样我们就可以更清楚地看到 fab 的执行流程：<br />
+<strong>清单 6. 执行流程</strong><br />
+&gt;&gt;&gt; f = fab(5)<br />
+&gt;&gt;&gt; f.next()<br />
+1<br />
+&gt;&gt;&gt; f.next()<br />
+1<br />
+&gt;&gt;&gt; f.next()<br />
+2<br />
+&gt;&gt;&gt; f.next()<br />
+3<br />
+&gt;&gt;&gt; f.next()<br />
+5<br />
+&gt;&gt;&gt; f.next()<br />
+Traceback (most recent call last):<br />
+File &#8220;&lt;stdin&gt;&#8221;, line 1, in &lt;module&gt;<br />
+StopIteration<br />
+当函数执行结束时，generator 自动抛出 StopIteration 异常，表示迭代完成。在 for 循环里，无需处理 StopIteration 异常，循环会正常结束。<br />
+我们可以得出以下结论：<br />
+一个带有 yield 的函数就是一个 generator，它和普通函数不同，生成一个 generator 看起来像函数调用，但不会执行任何函数代码，直到对其调用 next()（在 for 循环中会自动调用 next()）才开始执行。虽然执行流程仍按函数的流程执行，但每执行到一个 yield 语句就会中断，并返回一个迭代值，下次执行时从 yield 的下一个语句继续执行。看起来就好像一个函数在正常执行的过程中被 yield 中断了数次，每次中断都会通过 yield 返回当前的迭代值。<br />
+yield 的好处是显而易见的，把一个函数改写为一个 generator 就获得了迭代能力，比起用类的实例保存状态来计算下一个 next() 的值，不仅代码简洁，而且执行流程异常清晰。<br />
+如何判断一个函数是否是一个特殊的 generator 函数？可以利用 isgeneratorfunction 判断：<br />
+<strong>清单 7. 使用 isgeneratorfunction 判断</strong><br />
+&gt;&gt;&gt; from inspect import isgeneratorfunction<br />
+&gt;&gt;&gt; isgeneratorfunction(fab)<br />
+True<br />
+要注意区分 fab 和 fab(5)，fab 是一个 generator function，而 fab(5) 是调用 fab 返回的一个 generator，好比类的定义和类的实例的区别：<br />
+<strong>清单 8. 类的定义和类的实例</strong><br />
+&gt;&gt;&gt; import types<br />
+&gt;&gt;&gt; isinstance(fab, types.GeneratorType)<br />
+False<br />
+&gt;&gt;&gt; isinstance(fab(5), types.GeneratorType)<br />
+True<br />
+fab 是无法迭代的，而 fab(5) 是可迭代的：<br />
+&gt;&gt;&gt; from collections import Iterable<br />
+&gt;&gt;&gt; isinstance(fab, Iterable)<br />
+False<br />
+&gt;&gt;&gt; isinstance(fab(5), Iterable)<br />
+True<br />
+每次调用 fab 函数都会生成一个新的 generator 实例，各实例互不影响：<br />
+&gt;&gt;&gt; f1 = fab(3)<br />
+&gt;&gt;&gt; f2 = fab(5)<br />
+&gt;&gt;&gt; print &#8216;f1:&#8217;, f1.next()<br />
+f1: 1<br />
+&gt;&gt;&gt; print &#8216;f2:&#8217;, f2.next()<br />
+f2: 1<br />
+&gt;&gt;&gt; print &#8216;f1:&#8217;, f1.next()<br />
+f1: 1<br />
+&gt;&gt;&gt; print &#8216;f2:&#8217;, f2.next()<br />
+f2: 1<br />
+&gt;&gt;&gt; print &#8216;f1:&#8217;, f1.next()<br />
+f1: 2<br />
+&gt;&gt;&gt; print &#8216;f2:&#8217;, f2.next()<br />
+f2: 2<br />
+&gt;&gt;&gt; print &#8216;f2:&#8217;, f2.next()<br />
+f2: 3<br />
+&gt;&gt;&gt; print &#8216;f2:&#8217;, f2.next()<br />
+f2: 5<br />
+<strong>return 的作用</strong><br />
+在一个 generator function 中，如果没有 return，则默认执行至函数完毕，如果在执行过程中 return，则直接抛出 StopIteration 终止迭代。<br />
+回页首<br />
+另一个例子<br />
+另一个 yield 的例子来源于文件读取。如果直接对文件对象调用 read() 方法，会导致不可预测的内存占用。好的方法是利用固定长度的缓冲区来不断读取文件内容。通过 yield，我们不再需要编写读文件的迭代类，就可以轻松实现文件读取：<br />
+<strong>清单 9. 另一个 yield 的例子</strong><br />
+def read_file(fpath):<br />
+———BLOCK_SIZE = 1024<br />
+———with open(fpath, &#8216;rb&#8217;) as f:<br />
+——————while True:<br />
+—————————block = f.read(BLOCK_SIZE)<br />
+—————————if block:<br />
+————————————yield block<br />
+—————————else:<br />
+————————————return<br />
+以上仅仅简单介绍了 yield 的基本概念和用法，yield 在 Python 3 中还有更强大的用法，我们会在后续文章中讨论。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

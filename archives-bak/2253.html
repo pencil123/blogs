@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>SAPI\CGI和FastCGI | 青春部落    </title>
+    <meta name="keywords"  content="服务器应用编程接口,SAPI,CGI,Fast-CGI,通用网关接口,快速通用网关接口" />
+    <meta name="description"  content="SAPI(服务器应用编程接口)CGI(通用网关接口),Fast-CGI(快速通用网关接口)" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; SAPI\CGI和FastCGI评论Feed" href="https://cn-blogs.cn/archives/2253.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='进程管理pm' href='https://cn-blogs.cn/archives/2243.html' />
+<link rel='next' title='php配置' href='https://cn-blogs.cn/archives/2258.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2253.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2253' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2253.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2253.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2253 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/php" rel="category tag">PHP服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2243.html" rel="prev">上一篇：进程管理pm</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2258.html" rel="next">下一篇：php配置</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            SAPI\CGI和FastCGI        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/02/26</span>
+            <span class="update is-hidden">2018-04-21</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>SAPI（Server Application Programming Interface）:服务器应用编程接口<br />
+PHP通过SAPI提供了一组接口，供应用（nginx等）和PHP内核之间进行数据交互。<br />
+简单的讲，就像函数的输入和输出一样，我们通过Linux命令行执行一段PHP代码，本质是Linux的Shell通过PHP的SAPI传入一组参数，Zend引擎执行后，返回给shell，由shell显示出来的过程。同样的，通过Apache调用PHP，通过Web服务器给SAPI传入数据，Zend引擎执行后，返回给Apache，由Apache显示在页面上。<br />
+<img class="alignnone size-full wp-image-2254" src="http://www.cn-blogs.cn/wp-content/uploads/2017/10/54250531d9869_middle.jpg" alt="php_sapi" width="427" height="436" srcset="https://cn-blogs.cn/wp-content/uploads/2017/10/54250531d9869_middle.jpg 427w, https://cn-blogs.cn/wp-content/uploads/2017/10/54250531d9869_middle-294x300.jpg 294w" sizes="(max-width: 427px) 100vw, 427px" /><br />
+PHP提供很多种形式的接口，包括apache、apache2filter、apache2handler、caudium、cgi 、cgi-fcgi、cli、cli-server、continuity、embed、isapi、litespeed、milter、nsapi、phttpd pi3web、roxen、thttpd、tux和webjames。<br />
+但是常用的只有5种形式，CLI/CGI（命令行）、Multiprocess（多进程）、Multithreaded（多线程）、FastCGI和Embedded（内嵌）。</p>
+<h4>PHP的运行和加载</h4>
+<p>无论使用哪种SAPI，在PHP执行脚本前后，都包含一系列事件：Module的Init(MINT)和Shutdown(MSHUTDOWN)，Request 的Init(RINT)和Shutdown(RSHUTDOWN)。<br />
+第一阶段是PHP模块初始化阶段（MINT），可以初始化扩展内部变量、分配资源和注册资源处理器，在整个PHP实例生命周期内，该过程只执行一次。</p>
+<h4>FastCGI运行模式</h4>
+<p>PHP-FPM就是允许在FastCGI模式下的。FastCGI是一种特殊的CGI模式，是一种常驻进程类型的CGI。<br />
+Master进程运行后可以Fork多个进程，不用花费时间动态的Fork子进程，也不需要每次请求都调用MINT/MSHUTDOWN。<br />
+PHP通过PHP-FPM来管理和调度FastCGI的进程池。<br />
+Nginx和PHP-FPM通过本地的TCP Socket和Unix Socket 进行通信。</p>
+<p>PHP-FPM进程管理器自身初始化，启动多个CGI解释器进程等待来自Nginx的请求。<br />
+当客户端请求达到PHP-FPM，管理器选择到一个CGI进程进行处理，Nginx将CGI环境变量和标准输入发送到一个PHP-CGI子进程。</p>
+<p>PHP-CGI子进程处理完成后，将标准输出和错误信息返回给Nginx，当PHP-CGI子进程关闭连接时，请求处理完成。PHP-CGI子进程等待着下一个连接。</p>
+<p>可以想象CGI的系统开销有多大。每一个Web 请求PHP都必须重新解析php.ini、载入全部扩展并始化全部数据结构。<br />
+使用FastCGI，所有这些都只在进程启动时发生一次。另外，对于数据库和Memcache的持续连接可以工作。</p>
+<h2>CGI 通用网关接口</h2>
+<p>通用网关接口（Common Gateway Interface）是一种重要的互联网技术，可以让一个客户端，从网页浏览器向执行在网络服务器上的程序请求数据。CGI描述了服务器和请求处理程序之间传输数据的一种标准。</p>
+<h4>独立于编程语言之外</h4>
+<p>编程语言Perl是一个广泛被用来编写CGI程序的语言，但CGI的一个目的是要独立于任何语言的。<br />
+Web服务器无须在这个问题上对语言有任何了解。事实上，CGI程序可以用任何脚本语言或者是完全独立编程语言实现，只要这个语言可以在这个系统上运行。<br />
+除Perl外，像Unix shell script, Python, Ruby, PHP, Tcl, C/C++,和Visual Basic都可以用来编写CGI程序。</p>
+<h4>CGI的工作方式</h4>
+<p>从Web服务器的角度看，是在特定的位置（比如：http://www.example.com/wiki.cgi）定义了可以运行CGI程序。<br />
+当收到一个匹配URL的请求，相应的程序就会被调用，并将客户端发送的数据作为输入。<br />
+程序的输出会由Web服务器收集，并加上合适的档头，再发送回客户端。</p>
+<h4>发展过程</h4>
+<p><strong>1、</strong>一般每次的CGI请求都需要新生成一个程序的副本来运行，这样大的工作量会很快将服务器压垮。<br />
+<strong>2、</strong>因此一些更有效的技术像mod_perl，可以让脚本解释器直接作为模块集成在Web服务器（例如：Apache）中，这样就能避免重复载入和初始化解释器。<br />
+不过这只是对解释语言而言，如果使用C语言等编译语言则可以避免这种额外负荷。<br />
+<strong>3、</strong>管理工具：以php为例，PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置，比spawn-fcgi具有更多优点。</p>
+<h2>Fast-CGI 快速通用网关接口</h2>
+<p>快速通用网关接口(Fast Common Gateway Interface)<br />
+FastCGI是一种让交互程序与Web服务器通信的协议。FastCGI是早期通用网关接口（CGI）的增强版本。<br />
+FastCGI致力于减少网页服务器与CGI程序之间交互的开销，从而使服务器可以同时处理更多的网页请求。<br />
+FastCGI不是为每个请求创建一个新进程，而是使用持久进程来处理一系列请求。这些进程由FastCGI服务器所拥有，而不是Web服务器。</p>
+<h4>历史</h4>
+<p>CGI使外部程序与Web服务器之间交互成为可能。CGI程序运行在独立的进程中，并对每个Web请求创建一个进程，这种方法非常容易实现，但效率很差，难以扩展。<br />
+面对大量请求，进程的大量创建和消亡使操作系统性能大大下降。此外，由于地址空间无法共享，也限制了资源重用。</p>
+<h4>请求处理过程</h4>
+<p>Web服务器通过Unix域套接字，命名管道或TCP连接将环境信息和页面请求本身发送到FastCGI进程。<br />
+响应通过相同的连接从进程返回到Web服务器，Web服务器随后将该响应传递给最终用户。<br />
+连接可能在响应结束时关闭，但Web服务器和FastCGI服务进程都会持续存在。</p>
+<h4>进程复用</h4>
+<p>每个单独的FastCGI进程可以在其一生中处理许多请求，从而避免每个请求流程创建和终止的开销。<br />
+<br />
+同时处理多个请求的方式：<br />
+1、通过使用具有内部复用的单一连接（即通过单个连接的多个请求）;<br />
+2、通过使用多个连接;<br />
+3、通过使用单一连接和多链接的组合。<br />
+<strong>可以配置多个FastCGI服务器，增加稳定性和可扩展性。</strong></p>
+<h4>单独管理</h4>
+<p>网站管理员和程序员可以发现，与FastCGI相比，Web应用程序与Web服务器的分离与嵌入式解释器（mod_perl，mod_php等）相比具有许多优点。<br />
+这种分离允许服务器和应用程序进程独立重新启动（繁忙的网站的重要考虑因素）。<br />
+它还能够实现每个应用程序/托管服务安全策略，这是ISP和Web托管公司的重要要求。<br />
+不同类型的传入请求可以分发到具有FastCGI服务器，这些服务器已经被配置为有效地处理这些特定类型的请求。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Bacula 服务安装 | 青春部落    </title>
+    <meta name="keywords"  content="Bacula,backup,文件备份,数据备份,服务安装" />
+    <meta name="description"  content="Bacula 数据文件备份、恢复和校验服务安装过程说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Bacula 服务安装评论Feed" href="https://cn-blogs.cn/archives/3442.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Bacula 备份工具' href='https://cn-blogs.cn/archives/3440.html' />
+<link rel='next' title='Bacula 控制器配置文件说明1' href='https://cn-blogs.cn/archives/3448.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3442.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3442' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3442.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3442.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3442 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool" rel="category tag">运维</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3440.html" rel="prev">上一篇：Bacula 备份工具</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3448.html" rel="next">下一篇：Bacula 控制器配置文件说明1</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Bacula 服务安装        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/02/06</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>说明</h2>
+<p>Bacula 为存储备份相关的信息，需要使用数据库。支持的数据库有MySQL,PostgreSQL,SQLite等。<br />
+Bacula 发布的版本分为：源码包，文档包，非核心GUI包，win系统安装程序。</p>
+<h2>版本号说明</h2>
+<p>Bacula 的版本号按照major.minor.release 的方式命名。<br />
+major:主要版本，一般不会变<br />
+minor:次要版本；偶数为发行版，奇数是开发版<br />
+release:补丁版本</p>
+<h2>安装说明</h2>
+<p>Redhat/Centos 系统编译安装建议参数<br />
+<code>#CFLAGS="-g -Wall" ./configure \<br />
+--sbindir=/opt/bacula/bin \<br />
+--sysconfdir=/opt/bacula/etc \<br />
+--enable-smartalloc \<br />
+--with-mysql \<br />
+--with-working-dir=/opt/bacula/working<br />
+--with-pid-dir=/opt/bacula/working \<br />
+--with-subsys-dir=/opt/bacula/working<br />
+--enable-readline<br />
+#make install</code><br />
+<strong>补充：</strong><br />
+安装过程中如果已经编译过参数(./configure )，想修改编译参数时；使用macke distclean清除编译缓存文件。</p>
+<h2>单独安装Storage</h2>
+<p>Bacula 安装过程中会出现二选一的情况：<br />
+1、只安装File Daemon 使用-enable-client-only 参数编译<br />
+2、否则配置数据库连接<br />
+本来安装Storage Daemon 不需要使用数据库；不过还是要添加上，可以使用sqlite轻量级数据库。<br />
+安装过程<br />
+<code>./configure --prefix=/usr/local/bacula/ --enable-build-stored --disable-build-dird --with-sqlite3<br />
+make<br />
+make install</code></p>
+<h2>目录参数设置</h2>
+<ul>
+<li>-prefix=path</li>
+<li>-sbindir=binary-path</li>
+<li>-sysconfdir=config-path</li>
+<li>-datadir=path</li>
+</ul>
+<h2>特征参数</h2>
+<table>
+<tbody>
+<tr>
+<th>-disable-ipv6</th>
+<th>禁用IPV6</th>
+</tr>
+<tr>
+<th>-enable-smartalloc</th>
+<th>内存溢出保护</th>
+</tr>
+<tr>
+<th>-enable-BAT</th>
+<th>依赖Qt的GUI管理工具</th>
+</tr>
+<tr>
+<th>-enable-batch-insert</th>
+<th>数据库批量插入数据</th>
+</tr>
+<tr>
+<th>-enable-bwx-console</th>
+<th>不依赖Qt，支持GTK+,X11的GUI管理工具</th>
+</tr>
+<tr>
+<th>-disable-nls</th>
+<th>默认使用GNU本地语言支持(NLS)库，可能导致异常。禁用后，使用英语。</th>
+</tr>
+<tr>
+<th>-with-sqlite3</th>
+<th>数据库</th>
+</tr>
+<tr>
+<th>-with-mysql</th>
+<th>数据库</th>
+</tr>
+<tr>
+<th>-with-postgresql</th>
+<th>数据库</th>
+</tr>
+<tr>
+<th>-with-openssl</th>
+<th>通信加密</th>
+</tr>
+</tbody>
+</table>
+<h2>密码和用户</h2>
+<table>
+<tbody>
+<tr>
+<th>-with-dir-password=Password</th>
+<th>用于访问Director的密码（通常来自控制台程序）</th>
+</tr>
+<tr>
+<th>-with-fd-password=Password</th>
+<th>用于访问文件守护进程（通常由Director导入）的密码</th>
+</tr>
+<tr>
+<th>-with-sd-password=Password</th>
+<th>用于访问存储守护程序（通常由Director导入）的密码</th>
+</tr>
+<tr>
+<th>-with-dir-user=User</th>
+<th>用于运行Director的Userid；Director必须以超级用户身份启动，但不需要以超级用户身份运行</th>
+</tr>
+<tr>
+<th>-with-dir-group=Group</th>
+<th>用于运行Director的GroupId</th>
+</tr>
+<tr>
+<th>-with-sd-user=User</th>
+<th>用于运行存储守护进程的用户标识；存储守护程序必须以root用户身份启动，但不需要以root用户身份运行</th>
+</tr>
+<tr>
+<th>-with-sd-group=Group</th>
+<th>用于运行存储守护进程的GroupId</th>
+</tr>
+<tr>
+<th>-with-fd-user=User</th>
+<th>用来运行File守护进程的Userid；File守护程序必须以root身份启动，但不需要以root用户身份运行</th>
+</tr>
+<tr>
+<th>-with-fd-group=Group</th>
+<th>用来运行File守护进程的GroupId</th>
+</tr>
+<tr>
+<th>-with-mon-dir-password=Password</th>
+<th>用于从监视器访问目录的密码。如果没有指定，配置会自动创建一个随机密码</th>
+</tr>
+<tr>
+<th>-with-mon-fd-password=Password</th>
+<th>用于从监视器访问文件守护进程的密码</th>
+</tr>
+<tr>
+<th>-with-mon-sd-password=Password</th>
+<th>用于从监视器访问存储守护进程的密码</th>
+</tr>
+<tr>
+<th>-with-db-name=database-name</th>
+<th>指定要在conf文件中使用的数据库名称。默认是bacula</th>
+</tr>
+<tr>
+<th>-with-db-user=database-user</th>
+<th>指定要在conf文件中使用的数据库用户名。默认是bacula</th>
+</tr>
+</tbody>
+</table>
+<h2>进程设置</h2>
+<ul>
+<li>-enable-client-only 仅安装File Daemon</li>
+<li>-enable-build-dird 安装Director Daemon 和Director 管理工具；默认配置，-disable-build-dird禁用</li>
+<li>-enable-build-stored 安装Storage Daemon；默认配置，-disable-build-stored禁用</li>
+</ul>
+<h2>进程管理</h2>
+<ul>
+<li>sbin/bacula-dir</li>
+<li>sbin/bacula-fd</li>
+<li>sbin/bacula-sd</li>
+</ul>
+<p>可以拷贝至/etc/init.d/中设置开机自启动</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

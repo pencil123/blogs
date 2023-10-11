@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Git 工作区和状态 | 青春部落    </title>
+    <meta name="keywords"  content="Git,分布式版本管理,工作区,文件状态" />
+    <meta name="description"  content="分布式版本管理Git的工作区和文件状态说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Git 工作区和状态评论Feed" href="https://cn-blogs.cn/archives/1752.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Git 初始化' href='https://cn-blogs.cn/archives/1747.html' />
+<link rel='next' title='Git 分支操作' href='https://cn-blogs.cn/archives/1754.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1752.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1752' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1752.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1752.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1752 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/git" rel="category tag">版本管理</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1747.html" rel="prev">上一篇：Git 初始化</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1754.html" rel="next">下一篇：Git 分支操作</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Git 工作区和状态        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/01/25</span>
+            <span class="update is-hidden">2018-05-01</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Git 保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。<br />
+从不同的角度理解git的管理，可以分为3个工作区域和4个文件状态。</p>
+<p><strong>3个工作区域</strong>:工作目录、暂存区域、Git仓库<br />
+<strong>4个状态</strong>：未跟踪、以修改、以暂存、已提交</p>
+<h3>工作区域</h3>
+<p><strong>工作目录</strong>：电脑中看到的开发目录。官网的解释：对项目的某个版本独立提取出来的内容。 这些从Git仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。<br />
+<strong>暂存区域</strong>：Git仓库目录下的index文件；保存了下次将提交的文件列表信息；<br />
+<strong>Git仓库目录</strong>：.git隐藏目录；用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。</p>
+<h3>四个状态</h3>
+<p>未跟踪（untracked）:未跟踪表示新建立的文件<br />
+已修改（modified）:已修改表示修改了文件，但还没保存到数据库中<br />
+已暂存（staged）:已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中<br />
+已提交（committed）:已提交表示数据已经安全的保存在本地数据库中。</p>
+<h4>1、加入到暂存区</h4>
+<p>1、暂存操作会为每一个文件(修改过或者新加入的文件)计算校验和（SHA-1哈希算法）<br />
+2、然后会把当前版本的文件快照保存到Git 仓库中（Git 使用 blob 对象来保存它们）<br />
+3、最终将校验和加入到暂存区域等待提交：</p>
+<h4>2、从暂存区提交到仓库</h4>
+<p>1、Git会先计算每一个子目录的校验和，在Git仓库中这些校验和保存为树对象。<br />
+2、随后，Git 便会创建一个提交对象<br />
+提交对象包括一个指向暂存内容快照的指针、指向这个树对象的指针、作者的姓名和邮箱、提交时输入的信息以及指向它的父对象的指针。<br />
+首次提交产生的提交对象没有父对象，普通提交操作产生的提交对象有一个父对象，而由多个分支合并产生的提交对象有多个父对象<br />
+3、如此一来，Git 就可以在需要的时候重现此次保存的快照。</p>
+<h4>完整的提交过程中会生成对象</h4>
+<p>每个文件一个blob 对象（保存着文件快照）<br />
+一个树对象（记录着目录结构和 blob 对象索引）<br />
+一个提交对象（包含着指向前述树对象的指针和所有提交信息）<br />
+Git 的分支，其实本质上仅仅是指向提交对象的可变指针。 Git 的默认分支名字是 master。 在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。 它会在每次的提交操作中自动向前移动。</p>
+<h4>工作目录</h4>
+<p>你工作目录下的每一个文件都不外乎这两种状态：已跟踪或未跟踪。<br />
+已跟踪的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后，它们的状态可能处于未修改，已修改或已放入暂存区。<br />
+工作目录中除已跟踪文件以外的所有其它文件都属于未跟踪文件，它们既不存在于上次快照的记录中，也没有放入暂存区。<br />
+初次克隆某个仓库的时候，工作目录中的所有文件都属于已跟踪文件，并处于未修改状态。<br />
+编辑过某些文件之后，由于自上次提交后你对它们做了修改，Git 将它们标记为已修改文件。 我们逐步将这些修改过的文件放入暂存区，然后提交所有暂存了的修改，如此反复。</p>
+<h4>暂存区</h4>
+<p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区。<br />
+Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。</p>
+<p>第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；<br />
+第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。</p>
+<p><strong>跟踪并管理的是修改，而非文件</strong></p>
+<h4>远程仓库</h4>
+<p><code>$ git remote add origin git@github.com:michaelliao/learngit.git</code><br />
+远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。<br />
+把本地库的所有内容推送到远程库上：<br />
+<code>$ git push -u origin master</code><br />
+git push命令，实际上是把当前分支master推送到远程。<br />
+要关联一个远程库，使用命令<br />
+<code>git remote add origin git@server-name:path/repo-name.git；</code><br />
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

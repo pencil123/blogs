@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MongoDB Shards集群搭建 | 青春部落    </title>
+    <meta name="keywords"  content="MongoDB,分片,Shard,集群搭建" />
+    <meta name="description"  content="MongoDB数据库搭建shards集群" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MongoDB Shards集群搭建评论Feed" href="https://cn-blogs.cn/archives/4577.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MongoDB 主从复制' href='https://cn-blogs.cn/archives/4573.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4577.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4577' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4577.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4577.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4577 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mongodb" rel="category tag">MongoDB</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4573.html" rel="prev">上一篇：MongoDB 主从复制</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MongoDB Shards集群搭建        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/10/14</span>
+            <span class="update is-hidden">2018-10-14</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>我们要创建一个这样子的分布式集群：有两个shard，每个shard都是一个replica set，各有两个副本（实际产品应用中还应加上一个仅用于投票aribiter）；有三个config server；有一个mongos。步骤如下（前提：你已经安装了MongoDB，并且假设你对分布式系统的一般架构有认识）：</p>
+<h3>1、replica set</h3>
+<p>启动两个副本集：</p>
+<h4>replica set A</h4>
+<p><code>mkdir -p ./replset_shard1/node1<br />
+mkdir -p ./replset_shard1/node2<br />
+numactl --interleave=all mongod --shardsvr --port 20001 --dbpath ./replset_shard1/node1 --replSet set_a --oplogSize 1024 --logpath ./replset_shard1/node1/rs20001.log --fork<br />
+numactl --interleave=all mongod --shardsvr --port 20002 --dbpath ./replset_shard1/node2 --replSet set_a --oplogSize 1024 --logpath ./replset_shard1/node2/rs20002.log --fork</code><br />
+初始化，进入某个副本执行：<br />
+<strong>rs.initiate({&#8220;_id&#8221; : &#8220;set_a&#8221;, &#8220;members&#8221; : [{_id: 0, host: &#8220;xxxhost:20001&#8221;}, {_id: 1, host: &#8220;xxxhost: 20002&#8221;}]})</strong></p>
+<h4>replica set B</h4>
+<p><code>mkdir -p ./replset_shard2/node1<br />
+mkdir -p ./replset_shard2/node2<br />
+numactl --interleave=all mongod --shardsvr --port 30001 --dbpath ./replset_shard2/node1 --replSet set_b --oplogSize 1024 --logpath ./replset_shard2/node1/rs30001.log --replSet configs --fork<br />
+numactl --interleave=all mongod --shardsvr --port 30002 --dbpath ./replset_shard2/node2 --replSet set_b --oplogSize 1024 --logpath ./replset_shard2/node2/rs30002.log --replSet configs --fork</code></p>
+<h4>初始化</h4>
+<p><code>rs.initiate({"_id" : "set_a", "members" : [{_id: 0, host: "xxxhost:30001"}, {_id: 1, host: "xxxhost: 30002"}]})</code><br />
+注意1：&#8211;replSet 指定副本名，一个副本集内的副本名必须一样，&#8211;oplogSize 指定oplog大小（单位MB），如果不指定，默认为DB所在磁盘空闲空间的5%，且大于1GB，不超过50GB<br />
+注意2：本例子为测试使用，实际工作中副本要能抵御单点故障：多个副本分布在不同机器\机房上。</p>
+<h3>2、config server</h3>
+<p><code>mkdir -p ./data/configdb1;mkdir -p ./data/configdb2;mkdir -p ./data/configdb3;</code><br />
+启动mongo config server:<br />
+<code>mongod --configsvr --fork --logpath ./data/configdb1/mongo17019.log --dbpath ./data/configdb1 --port 17019<br />
+mongod --configsvr --fork --logpath ./data/configdb2/mongo27019.log --dbpath ./data/configdb2 --port 27019<br />
+mongod --configsvr --fork --logpath ./data/configdb3/mongo37019.log --dbpath ./data/configdb3 --port 37019</code></p>
+<h3>3、mongos配置</h3>
+<p><code>mkdir -p ./mongosdb<br />
+启动mongos：<br />
+mongos --configdb xxxhost:17019,xxxhost:27019,xxxhost:37019 --logpath ./mongosdb/mongos.log --fork --port 8100</code><br />
+启动mongos时，config server的配置信息不使用localhost、也不使用127.0.0.1，否则添加其它机器的shard会出现错误提示：<br />
+<code>"can’t use localhost as a shard since all shards need to communicate. either use all shards and configdbs in localhost or all in actual IPs host: xxxxx isLocalHost"</code></p>
+<h3>4、replica set 添加到 shard cluster</h3>
+<p>登陆mongos<br />
+<code>test&gt; use admin<br />
+switched to db admin<br />
+admin&gt; db.runCommand({addShard: "set_a/xxxhost:20001"})<br />
+{ "shardAdded" : "set_a", "ok" : 1 }<br />
+admin&gt; db.runCommand({addShard: "set_b/xxxhost:30001"})<br />
+{ "shardAdded" : "set_b", "ok" : 1 }</code></p>
+<p>查看config.databases：<br />
+<code>config&gt; db.databases.find()<br />
+{ "_id" : "admin", "partitioned" : false, "primary" : "config" }<br />
+{ "_id" : "cswuyg", "partitioned" : false, "primary" : "set_a" }</code></p>
+<p>查看shards：<br />
+<code>config&gt; db.shards.find()<br />
+{ "_id" : "set_a", "host" : "set_a/xxxhost:20001,xxxhost:20002" }<br />
+{ "_id" : "set_b", "host" : "set_b/xxxhost:30001,xxxhost:30002" }</code></p>
+<h3>5、对文档使用shard功能</h3>
+<p>登陆mongos:<br />
+<code>cswuyg&gt; use admin<br />
+switched to db admin<br />
+admin&gt; db.runCommand({"enablesharding": "cswuyg"})<br />
+{ "ok" : 1 }<br />
+admin&gt; db.runCommand({"shardcollection": "cswuyg.a", "key": {"_id": 1}})<br />
+{ "collectionsharded" : "cswuyg.a", "ok" : 1 }</code></p>
+<h3>6、插入数据测试</h3>
+<p>登陆mongos，进入测试DB，执行测试js代码：<br />
+<code>var a = 10000<br />
+for (var i = 0; i &lt; 1000000; ++i){<br />
+db.a.save({"b": i})<br />
+}</code><br />
+集合自动均衡后（或者手动启动均衡:sh.startBalancer()）chunks的分布效果：<br />
+<code>config&gt; db.chunks.find()<br />
+{ "_id" : "cswuyg.a-_id_MinKey", "lastmod" : Timestamp(2, 0), "lastmodEpoch" : ObjectId("54f54f0a59b0d8e1cbf0784e"), "ns" : "cswuyg.a", "min" : { "_id" : { "$minKey" : 1 } }, "max" : { "_id" : ObjectId("54f477859a27767875b03801") }, "shard" : "set_b" }<br />
+{ "_id" : "cswuyg.a-_id_ObjectId('54f477859a27767875b03801')", "lastmod" : Timestamp(3, 0), "lastmodEpoch" : ObjectId("54f54f0a59b0d8e1cbf0784e"), "ns" : "cswuyg.a", "min" : { "_id" : ObjectId("54f477859a27767875b03801") }, "max" : { "_id" : ObjectId("54f5507a86d364ad1c3f125f") }, "shard" : "set_b" }<br />
+{ "_id" : "cswuyg.a-_id_ObjectId('54f5507a86d364ad1c3f125f')", "lastmod" : Timestamp(4, 1), "lastmodEpoch" : ObjectId("54f54f0a59b0d8e1cbf0784e"), "ns" : "cswuyg.a", "min" : { "_id" : ObjectId("54f5507a86d364ad1c3f125f") }, "max" : { "_id" : ObjectId("54f551fe86d364ad1c44a844") }, "shard" : "set_a" }<br />
+{ "_id" : "cswuyg.a-_id_ObjectId('54f551fe86d364ad1c44a844')", "lastmod" : Timestamp(3, 2), "lastmodEpoch" : ObjectId("54f54f0a59b0d8e1cbf0784e"), "ns" : "cswuyg.a", "min" : { "_id" : ObjectId("54f551fe86d364ad1c44a844") }, "max" : { "_id" : ObjectId("54f552f086d364ad1c4aee1f") }, "shard" : "set_a" }<br />
+{ "_id" : "cswuyg.a-_id_ObjectId('54f552f086d364ad1c4aee1f')", "lastmod" : Timestamp(4, 0), "lastmodEpoch" : ObjectId("54f54f0a59b0d8e1cbf0784e"), "ns" : "cswuyg.a", "min" : { "_id" : ObjectId("54f552f086d364ad1c4aee1f") }, "max" : { "_id" : { "$maxKey" : 1 } }, "shard" : "set_b" }</code></p>
+<h3>7、为副本集set_a添加新的副本</h3>
+<p>启动新副本实例<br />
+<code>mkdir -p ./replset_shard1/node3<br />
+numactl --interleave=all mongod --port 20003 --dbpath ./replset_shard1/node3 --replSet set_a --oplogSize 1024 --logpath ./replset_shard1/node3/rs20003.log --fork</code><br />
+新副本实例加入到副本集<br />
+进入到primary实例执行：<br />
+<code>test&gt; rs.add("xxxhost:20003")<br />
+{ "ok" : 1 }</code><br />
+加入之后的新副本实例需要时间初始化同步数据，大数据量数据初始化过程可能很长，对服务会有较大影响。而且如果同步初始化过程耗时太长时，且导致了oplog空间被写满一轮，则又要再次触发同步初始化，这种情况下可以采用其它方式来实现添加副本：拷贝primary实例的磁盘文件到新目录然后以副本启动，然后加入到replica set，这样子就不需要有同步初始化过程。</p>
+<h4>参考：</h4>
+<p>http://docs.mongodb.org/manual/tutorial/convert-standalone-to-replica-set/<br />
+http://docs.mongodb.org/manual/tutorial/restore-replica-set-from-backup/<br />
+附上：删除副本<br />
+<code>cfg = rs.config()<br />
+cfg.members.splice(0,2) #删除从位置0开始的2个成员<br />
+rs.reconfig(cfg, {'force':true})<br />
+参考：https://docs.mongodb.com/manual/tutorial/remove-replica-set-member/</code></p>
+<h3>8、其它</h3>
+<p>如果要把一个分片集群转为副本集集群，需要dump出数据，然后restore回去；<br />
+如果要把一个分片集群转为副本集分片集群，参考：<br />
+http://docs.mongodb.org/manual/tutorial/convert-standalone-to-replica-set/<br />
+如果是多机器的集群，不要在replica中使用localhost、127.0.0.1，否则导致无法使用多机器部署。</p>
+<h3>补充：</h3>
+<p>为副本添加tag：<br />
+<code>var conf = rs.conf()<br />
+conf.members[0].tags = { "location": "nj" }<br />
+conf.members[1].tags = { "location": "bj"}<br />
+conf.members[2].tags = { "location": "hz"  }<br />
+conf.members[3].tags = { "location": "gz"  }<br />
+rs.reconfig(conf)</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

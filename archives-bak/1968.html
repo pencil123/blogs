@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyrus SASL介绍 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Cyrus SASL介绍评论Feed" href="https://cn-blogs.cn/archives/1968.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='telnet发邮件' href='https://cn-blogs.cn/archives/1964.html' />
+<link rel='next' title='Python 爬虫模块 &#8211; urllib and urllib2' href='https://cn-blogs.cn/archives/1165.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1968.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1968' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1968.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1968.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1968 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/mail" rel="category tag">邮箱服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1964.html" rel="prev">上一篇：telnet发邮件</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1165.html" rel="next">下一篇：Python 爬虫模块 &#8211; urllib and urllib2</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Cyrus SASL介绍        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/07/10</span>
+            <span class="update is-hidden">2017-10-10</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>1. 综述</strong><br />
+这篇文档讲述的是系统管理员配置SASL的方法，其中详细的描述了系统管理员如何利Cyrus SASL库来安装一个服务。Cyrus SASL是sasl的一种实现。</p>
+<p><strong>2. SASL 概念</strong><br />
+SASL的全称是the Simple Authentication and Security Layer。它的机制是对协议执行验证。如果有某种服务（如SMTP或IMAP）使用了SASL，使用这种协议的应用程序之间将会共享代码。一些明显使用SASL的应用程序有sendmail( 8.10.0版本以后)和Cyrus imapd(1.6.0版本以后)。<br />
+使用SASL库的应用程序之间将会告诉彼此如何完成 SASL协议的改变，并且告诉改变后的结果。</p>
+<p>SASL只是一个框架，特定SASL机制控制着准确地协议改变。如果有n个协议使用m种不同的认证方式，SASL试图只用n+m种说明写入SASL库，并不需要写入n*m种，而且只要第一次写入，应用程序就可以运用SASl来执行服务。<br />
+<strong><br />
+3. 认证和授权标志符</strong></p>
+<p>“authorization identifier”，”authentication identifer”是不同的概念，我们需要熟悉两者之间的不同。</p>
+<p>userid (user id, authorization id)<br />
+userid是应用程序用来核对可用选项的标识符。如，在unix系统，用户“bovik”可以用来写入“/home/bovik” 和它的子目录，但是不允许写入”/etc”。</p>
+<p>authid (authentication id)<br />
+“authentication”是用来被核对标志符。如，”bovik”的密码是“qqqq”,系统会验证任何知道“bovik”的密码为“qqqq”的登录者。这样一个用户担当另一个用户的角色是容易被验证的。示例：Harry正在度假，他让他的学生jane来帮他查看他的邮箱。他可以让jane担当他的角色，jane只需要他的id和密码验证即可，但是需要被“bovik”用户授权。这样jane通过“jane” id、jane的密码和“bovik”用户的授权就可以登录邮件系统。</p>
+<p>应用程序能够设置它们拥有的代理权限；默认，SASL库允许相同的用户去代理其他的用户（这些用户是必须是userid,authid）。</p>
+<p><strong>4. 领域</strong></p>
+<p>Cyrus SASL库支持领域的定义。一个领域是指用户和在一个特定领域，特定机制的认证用户的抽象集。</p>
+<p>以单个机器的单个服务的最简单的案例中，领域可以描述成服务的域名。如果应用程序没有具体制定SASL的领域,大部分机制默认采用这用方法。<br />
+如果一个站点希望在多台机器之间分享的密码,但可以选择认证的领域作为域名,如“CMU.EDU”。另一方面,为了防止当一台机器的不安全，使整个网站的安全受到连累，每台服务器可以有它自己的领域。某些机制迫使用户(客户端)手动配置他们所处什的领域,使得用户认证更加坚固。</p>
+<p>一个单一的站点可能支持多个不同的领域，这可能会造成应用程序混乱，但应用程序并不希望如此。你需要确保应用程序支持被添加不同领域的用户到sasldb,并需要设置saslpasswd。</p>
+<p>Kerberos机制是把SASL领域当成Kerberos领域。 因此,这个Kerberos的SASL领域默认为服务器上的Kerberos默认领域。他们支持跨域认证;检查你的应用程序如何处理这个SASL领域。</p>
+<p>一些认证机制,如PLAIN和CRAM-MD5,并不支持领域的概念。</p>
+<p><strong>5. SASL工作原理及服务器和客户端是如何精确的选择、使用SASL来实现那些认证机制</strong></p>
+<p><strong>PLAIN</strong><br />
+PLAIN自身并没有安全认证的机制。它的作用是通过另外的标准加密连接。（比如，IMAP命令“STARTTLS”产生一个加密的连接，通过使用PLAIN。）PLAIN工作机制是通过传送一个userid,一个authentication id和一个密码给服务器。并且服务器就验证PLAIN传送的是否一个三元组。系统管理员首先关注的是怎么样认证和验证密码是否正确。Cyrus SASl库可以实现这个功能。</p>
+<p><strong>passwd</strong><br />
+/etc/passwd 可以很好的被SASL库支持。简单的配置是把“pwcheck_method”设置成”passwd”。</p>
+<p><strong>Shadow</strong><br />
+/etc/shadow 有点复杂。如果使用SASL库的服务使用root用户来执行，是没有问题的，只需要把“pwcheck_method”设置成”shadow”。然而为了安全，大部分守护进程并不是采用root用户，比如说Cyrus imapd。为了能够使这些服务能够检查密码，他们需要一个root执行的辅助程序，或者特别许可的权限来读取/etc/shadow。最简单的方式就是赋给服务程序权限来读取/etc/shadow。比如，添加用户组为“shadow”的cyrus 用户，这样cyrus用户就有权限读取/etc/shadow。</p>
+<p><strong>Kerberos_v4</strong><br />
+Kerberos v4的建立是在编译的时候的进行配置的。通过把“pwcheck_method”设置成”Kerberos_v4”,可以对明文的密码进行检查。</p>
+<p><strong>pam</strong><br />
+PAM在linux和solaris里默认采用的验证用户的方式。通过配置它可以采用不同的方式检查密码。如果你采用pam验证同时采用Cyrus SASL库，那么只需在编译的时候把”pwcheck_method” 设置成”PAM”。采用SASL机制的pam认证，只会对明文验证有作用。对其他的密码验证是没有效果的。</p>
+<p><strong>sasldb</strong><br />
+Sasldb是存储SASL密码的暗文数据库。相同的数据库存储着暗文共享的方法。它的首先是共享密匙机制的密码的将会与明文机制的密码的同步。但是常规系统内置将不使用sasldb。如果你在sasldb里设置明文密码。你只需要配置“saslpasswd”即把pwcheck_method设置成sasldb。</p>
+<p><strong>write your own</strong><br />
+最后，也是最重要的，PLAIN最灵活的验证方法是自己写自己需要验证的方式。一些应用程序条用”sasl_checkpass()”惯例或使用PLAIN将会调用自己写的验证代码。最简单修改验证惯例的方法是修改lib/server.c（详细略）。</p>
+<p><strong>6. 如何配置SASL</strong></p>
+<p><strong>默认配置文件</strong><br />
+一般，Cyrus SASL库从/usr/lib/sasl/app.conf读取配置文件。其中app是应用程序的命名。比如sendmail从/usr/lib/sasl/sendmail.conf读取配置文件。</p>
+<p><strong>应用程序的配置</strong><br />
+应用程序可以重新定义SASl库寻找配置信息的方式。例如Cyrus imapd 的asl配置项是从它自己的配置文件/etc/imapd.conf内读取sasl_pwcheck_option”信息。<br />
+不幸的是，自从SASL变得高灵活性的情况下，管理员可以很轻松的升级或安装新认证插件，并不需要重新编译应用程序。但是他的灵活性也造成编译的繁琐。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

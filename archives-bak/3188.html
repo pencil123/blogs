@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Linux 软件防火墙 | 青春部落    </title>
+    <meta name="keywords"  content="linux 防火墙,iptables 防火墙,nftables 防火墙" />
+    <meta name="description"  content="linux 系统内核防火墙Iptables简介；iptables防火墙的作用、规则属性和组成" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Linux 软件防火墙评论Feed" href="https://cn-blogs.cn/archives/3188.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='HTTP状态码-5xx服务器错误' href='https://cn-blogs.cn/archives/2951.html' />
+<link rel='next' title='linux 禁用IPV6' href='https://cn-blogs.cn/archives/3228.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3188.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3188' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3188.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3188.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3188 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2951.html" rel="prev">上一篇：HTTP状态码-5xx服务器错误</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3228.html" rel="next">下一篇：linux 禁用IPV6</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Linux 软件防火墙        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/04/15</span>
+            <span class="update is-hidden">2018-04-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>防火墙工作在一个网络环境中的边缘位置；这里网络环境指的可以是一台单独的主机，也可以是一个局域网。<br />
+防火墙根据事先设定好的规则，对经过的网络报文按照设定好的处理方式处理。</p>
+<h2>1、Linux软件防火墙</h2>
+<p>linux系统中TCP/IP协议栈是在系统内核中，所以防火墙是工作在内核中的。<br />
+iptables 是一个配置 Linux 内核防火墙 的命令行工具，是 netfilter 项目的一部分。<br />
+术语 iptables 也经常代指该内核级防火墙。<br />
+iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包。<br />
+iptables 用于 ipv4，ip6tables 用于 ipv6。<br />
+nftables 已经包含在 Linux kernel 3.13 中，以后会取代 iptables 成为主要的 Linux 防火墙工具。</p>
+<h4>规则属性</h4>
+<p>iptables 用于设定防火墙规则的属性有：来源IP，来源端口，目标IP和目标端口；<br />
+TCP协议标志位：syn、syn+ack、ack、fin、urg、psh和rst。</p>
+<h4>防火墙组成：表 &lt;-链 &lt;-规则</h4>
+<p>过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成 表 的集合。<br />
+表 由一组预先定义的 链 组成，链 包含遍历顺序规则。<br />
+每一条规则包含一个谓词的潜在匹配和相应的动作（称为 目标），如果谓词为真，该动作会被执行。也就是说条件匹配。<br />
+iptables 是用户工具，允许用户使用 链 和 规则。</p>
+<h2>2、防火墙默认规则说明</h2>
+<p>linux 系统软件防火墙Iptables默认存在几条安全规则；这里说说这几条规则的含义。</p>
+<h4>Filter表中3条规则容器的默认target</h4>
+<p><code>:INPUT ACCEPT [0:0]</code><br />
+# 该规则表示INPUT表默认策略是ACCEPT<br />
+<code>:FORWARD ACCEPT [0:0]</code><br />
+# 该规则表示FORWARD表默认策略是ACCEPT<br />
+<code>:OUTPUT ACCEPT [0:0]</code><br />
+# 该规则表示OUTPUT表默认策略是ACCEPT</p>
+<h4>允许和拒绝的数据包</h4>
+<p><code>-I INPUT -p tcp --dport 22 -j ACCEPT</code><br />
+#SSH 22端口允许访问<br />
+<code>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code><br />
+#-m过滤数据包的状态<br />
+#ESTABLISHED：已建立的链接状态；RELATED：该数据包与本机发出的数据包有关<br />
+<code>-A INPUT -j REJECT --reject-with icmp-host-prohibited<br />
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited</code><br />
+#在INPUT表和FORWARD表中拒绝所有其他不符合上述任何一条规则的数据包；并且发送一条host prohibited的消息给被拒绝的主机。<br />
+<code>-A INPUT -i lo -j ACCEPT</code><br />
+-i 参数是指定接口，这里的接口是lo ，lo就是Loopback（本地环回接口），意思就允许本地环回接口在INPUT表的所有数据通信</p>
+<h2>3、Filter 表说明</h2>
+<p>Filter表是iptables中最常用的表，<strong>用于管理到达本机、路过本机和从本机发出的数据包</strong></p>
+<table>
+<tr>
+<th>Input链</th>
+<th>所有目标地址是本机地址的数据包</th>
+</tr>
+<tr>
+<th>Forward链</th>
+<th>负责转发流经主机但不进入本机的数据包，和NAT关系很大</th>
+</tr>
+<tr>
+<th>Output链</th>
+<th>所有本机发出的数据包</th>
+</tr>
+</table>
+<p><a href="http://www.cn-blogs.cn/archives/3124.html/filter-chain" rel="attachment wp-att-3128"><img class="alignnone size-full wp-image-3128" src="http://www.cn-blogs.cn/wp-content/uploads/2018/01/filter-chain.jpg" alt="" width="750" height="421" srcset="https://cn-blogs.cn/wp-content/uploads/2018/01/filter-chain.jpg 750w, https://cn-blogs.cn/wp-content/uploads/2018/01/filter-chain-300x168.jpg 300w" sizes="(max-width: 750px) 100vw, 750px" /></a></p>
+<h4>管理示例</h4>
+<p>1、查看当前防火墙规则<br />
+<code>iptables -L -n</code></p>
+<p>2、清空所有防火墙规则<br />
+<code>iptables -F</code></p>
+<p>3、保存动态添加的规则<br />
+<code>centos:service iptables save<br />
+ubuntu:iptables-save</code><br />
+这样就可以写到/etc/sysconfig/iptables文件里了。</p>
+<p>4、设定默认规则<br />
+<code>iptables -P INPUT DROP<br />
+iptables -P OUTPUT ACCEPT<br />
+iptables -P FORWARD DROP</code></p>
+<p>5、规则的增删改<br />
+<code>-A 从末尾添加<br />
+-I 从开头添加<br />
+-D 删除<br />
+-R 替换</code></p>
+<p>6、通用匹配<br />
+<code>-s | --src | --source [!] IP/NETWORK<br />
+-d |--destination [!] address[/mask][...]<br />
+-i :指定数据报文流入接口 input prerouting forward<br />
+-o :指定数据报文流出接口 output postrouting forward<br />
+-p :明确说明只放行哪种协议的报文匹配规则</code></p>
+<p>7、Target 方法<br />
+<code>DROP : 丢弃<br />
+REJECT : 拒绝<br />
+ACCEPT : 接受<br />
+RETURN ： 返回主链继续匹配<br />
+REDIRECT: 端口重定向<br />
+MASQUERADE :地址伪装<br />
+DNAT : 目标地址转换<br />
+SNAT ：源地址转换<br />
+MARK ：打标签<br />
+LOG</code></p>
+<h2>4、NAT 表说明</h2>
+<h4>什么是NAT？</h4>
+<p>在计算机网络中，网络地址转换（Network Address Translation，缩写为NAT），也叫做网络掩蔽或者IP掩蔽（IP masquerading），是一种在IP数据包通过路由器或防火墙时重写来源IP地址或目的IP地址的技术。<br />
+NAT服务可能会对TCP/IP数据包中的源IP地址、目的IP地址、源端口和目的端口进行修改操作。</p>
+<h4>为什么需要NAT？</h4>
+<p>这种技术普遍使用在一个局域网中有多台主机，但只有一个公有IP地址。使用NAT服务可以使多态主机同时访问因特网。<br />
+当然，NAT也让主机之间的通信变得复杂，导致降低了通信效率。</p>
+<h4>NAT的类型</h4>
+<p>NAT分成了两种类型，即源NAT(SNAT)和目的NAT(DNAT)；<br />
+SNAT就是改变转发数据包的源地址<br />
+DNAT就是改变转发数据包的目的地址</p>
+<h4>Nat表说明</h4>
+<p>NAT表：负责网络地址转换，即来源于目的IP地址和端口的转换，一般用于共享上网或特殊端口的转换服务<br />
+NAT表也有三条&#8221;链&#8221;(chains)&#8212;规则（rule）的容器；它们分别是:</p>
+<table>
+<tr>
+<th>PREROUTING链</th>
+<th>定义目的NAT的规则；因为路由器进行路由时只检查目的IP地址，为了使数据包正确路由，我们必须在路由之前就进行目的NAT;</th>
+</tr>
+<tr>
+<th>POSTROUTING链</th>
+<th>定义源NAT的规则，系统在决定了数据包的路由以后在执行该链中的规则;</th>
+</tr>
+<tr>
+<th>OUTPUT链</th>
+<th>定义对本地产生的数据包的目的NAT规则</th>
+</tr>
+</table>
+<p><a href="http://www.cn-blogs.cn/archives/583.html/nat-chains" rel="attachment wp-att-3122"><img class="alignnone size-full wp-image-3122" src="http://www.cn-blogs.cn/wp-content/uploads/2016/09/NAT-chains.jpg" alt="" width="750" height="421" srcset="https://cn-blogs.cn/wp-content/uploads/2016/09/NAT-chains.jpg 750w, https://cn-blogs.cn/wp-content/uploads/2016/09/NAT-chains-300x168.jpg 300w" sizes="(max-width: 750px) 100vw, 750px" /></a><br />
+PS：不管我们设置的是SNAT或者DNAT的规则时，NAT机制都会自动帮我们判别“另一个方向的应答数据包”。从而不需要我们设置第二条规则。</p>
+<p>操作语法<br />
+-t nat 使用NAT表</p>
+<h4>使用实例</h4>
+<p><strong>1、修改源NAT(SNAT)</strong><br />
+更改所有来自192.168.1.0/24的数据包的源ip地址为1.2.3.4:<br />
+<code>iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT –to 1.2.3.4</code><br />
+系统在路由及过滤等处理直到数据包要被送出时才进行SNAT。</p>
+<p><strong>使用场景</strong><br />
+有一种SNAT的特殊情况是IP欺骗，也就是所谓的MASQUERADE;即将数据包的源IP改为-o出口设备的IP地址。<br />
+通常建议在使用拨号上网的时候使用，或者说在合法ip地址不固定的情况下使用。<br />
+<code># iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE</code><br />
+可以看出，这时候我们没有必要显式的指定源ip地址等信息。</p>
+<p><strong>2、修改目的NAT(DNAT)</strong><br />
+如修改所有来自192.168.1.0/24的数据包的目的IP地址为1.2.3.4；<br />
+<code>iptables -t nat -A PREROUTING -s 192.168.1.0/24 -i eth1 -j DNAT –to 1.2.3.4</code><br />
+系统是先进行DNAT修改，然后才进行路由及过滤等操作。</p>
+<p><strong>使用场景</strong><br />
+有一种DNAT的特殊情况是重定向Redirection；将符合条件的数据包的目的IP地址改为数据包进入系统时的网络接口的IP地址。<br />
+通常是在与squid配置形成透明代理时使用，假设squid的监听端口是3128，通过以下语句来将来自192.168.1.0/24，目的端口为80的数据包重定向到squid监听端口:<br />
+<code>iptables -t nat -A PREROUTING -i eth1 -p tcp -s 192.168.1.0/24 –dport 80 -j REDIRECT –to-port 3128</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

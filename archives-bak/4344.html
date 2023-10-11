@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Http Host 主机头攻击 | 青春部落    </title>
+    <meta name="keywords"  content="hacker,系统安装,http,host" />
+    <meta name="description"  content="系统安全利用http协议中的host头进行攻击" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Http Host 主机头攻击评论Feed" href="https://cn-blogs.cn/archives/4344.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='跨国金融服务公司' href='https://cn-blogs.cn/archives/4342.html' />
+<link rel='next' title='Chrome 数据保护程序' href='https://cn-blogs.cn/archives/4353.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4344.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4344' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4344.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4344.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4344 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/security" rel="category tag">安全</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4342.html" rel="prev">上一篇：跨国金融服务公司</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/4353.html" rel="next">下一篇：Chrome 数据保护程序</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Http Host 主机头攻击        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/05/02</span>
+            <span class="update is-hidden">2018-05-02</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>在web访问过程中，客户端可以任意修改request header fields。这样我们就要明确一点，所有来自客户端的数据信息都不可信。<br />
+当客户端在请求头中人为添加了host头字段信息。这种就是利用http协议修改Host请求头攻击行为。</p>
+<h3>生效过程</h3>
+<p>客户端访问http://example.com/时，添加request header 中host=evil.com。<br />
+这种情况，会请求到example.com的服务器上；服务器会认为客户端访问的域名为evil.com。<br />
+如果web服务上没有配置evil.com这个域名，web服务会使用默认配置虚拟主机响应此请求。<br />
+这就是漏洞所在。</p>
+<h3>密码重置</h3>
+<p>当web服务(nginx\apache\Varnish)收到host参数，它不能确认这个值是否被客户端上传host header field参数覆盖；会传输给后端的应用程序。<br />
+当后端的应用程序用到HOST这个数值时，就有可能会中招。<br />
+如：<br />
+<code>&lt;link href="http://_SERVER['HOST']" (Joomla)</code><br />
+并追加秘密密钥和令牌给包含它的链接：<br />
+<code>&lt;a href="http://_SERVER['HOST']?token=topsecret"&gt; (Django, Gallery, others)</code><br />
+甚至直接从它导入脚本：<br />
+<code>&lt;script src="http://_SERVER['HOST']/misc/jquery.js?v=1.4.4"&gt; (Various)</code><br />
+密码重置就是上述技术过程的一种实现方式。<br />
+如果后端应用程序的密码重置机制是发送验证邮件，对用户生成特定的key值，将host域名和key值拼接为特定的URL地址用于验证信任。<br />
+如果host域名获取错误，用户点击此URL就会将key值发送到恶意网站上去。黑客依此得到用户的key值，就可以重置用户的密码。</p>
+<h4>攻击方式实施过程</h4>
+<p>黑客打开目标网站申请重置特定用户的密码，如果后端应用程序存在这样的BUG。黑客就可以重置用户密码。</p>
+<h3>页面缓存中毒</h3>
+<h4>WEB服务器端中毒</h4>
+<p>WEB服务一般都可以设置页面缓存的功能；其页面缓存内容会和访问的域名进行绑定。目前常用的WEB服务器：<br />
+Varnish使用它看到的第一个主机头来识别请求。Apache将所有存在的主机头连接起来。Nginx使用最后一个主机头。<br />
+这意味着您可以通过发出以下格式的请求来使Varnish缓存中毒。<br />
+<code>&gt; GET / HTTP/1.1<br />
+&gt; Host: example.com<br />
+&gt; Host: evil.com</code><br />
+当服务器使用Varnish服务做请求缓存时，上面的请求如果和example.com请求页面展示内容不同；就会污染example.com的缓存。</p>
+<h4>应用程序级缓存中毒</h4>
+<p>Joomla将Host头部写入每个页面，而不对其进行HTML编码，并且其缓存完全无视Host头部。在Joomla安装的主页上获得持久的XSS非常简单：<br />
+<code>curl -H "Host: cow\"onerror='alert(1)'rel='stylesheet'" http://example.com/ | fgrep cow\"</code><br />
+这将创建以下请求：<br />
+<code>&gt; GET / HTTP/1.1<br />
+&gt; Host: cow"onerror='alert(1)'rel='stylesheet'</code><br />
+响应应该显示一个有毒的&lt;link&gt;元素：<br />
+<code>&lt;link href="http://cow"onerror='alert(1)'rel='stylesheet'/" rel="canonical"/&gt;</code><br />
+要验证缓存是否中毒，只需在浏览器中加载主页并观察弹出窗口。</p>
+<h3>保护服务器安全</h3>
+<p>1、设置默认虚拟主机<br />
+http host 主机头攻击，一般都是web服务器中的默认虚拟主机进行响应请求。在web服务器上设置默认的虚拟主机，并设置用来不做响应就可以解决这种问题。</p>
+<p>2、程序中尽量不要使用_SERVER[&#8216;HOST&#8217;]<br />
+程序中尽量不要使用此参数或者做好域名验证工作。并且注意黑客可能会传递host参数为SQL注入语句。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

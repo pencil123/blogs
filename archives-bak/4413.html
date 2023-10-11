@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP依赖注入 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; PHP依赖注入评论Feed" href="https://cn-blogs.cn/archives/4413.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PHP泛型简析' href='https://cn-blogs.cn/archives/4410.html' />
+<link rel='next' title='PHP foreach详解' href='https://cn-blogs.cn/archives/4415.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4413.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4413' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4413.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4413.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4413 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/php-develop" rel="category tag">PHP</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4410.html" rel="prev">上一篇：PHP泛型简析</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/4415.html" rel="next">下一篇：PHP foreach详解</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            PHP依赖注入        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/uptoyou" title="由uptoyou发布" rel="author">uptoyou</a></span>
+            <span class="entry-date">2018/05/11</span>
+            <span class="update is-hidden">2018-05-15</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>传统开发中，当需要用到Foo类的时候，就会创建Foo类并调用Foo类里的函数，假如这个函数中需要调用Bar类的函数，就在Foo类的函数中创建Bar类实例，并调用Bar类的函数，而如果还需要在Bar的函数中调用Bim类的函数，就在Bim类中创建Bar类实例并调用Bar中的函数<br />
+class Bim<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Bar<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        $bim = new Bim();<br />
+        $bim-&gt;doSomething();<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Foo<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        $bar = new Bar();<br />
+        $bar-&gt;doSomething();<br />
+        echo __METHOD__;<br />
+    }<br />
+}</p>
+<p>$foo = new Foo();<br />
+$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething<br />
+依赖注入的思路是当用到Foo类的时候，Foo类需要Bar类，Bar类需要Bim类，那么创建Bim类，再创建Bar类，并把Bim类实例注入到Bar类中，再创建Foo类，并把Bar类实例注入到Foo类中<br />
+class Bim<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Bar<br />
+{<br />
+    private $bim;</p>
+<p>    public function __construct(Bim $bim)<br />
+    {<br />
+        $this-&gt;bim = $bim;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bim-&gt;doSomething();<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Foo<br />
+{<br />
+    private $bar;</p>
+<p>    public function __construct(Bar $bar)<br />
+    {<br />
+        $this-&gt;bar = $bar;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bar-&gt;doSomething();<br />
+        echo __METHOD__;<br />
+    }<br />
+}</p>
+<p>$foo = new Foo(new Bar(new Bim()));<br />
+$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething<br />
+依赖注入容器<br />
+class Bim<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Bar<br />
+{<br />
+    private $bim;</p>
+<p>    public function __construct(Bim $bim)<br />
+    {<br />
+        $this-&gt;bim = $bim;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bim-&gt;doSomething();<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Foo<br />
+{<br />
+    private $bar;</p>
+<p>    public function __construct(Bar $bar)<br />
+    {<br />
+        $this-&gt;bar = $bar;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bar-&gt;doSomething();<br />
+        echo __METHOD__;<br />
+    }<br />
+}</p>
+<p>class Container<br />
+{<br />
+    private $s = array();</p>
+<p>    function __set($k, $c)<br />
+    {<br />
+        $this-&gt;s[$k] = $c;<br />
+    }</p>
+<p>    function __get($k)<br />
+    {<br />
+        return $this-&gt;s[$k]($this);<br />
+    }<br />
+}</p>
+<p>$c = new Container();</p>
+<p>$c-&gt;bim = function () {<br />
+    return new Bim();<br />
+};<br />
+$c-&gt;bar = function ($c) {<br />
+    return new Bar($c-&gt;bim);<br />
+};<br />
+$c-&gt;foo = function ($c) {<br />
+    return new Foo($c-&gt;bar);<br />
+};</p>
+<p>// 从容器中取得Foo<br />
+$foo = $c-&gt;foo;<br />
+$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething<br />
+class Bim<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Bar<br />
+{<br />
+    private $bim;</p>
+<p>    public function __construct(Bim $bim)<br />
+    {<br />
+        $this-&gt;bim = $bim;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bim-&gt;doSomething();<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Foo<br />
+{<br />
+    private $bar;</p>
+<p>    public function __construct(Bar $bar)<br />
+    {<br />
+        $this-&gt;bar = $bar;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bar-&gt;doSomething();<br />
+        echo __METHOD__;<br />
+    }<br />
+}</p>
+<p>class IoC<br />
+{<br />
+    protected static $registry = [];</p>
+<p>    public static function bind($name, Callable $resolver)<br />
+    {<br />
+        static::$registry[$name] = $resolver;<br />
+    }</p>
+<p>    public static function make($name)<br />
+    {<br />
+        if (isset(static::$registry[$name])) {<br />
+            $resolver = static::$registry[$name];<br />
+            return $resolver();<br />
+        }<br />
+        throw new Exception(&#8216;Alias does not exist in the IoC registry.&#8217;);<br />
+    }<br />
+}</p>
+<p>IoC::bind(&#8216;bim&#8217;, function () {<br />
+    return new Bim();<br />
+});<br />
+IoC::bind(&#8216;bar&#8217;, function () {<br />
+    return new Bar(IoC::make(&#8216;bim&#8217;));<br />
+});<br />
+IoC::bind(&#8216;foo&#8217;, function () {<br />
+    return new Foo(IoC::make(&#8216;bar&#8217;));<br />
+});</p>
+<p>// 从容器中取得Foo<br />
+$foo = IoC::make(&#8216;foo&#8217;);<br />
+$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething<br />
+class Bim<br />
+{<br />
+    public function doSomething()<br />
+    {<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Bar<br />
+{<br />
+    private $bim;</p>
+<p>    public function __construct(Bim $bim)<br />
+    {<br />
+        $this-&gt;bim = $bim;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bim-&gt;doSomething();<br />
+        echo __METHOD__, &#8216;|&#8217;;<br />
+    }<br />
+}</p>
+<p>class Foo<br />
+{<br />
+    private $bar;</p>
+<p>    public function __construct(Bar $bar)<br />
+    {<br />
+        $this-&gt;bar = $bar;<br />
+    }</p>
+<p>    public function doSomething()<br />
+    {<br />
+        $this-&gt;bar-&gt;doSomething();<br />
+        echo __METHOD__;<br />
+    }<br />
+}</p>
+<p>class Container<br />
+{<br />
+    private $s = array();</p>
+<p>    public function __set($k, $c)<br />
+    {<br />
+        $this-&gt;s[$k] = $c;<br />
+    }</p>
+<p>    public function __get($k)<br />
+    {<br />
+        // return $this-&gt;s[$k]($this);<br />
+        return $this-&gt;build($this-&gt;s[$k]);<br />
+    }</p>
+<p>    /**<br />
+     * 自动绑定（Autowiring）自动解析（Automatic Resolution）<br />
+     *<br />
+     * @param string $className<br />
+     * @return object<br />
+     * @throws Exception<br />
+     */<br />
+    public function build($className)<br />
+    {<br />
+        // 如果是匿名函数（Anonymous functions），也叫闭包函数（closures）<br />
+        if ($className instanceof Closure) {<br />
+            // 执行闭包函数，并将结果<br />
+            return $className($this);<br />
+        }</p>
+<p>        /** @var ReflectionClass $reflector */<br />
+        $reflector = new ReflectionClass($className);</p>
+<p>        // 检查类是否可实例化, 排除抽象类abstract和对象接口interface<br />
+        if (!$reflector-&gt;isInstantiable()) {<br />
+            throw new Exception(&#8220;Can&#8217;t instantiate this.&#8221;);<br />
+        }</p>
+<p>        /** @var ReflectionMethod $constructor 获取类的构造函数 */<br />
+        $constructor = $reflector-&gt;getConstructor();</p>
+<p>        // 若无构造函数，直接实例化并返回<br />
+        if (is_null($constructor)) {<br />
+            return new $className;<br />
+        }</p>
+<p>        // 取构造函数参数,通过 ReflectionParameter 数组返回参数列表<br />
+        $parameters = $constructor-&gt;getParameters();</p>
+<p>        // 递归解析构造函数的参数<br />
+        $dependencies = $this-&gt;getDependencies($parameters);</p>
+<p>        // 创建一个类的新实例，给出的参数将传递到类的构造函数。<br />
+        return $reflector-&gt;newInstanceArgs($dependencies);<br />
+    }</p>
+<p>    /**<br />
+     * @param array $parameters<br />
+     * @return array<br />
+     * @throws Exception<br />
+     */<br />
+    public function getDependencies($parameters)<br />
+    {<br />
+        $dependencies = [];</p>
+<p>        /** @var ReflectionParameter $parameter */<br />
+        foreach ($parameters as $parameter) {<br />
+            /** @var ReflectionClass $dependency */<br />
+            $dependency = $parameter-&gt;getClass();</p>
+<p>            if (is_null($dependency)) {<br />
+                // 是变量,有默认值则设置默认值<br />
+                $dependencies[] = $this-&gt;resolveNonClass($parameter);<br />
+            } else {<br />
+                // 是一个类，递归解析<br />
+                $dependencies[] = $this-&gt;build($dependency-&gt;name);<br />
+            }<br />
+        }</p>
+<p>        return $dependencies;<br />
+    }</p>
+<p>    /**<br />
+     * @param ReflectionParameter $parameter<br />
+     * @return mixed<br />
+     * @throws Exception<br />
+     */<br />
+    public function resolveNonClass($parameter)<br />
+    {<br />
+        // 有默认值则返回默认值<br />
+        if ($parameter-&gt;isDefaultValueAvailable()) {<br />
+            return $parameter-&gt;getDefaultValue();<br />
+        }</p>
+<p>        throw new Exception(&#8216;I have no idea what to do here.&#8217;);<br />
+    }<br />
+}</p>
+<p>// &#8212;-<br />
+$c = new Container();<br />
+$c-&gt;bar = &#8216;Bar&#8217;;<br />
+$c-&gt;foo = function ($c) {<br />
+    return new Foo($c-&gt;bar);<br />
+};<br />
+// 从容器中取得Foo<br />
+$foo = $c-&gt;foo;<br />
+$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething</p>
+<p>// &#8212;-<br />
+$di = new Container();</p>
+<p>$di-&gt;foo = &#8216;Foo&#8217;;</p>
+<p>/** @var Foo $foo */<br />
+$foo = $di-&gt;foo;</p>
+<p>var_dump($foo);<br />
+/*<br />
+Foo#10 (1) {<br />
+	private $bar =&gt; class Bar#14 (1) {<br />
+    	private $bim =&gt; class Bim#16 (0) {}<br />
+ 	}<br />
+}<br />
+*/</p>
+<p>$foo-&gt;doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

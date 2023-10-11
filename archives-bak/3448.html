@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Bacula 控制器配置文件说明1 | 青春部落    </title>
+    <meta name="keywords"  content="Bacula,backup,文件备份,数据备份,配置文件" />
+    <meta name="description"  content="Bacula 数据备份服务软件配置文件说明文档1" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Bacula 控制器配置文件说明1评论Feed" href="https://cn-blogs.cn/archives/3448.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Bacula 服务安装' href='https://cn-blogs.cn/archives/3442.html' />
+<link rel='next' title='Bacula 控制器配置文件说明2' href='https://cn-blogs.cn/archives/3450.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3448.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3448' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3448.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3448.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3448 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool" rel="category tag">运维</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3442.html" rel="prev">上一篇：Bacula 服务安装</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3450.html" rel="next">下一篇：Bacula 控制器配置文件说明2</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Bacula 控制器配置文件说明1        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/02/06</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>Director 配置</h2>
+<p>Configuring the Director(bacula-dir.conf file)配置中最为复杂的文件。包含了各种资源的设定。</p>
+<h2>资源类型</h2>
+<p>作业-Job，作业定义-JobDefs，客户端-Client，存储-Storage，编目-Catalog，计划-Schedule，文件集-FileSet，池-Pool，控制器-Director或者消息-Messages。<br />
+一切都是围绕着作业定义的，并以某种方式与作业关联起来。</p>
+<table>
+<tbody>
+<tr>
+<th>控制器资源</th>
+<th>定义控制器名称和验证密码。配置文件只能有一个Director</th>
+</tr>
+<tr>
+<th>作业资源</th>
+<th>定义备份/还原作业，并将客户端，文件集，计划资源连接在一起，用于定义一个作业。</th>
+</tr>
+<tr>
+<th>作业定义资源</th>
+<th>为作业资源设置默认选项。</th>
+</tr>
+<tr>
+<th>计划资源</th>
+<th>定义Bacula内部调度程序何时自动运行Job。每个工作只会引用一个。</th>
+</tr>
+<tr>
+<th>文件集资源</th>
+<th>定义要备份的文件集，和客户端结合使用。每个作业只能引用一个文件集。</th>
+</tr>
+<tr>
+<th>客户端资源</th>
+<th>定义要备份的客户端。每个工作只会引用一个客户端。</th>
+</tr>
+<tr>
+<th>存储资源</th>
+<th>定义应在哪个物理设备上安装卷。您可能有一个或多个存储定义。</th>
+</tr>
+<tr>
+<th>池资源</th>
+<th>定义可用于特定作业的卷池。大多数人使用一个默认的池。<br />
+但是，如果您拥有大量的客户端或卷，则可能需要拥有多个池。<br />
+池允许您限制作业（或客户端）仅使用特定的一组卷。</th>
+</tr>
+<tr>
+<th>编目资源</th>
+<th>定义在哪个数据库中保存文件列表以及备份卷的名称。大多数人只使用一个目录</th>
+</tr>
+<tr>
+<th>消息资源</th>
+<th>定义错误和信息消息的发送或记录。</th>
+</tr>
+</tbody>
+</table>
+<h2>控制器资源 Director</h2>
+<table>
+<tbody>
+<tr>
+<th>Name</th>
+<th>required</th>
+</tr>
+<tr>
+<th>Password</th>
+<th>用于校验Console连接;required</th>
+</tr>
+<tr>
+<th>DirPort</th>
+<th>端口号</th>
+</tr>
+<tr>
+<th>QueryFile</th>
+<th>解析Console命令对应的SQL语句;required</th>
+</tr>
+<tr>
+<th>WorkingDirectory</th>
+<th>存储状态文件的目录;required</th>
+</tr>
+<tr>
+<th>Maximum Concurrent Jobs</th>
+<th>同时运行的最大任务数量</th>
+</tr>
+<tr>
+<th>Messages</th>
+<th>定义控制器的消息传递位置|方式</th>
+</tr>
+</tbody>
+</table>
+<h2>作业资源 Job</h2>
+<table>
+<tbody>
+<tr>
+<th>Name</th>
+<th>作业的名称；required</th>
+</tr>
+<tr>
+<th>Type</th>
+<th>Backup|Restore|Verify|Admin</th>
+</tr>
+<tr>
+<th>Level</th>
+<th>备份作业的等级：Full,Incremental，Differential</th>
+</tr>
+<tr>
+<th>JobDefs</th>
+<th>继承作业定义资源的默认值</th>
+</tr>
+<tr>
+<th>Client</th>
+<th>客户端资源名称</th>
+</tr>
+<tr>
+<th>FileSet</th>
+<th>文件集资源名称</th>
+</tr>
+<tr>
+<th>Storage</th>
+<th>存储资源名称</th>
+</tr>
+<tr>
+<th>Schedule</th>
+<th>计划资源名称</th>
+</tr>
+<tr>
+<th>Message</th>
+<th>消息资源名称</th>
+</tr>
+<tr>
+<th>Poll</th>
+<th>池资源名称</th>
+</tr>
+<tr>
+<th>Priority</th>
+<th>优先级</th>
+</tr>
+<tr>
+<th>Write Bootstrap</th>
+<th>Bacula的会写一个引导每个备份作业运行文件。<br />
+该指令仅适用于备份作业。<br />
+如果备份作业是完整保存，则在写入引导记录之前，Bacula将清除指定文件的所有当前内容。<br />
+如果作业是增量或差异保存，Bacula会将当前的引导记录附加到文件末尾。</th>
+</tr>
+</tbody>
+</table>
+<p><strong>补充</strong>：还原作业需要定义FileSet，但是用不着。</p>
+<h2>作业定义资源 JobDefs</h2>
+<p>JobDefs资源允许可以出现在Job资源中的所有相同的指令。但是，JobDefs资源不会创建作业，而是可以在作业中引用它，为该作业提供默认值。这允许您简洁地定义几个几乎相同的作业，每个作业都引用一个包含默认值的JobDefs资源。每个作业只需要提及默认的更改。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

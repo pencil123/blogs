@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>InnoDB体系结构 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL.InnoDB,体系结构" />
+    <meta name="description"  content="MySQL数据库中InnoDB存储引擎的体系结构" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; InnoDB体系结构评论Feed" href="https://cn-blogs.cn/archives/2889.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL 体系结构' href='https://cn-blogs.cn/archives/2884.html' />
+<link rel='next' title='索引的分类' href='https://cn-blogs.cn/archives/2907.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2889.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2889' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2889.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2889.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2889 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2884.html" rel="prev">上一篇：MySQL 体系结构</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2907.html" rel="next">下一篇：索引的分类</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            InnoDB体系结构        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/02/10</span>
+            <span class="update is-hidden">2018-04-18</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>InnoDB存储引擎体系结构的主要组件。</p>
+<h3>1、缓冲池</h3>
+<p>缓冲池是主存储器中的一个区域， InnoDB用于访问作为数据的缓存表和索引数据。缓冲池允许经常使用的数据直接从内存中处理，从而加快处理速度。在专用数据库服务器上，经常将高达80％的物理内存分配给InnoDB缓冲池。<br />
+为了提高高容量读取操作的效率，缓冲池分为可能包含多行的页面。为了高速缓存管理的效率，缓冲池被实现为页面的链接列表; 很少使用的数据使用LRU算法移除缓存。</p>
+<h3>2、更改缓冲区（Change Buffer）</h3>
+<p>更改缓冲区是一种特殊的数据结构。当受影响的页面不在缓冲池中时，更改缓冲区会缓存对辅助索引页面的更改。当页面通过其他读取操作加载到缓冲池中时，稍后可能会合并由INSERT，UPDATE或DELETE操作（DML）导致的缓冲更改。</p>
+<p>查看更改缓冲区的状态<br />
+<code>MYSQL &gt; SHOW ENGINE INNODB STATUS\G</code></p>
+<h3>3、自适应哈希索引</h3>
+<p>自适应哈希索引（AHI）使InnoDB在系统中执行更像内存数据库，并为缓冲池提供适当的工作负载和充足内存组合，而不会牺牲任何事务功能或可靠性。<br />
+该功能由innodb_adaptive_hash_index选项启用，或者在服务器启动时通过&#8211;skip-innodb_adaptive_hash_index关闭。</p>
+<h3>4、重做日志缓冲区</h3>
+<p>重做日志缓冲区是保存要写入重做日志的数据的内存区域。<br />
+重做日志缓冲区大小由innodb_log_buffer_size配置选项定义。<br />
+重做日志缓冲区会定期刷新到磁盘上的日志文件。<br />
+一个大的重做日志缓冲区允许大事务运行，而无需在事务提交之前将重做日志写入磁盘。<br />
+因此，如果您有更新，插入或删除多行的事务，则使日志缓冲区更大可节省磁盘I / O<br />
+innodb_flush_log_at_trx_commit 选项控制如何将重做日志缓冲区的内容写入日志文件。<br />
+innodb_flush_log_at_timeout 选项控制重做日志刷新频率。</p>
+<h3>5、系统表空间</h3>
+<p>InnoDB系统表空间包含InnoDB数据字典（与InnoDB相关的对象的元数据）、双写缓冲区、更改缓冲区和撤消日志的存储区域。<br />
+系统表空间还包含在系统表空间中创建的任何用户创建表的表和索引数据。<br />
+系统表空间被视为共享表空间，因为它被多个表共享。<br />
+系统表空间由一个或多个数据文件表示。<br />
+默认情况下，在MySQL数据目录中创建一个名为ibdata1的系统数据文件。<br />
+系统数据文件的大小和数量由innodb_data_file_path启动选项控制。</p>
+<h3>6、InnoDB数据字典</h3>
+<p>InnoDB数据字典由内部系统表组成，这些系统表包含用于跟踪诸如表，索引和表格列等对象的元数据。 元数据物理位于InnoDB系统表空间中。 由于历史原因，数据字典元数据在一定程度上与存储在InnoDB表元数据文件（.frm文件）中的信息重叠。</p>
+<h3>7、双写缓冲区</h3>
+<p>InnoDB使用称为doublewrite的文件刷新技术。<br />
+双写缓冲区是一个位于系统表空间中的存储区域。在页面数据写入到正确位置之前，InnoDB首先会将他们写入到成为双写缓冲区中的连续区域。<br />
+如果在页面写入过程中存在操作系统，存储子系统或 mysqld进程崩溃，InnoDB可以稍后在崩溃恢复期间从双写缓冲区中找到页面的良好副本。</p>
+<p>尽管数据总是写入两次，但双写缓冲区不需要两倍的I / O开销或两倍的I / O操作。数据作为一个大的顺序块写入到双写缓冲区本身，只需一次fsync() 调用操作系统。</p>
+<p>在大多数情况下，默认情况下会启用doublewrite缓冲区。要禁用双写缓冲区，请设置 innodb_doublewrite为0。</p>
+<p>如果系统表空间文件（“ ibdata文件 ”）位于支持原子写入的Fusion-io设备上，则会自动禁用双写缓冲，并将Fusion-io原子写入用于所有数据文件。</p>
+<h3>8、撤消日志</h3>
+<p>撤消日志是与单个事务关联的撤消日志记录的集合。撤销日志记录包含有关如何撤消事务对聚集索引 记录的最新更改的信息 。如果另一个事务需要查看原始数据（作为一致读取操作的一部分），则从撤消日志记录中检索未修改的数据。撤销日志存在于 撤消日志段中，该日志段包含在 回滚段中。回滚段位于 系统表空间， 临时表空间和撤消表空间中。</p>
+<h3>9、每个文件表的表空间</h3>
+<p>每个文件表的表空间是一个单独的表空间，它是在它自己的数据文件中创建的，而不是在系统表空间中创建的。<br />
+innodb_file_per_table启用该选项，每个文件表的表空间由单个.ibd数据文件表示。</p>
+<h3>10、一般表空间</h3>
+<p>InnoDB使用CREATE TABLESPACE语法创建 的共享表空间。</p>
+<h3>11、撤消表空间</h3>
+<p>撤消表空间包含一个或多个包含撤消日志的文件 。</p>
+<h3>12、临时表空间</h3>
+<p>非压缩的用户创建的临时表和磁盘内部临时表是在共享的临时表空间中创建的。<br />
+innodb_temp_data_file_path配置选项定义临时表空间数据文件的相对路径，名称，大小和属性。 如果innodb_temp_data_file_path未指定任何值，则缺省行为是在innodb_data_home_dir目录中创建名为ibtmp1的自动扩展数据文件，该文件略大于12MB。</p>
+<h3>13、重做日志</h3>
+<p>重做日志是在崩溃恢复期间使用的基于磁盘的数据结构，用于纠正由不完整事务写入的数据。在正常操作期间，重做日志将编码请求以更改 InnoDB由SQL语句或低级别API调用产生的表数据。在意外关闭之前没有完成更新数据文件的修改会在初始化期间以及接受连接之前自动重播。</p>
+<div id="attachment_3997" style="max-width: 813px" class="wp-caption alignnone"><a href="https://www.cn-blogs.cn/archives/2889.html/innodb-2" rel="attachment wp-att-3997"><img src="https://www.cn-blogs.cn/wp-content/uploads/2017/02/InnoDB.jpg" alt="" width="803" height="601" class="size-full wp-image-3997" srcset="https://cn-blogs.cn/wp-content/uploads/2017/02/InnoDB.jpg 803w, https://cn-blogs.cn/wp-content/uploads/2017/02/InnoDB-300x225.jpg 300w, https://cn-blogs.cn/wp-content/uploads/2017/02/InnoDB-768x575.jpg 768w" sizes="(max-width: 803px) 100vw, 803px" /></a><p class="wp-caption-text">MySQL 数据库InnoDB架构图</p></div>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

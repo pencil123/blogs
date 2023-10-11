@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>代理服务器说明 | 青春部落    </title>
+    <meta name="keywords"  content="代理服务器,Proxy,正向代理,反向代理,透明代理,HTTP代理,HTTPS代理,Socks代理" />
+    <meta name="description"  content="代理服务器包括正向代理、透明代理和反向代理；正向代理又分为HTTP代理、HTTPS代理和Socks代理" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 代理服务器说明评论Feed" href="https://cn-blogs.cn/archives/3552.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='map 变量映射模块' href='https://cn-blogs.cn/archives/3541.html' />
+<link rel='next' title='Squid 进程管理' href='https://cn-blogs.cn/archives/3557.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3552.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3552' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3552.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3552.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3552 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool" rel="category tag">运维</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3541.html" rel="prev">上一篇：map 变量映射模块</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3557.html" rel="next">下一篇：Squid 进程管理</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            代理服务器说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/02/14</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h1>代理服务</h1>
+<p>代理服务分为正向代理，透明代理和反向代理</p>
+<h2>正向代理</h2>
+<p>需要在客户端配置好代理服务器信息；<br />
+页面请求过程：当客户端请求一个URL时，客户端不进行DNS解析操作，直接将请求动作发送给代理服务器。<br />
+代理服务器接受到请求后，进行DNS解析和URL请求。<br />
+代理服务器得到页面后，自己缓存一份，向客户端发送一份。<br />
+存在IP包头的修改</p>
+<h2>透明代理</h2>
+<p>当设置在网关处时，客户端不需要设置；如放在其他位置，需要添加路由表<br />
+页面请求过程：当客户端请求一个URL时，客户端需要进行DNS解析操作。然后将IP包发送出去。<br />
+中间如果经过代理服务器，代理服务器将会代替客户端向URL服务器发送请求。<br />
+（squid）代理服务器在处理过程中，需要对端口做一次映射。<br />
+将正常请求时的80端口，映射到（squid）服务监听的端口上。（squid）服务接受到请求后，打开一个新端口，向URL服务器请求页面。<br />
+存在IP包头的修改</p>
+<h2>反向代理</h2>
+<p>代替后端真实服务器返回数据；有负载均衡的作用<br />
+页面请求过程：前提域名指向反向代理服务器。<br />
+当客户端请求时，代理服务器中如果有请求内容缓存，将直接回复客户端。<br />
+如果没有请求内容的缓存，将会把情况动作，发送到后端的真实服务器。具体返回操作视情况而定。<br />
+如果存在情况缓存，将不需要修改IP包头；如不存在，可能需要修改。</p>
+<h1>正向代理分类</h1>
+<p>HTTP代理，HTTPS代理和Socks代理</p>
+<h2>HTTP代理</h2>
+<p>资源缓存，纯文本传输，非加密；不能很好的支持HTTPS的网站<br />
+代理服务器接受纯文本的请求后；使用缓存资源响应请求或者代理请求网站信息；然后传输给客户端。<br />
+这个过程都是纯文本传输。服务器可以分析出所有的访问内容。</p>
+<h2>HTTPS代理</h2>
+<p>不缓存资源，不透明的隧道通信。支持HTTP和HTTPS的请求<br />
+代理服务器是一个中介；接受请求（CONNECT 类型）后建立一个不透明的隧道连接目标服务器。客户端和服务器间进行SSL/TLS的通信。</p>
+<h2>Socks代理</h2>
+<p>SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。SOCKS是&#8221;SOCKetS&#8221;的缩写。<br />
+根据OSI模型，SOCKS是会话层(NFS,RPC)的协议，位于表示层(JPEG)与传输层（TCP/UDP）之间。而HTTP代理在应用层。<br />
+Socks 4仅支持TCP连接<br />
+Socks 5支持TCP，UDP，通过登录和密码授权，以及远程DNS查询</p>
+<h2>其他代理</h2>
+<p>FTP代理<br />
+CGI代理：在服务器上开发一个打开URL（访问者提交的地址）的功能页面。<br />
+Email代理：SMTP,POP3,IMAP</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>sendfile | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; sendfile评论Feed" href="https://cn-blogs.cn/archives/173.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='tcp网络IO' href='https://cn-blogs.cn/archives/171.html' />
+<link rel='next' title='ssl证书配置' href='https://cn-blogs.cn/archives/180.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/173.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=173' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F173.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F173.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-173 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/171.html" rel="prev">上一篇：tcp网络IO</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/180.html" rel="next">下一篇：ssl证书配置</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            sendfile        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/04/26</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>Syntax: sendfile on | off;</strong><br />
+Default:<br />
+sendfile off;<br />
+Enables or disables the use of sendfile().<br />
+从nginx 0.8.12和FreeBSD 5.2.1开始， aio可用于为sendfile()预加载数据：</p>
+<p>location /video/ {<br />
+	sendfile on;<br />
+    tcp_nopush on;<br />
+    aio on;<br />
+}<br />
+在这种配置中，sendfile()使用SF_NODISKIO标志来调用它，使其不会阻塞磁盘I / O，而是返回数据不在内存中。然后，nginx通过读取一个字节来启动异步数据加载。在第一次读取时，FreeBSD内核将文件的前128K字节加载到内存中，虽然下一次读取只能以16K的块加载数据。这可以使用read_ahead指令更改 。</p>
+<p><strong>Syntax: sendfile_max_chunk size;</strong><br />
+Default:<br />
+sendfile_max_chunk 0;<br />
+当设置为非零值时，限制在单个sendfile()呼叫中可传输的数据量。没有限制，一个快速连接可能完全抓住了工作进程。</p>
+<p>Linux kernel 2.2之前，读写数据基本都是使用read系统调用和write系调用，以nginx来说如果一个请求建立，从磁盘的文件到网络连接之间会通过硬件（DMA）&#8212;内核层&#8212;用户层多次读写系统来完成文件数据的复制传输：从内核层用read系统调用读到用户层，再从用户层用write系统调用写到内核层，每一次用户层到内核层的进行一次上下文转换，这种代价是非常昂贵的。甚至在没有数据变化时这种复制尤其显得多余。如果nginx接受大量并发请求，这种系统调用就会非常频繁，服务器的性能就会下降。<br />
+<a href="http://www.cn-blogs.cn/wp-content/uploads/2016/05/read_write.png"><img class="alignnone size-full wp-image-174" src="http://www.cn-blogs.cn/wp-content/uploads/2016/05/read_write.png" alt="read_write" width="704" height="404" srcset="https://cn-blogs.cn/wp-content/uploads/2016/05/read_write.png 704w, https://cn-blogs.cn/wp-content/uploads/2016/05/read_write-300x172.png 300w" sizes="(max-width: 704px) 100vw, 704px" /></a><br />
+在Linux kernel2.2版本之后出现了一种叫做“零拷贝(zero-copy)”系统调用机制，目前很多应用服务器如apache、samba、nginx都支持sendfile。注意：sendfile系统调用是一种文件传输的系统调用和kernel系统调用关系不大。<br />
+<a href="http://www.cn-blogs.cn/wp-content/uploads/2016/05/sendfile.png"><img class="alignnone size-full wp-image-175" src="http://www.cn-blogs.cn/wp-content/uploads/2016/05/sendfile.png" alt="sendfile" width="704" height="404" srcset="https://cn-blogs.cn/wp-content/uploads/2016/05/sendfile.png 704w, https://cn-blogs.cn/wp-content/uploads/2016/05/sendfile-300x172.png 300w" sizes="(max-width: 704px) 100vw, 704px" /></a><br />
+如图所示，nginx在支持了sendfile系统调用后，避免了内核层与用户层的上线文切换（content swith）工作，大大减少了系统性能的开销。<br />
+可以使用man 8 sendfile 进一步了解sendfile系统调用。<br />
+以下是对参数解释<br />
+out_fd<br />
+a file descriptor, open for writing, for the data to be written<br />
+in_fd<br />
+a file descriptor, open for reading, for the data to be read<br />
+offset<br />
+the offset in the input file to start transfer (e.g. a value of 0 indicates the beginning of the file). This is passed into the function and updated when the function returns.<br />
+count<br />
+the number of bytes to be transferred</p>
+<p>正常情况下函数会返回被写入的字节数，如果出错就返回-1<br />
+我们都知道在linux系统里文件描述符fd，可以是一个真实的文件或者是一个设备，例如一个网络socket，（当然linux世界里一切皆文件，这里只是具体区别一下。）senfile需要输入的文件描述符是一个支持mmap的真实文件或者设备，那么socket就不能作为输入的fd，而输出的fd是可以的。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

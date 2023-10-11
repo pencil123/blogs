@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ssl证书配置 | 青春部落    </title>
+    <meta name="keywords"  content="nginx,证书配置,ssl模块" />
+    <meta name="description"  content="nginx 服务证书配置:ssl模块" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; ssl证书配置评论Feed" href="https://cn-blogs.cn/archives/180.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='sendfile' href='https://cn-blogs.cn/archives/173.html' />
+<link rel='next' title='sub-内容替换' href='https://cn-blogs.cn/archives/182.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/180.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=180' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F180.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F180.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-180 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/173.html" rel="prev">上一篇：sendfile</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/182.html" rel="next">下一篇：sub-内容替换</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            ssl证书配置        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/04/26</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>编译过程中添加参数–with-http_ssl_module</p>
+<p><strong>配置案例：</strong><br />
+<code>server {<br />
+listen 443 ssl; #ssl参数<br />
+server_name example.com;<br />
+ssl_certificate example.com.crt; #证书文件<br />
+ssl_certificate_key example.com.key; #私钥文件<br />
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;<br />
+ssl_ciphers HIGH:!aNULL:!MD5;<br />
+#...<br />
+}</code></p>
+<p><strong>listen port ssl：</strong><br />
+ssl参数允许指定该端口上接受的所有连接都应该工作在SSL模式。这样可以为处理HTTP和HTTPS请求的服务器提供更紧凑的配置。</p>
+<p><strong>Syntax: ssl on </strong>| off; 开启对https的支持<br />
+<code>Default:<br />
+ssl off;<br />
+Context: http, server</code><br />
+Enables the HTTPS protocol for the given virtual server.</p>
+<p><strong>Syntax: ssl_certificate file;</strong> 证书文件<br />
+<code>Default: —<br />
+Context: http, server</code><br />
+Specifies a file with the certificate in the PEM format for the given virtual server. If intermediate certificates should be specified in addition to a primary certificate, they should be specified in the same file in the following order: the primary certificate comes first, then the intermediate certificates. A secret key in the PEM format may be placed in the same file.<br />
+它会被发送到连接服务器的每个客户端</p>
+<p><strong>Syntax: ssl_certificate_key file; </strong> 密钥文件<br />
+<code>Default: —<br />
+Context: http, server</code><br />
+Specifies a file with the secret key in the PEM format for the given virtual server.<br />
+用来解密的，所以它的权限要得到保护但nginx的主进程能够读取</p>
+<p><strong>ssl_protocols</strong>指令用于启动特定的加密协议</p>
+<p><strong>ssl_ciphers</strong>选择加密套件，不同的浏览器所支持的套件（和顺序）可能会不同。<br />
+<strong><br />
+ssl_prefer_server_ciphers on</strong>设置协商加密算法时，优先使用我们服务端的加密套件，而不是客户端浏览器的加密套件。</p>
+<blockquote class="wp-embedded-content" data-secret="QZf6WdSmxa"><p><a href="http://www.cn-blogs.cn/archives/1651.html">ssl证书</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="http://www.cn-blogs.cn/archives/1651.html/embed#?secret=QZf6WdSmxa" data-secret="QZf6WdSmxa" width="500" height="282" title="《ssl证书》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p><strong>HTTPS服务器优化</strong></p>
+<p>SSL的运行计算需要消耗额外的CPU资源，一般多核处理器系统会运行多个工作进程(worker processes )，进程的数量不会少于可用的 CPU 核数。SSL 通讯过程中『握手』阶段的运算最占用 CPU 资源，有两个方法可以减少每台客户端的运算量：</p>
+<p>激活 keepalive 长连接，一个连接发送更多个请求<br />
+复用 SSL 会话参数，在并行并发的连接数中避免进行多次 SSL『握手』</p>
+<p>这些会话会存储在一个 SSL 会话缓存里面，通过命令 ssl_session_cache 配置，可以使缓存在机器间共享，然后利用客戶端在『握手』阶段使用的 seesion id 去查询服务端的 session cathe(如果服务端设置有的话)，简化『握手』阶段。</p>
+<p>1M 的会话缓存大概包含 4000 個会话，默认的缓存超时时间为 5 分钟，可以通过使用 ssl_session_timeout 命令设置缓存超时时间。下面是一個拥有 10M 共享会话缓存的多核系统优化配置例子：<br />
+<code>worker_processes auto;<br />
+http {<br />
+ssl_session_cache shared:SSL:10m; #配置共享会话缓存大小<br />
+ssl_session_timeout 10m; #配置会话超时时间<br />
+server {<br />
+listen 443 ssl;<br />
+server_name www.example.com;<br />
+#设置长连接<br />
+keepalive_timeout 70;<br />
+ssl_certificate www.example.com.crt;<br />
+ssl_certificate_key www.example.com.key;<br />
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;<br />
+ssl_ciphers HIGH:!aNULL:!MD5;<br />
+#...</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

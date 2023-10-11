@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Python 字典（Dictionary） | 青春部落    </title>
+    <meta name="keywords"  content="Python,编程,字典类型" />
+    <meta name="description"  content="Python编程域名中字典类型变量说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Python 字典（Dictionary）评论Feed" href="https://cn-blogs.cn/archives/932.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='正则表达式' href='https://cn-blogs.cn/archives/920.html' />
+<link rel='next' title='datetime默认值为当前时间' href='https://cn-blogs.cn/archives/941.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/932.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=932' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F932.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F932.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-932 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/920.html" rel="prev">上一篇：正则表达式</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/941.html" rel="next">下一篇：datetime默认值为当前时间</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Python 字典（Dictionary）        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/11/01</span>
+            <span class="update is-hidden">2018-05-18</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>字典类型</h3>
+<p>由“键-值”对组成的集合，字典中的“值”通过“键”来引用。字典的”键”是区分大小写的,也可以使用数字。<br />
+由于字典是无序的，因此字典中没有append()、remove()等方法。</p>
+<h3>字典内置函数</h3>
+<table>
+<tbody>
+<tr>
+<th>cmp(dict1, dict2)</th>
+<th>比较两个字典元素。</th>
+</tr>
+<tr>
+<th>len(dict)</th>
+<th>计算字典元素个数，即键的总数。</th>
+</tr>
+<tr>
+<th>str(dict)</th>
+<th>输出字典可打印的字符串表示。</th>
+</tr>
+<tr>
+<th>type(variable)</th>
+<th>返回输入的变量类型，如果变量是字典就返回字典类型。</th>
+</tr>
+</tbody>
+</table>
+<h3>字典内置方法</h3>
+<table>
+<tbody>
+<tr>
+<th>dict.clear()</th>
+<th>删除字典内所有元素</th>
+</tr>
+<tr>
+<th>dict.copy()</th>
+<th>返回一个字典的浅复制</th>
+</tr>
+<tr>
+<th>dict.fromkeys(seq[, val]))</th>
+<th>创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值</th>
+</tr>
+<tr>
+<th>dict.get(key, default=None)</th>
+<th>返回指定键的值，如果值不在字典中返回default值</th>
+</tr>
+<tr>
+<th>dict.has_key(key)</th>
+<th>如果键在字典dict里返回true，否则返回false</th>
+</tr>
+<tr>
+<th>dict.items()</th>
+<th>以列表返回可遍历的(键, 值) 元组数组</th>
+</tr>
+<tr>
+<th>dict.iteritems()</th>
+<th>返回一个迭代器；和items相比，内存使用小，稍微慢</th>
+</tr>
+<tr>
+<th>dict.keys()</th>
+<th>以列表返回一个字典所有的键</th>
+</tr>
+<tr>
+<th>dict.iterkeys()</th>
+<th>返回针对键的迭代器</th>
+</tr>
+<tr>
+<th>dict.setdefault(key, default=None)</th>
+<th>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</th>
+</tr>
+<tr>
+<th>dict.update(dict2)</th>
+<th>把字典dict2的键/值对更新到dict里</th>
+</tr>
+<tr>
+<th>dict.values()</th>
+<th>以列表返回字典中的所有值</th>
+</tr>
+<tr>
+<th>dict.itervalues()</th>
+<th>返回值的迭代器</th>
+</tr>
+<tr>
+<th>pop(key[,default])</th>
+<th>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</th>
+</tr>
+<tr>
+<th>popitem()</th>
+<th>随机返回并删除字典中的一对键和值。</th>
+</tr>
+</tbody>
+</table>
+<h4>遍历</h4>
+<p><code>dict={"a":"apple","b":"banana","o":"orange"}</code><br />
+1、通过字典的key<br />
+<code>for i in dict:<br />
+print "dict[%s]=" % i,dict[i]</code><br />
+2、获取key，value列表<br />
+<code>for (k,v) in dict.items():<br />
+print "dict[%s]=" % k,v</code><br />
+3、返回迭代器<br />
+<code>for k,v in dict.iteritems():<br />
+print "dict[%s]=" % k,v</code><br />
+4、key，value迭代器<br />
+<code>for k,v in zip(dict.iterkeys(),dict.itervalues()):<br />
+print "dict[%s]=" % k,v</code></p>
+<h4>字典排列:value值排序</h4>
+<p><code>dic = {'a':31, 'bc':5, 'c':3, 'asd':4, 'aa':74, 'd':0}<br />
+dict= sorted(dic.iteritems(), key=lambda d:d[1], reverse = True)<br />
+print dict</code><br />
+输出的结果：<br />
+<code>[('aa', 74), ('a', 31), ('bc', 5), ('asd', 4), ('c', 3), ('d', 0)]</code></p>
+<p>分解代码:<br />
+<code>dic.iteritems()返回key,value的迭代器；<br />
+sorted方法，通过key排序；通过lambda,key等于d[1]即value。<br />
+reverse = True表示是需要翻转的，默认是从小到大，翻转的话，那就是从大到小。</code></p>
+<h4>字典排列:key键排序</h4>
+<p><code>dic = {'a':31, 'bc':5, 'c':3, 'asd':4, 'aa':74, 'd':0}<br />
+dict= sorted(dic.iteritems(), key=lambda d:d[0])# d[0]表示字典的键<br />
+print dict</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

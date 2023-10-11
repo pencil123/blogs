@@ -98,6 +98,7 @@ function curl_down($post_num)
 	curl_setopt($ch,CURLOPT_URL,$url);
 	curl_setopt($ch,CURLOPT_HEADER,false);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	curl_setopt($ch,CURLOPT_USERPWD,"grey:123IGinfinitesys");
 	$content=curl_exec($ch);
 	curl_close($ch);
 	return $content;

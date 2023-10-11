@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP(超文本预处理器)简述 | 青春部落    </title>
+    <meta name="keywords"  content="php,超文本预处理器" />
+    <meta name="description"  content="php编程语言-超文本预处理器" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; PHP(超文本预处理器)简述评论Feed" href="https://cn-blogs.cn/archives/2328.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='路径和目录' href='https://cn-blogs.cn/archives/2285.html' />
+<link rel='next' title='PHP 编译安装操作过程' href='https://cn-blogs.cn/archives/2336.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2328.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2328' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2328.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2328.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2328 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/php" rel="category tag">PHP服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2285.html" rel="prev">上一篇：路径和目录</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2336.html" rel="next">下一篇：PHP 编译安装操作过程</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            PHP(超文本预处理器)简述        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/03/29</span>
+            <span class="update is-hidden">2018-04-21</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>PHP（php:Hypertext Preprocessor,即php:超文本预处理器”）是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用。</p>
+<p>PHP的语法借鉴吸收C语言、Java和Perl等流行计算机语言的特点，易于一般程序员学习。</p>
+<p>PHP最初是由勒多夫在1995年开始开发的；现在PHP的标准由the PHP Group维护。<br />
+PHP以PHP License作为许可协议，不过因为这个协议限制了PHP名称的使用，所以和开放源代码许可协议GPL不兼容。</p>
+<p>根据2013年4月的统计数据，PHP已经被安装在超过2亿4400万个网站和210万台服务器上。</p>
+<h3>发展历史</h3>
+<p>PHP原本的简称为Personal Home Page，是拉斯姆斯·勒多夫为了要维护个人网页，而用c语言开发的一些CGI工具程序集，来取代原先使用的Perl程序。<br />
+他将这些程序和一些窗体解释器集成起来，称为PHP/FI。PHP/FI可以和数据库连接，产生简单的动态网页程序。<br />
+拉斯姆斯·勒多夫在1995年6月8日将PHP/FI公开发布；这个发布的版本命名为PHP 2。</p>
+<p>在1997年，任职于Technion IIT公司的两个以色列程序员：Zeev Suraski和Andi Gutmans，重写了PHP的语法分析器，成为PHP 3的基础，而PHP也在这个时候改称为PHP: Hypertext Preprocessor。<br />
+在1998年6月正式发布PHP 3。<br />
+Zeev Suraski和Andi Gutmans在PHP 3发布后开始改写PHP的核心，这个在1999年发布的语法分析器称为Zend Engine，他们也在以色列的Ramat Gan成立了Zend Technologies来管理PHP的开发。</p>
+<p>在2000年5月22日，以Zend Engine 1.0为基础的PHP 4正式发布，2004年7月13日则发布了PHP 5，PHP 5则使用了第二代的Zend Engine。<br />
+PHP包含了许多新特色，像是强化的面向对象功能、引入PDO（PHP Data Objects，一个访问数据库的延伸库）、以及许多性能上的增强。<br />
+目前PHP 4已经不会继续更新，以鼓励用户转移到PHP 5。</p>
+<p>2008年PHP 5成为了PHP唯一维护中的稳定版本。最新的发布版本为PHP 5.6.9。<br />
+PHP 7的于2015年12月3日开发完成，主要的改进有PHPNG、JIT引擎、抽象语法树编译、异步编程。</p>
+<h4>应用</h4>
+<p>PHP是一个应用范围很广的语言，特别是在网络程序开发方面。一般来说PHP大多在服务器端运行，通过运行PHP的代码来产生网页提供浏览器读取，此外也可以用来开发命令行脚本程序和用户端的GUI应用程序。</p>
+<h2>基础知识</h2>
+<h4>PHP语法</h4>
+<p>1、PHP的语法参考了Perl、C语言，而且可以集成在HTML之中。<br />
+2、PHP剖析引擎只剖析&lt;?php到? &gt;;之间的代码，而不包含在&lt;?php到?&#8211;&gt;之间的内容则会直接提交，所以可以将PHP代码嵌入在HTML之中。<br />
+3、PHP可以用三种注解的形式：C与C++所使用的“/*&#8230;*/”与“//”，和Perl的“#”。</p>
+<h4>PHP语言数据类型</h4>
+<p>PHP主要有八种基本数据类型，其中包括：<br />
+1、四种变量类型：整数型（integer）、浮点数型（float）、布尔型（boolean）、字符串（string）<br />
+2、两种复合类型：数组（array）、对象（object）<br />
+3、两种特殊类型：NULL、资源 （resource）</p>
+<h4>PHP语言变量</h4>
+<p>PHP中，变量以“$”后接变量名称来表示。 变量名称区分大小写。<br />
+有效的变量名称以‘字母或下划线’开头，后接任意数目的字母、数字或下划线，PHP也支持使用多字节文字作为变量名。</p>
+<h4>面向对象编程</h4>
+<p>PHP从PHP 3开始有了基本的面向对象（Object oriented）的特性，但直到PHP 5将面向对象部分重新改写之后，PHP的面向对象功能才比较完善。现在PHP可以说是一个有完整面向对象功能的语言。</p>
+<h4>PHP编程框架</h4>
+<p>使用PHP框架可以更快更简单的部署项目并提高开发效率，但学习使用这些框架需要付出额外的学习成本。<br />
+最流行的PHP框架包括：Symfony, Zend Framework, Laravel、Phalcon、CodeIgniter、Yii等等。</p>
+<h4>PHP开发扩展库</h4>
+<p>内置多样化的函数是PHP主要的特点之一，这些开放代码的函数提供了各种不同的功能，例如文件处理、FTP、字符串处理、等等。<br />
+这些函数的使用方法和C语言相近（例如printf），这也是PHP广为流行的原因之一。<br />
+除了内置的函数之外，PHP也提供了很多扩展库（extension），像是各种数据库连接函数、数据压缩函数、图形处理等等。<br />
+有些延伸库需要从PECL（PHP Extension Community Library）获取。</p>
+<h4>PHP包管理器</h4>
+<p>Composer是php社区用来管理依赖关系的工具，一般在php项目中通过composer.json声明依赖的外部php库，然后就可以使用Composer管理包依赖。</p>
+<h4>PHP编译器</h4>
+<p>PHP一直被当作解释器使用。PHP编译器则将PHP从解释器中分离，为加快运行和改善与以其他编程语言编写部分的互通性，例如Phalanger将PHP编译成通用中间语言和Hiphop for PHP把PHP源代码编译成C++等。Facebook因应其网站大量的用户，集成了HPHPc、HPHPi、HPHPd以及HHVM这四种脚本引擎，开发出HipHop for PHP，以加强网站性能。</p>
+<h2>PHP 内核</h2>
+<h4>PHP Zend Engine</h4>
+<p>Zend Engine是开源的、PHP脚本语言的解释器，它最早是由以色列理工学院(Technion)的学生Andi Gutmans和Zeev Suraski所开发，Zend也正是此二人名字的合称。后来两人联合创立了Zend Technologies公司。<br />
+Zend Engine 1.0于1999年随PHP 4发布，由C语言开发且经过高度优化，并能够做为PHP的后端模块使用。</p>
+<p>Zend Engine为PHP提供了内存和资源管理的功能以及其它的一些标准服务，其高性能、可靠性和可扩展性在促进PHP成为一种流行的语言方面发挥了重要作用。<br />
+<strong>Zend Engine的出现将PHP代码的处理过程分成了两个阶段</strong><br />
+1、首先是分析PHP代码并将其转换为称作Zend opcode的二进制格式(类似Java的字节码)，并将其存储于内存中；<br />
+2、第二阶段是使用Zend Engine去执行这些转换后的Opcode。</p>
+<h4>PHP的Opcode</h4>
+<p>Opcode是一种PHP脚本编译后的中间语言，就像Java的ByteCode,或者.NET的MSL。<br />
+PHP执行PHP脚本代码一般会经过如下4个步骤(确切的来说，应该是PHP的语言引擎Zend)：<br />
+1、Scanning(Lexing) —— 将PHP代码转换为语言片段(Tokens)<br />
+2、Parsing —— 将Tokens转换成简单而有意义的表达式<br />
+3、Compilation —— 将表达式编译成Opcodes<br />
+4、Execution —— 顺次执行Opcodes，每次一条，从而实现PHP脚本的功能</p>
+<h2>源代码编码</h2>
+<p>PHP源代码是可以直接读取的，即使放到服务器上运行也是一样。虽然让PHP多了弹性，但相对的会造成安全危机和性能下降的问题。<br />
+通过PHP编码器，可以保护PHP的源代码不被读取（对商业软件来说特别有需求），也可以提升运行的性能。有许多公司或团体开发PHP的编码器，将PHP程序编译成字节码（byte code），再通过服务器上安装对应的程序来运行PHP脚本。</p>
+<h4>PHP的加速器</h4>
+<p>除了通过编码器加速之外，PHP还可以通过动态的缓存机制来提升速度，加速工具有商业版的，例如Zend Platform，也有开放源代码的加速软件如eAccelerator、APC、XCache。<br />
+基于PHP的特殊扩展机制<br />
+如opcode缓存扩展也可以将opcode缓存于php的共享内存中，从而可以让同一段代码的后续重复执行时跳过编译阶段以提高性能。<br />
+由此也可以看出，这些加速器并非真正提高了opcode的运行速度，而仅是通过分析opcode后并将它们重新排列以达到快速执行的目的。</p>
+<h4>常见的PHP加速器</h4>
+<p>1、APC (Alternative PHP Cache)<br />
+遵循PHP License的开源框架，PHP opcode缓存加速器。</p>
+<p>2、eAccelerator<br />
+源于Turck MMCache，早期的版本包含了一个PHP encoder和PHP loader。</p>
+<p>3、XCache<br />
+快速而且稳定的PHP opcode缓存，经过严格测试且被大量用于生产环境。</p>
+<p>4、Zend Optimizer和Zend Guard Loader<br />
+Zend Optimizer并非一个opcode加速器，它是由Zend Technologies为PHP5.2及以前的版本提供的一个免费、闭源的PHP扩展，其能够运行由Zend Guard生成的加密的PHP代码或模糊代码。 而Zend Guard Loader则是专为PHP5.3提供的类似于Zend Optimizer功能的扩展。项目地址，http://www.zend.com/en/products/guard/runtime-decoders</p>
+<blockquote class="wp-embedded-content" data-secret="HQ7oqnaE4W"><p><a href="https://www.cn-blogs.cn/archives/2363.html">php 进程扩展页面级缓存 OPcache</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/2363.html/embed#?secret=HQ7oqnaE4W" data-secret="HQ7oqnaE4W" width="500" height="282" title="《php 进程扩展页面级缓存 OPcache》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><br />
+5、NuSphere PhpExpress<br />
+NuSphere的一款开源PHP加速器，它支持装载通过NuSphere PHP Encoder编码的PHP程序文件，并能够实现对常规PHP文件的执行加速。项目地址，http://www.nusphere.com/products/phpexpress.htm</p>
+<h3>PHP源码目录结构</h3>
+<p>PHP的源码在结构上非常清晰。其代码根目录中主要包含了一些说明文件以及设计方案，并提供了如下子目录：</p>
+<p>1、build —— 顾名思义，这里主要放置一些跟源码编译相关的文件，比如开始构建之前的buildconf脚本及一些检查环境的脚本等。<br />
+2、ext —— 官方的扩展目录，包括了绝大多数PHP的函数的定义和实现，如array系列，pdo系列，spl系列等函数的实现。 个人开发的扩展在测试时也可以放到这个目录，以方便测试等。<br />
+3、main —— 这里存放的就是PHP最为核心的文件了，是实现PHP的基础设施，这里和Zend引擎不一样，Zend引擎主要实现语言最核心的语言运行环境。<br />
+4、Zend —— Zend引擎的实现目录，比如脚本的词法语法解析，opcode的执行以及扩展机制的实现等等。<br />
+5、pear —— PHP 扩展与应用仓库，包含PEAR的核心文件。<br />
+6、sapi —— 包含了各种服务器抽象层的代码，例如apache的mod_php，cgi，fastcgi以及fpm等等接口。<br />
+7、TSRM —— PHP的线程安全是构建在TSRM库之上的，PHP实现中常见的*G宏通常是对TSRM的封装，TSRM(Thread Safe Resource Manager)线程安全资源管理器。<br />
+8、tests —— PHP的测试脚本集合，包含PHP各项功能的测试文件。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

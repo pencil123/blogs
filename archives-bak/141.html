@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>VIM 编辑器技巧 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; VIM 编辑器技巧评论Feed" href="https://cn-blogs.cn/archives/141.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='scp security copy' href='https://cn-blogs.cn/archives/139.html' />
+<link rel='next' title='动态链接库管理 Ldconfig' href='https://cn-blogs.cn/archives/145.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/141.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=141' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F141.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F141.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-141 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/shell" rel="category tag">Shell 壳</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/139.html" rel="prev">上一篇：scp security copy</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/145.html" rel="next">下一篇：动态链接库管理 Ldconfig</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            VIM 编辑器技巧        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/05/23</span>
+            <span class="update is-hidden">2018-04-30</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>ctrl+r redo</p>
+<p>命令模式下<br />
+J 将光标所在下一行合并到光标所在行<br />
+&gt;&gt; 光标所在行增加缩进(一个tab)<br />
+&lt;&lt; 光标所在行减少缩进(一个tab)<br />
+n&gt;&gt; 光标所在行开始的n行增加缩进<br />
+n&lt;&lt; 光标所在行开始的n行减少缩进<br />
+<strong>12 书签</strong><br />
+命令模式下<br />
+mx 设定书签，x是任意一个字母，通常小写(a-z),x为小写字母时,局限在一个文件之间切换;大写字母时,可在文件之间切换.<br />
+`x (`位于数字键1旁边)跳转到书签x<br />
+编辑模式下<br />
+:marks 查看标签</p>
+<p><strong>14 数字前缀与重复</strong><br />
+命令模式下<br />
+将数字加在命令前,标示该命令处理几次,如5dd标示执行5次dd(删除光标所在整行)操作。<br />
+. (英文句号）为命令重复命令，按下一次执行一次上一次执行过的命令。<br />
+<strong>技巧2 自定义快捷键操作</strong><br />
+编辑模式下<br />
+:map ^x 命令 (map与^之间、x与命令之间有空格,此处到^并非键盘上的^,而是按下ctrl+v出现到快捷键,表示ctrl键,后面到x为任意字母)按下ctrl+x后会执行对应到命令<br />
+例:<br />
+:map ^p I#&lt;ESC&gt; 当按下ctrl+p快捷组合键时,在光标所在行行首添加一个#号,并回到命令模式<br />
+<strong>技巧3 连续行注释</strong><br />
+编辑模式下<br />
+:n1,n2/^/#/g (#号为注释符号,在shell中注释符号为#,C++中为//)<br />
+:n1,n2/^/\/\//g C++源文件多行连续注释<br />
+技巧4 替换<br />
+:ab string1 string2 在vim中输入string1按空格或回车后,string1会自动替换为string2<br />
+:unab string1 取消string1的替换<br />
+<strong>vim配置文件</strong><br />
+~/.vimrc<br />
+可将编辑模式下的命令写在里面，每个命令单独一行，这样每次启动时，会自动执行里面的命令。<br />
+由于在secureCRT中会将原来的文本原封不动的按照字符串的样式发送给服务器。<br />
+所以服务器上的vim设置为autoindent的话，在i模式下，那么它会将secureCRT传输而来的这些字符串再进行一下缩进。<br />
+若拷贝的文本中已有表示缩进的空格或者制表符的话，它们也会被当成字符串，而被缩进。<br />
+<strong>解决办法：</strong><br />
+1，在拷贝前输入:set paste (这样的话，vim就不会启动自动缩进，而只是纯拷贝粘贴）<br />
+2，拷贝完成之后，输入:set nopaste (关闭paste)<br />
+附，paste相关知识。<br />
+&#8216;paste&#8217; 布尔型 (缺省关闭)</p>
+<h3>列模式</h3>
+<p>可以对多行进行批量重复操作；降低了重复操作多行的工作量。<br />
+例如：</p>
+<h2>多行添加注释</h2>
+<p>a. 按下Ctrl + v，进入列模式;<br />
+b. 在行首选择需要注释的行;<br />
+c. 按下“I”，进入插入模式；<br />
+d. 然后输入注释符（“//”、“#”等）;<br />
+e. 按下“Esc”键。</p>
+<h2>多行取消注释</h2>
+<p>a. 按下Ctrl + v, 进入列模式;<br />
+b. 选定要取消的注释符;<br />
+c. 按下“x”或者“d”</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

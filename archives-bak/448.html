@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>es aggs | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; es aggs评论Feed" href="https://cn-blogs.cn/archives/448.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='python float 小数位' href='https://cn-blogs.cn/archives/446.html' />
+<link rel='next' title='常用API' href='https://cn-blogs.cn/archives/451.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/448.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=448' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F448.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F448.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-448 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/elk" rel="category tag">日志分析</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/446.html" rel="prev">上一篇：python float 小数位</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/451.html" rel="next">下一篇：常用API</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            es aggs        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/15</span>
+            <span class="update is-hidden">2017-09-12</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>聚合(Aggregations)也拥有一种可组合(Composable)的语法：<br />
+为了掌握聚合aggs语法，你一定要了解两个主要概念：<br />
+<strong>Buckets(桶)：满足某个条件的文档集合。</strong><br />
+<strong>Metrics(指标)：为某个桶中的文档计算得到的统计信息。</strong><br />
+每个聚合只是简单地由<strong>一个或者多个桶，零个或者多个指标组合而成</strong>。</p>
+<p>桶和SQL中的组(Grouping)拥有相似的概念；<br />
+指标则与COUNT()，SUM()，MAX()，MIN(), AVG()等相似</p>
+<p><strong>桶(Buckets)</strong><br />
+一个桶就是满足特定条件的一个文档集合：一名员工要么属于男性桶，或者女性桶。<br />
+城市杭州属于浙江省这个桶。<br />
+日期2014-10-28属于十月份这个桶。<br />
+随着聚合被执行，每份文档中的值会被计算来决定它们是否匹配了桶的条件。<br />
+如果匹配成功，那么该文档会被置入该桶中，同时聚合会继续执行。<br />
+桶也能够嵌套在其它桶中，能让你完成层次或者条件划分这些需求。<br />
+比如， 杭州可以被放置在浙江省这个桶中，而整个浙江省有属于中国这个桶中。</p>
+<p><strong>指标(Metrics)</strong><br />
+桶能够让我们对文档进行有意义的划分，但是最终我们还是需要对每个桶中的文档进行某种指标计算。<br />
+分桶是达到最终目的的手段：提供了对文档进行划分的方法，从而让你能够计算需要的指标。<br />
+多数指标仅仅是简单的数学运算(比如，min，mean，max以及sum)，它们使用文档中的值进行计算。<br />
+在实际应用中，指标能够让你计算例如平均薪资，最高出售价格，或者百分之95的查询延迟。<br />
+<strong>一个聚合就是一些桶和指标的组合。</strong>一个聚合可以只有一个桶，或者一个指标，或者每样一个。在桶中甚至可以有多个嵌套的桶。比如，我们可以将文档按照其所属国家进行分桶，然后对每个桶计算其平均薪资(一个指标)。</p>
+<p>因为桶是可以嵌套的，我们能够实现一个更加复杂的聚合操作：<br />
+将文档按照国家进行分桶。(桶)<br />
+然后将每个国家的桶再按照性别分桶。(桶)<br />
+然后将每个性别的桶按照年龄区间进行分桶。(桶)<br />
+最后，为每个年龄区间计算平均薪资。</p>
+<p>懂了桶和指标的概念后，我们来试着看下面的几个elasticsearch表达式.<br />
+{<br />
+=== &#8220;aggs&#8221; : {<br />
+====== &#8220;colors&#8221; : {<br />
+============&#8221;terms&#8221; : {&#8220;field&#8221; : &#8220;color&#8221;}<br />
+====== }<br />
+=== }<br />
+}<br />
+aggs是聚合的顶级标注，colors是名字，算是这次聚合任务的名字。 然后我们定义一个terms类型的桶，字段是color字段。<br />
+一句话简单说明，就是 把color进行group by分组。 虽然语法上看起来只是分组而已，但elasticsearch已经帮你把每种颜色都进行了聚合求数目，并且帮你按照数目进行从大到小排序。<br />
+{<br />
+===&#8221;aggs&#8221;: {<br />
+======&#8221;colors&#8221;: {<br />
+=========&#8221;terms&#8221;: {&#8220;field&#8221;: &#8220;color&#8221;},<br />
+=========&#8221;aggs&#8221;: {<br />
+============&#8221;avg_price&#8221;: {&#8220;avg&#8221;: {&#8220;field&#8221;: &#8220;price&#8221;}}<br />
+=========}<br />
+======}<br />
+===}<br />
+}<br />
+我们看到上面的聚合语句的难度要复杂与上次的，因为多了一个avg求平均数的指标。avg本身的意思很好理解，就是给price做avg。但我们需要注意的是，他的取值范围 ！ 他是受限于他上层的桶 ，他的上层桶只有一个，那就是terms的那个。 那这个语句所要表达的意思就很明显了。 首先要针对每个颜色进行分组，然后每个颜色的所有的价格，进行求平均值。<br />
+{<br />
+===&#8221;aggs&#8221;: {<br />
+======&#8221;colors&#8221;: {<br />
+=========&#8221;terms&#8221;: {&#8220;field&#8221;: &#8220;color&#8221;},<br />
+=========&#8221;aggs&#8221;: {<br />
+============&#8221;avg_price&#8221;: {&#8220;avg&#8221;: {&#8220;field&#8221;: &#8220;price&#8221;}},<br />
+============&#8221;make&#8221;: { &#8220;terms&#8221;: {&#8220;field&#8221;: &#8220;make&#8221; }}<br />
+=========}<br />
+======}<br />
+===}<br />
+}<br />
+这里多了一个跟avg平级的聚合，他其实也是在做桶的操作，但他跟avg一样都是存在于terms color那个桶的。 这个语句要表达的意思是说，不仅显示每个颜色的数目，每个颜色的平均值，每个颜色里面针对make(品牌)进行分组统计。<br />
+{<br />
+===&#8221;aggs&#8221;: {<br />
+======&#8221;colors&#8221;: {<br />
+=========&#8221;terms&#8221;: {&#8220;field&#8221;: &#8220;color&#8221;},<br />
+=========&#8221;aggs&#8221;: {<br />
+============&#8221;avg_price&#8221;: { &#8220;avg&#8221;: { &#8220;field&#8221;: &#8220;price&#8221; }},<br />
+============&#8221;make&#8221; : {&#8220;terms&#8221; : {&#8220;field&#8221; : &#8220;make&#8221; },<br />
+=============== &#8220;aggs&#8221; : {<br />
+================== &#8220;min_price&#8221; : { &#8220;min&#8221;: { &#8220;field&#8221;: &#8220;price&#8221;} },<br />
+================== &#8220;max_price&#8221; : { &#8220;max&#8221;: { &#8220;field&#8221;: &#8220;price&#8221;} }<br />
+=============== }<br />
+============}<br />
+=========}<br />
+======}<br />
+===}<br />
+}<br />
+相比之前的，我们可以看到明显多出min_price max_price这两个字段。 基于上面的解释，我们再继续描述下他所表达的意思。不仅显示每个颜色的数目，每个颜色的平均值，每个颜色里面针对make(品牌)进行分组统计，然后继续得到最便宜的价格，最贵的价格。<br />
+{<br />
+===&#8221;aggs&#8221;: {<br />
+======&#8221;sales&#8221;: {<br />
+=========&#8221;date_histogram&#8221;: {<br />
+============&#8221;field&#8221;: &#8220;sold&#8221;,<br />
+============&#8221;interval&#8221;: &#8220;month&#8221;,<br />
+============&#8221;format&#8221;: &#8220;yyyy-MM-dd&#8221;,<br />
+============&#8221;min_doc_count&#8221; : 0,<br />
+============&#8221;extended_bounds&#8221; : {<br />
+=============== &#8220;min&#8221; : &#8220;2014-01-01&#8221;,<br />
+=============== &#8220;max&#8221; : &#8220;2014-12-31&#8221;<br />
+============}<br />
+====== }<br />
+=== }<br />
+===}<br />
+}<br />
+date_histogram是aggs表述时间范围的，这也是我们经常会用到的。 上面的聚合语句表达的意思是说，2014整年里按照每个月的维度进行分组聚合，求每个月有多少item<br />
+大家一定要理解Buckets(桶)及Metrics(指标)概念，buckets多层嵌套的概念，想基于哪个桶做统计计算，只需要嵌入一层aggs就可以了。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

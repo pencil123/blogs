@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 开发UDF(C language) | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,UDF,用户自定义函数" />
+    <meta name="description"  content="MySQL 数据库服务C语言开发UDF用户自定义函数" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 开发UDF(C language)评论Feed" href="https://cn-blogs.cn/archives/334.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL UDF 用户自定义函数' href='https://cn-blogs.cn/archives/331.html' />
+<link rel='next' title='最大连接失败次数' href='https://cn-blogs.cn/archives/336.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/334.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=334' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F334.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F334.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-334 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/331.html" rel="prev">上一篇：MySQL UDF 用户自定义函数</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/336.html" rel="next">下一篇：最大连接失败次数</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 开发UDF(C language)        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/12/20</span>
+            <span class="update is-hidden">2018-04-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>name_init</h3>
+<p><code>my_boolname_init(UDF_INIT *initid, UDF_ARGS *args, char *message)</code><br />
+请自行了解UDF_INIT 结构体和UDF_ARGS结构体<br />
+Message：用于打印错误信息</p>
+<h3>name_deinit</h3>
+<p><code>void name_deinit(UDF_INIT*initid)</code><br />
+该函数会进行一些内存释放和清理的工作，在之前我们提到initid-&gt;ptr，我们可以在该区域·进行内存的动态分配，这里就可以直接进行内存释放。</p>
+<h3>name()</h3>
+<p>针对不同的返回值类型，如：STRING\DECIMAL\INTEGER\REAL</p>
+<h3>name_add()和name_clear()</h3>
+<p><code>void name_add(UDF_INIT *initid, UDF_ARGS *args, char *is_null,char *error)<br />
+void name_clear(UDF_INIT *initid, char *is_null, char *error)</code><br />
+对于聚合类型的UDF，name_addd和name_clear会被反复调用</p>
+<h2>两个例子</h2>
+<p>下一个单次调用型函数，一个聚集类型函数，来描述写一个UDF的过程。</p>
+<h3>接受一个参数，并返回该参数的值</h3>
+<p><code>//初始化<br />
+my_booludf_int_init(UDF_INIT *initid, UDF_ARGS *args, char *message)<br />
+{<br />
+if (args-&gt;arg_count != 1){ //检查参数个数<br />
+strcpy(message, "udf_intexample() can onlyaccept one argument");<br />
+return 1;<br />
+}<br />
+if (args-&gt;arg_type[0] != INT_RESULT){ //检查参数类型<br />
+strcpy(message, "udf_intexample() argumenthas to be an integer");<br />
+return 1;<br />
+}<br />
+return 0;<br />
+}<br />
+//清理操作<br />
+voidudf_int_deinit(UDF_INIT *initid)<br />
+{<br />
+}<br />
+//主函数<br />
+long long udf_int(UDF_INIT *initid, UDF_ARGS *args, char *is_null, char *error)<br />
+{<br />
+long long num = (*(long long *)args-&gt;args[0]); //获取第一个参数值<br />
+return num;<br />
+}</code></p>
+<h3>接受一个浮点数类型的参数，并对每个分组进行求和</h3>
+<p><code>//初始化<br />
+my_booludf_floatsum_init(UDF_INIT *initid, UDF_ARGS *args, char *message)<br />
+{<br />
+double *total = (double *) malloc (sizeof(double));<br />
+if (total == NULL){ //内存分配失败<br />
+strcpy(message,"udf_floatsum:alloc mem failed!");<br />
+return 1;<br />
+}<br />
+*total = 0;<br />
+initid-&gt;ptr = (char *)total;<br />
+if (args-&gt;arg_count != 1){ //检查参数个数<br />
+strcpy(message, "too moreargs,only one!");<br />
+return 1;<br />
+}<br />
+if (args-&gt;arg_type[0] != REAL_RESULT){ //检查参数类型<br />
+strcpy(message, "wrongtype");<br />
+return 1;<br />
+}<br />
+initid-&gt;decimals = 3; //设置返回值精度<br />
+return 0;<br />
+}<br />
+//清理、释放在init函数中分配的内存<br />
+voidudf_floatsum_deinit(UDF_INIT *initid)<br />
+{<br />
+free(initid-&gt;ptr);<br />
+}<br />
+//每一行都会调用到该函数<br />
+voidudf_floatsum_add(UDF_INIT *initid, UDF_ARGS *args, char *is_null, char *error)<br />
+{<br />
+double* float_total;<br />
+float_total = (double*)initid-&gt;ptr;<br />
+if (args-&gt;args[0])<br />
+*float_total += *(double*)args-&gt;args[0];<br />
+}<br />
+//每个分组完成后，返回结果<br />
+doubleudf_floatsum(UDF_INIT *initid, UDF_ARGS *args, char *is_null, char *error)<br />
+{<br />
+double* float_total;<br />
+float_total = (double *)initid-&gt;ptr;<br />
+return *float_total;<br />
+}<br />
+//在进行下一个分组前调用，设置initid-&gt;ptr指向的值为0，以便下一次分组统计<br />
+voidudf_floatsum_clear(UDF_INIT *initid, char *is_null, char *error)<br />
+{<br />
+double *float_total;<br />
+float_total = (double *)initid-&gt;ptr;<br />
+*float_total = 0;<br />
+}</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

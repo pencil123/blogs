@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 编译安装 | 青春部落    </title>
+    <meta name="keywords"  content="mysql,编译安装" />
+    <meta name="description"  content="linux 系统下mysql数据库服务编译安装说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 编译安装评论Feed" href="https://cn-blogs.cn/archives/3304.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL 索引管理' href='https://cn-blogs.cn/archives/924.html' />
+<link rel='next' title='zabbix 整套安装简介' href='https://cn-blogs.cn/archives/3023.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3304.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3304' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3304.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3304.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3304 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/924.html" rel="prev">上一篇：MySQL 索引管理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3023.html" rel="next">下一篇：zabbix 整套安装简介</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 编译安装        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/10/25</span>
+            <span class="update is-hidden">2018-04-13</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>MySQL 数据库安装前准备</h2>
+<p>MySQL 数据库安装之前需要做的事情：<br />
+1、选择编译安装还是二进制发布版安装<br />
+2、在官网下载安装文件，并校验文件<br />
+3、配置MySQL 数据库依赖环境</p>
+<h3>二进制发布版安装包知识补充</h3>
+<h4>MySQL社区版的RPM包</h4>
+<table>
+<tbody>
+<tr>
+<th>软件包名字</th>
+<th>概要</th>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td>mysql-community-server</td>
+<td>数据库服务器和相关工具</td>
+</tr>
+<tr>
+<td>mysql-community-client</td>
+<td>MySQL客户端应用程序和工具</td>
+</tr>
+<tr>
+<td>mysql-community-common</td>
+<td>服务器和客户端库的公共文件</td>
+</tr>
+<tr>
+<td>mysql-community-server-minimal</td>
+<td>数据库服务器和相关工具的最小安装</td>
+</tr>
+<tr>
+<td>mysql-community-devel</td>
+<td>开发MySQL数据库客户端应用程序的头文件和库</td>
+</tr>
+<tr>
+<td>mysql-community-libs</td>
+<td>MySQL数据库客户端应用程序的共享库</td>
+</tr>
+<tr>
+<td>mysql-community-libs-compat</td>
+<td>用于以前的MySQL安装的共享兼容性库</td>
+</tr>
+<tr>
+<td>mysql-community-embedded</td>
+<td>MySQL嵌入式库</td>
+</tr>
+<tr>
+<td>mysql-community-embedded-devel</td>
+<td>开发MySQL的头文件和库作为可嵌入的库</td>
+</tr>
+<tr>
+<td>mysql-community-test</td>
+<td>MySQL服务器的测试套件</td>
+</tr>
+</tbody>
+</table>
+<h4>MySQL Installation Layout for Linux RPM Packages from the MySQL Developer Zone</h4>
+<table>
+<tbody>
+<tr>
+<th>Files or Resources</th>
+<th>Location</th>
+</tr>
+<tr>
+<td>Client programs and scripts</td>
+<td>/usr/bin</td>
+</tr>
+<tr>
+<td>mysqld server</td>
+<td>/usr/sbin</td>
+</tr>
+<tr>
+<td>Configuration file</td>
+<td>/etc/my.cnf</td>
+</tr>
+<tr>
+<td>Data directory</td>
+<td>/var/lib/mysql</td>
+</tr>
+<tr>
+<td>Error log file</td>
+<td>For RHEL, Oracle Linux, CentOS or Fedora platforms:<br />
+/var/log/mysqld.log<br />
+For SLES: /var/log/mysql/mysqld.log</td>
+</tr>
+<tr>
+<td>Value of secure_file_priv</td>
+<td>/var/lib/mysql-files</td>
+</tr>
+<tr>
+<td>System V init script</td>
+<td>For RHEL, Oracle Linux, CentOS or Fedora platforms:<br />
+/etc/init.d/mysqld<br />
+For SLES: /etc/init.d/mysql</td>
+</tr>
+<tr>
+<td>Systemd service</td>
+<td>For RHEL, Oracle Linux, CentOS or Fedora platforms:<br />
+mysqld<br />
+For SLES: mysql</td>
+</tr>
+<tr>
+<td>Pid file</td>
+<td>/var/run/mysql/mysqld.pid</td>
+</tr>
+<tr>
+<td>Socket</td>
+<td>/var/lib/mysql/mysql.sock</td>
+</tr>
+<tr>
+<td>Keyring directory</td>
+<td>/var/lib/mysql-keyring</td>
+</tr>
+<tr>
+<td>Unix manual pages</td>
+<td>/usr/share/man</td>
+</tr>
+<tr>
+<td>Include (header) files</td>
+<td>/usr/include/mysql</td>
+</tr>
+<tr>
+<td>Libraries</td>
+<td>/usr/lib/mysql</td>
+</tr>
+<tr>
+<td>Miscellaneous support files (for example, error messages, and character<br />
+set files)</td>
+<td>/usr/share/mysql</td>
+</tr>
+</tbody>
+</table>
+<h3>编译安装和二进制发行版安装</h3>
+<p>1、编译安装可以自定义MySQL安装路径。标准二进制发行版安装已经定义好路径了。<br />
+2、编译安装可以自定义启动或禁用部分功能扩展，从而优化服务。二进制发行版采用标准的编译参数。<br />
+3、如果你是开发高手，可以更加需求修改源代码。<br />
+4、源代码分发包含比二进制分发更多的测试和示例。</p>
+<h3>校验安装包</h3>
+<h4>验证MD5校验和</h4>
+<p>在你下载了一个MySQL包之后，你应该确保它的MD5校验和与MySQL下载页面上提供的校验和相匹配。每个软件包都有一个单独的校验和，您可以根据您下载的软件包进行验证。</p>
+<h4>使用GnuPG进行签名检查</h4>
+<p>验证包的完整性和真实性的另一种方法是使用加密签名。这比使用MD5校验和更可靠，但需要更多的工作。</p>
+<h3>源码编译安装系统要求</h3>
+<p>1、CMake 平台构建框架工具<br />
+2、一个可用的ANSI C ++编译器<br />
+3、Boost C ++库需要构建MySQL（但不要使用它）<br />
+4、The ncurses library.</p>
+<h2>MySQL 数据库安装过程</h2>
+<h3>安装依赖库</h3>
+<p><code>yum -y install make gcc-c++ cmake bison-devel ncurses-devel</code></p>
+<h3>建立mysql用户</h3>
+<p><code>groupadd mysql<br />
+useradd -g mysql mysql</code></p>
+<h3>建立相应的目录</h3>
+<p><code>mkdir /usr/local/mysql<br />
+mkdir /data/mysqldb/dbs -p<br />
+mkdir /data/mysqldb/mysql-bin<br />
+mkdir /data/mysqldb/logs<br />
+mkdir /data/mysqldb/run<br />
+mkdir /data/mysqldb/relay-bin</code></p>
+<h3>目录权限设置</h3>
+<p><code>chown -R mysql:mysql /data/mysqldb<br />
+chown -R mysql:mysql /usr/local/mysql</code></p>
+<h3>编译安装</h3>
+<p><code>cmake \<br />
+-DCMAKE_INSTALL_PREFIX=/usr/local/mysql \<br />
+-DMYSQL_DATADIR=/usr/local/mysql/data \<br />
+-DSYSCONFDIR=/etc \<br />
+-DWITH_MYISAM_STORAGE_ENGINE=1 \<br />
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \<br />
+-DWITH_MEMORY_STORAGE_ENGINE=1 \<br />
+-DWITH_READLINE=1 \<br />
+-DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock \<br />
+-DMYSQL_TCP_PORT=3306 \<br />
+-DENABLED_LOCAL_INFILE=1 \<br />
+-DWITH_PARTITION_STORAGE_ENGINE=1 \<br />
+-DEXTRA_CHARSETS=all \<br />
+-DDEFAULT_CHARSET=utf8 \<br />
+-DMYSQL_USER=mysql \<br />
+-DDEFAULT_COLLATION=utf8_general_ci<br />
+make &amp;&amp; make install</code></p>
+<h3>编译参数说明</h3>
+<h4>有关目录的参数</h4>
+<table>
+<tbody>
+<tr>
+<th>安装根目录</th>
+<th>-DCMAKE_INSTALL_PREFIX=</th>
+</tr>
+<tr>
+<th>mysqld目录</th>
+<th>-DINSTALL_SBINDIR=</th>
+</tr>
+<tr>
+<th>数据存储目录</th>
+<th>-DMYSQL_DATADIR=</th>
+</tr>
+<tr>
+<th>配置文件目录</th>
+<th>-DSYSCONFDIR=</th>
+</tr>
+<tr>
+<th>插件目录</th>
+<th>-DINSTALL_PLUGINDIR=</th>
+</tr>
+<tr>
+<th>手册文件目录</th>
+<th>-DINSTALL_MANDIR=</th>
+</tr>
+<tr>
+<th>共享数据目录</th>
+<th>-DINSTALL_SHAREDIR=</th>
+</tr>
+<tr>
+<th>Library库目录</th>
+<th>-DINSTALL_LIBDIR=</th>
+</tr>
+<tr>
+<th>Header安装目录</th>
+<th>-DINSTALL_INCLUDEDIR=</th>
+</tr>
+<tr>
+<th>信息文档目录</th>
+<th>-DINSTALL_INFODIR=</th>
+</tr>
+</tbody>
+</table>
+<h4>存储引擎参数</h4>
+<table>
+<tbody>
+<tr>
+<th>myisam存储引擎</th>
+<th>-DWITH_MYISAM_STORAGE_ENGINE</th>
+</tr>
+<tr>
+<th>innodb存储引擎</th>
+<th>-DWITH_INNOBASE_STORAGE_ENGINE</th>
+</tr>
+<tr>
+<th>archive存储引擎</th>
+<th>-DWITH_ARCHIVE_STORAGE_ENGINE</th>
+</tr>
+<tr>
+<th>blackhole存储引擎</th>
+<th>-DWITH_BLACKHOLE_STORAGE_ENGINE</th>
+</tr>
+</tbody>
+</table>
+<h4>库文件加载参数</h4>
+<table>
+<tbody>
+<tr>
+<th>readline库</th>
+<th>-DWITH_READLINE=1</th>
+</tr>
+<tr>
+<th>SSL库</th>
+<th>-DWITH_SSL=system</th>
+</tr>
+<tr>
+<th>zlib库</th>
+<th>-DWITH_ZLIB=system</th>
+</tr>
+<tr>
+<th>libwrap库</th>
+<th>-DWITH_LIBWRAP=0</th>
+</tr>
+</tbody>
+</table>
+<h4>其他配置参数</h4>
+<table>
+<tbody>
+<tr>
+<th>TCP/IP端口</th>
+<th>-DMYSQL_TCP_PORT=3306</th>
+</tr>
+<tr>
+<th>UNIX socket文件</th>
+<th>-DMYSQL_UNIX_ADDR=/tmp/mysqld.sock</th>
+</tr>
+<tr>
+<th>启用加载本地数据</th>
+<th>-DENABLED_LOCAL_INFILE=1</th>
+</tr>
+<tr>
+<th>扩展字符支持</th>
+<th>-DEXTRA_CHARSETS=all（默认：all）</th>
+</tr>
+<tr>
+<th>默认字符集</th>
+<th>-DDEFAULT_CHARSET=utf8</th>
+</tr>
+<tr>
+<th>默认字符校对</th>
+<th>-DDEFAULT_COLLATION=utf8_general_ci</th>
+</tr>
+<tr>
+<th>嵌入式服务器</th>
+<th>-DWITH_EMBEDDED_SERVER=1</th>
+</tr>
+<tr>
+<th>mysqld运行用户</th>
+<th>-DMYSQL_USER=mysql</th>
+</tr>
+<tr>
+<th>调试模式</th>
+<th>&#8211;DWITH_DEBUG=0（默认禁用）</th>
+</tr>
+<tr>
+<th>Profiling</th>
+<th>-DENABLE_PROFILING=0（默认启用）</th>
+</tr>
+<tr>
+<th>注释存储类型</th>
+<th>-DWITH_COMMENT=&#8217;string&#8217;</th>
+</tr>
+</tbody>
+</table>
+<h2>MySQL 数据库安装完成后的设置和测试</h2>
+<h3>初始化数据目录</h3>
+<p>安装MySQL之后mysql，必须初始化数据目录（包括系统数据库中的表）。对于某些MySQL安装方法，数据目录初始化可以自动完成。对于其他安装方法，包括通用二进制和源代码发行版的安装，您必须自己初始化数据目录。</p>
+<h4>使用mysqld初始化</h4>
+<p><code>bin/mysqld --initialize --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data</code><br />
+执行过程：<br />
+1、检测数据目录：如不存在，则创建；如存在且不为空，则产生错误并退出<br />
+2、在数据目录中，创建 mysql系统数据库及其表，包括授权表，服务器端帮助表和时区表<br />
+3、Innodb 存储引擎所需要的系统表空间和相关数据结构<br />
+4、创建&#8217;root&#8217;@&#8217;localhost&#8217;超级用户和其他保留用户<br />
+5、如果保证文件(fill_help_tables.sql)可用，则生成帮助表。<br />
+6、如果&#8211;init-file参数设定SQL语句文件，则服务器将执行文件中的语句<br />
+7、退出</p>
+<h4>使用mysql_install_db初始化</h4>
+<p><code>bin/mysql_install_db --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data</code><br />
+1、mysql_install_db脚本初始化数据库时需要读取my.cnf(default-file)配置文件.<br />
+2、已经初始化过的数据库，重新初始化需要先停掉MySQL服务。<br />
+3、在服务器上运行多个实例的情况下，新初始化一个数据库，请注意指明my.cnf配置文件。<br />
+4、二进制日志、中继日志、错误日志等目录配置要分开并写明。</p>
+<h4>配置文件</h4>
+<p>在UNIX和类UNIX系统中，MySQL 启动序按照下面列表读取配置信息。<br />
+配置信息生效规则：前面的文件优先读取，后面文件的配置会覆盖前面文件的配置。</p>
+<table>
+<tbody>
+<tr>
+<th>File Name</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<th>/etc/my.cnf</th>
+<th>Global options</th>
+</tr>
+<tr>
+<th>/etc/mysql/my.cnf</th>
+<th>Global options</th>
+</tr>
+<tr>
+<th>SYSCONFDIR/my.cnf</th>
+<th>Global options</th>
+</tr>
+<tr>
+<th>$MYSQL_HOME/my.cnf</th>
+<th>Server-specific options (server only)</th>
+</tr>
+<tr>
+<th>defaults-extra-file</th>
+<th>The file specified with &#8211;defaults-extra-file, if any</th>
+</tr>
+<tr>
+<th>~/.my.cnf</th>
+<th>User-specific options</th>
+</tr>
+<tr>
+<th>~/.mylogin.cnf</th>
+<th>User-specific login path options (clients only)</th>
+</tr>
+</tbody>
+</table>
+<h4>服务启动和关闭</h4>
+<p><code>/bin/mysqld_safe --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data &amp;</code><br />
+注意：如果启动命令不写明datadir，而是从my.cnf配置文件中读取；则需要首先排查配置文件的参数赋值是否合适。<br />
+<code>/bin/mysqladmin shutdown -S path-to-socket</code><br />
+正确关闭服务</p>
+<h4>测试服务</h4>
+<p>数据目录初始化并启动服务器后，执行一些简单的测试以确保其工作正常。<br />
+使用mysqladmin来验证服务器正在运行。以下命令提供简单的测试来检查服务器是否启动并响应连接：<br />
+<code>shell&gt; bin/mysqladmin version<br />
+shell&gt;bin/mysqladmin variables</code><br />
+如果无法连接到服务器，请指定一个-u root连接为的选项root。如果您已经为该root帐户分配了密码，则还需要-p在命令行中指定并在出现提示时输入密码。例如：<br />
+<code>shell&gt; bin/mysqladmin -u root -p version<br />
+输入密码：(enter root password here)</code></p>
+<h4>数据库管理脚本</h4>
+<p><code>cp support-files/mysql.server /etc/init.d/mysql<br />
+chkconfig mysql on<br />
+service mysql start</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

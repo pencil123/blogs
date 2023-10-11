@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ioloop 分析 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; ioloop 分析评论Feed" href="https://cn-blogs.cn/archives/1081.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='ioloop_Configurable_EPollIOLoop_PollIOLoop_ioloop 之间的关系' href='https://cn-blogs.cn/archives/1077.html' />
+<link rel='next' title='Python 面向对象编程特殊方法' href='https://cn-blogs.cn/archives/1083.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1081.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1081' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1081.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1081.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1081 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python/tornado" rel="category tag">Tornado</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1077.html" rel="prev">上一篇：ioloop_Configurable_EPollIOLoop_PollIOLoop_ioloop 之间的关系</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1083.html" rel="next">下一篇：Python 面向对象编程特殊方法</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            ioloop 分析        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/12/27</span>
+            <span class="update is-hidden">2016-12-27</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>ioloop 分析</strong><br />
+首先要看的是关于 epoll 操作的方法，还记得前文说过的 epoll 只需要四个 api 就能完全操作嘛？ 我们来看 PollIOLoop 的实现：</p>
+<p>epoll 操作</p>
+<blockquote><p>def add_handler(self, fd, handler, events):<br />
+-**-fd, obj = self.split_fd(fd)<br />
+-**-self._handlers[fd] = (obj, stack_context.wrap(handler))<br />
+-**-self._impl.register(fd, events | self.ERROR)</p>
+<p>def update_handler(self, fd, events):<br />
+-**-fd, obj = self.split_fd(fd)<br />
+-**-self._impl.modify(fd, events | self.ERROR)</p>
+<p>def remove_handler(self, fd):<br />
+-**-fd, obj = self.split_fd(fd)<br />
+-**-self._handlers.pop(fd, None)<br />
+-**-self._events.pop(fd, None)<br />
+-**-try:<br />
+-**&#8211;**-self._impl.unregister(fd)<br />
+-**&#8211;**-except Exception:<br />
+-**&#8211;**&#8211;**-gen_log.debug(&#8220;Error deleting fd from IOLoop&#8221;, exc_info=True)</p></blockquote>
+<p>1、epoll_ctl：这个三个方法分别对应 epoll_ctl 中的 add 、 modify 、 del 参数。 所以这三个方法实现了 epoll 的 epoll_ctl 。</p>
+<p>2、epoll_create：然后 epoll 的生成在前文 EPollIOLoop 的初始化中就已经完成了：super(EPollIOLoop, self).initialize(impl=select.epoll(), **kwargs)。 这个相当于 epoll_create 。</p>
+<p>3、epoll_wait：epoll_wait 操作则在 start() 中：event_pairs = self._impl.poll(poll_timeout)</p>
+<p>4、epoll_close：而 epoll 的 close 则在 PollIOLoop 中的 close 方法内调用： self._impl.close() 完成。</p>
+<p>initialize<br />
+接下来看 PollIOLoop 的初始化方法中作了什么：</p>
+<blockquote><p>def initialize(self, impl, time_func=None, **kwargs):<br />
+-**&#8211;**-super(PollIOLoop, self).initialize(**kwargs)<br />
+-**&#8211;**-self._impl = impl-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**- # 指定 epoll<br />
+-**&#8211;**-if hasattr(self._impl, &#8216;fileno&#8217;):<br />
+-**&#8211;**&#8211;**-set_close_exec(self._impl.fileno())   # fork 后关闭无用文件描述符<br />
+-**&#8211;**-self.time_func = time_func or time.time   # 指定获取当前时间的函数<br />
+-**&#8211;**-self._handlers = {}-**&#8211;**&#8211;**&#8211;**&#8211;**-   # handler 的字典，储存被 epoll 监听的 handler，与打开它的文件描述符 ( file descriptor 简称 fd ) 一一对应<br />
+-**&#8211;**-self._events = {}-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**- # event 的字典，储存 epoll 返回的活跃的 fd event pairs<br />
+-**&#8211;**-self._callbacks = []-**&#8211;**&#8211;**&#8211;**&#8211;**-  # 储存各个 fd 回调函数的列表<br />
+-**&#8211;**-self._callback_lock = threading.Lock()-**-# 指定进程锁<br />
+-**&#8211;**-self._timeouts = []-**&#8211;**&#8211;**&#8211;**&#8211;**-   # 将是一个最小堆结构，按照超时时间从小到大排列的 fd 的任务堆（ 通常这个任务都会包含一个 callback ）<br />
+-**&#8211;**-self._cancellations = 0-**&#8211;**&#8211;**&#8211;**-   # 关于 timeout 的计数器<br />
+-**&#8211;**-self._running = False-**&#8211;**&#8211;**&#8211;**&#8211;**- # ioloop 是否在运行<br />
+-**&#8211;**-self._stopped = False-**&#8211;**&#8211;**&#8211;**&#8211;**- # ioloop 是否停止<br />
+-**&#8211;**-self._closing = False-**&#8211;**&#8211;**&#8211;**&#8211;**- # ioloop 是否关闭<br />
+-**&#8211;**-self._thread_ident = None-**&#8211;**&#8211;**&#8211;**- #  当前线程堆标识符 （ thread identify ）<br />
+-**&#8211;**-self._blocking_signal_threshold = None-**-# 系统信号， 主要用来在 epoll_wait 时判断是否会有 signal alarm 打断 epoll<br />
+-**&#8211;**-self._timeout_counter = itertools.count() # 超时计数器 ( 暂时不是很明白具体作用，好像和前面的 _cancellations 有关系？ 请大神讲讲)<br />
+-**&#8211;**-self._waker = Waker()-**&#8211;**&#8211;**&#8211;**&#8211;**- # 一个 waker 类，主要是对于管道 pipe 的操作，因为 ioloop 属于底层的数据操作，这里 epoll 监听的是 pipe<br />
+-**&#8211;**-self.add_handler(self._waker.fileno(),<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**- lambda fd, events: self._waker.consume(),<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**- self.READ)-**&#8211;**&#8211;**-   # 将管道加入 epoll 监听，对于 web server 初始化时只需要关心 READ 事件</p></blockquote>
+<p>除了注释中的解释，还有几点补充：<br />
+1、close_exec 的作用： 子进程在fork出来的时候，使用了写时复制（COW，Copy-On-Write）方式获得父进程的数据空间、 堆和栈副本，这其中也包括文件描述符。<br />
+刚刚fork成功时，父子进程中相同的文件描述符指向系统文件表中的同一项，接着，一般我们会调用exec执行另一个程序，此时会用全新的程序替换子进程的正文，数据，堆和栈等。<br />
+此时保存文件描述符的变量当然也不存在了，我们就无法关闭无用的文件描述符了。<br />
+所以通常我们会fork子进程后在子进程中直接执行close关掉无用的文件描述符，然后再执行exec。 所以 close_exec 执行的其实就是 关闭 ＋ 执行的作用。 详情可以查看： 关于linux进程间的close-on-exec机制</p>
+<p>2、Waker()： Waker 封装了对于管道 pipe 的操作：</p>
+<blockquote><p>def set_close_exec(fd):<br />
+-**-flags = fcntl.fcntl(fd, fcntl.F_GETFD)<br />
+-**-fcntl.fcntl(fd, fcntl.F_SETFD, flags | fcntl.FD_CLOEXEC)<br />
+-**-<br />
+def _set_nonblocking(fd):<br />
+-**-flags = fcntl.fcntl(fd, fcntl.F_GETFL)<br />
+-**-fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)</p>
+<p>class Waker(interface.Waker):<br />
+-**-def __init__(self):<br />
+-**&#8211;**-r, w = os.pipe()<br />
+-**&#8211;**-_set_nonblocking(r)<br />
+-**&#8211;**-_set_nonblocking(w)<br />
+-**&#8211;**-set_close_exec(r)<br />
+-**&#8211;**-set_close_exec(w)<br />
+-**&#8211;**-self.reader = os.fdopen(r, &#8220;rb&#8221;, 0)<br />
+-**&#8211;**-self.writer = os.fdopen(w, &#8220;wb&#8221;, 0)</p>
+<p>-**-def fileno(self):<br />
+-**&#8211;**-return self.reader.fileno()</p>
+<p>-**-def write_fileno(self):<br />
+-**&#8211;**-return self.writer.fileno()</p>
+<p>-**-def wake(self):<br />
+-**&#8211;**-try:<br />
+-**&#8211;**&#8211;**-self.writer.write(b&#8221;x&#8221;)<br />
+-**&#8211;**-except IOError:<br />
+-**&#8211;**&#8211;**-pass</p>
+<p>-**-def consume(self):<br />
+-**&#8211;**-try:<br />
+-**&#8211;**&#8211;**-while True:<br />
+-**&#8211;**&#8211;**&#8211;**-result = self.reader.read()<br />
+-**&#8211;**&#8211;**&#8211;**-if not result:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-break<br />
+-**&#8211;**-except IOError:<br />
+-**&#8211;**&#8211;**-pass</p>
+<p>-**-def close(self):<br />
+-**&#8211;**-self.reader.close()<br />
+-**&#8211;**-self.writer.close()</p></blockquote>
+<p>可以看到 waker 把 pipe 分为读、 写两个管道并都设置了非阻塞和 close_exec。 注意wake(self)方法中：self.writer.write(b&#8221;x&#8221;) 直接向管道中写入随意字符从而释放管道。</p>
+<p>start<br />
+ioloop 最核心的部分：</p>
+<blockquote><p>def start(self):<br />
+-**&#8211;**-if self._running:-**-   # 判断是否已经运行<br />
+-**&#8211;**&#8211;**-raise RuntimeError(&#8220;IOLoop is already running&#8221;)<br />
+-**&#8211;**-self._setup_logging()<br />
+-**&#8211;**-if self._stopped:<br />
+-**&#8211;**&#8211;**-self._stopped = False  # 设置停止为假<br />
+-**&#8211;**&#8211;**-return<br />
+-**&#8211;**-old_current = getattr(IOLoop._current, &#8220;instance&#8221;, None)<br />
+-**&#8211;**-IOLoop._current.instance = self<br />
+-**&#8211;**-self._thread_ident = thread.get_ident()  # 获得当前线程标识符<br />
+-**&#8211;**-self._running = True # 设置运行</p>
+<p>-**&#8211;**-old_wakeup_fd = None<br />
+-**&#8211;**-if hasattr(signal, &#8216;set_wakeup_fd&#8217;) and os.name == &#8216;posix&#8217;:<br />
+-**&#8211;**&#8211;**-try:<br />
+-**&#8211;**&#8211;**&#8211;**-old_wakeup_fd = signal.set_wakeup_fd(self._waker.write_fileno())<br />
+-**&#8211;**&#8211;**&#8211;**-if old_wakeup_fd != -1:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-signal.set_wakeup_fd(old_wakeup_fd)<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-old_wakeup_fd = None<br />
+-**&#8211;**&#8211;**-except ValueError:<br />
+-**&#8211;**&#8211;**&#8211;**-old_wakeup_fd = None</p>
+<p>-**&#8211;**-try:<br />
+-**&#8211;**&#8211;**-while True:  # 服务器进程正式开始，类似于其他服务器的 serve_forever<br />
+-**&#8211;**&#8211;**&#8211;**-with self._callback_lock: # 加锁，_callbacks 做为临界区不加锁进行读写会产生脏数据<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-callbacks = self._callbacks # 读取 _callbacks<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-self._callbacks = []. # 清空 _callbacks<br />
+-**&#8211;**&#8211;**&#8211;**-due_timeouts = [] # 用于存放这个周期内已过期（ 已超时 ）的任务<br />
+-**&#8211;**&#8211;**&#8211;**-if self._timeouts: # 判断 _timeouts 里是否有数据<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-now = self.time() # 获取当前时间，用来判断 _timeouts 里的任务有没有超时<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-while self._timeouts: # _timeouts 有数据时一直循环, _timeouts 是个最小堆，第一个数据永远是最小的， 这里第一个数据永远是最接近超时或已超时的<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-if self._timeouts[0].callback is None: # 超时任务无回调<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-heapq.heappop(self._timeouts) # 直接弹出<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self._cancellations -= 1 # 超时计数器 －1<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-elif self._timeouts[0].deadline  512<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-and self._cancellations > (len(self._timeouts) >> 1)):  # 当超时计数器大于 512 并且 大于 _timeouts 长度一半（ >> 为右移运算， 相当于十进制数据被除 2 ）时，清零计数器，并剔除 _timeouts 中无 callbacks 的任务<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self._cancellations = 0<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self._timeouts = [x for x in self._timeouts<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-  if x.callback is not None]<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-heapq.heapify(self._timeouts) # 进行 _timeouts 最小堆化</p>
+<p>-**&#8211;**&#8211;**&#8211;**-for callback in callbacks:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-self._run_callback(callback) # 运行 callbacks 里所有的 calllback<br />
+-**&#8211;**&#8211;**&#8211;**-for timeout in due_timeouts:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-if timeout.callback is not None:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self._run_callback(timeout.callback) # 运行所有已过期任务的 callback<br />
+-**&#8211;**&#8211;**&#8211;**-callbacks = callback = due_timeouts = timeout = None # 释放内存</p>
+<p>-**&#8211;**&#8211;**&#8211;**-if self._callbacks: # _callbacks 里有数据时<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-poll_timeout = 0.0 # 设置 epoll_wait 时间为0（ 立即返回 ）<br />
+-**&#8211;**&#8211;**&#8211;**-elif self._timeouts: # _timeouts 里有数据时<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-poll_timeout = self._timeouts[0].deadline &#8211; self.time()<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-# 取最小过期时间当 epoll_wait 等待时间，这样当第一个任务过期时立即返回<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-poll_timeout = max(0, min(poll_timeout, _POLL_TIMEOUT))<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-# 如果最小过期时间大于默认等待时间 _POLL_TIMEOUT ＝ 3600，则用 3600，如果最小过期时间小于0 就设置为0 立即返回。<br />
+-**&#8211;**&#8211;**&#8211;**-else:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-poll_timeout = _POLL_TIMEOUT # 默认 3600 s 等待时间</p>
+<p>-**&#8211;**&#8211;**&#8211;**-if not self._running: # 检查是否有系统信号中断运行，有则中断，无则继续<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-break</p>
+<p>-**&#8211;**&#8211;**&#8211;**-if self._blocking_signal_threshold is not None:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-signal.setitimer(signal.ITIMER_REAL, 0, 0) # 开始 epoll_wait 之前确保 signal alarm 都被清空（ 这样在 epoll_wait 过程中不会被 signal alarm 打断 ）</p>
+<p>-**&#8211;**&#8211;**&#8211;**-try:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-event_pairs = self._impl.poll(poll_timeout) # 获取返回的活跃事件队<br />
+-**&#8211;**&#8211;**&#8211;**-except Exception as e:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-if errno_from_exception(e) == errno.EINTR:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-continue<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-else:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-raise</p>
+<p>-**&#8211;**&#8211;**&#8211;**-if self._blocking_signal_threshold is not None:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-signal.setitimer(signal.ITIMER_REAL,<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**- self._blocking_signal_threshold, 0) #  epoll_wait 结束， 再设置 signal alarm<br />
+-**&#8211;**&#8211;**&#8211;**-self._events.update(event_pairs) # 将活跃事件加入 _events<br />
+-**&#8211;**&#8211;**&#8211;**-while self._events:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-fd, events = self._events.popitem() # 循环弹出事件<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-try:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-fd_obj, handler_func = self._handlers[fd] # 处理事件<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-handler_func(fd_obj, events)<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-except (OSError, IOError) as e:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-if errno_from_exception(e) == errno.EPIPE:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-pass<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-else:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self.handle_callback_exception(self._handlers.get(fd))<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**-except Exception:<br />
+-**&#8211;**&#8211;**&#8211;**&#8211;**&#8211;**-self.handle_callback_exception(self._handlers.get(fd))<br />
+-**&#8211;**&#8211;**&#8211;**-fd_obj = handler_func = None</p>
+<p>-**&#8211;**-finally:<br />
+-**&#8211;**&#8211;**-self._stopped = False # 确保发生异常也继续运行<br />
+-**&#8211;**&#8211;**-if self._blocking_signal_threshold is not None:<br />
+-**&#8211;**&#8211;**&#8211;**-signal.setitimer(signal.ITIMER_REAL, 0, 0) # 清空 signal alarm<br />
+-**&#8211;**&#8211;**-IOLoop._current.instance = old_current<br />
+-**&#8211;**&#8211;**-if old_wakeup_fd is not None:<br />
+-**&#8211;**&#8211;**&#8211;**-signal.set_wakeup_fd(old_wakeup_fd)   # 和 start 开头部分对应，但是不是很清楚作用，求老司机带带路</p></blockquote>
+<p>stop</p>
+<blockquote><p>def stop(self):<br />
+-**-self._running = False<br />
+-**-self._stopped = True<br />
+-**-self._waker.wake()</p></blockquote>
+<p>这个很简单，设置判断条件，然后调用 self._waker.wake() 向 pipe 写入随意字符唤醒 ioloop 事件循环。 over！</p>
+<p>总结</p>
+<p>噗，写了这么长，终于写完了。 经过分析，我们可以看到， ioloop 实际上是对 epoll 的封装，并加入了一些对上层事件的处理和 server 相关的底层处理。</p>
+<p>原味：http://python.jobbole.com/85365/</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

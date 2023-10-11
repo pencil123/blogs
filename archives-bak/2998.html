@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Percona 和 DSN 说明 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,Percona,DSN" />
+    <meta name="description"  content="MySQL数据库和Percona公司以及DSN说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Percona 和 DSN 说明评论Feed" href="https://cn-blogs.cn/archives/2998.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='查询缓存' href='https://cn-blogs.cn/archives/2977.html' />
+<link rel='next' title='Engine 存储引擎' href='https://cn-blogs.cn/archives/3011.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2998.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2998' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2998.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2998.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2998 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2977.html" rel="prev">上一篇：查询缓存</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3011.html" rel="next">下一篇：Engine 存储引擎</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Percona 和 DSN 说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/02/22</span>
+            <span class="update is-hidden">2018-04-30</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Percona是MySQL，MariaDB，MongoDB和RocksDB许多开源软件项目的开发人员。他们表示，他们的所有软件都是“完全开源并且完全免费”的。<br />
+该公司的收入来源于开源数据库相关支持，咨询和托管服务。<br />
+该公司由Peter Zaitsev和Vadim Tkachenko于2006年创立。其总部位于北卡罗来纳州的罗利，在北美和世界其他地区雇佣了大多数偏远的劳动力。</p>
+<h4>开源软件</h4>
+<p>Percona为其开源软件维护一个GitHub存储库，也可以从Percona网站下载。</p>
+<ul>
+<li>MySQL数据库软件
+<ul>
+<li>用于MySQL的Percona服务器</li>
+<li>Percona XtraDB集群</li>
+<li>Percona XtraBackup</li>
+<li>Percona TokuDB</li>
+</ul>
+</li>
+<li>MongoDB数据库软件：
+<ul>
+<li>用于MongoDB的Percona服务器</li>
+</ul>
+</li>
+<li>数据库管理工具
+<ul>
+<li>Percona监测和管理</li>
+<li>Percona工具包</li>
+<li>Percona监控插件</li>
+</ul>
+</li>
+</ul>
+<h3>DSN (Data source name) 数据源名称</h3>
+<p>Percona Toolkit工具使用DSN来指定如何创建到MySQL服务器的DBD连接。DSN是逗号分隔的key=value部分字符串，例如：<br />
+<code>h=host1,P=3306,u=bob</code></p>
+<p>某些工具不使用DSN，但仍使用&#8211;host，&#8211;user和&#8211;password等选项连接到MySQL。 这些工具使用这些选项在幕后自动创建DSN。<br />
+其他工具同时使用DSN和上述选项。这些选项为所有未指定选项对应关键部分的DSN提供默认值。例如，如果指定了DSN h = host1和选项&#8211;port = 12345，则该工具会自动将P = 12345添加到DSN。</p>
+<h4>转移字符</h4>
+<p>DSN通常在命令行中指定，因此必须考虑shell引用和转义。<br />
+由于DSN部分之间用逗号分隔，因此DSN值中的文字逗号必须用单个反斜杠（\）进行转义。由于反斜杠是大多数shell的转义字符，因此需要两个反斜杠来传递文字反斜杠。例如，如果用户名是字面意思my,name，那么它必须my\\,name在大多数shell上指定。这适用于DSN和与DSN相关的选项&#8211;user。</p>
+<h4>关键词列表</h4>
+<p>A ：Default character set for the connection<br />
+D ：Default database to use when connecting.<br />
+F ：Defaults file for the MySQL client library (my.cnf)<br />
+h : MySQL hostname or IP address to connect to.<br />
+L : Explicitly enable LOAD DATA LOCAL INFILE.<br />
+p : MySQL password to use when connecting.<br />
+P : Port number.<br />
+S : MySQL socket file.<br />
+u : username.</p>
+<h4>传播</h4>
+<p>许多工具可让您将值从一个DSN传播到下一个，因此您无需为每个DSN指定所有部分。例如，如果您要为每个DSN指定一个用户名和密码，则可以按以下方式连接到三台主机：<br />
+<code>h=host1,u=fred,p=wilma host2 host3</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

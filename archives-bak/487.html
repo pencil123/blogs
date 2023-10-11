@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Python 爬虫模块库说明-PycURL | 青春部落    </title>
+    <meta name="keywords"  content="Python,编程语言,爬虫,PycURL" />
+    <meta name="description"  content="Python编程语言中爬虫库PycURL模块说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Python 爬虫模块库说明-PycURL评论Feed" href="https://cn-blogs.cn/archives/487.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='文件类|属性' href='https://cn-blogs.cn/archives/484.html' />
+<link rel='next' title='os 进程管理|系统参数' href='https://cn-blogs.cn/archives/489.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/487.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=487' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F487.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F487.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-487 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/484.html" rel="prev">上一篇：文件类|属性</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/489.html" rel="next">下一篇：os 进程管理|系统参数</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Python 爬虫模块库说明-PycURL        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/28</span>
+            <span class="update is-hidden">2018-05-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Python从Internet抓取信息的库有PycURL和urllib。</p>
+<h3>PycURL 模块说明</h3>
+<p>A Python Interface To The cURL library（C语言编写的库）;官网：<code>https://curl.haxx.se/libcurl/</code><br />
+PycURL是libcurl（多协议文件传输库）的Python接口。 与urllib Python模块类似，PycURL可用于从Python程序中获取由URL标识的对象。<br />
+然而，除了简单的提取之外，PycURL还保留了libcurl的大部分功能，包括：<br />
+1、速度 &#8211; libcurl速度非常快（参考多并发操作），而PycURL作为libcurl之上的薄包装，速度也非常快。 <strong>PycURL的基准测试比Requests(urllib)要快好几倍。</strong><br />
+2、功能包括多个协议支持，SSL，身份验证和代理选项。 PycURL支持大部分libcurl的回调。<br />
+3、众多的和共享的接口,较为复杂。<br />
+4、用于网络操作的套接字，允许将PycURL集成到应用程序的I/O循环中（例如使用Tornado）。<br />
+<strong>安装</strong><br />
+<code>pip install pycurl</code></p>
+<h4>PycURL 模块常用方法</h4>
+<p>pycurl参数传递方法，以及基于pycurl模块实现的一个web页面探测程序。</p>
+<table>
+<tbody>
+<tr>
+<th>pycurl.Curl()类</th>
+<th>实现一个ibcurl包的Curl句柄对象</th>
+</tr>
+<tr>
+<th>close()</th>
+<th>对应libcurl包中curl_easy_cleanup方法，无参数，实现关闭回收Curl对象</th>
+</tr>
+<tr>
+<th>perform()</th>
+<th>对应libcurl包中curl_easy_perform方法，无参数，实现Curl对象请求的提交</th>
+</tr>
+<tr>
+<th>setopt(option,value)</th>
+<th>对应libcurl包中curl_easy_setopt方法<br />
+参数option通过libcurl的常量来定义，参数value的值会依赖option，可以是一个字符串、整形、长整形、文件对象、列表、函数等</th>
+</tr>
+</tbody>
+</table>
+<h4>curl_easy_setopt 方法说明</h4>
+<p>1、函数通过对参数的设置，控制libcurl的行为。<br />
+2、选项通过参数设置；参数可为长，支持，或者…<br />
+3、认真阅读文档，错误的参数会导致错误的行为。<br />
+4、可以对函数设置一个参数或者多个参数<br />
+5、使用此函数调用设置的选项对于使用此句柄执行的所有即将传输都有效。<br />
+6、这些选项在传输之间没有任何重置，所以如果您希望后续传输具有不同的选项，则必须在传输之间进行更改。 您可以选择使用curl_easy_reset将所有选项重置为内部默认值。</p>
+<h4>选项分类</h4>
+<table>
+<tbody>
+<tr>
+<th>behavior options</th>
+<th>行为选项</th>
+<th>ftp options</th>
+<th>FTP选项</th>
+</tr>
+<tr>
+<th>callback options</th>
+<th>回拨选项</th>
+<th>rtsp options</th>
+<th>RTSP OPTIONS</th>
+</tr>
+<tr>
+<th>error options</th>
+<th>错误选项</th>
+<th>protocol options</th>
+<th>协议选项</th>
+</tr>
+<tr>
+<th>network options</th>
+<th>网络选项</th>
+<th>connection options</th>
+<th>连接选项</th>
+</tr>
+<tr>
+<th>names and passwords options (authentication)</th>
+<th>名和密码选项（验证）</th>
+<th>ssl and security options</th>
+<th>SSL和安全选项</th>
+</tr>
+<tr>
+<th>http options</th>
+<th>HTTP OPTIONS</th>
+<th>ssh options</th>
+<th>SSH选项</th>
+</tr>
+<tr>
+<th>smtp options</th>
+<th>SMTP选项</th>
+<th>other options</th>
+<th>其他选项</th>
+</tr>
+<tr>
+<th>tftp options</th>
+<th>TFTP选项</th>
+<th>telnet options</th>
+<th>TELNET选项</th>
+</tr>
+</tbody>
+</table>
+<h4>设置选项</h4>
+<p><code>&gt;&gt;&gt; import pycurl #模块导入<br />
+&gt;&gt;&gt; curl = pycurl.Curl() #创建curl对象<br />
+&gt;&gt;&gt; curl.setopt(pycurl.CONNECTTIMEOUT,5) #连接等待时间，0则不等待<br />
+&gt;&gt;&gt; curl.setopt(pycurl.ENCODING, ‘gzip’) #Accept-Encoding and automatic decompressing data<br />
+&gt;&gt;&gt; curl.setopt(pycurl.REFERER,’http://www.google.com/search?sourceid=chrome&amp;ie=UTF-8&amp;q=’+self.randstr()) #设置header请求来源地址<br />
+&gt;&gt;&gt; curl.setopt((pycurl.HTTPHEADER,[‘text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8’])<br />
+&gt;&gt;&gt; curl.setopt(pycurl.COOKIEFILE, “cookie_file_name”) #保持连接，写cookie文件<br />
+&gt;&gt;&gt; curl.setopt(pycurl.TIMEOUT,5) #超时时间<br />
+&gt;&gt;&gt; curl.setopt(pycurl.NOPROGRESS,0) #下载进度条，非0则屏蔽<br />
+&gt;&gt;&gt; curl.setopt(pycurl.MAXREDIRS,5) #指定HTTP重定向最大次数<br />
+&gt;&gt;&gt; curl.setopt(pycurl.FOLLOWLOCATION, 1) #允许跟踪来源<br />
+&gt;&gt;&gt; curl.setopt(pycurl.FORBID_REUSE,1) #完成交互后强制断开连接，不重用<br />
+&gt;&gt;&gt; curl.setopt(pycurl.DNS_CACHE_TIMEOUT,60) #设置DNS信息保存时间，默认为120秒<br />
+&gt;&gt;&gt; curl.setopt(pycurl.USERAGENT, “Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36″) #设置HTTP的User-Agent（自行设置时需跟着常规标准走）<br />
+&gt;&gt;&gt; curl.setopt(pycurl.URL,”http://www.plcxue.com”) #设置请求的Url<br />
+&gt;&gt;&gt; curl.setopt(pycurl.WRITEFUNCTION,buf.write) #回调 和下面的参数向重合；不要同时使用<br />
+&gt;&gt;&gt; curl.setopt(pycurl.HEADERFUNCTION,getheader) 将返回的HTTP HEADER定向到回调函数getheader<br />
+&gt;&gt;&gt; curl.setopt(pycurl.WRITEHEADERFUNCTION,getbody) #将返回的内容定向到回调函数getbody<br />
+&gt;&gt;&gt; curl.setopt(pycurl.WRITEHEADER,fileobj) #将返回的HTTP HEADER定向到fileobj文件对象<br />
+&gt;&gt;&gt; curl.setopt(pycurl.WRITEDATE,fileobj) #将返回的HTML内容定向到fileobj文件对象<br />
+&gt;&gt;&gt; curl.setopt(pycurl.NOSIGNAL, 1) #</code></p>
+<h4>获取结果信息</h4>
+<p>对应libcurl的curl_easy_getinfo方法，参数option通过libcurl的常量指定。<br />
+<code>&gt;&gt;&gt; curl = pycurl.Curl()<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.HTTP_CODE) #返回HTTP状态码<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.TOTAL_TIME) #传输结束时所消耗的总时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.NAMELOOKUP_TIME) #DNS解析所消耗的时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.CONNECT_TIME) #建立连接所消耗的时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.PRETRANSFER_TIME) #从建立连接到准备传输所消耗的时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.STARTTRANSFER_TIME) #从建立连接到数据开始传输所消耗的时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.REDIRECT_TIME) #重定向所消耗的时间<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.SIZE_UPLOAD) #上传数据包大小<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.SIZE_DOWNLOAD) #下载数据包大小<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.SPEED_DOWNLOAD) #平均下载速度<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.SPEED_UPLOAD) #平均上传速度<br />
+&gt;&gt;&gt; curl.getinfo(pycurl.HEADER_SIZE) #HTTP头部大小</code></p>
+<h4>example coding 示例</h4>
+<p><code>#!/usr/bin/python<br />
+#–coding:utf-8–#<br />
+def curl_webSev(URL = ‘www.plcxue.com’):<br />
+_Curl = pycurl.Curl()<br />
+_Curl.setopt(pycurl.CONNECTTIMEOUT,5)<br />
+_Curl.setopt(pycurl.TIMEOUT,5)<br />
+_Curl.setopt(pycurl.NOPROGRESS,1)<br />
+_Curl.setopt(pycurl.FORBID_REUSE,1)<br />
+_Curl.setopt(pycurl.MAXREDIRS,1)<br />
+_Curl.setopt(pycurl.DNS_CACHE_TIMEOUT,30)<br />
+_Curl.setopt(pycurl.URL,URL)<br />
+try:<br />
+with open(os.path.dirname(os.path.realpath(__file__)) + “/content.txt”,’w’) as outfile:<br />
+_Curl.setopt(pycurl.WRITEHEADER,outfile)<br />
+_Curl.setopt(pycurl.WRITEDATA,outfile)<br />
+#Here we write the body to a buffer to avoid printing uninteresting output to standard out.<br />
+_Curl.perform()<br />
+except Exception as err:<br />
+print “exec error!\n\t%s” %err<br />
+sys.exit()<br />
+print “Http Code:\t%s” %_Curl.getinfo(_Curl.HTTP_CODE)<br />
+print “DNS lookup time:\t%s ms” %(_Curl.getinfo(_Curl.NAMELOOKUP_TIME) * 1000)<br />
+print “Create conn time:\t%s ms” %(_Curl.getinfo(_Curl.CONNECT_TIME) * 1000)<br />
+print “Ready conn time:\t%s ms” %(_Curl.getinfo(_Curl.PRETRANSFER_TIME) * 1000)<br />
+print “Tran Star time:\t%s ms” %(_Curl.getinfo(_Curl.STARTTRANSFER_TIME) * 1000)<br />
+print “Tran Over time:\t%s ms” %(_Curl.getinfo(_Curl.TOTAL_TIME) * 1000)<br />
+print “Download size:\t%d bytes/s” %_Curl.getinfo(_Curl.SIZE_DOWNLOAD)<br />
+print “HTTP header size:\t%d byte” %_Curl.getinfo(_Curl.HEADER_SIZE)<br />
+print “Avg download speed:\t%s bytes/s” %_Curl.getinfo(_Curl.SPEED_DOWNLOAD)</code></p>
+<p><code>if __name__ == ‘__main__’:<br />
+import os<br />
+import sys<br />
+import time<br />
+import pycurl<br />
+if sys.argv[1]:<br />
+curl_webSev(sys.argv[1])<br />
+else:<br />
+curl_webSev()</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

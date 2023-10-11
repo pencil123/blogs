@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>centos 配置无线网卡 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; centos 配置无线网卡评论Feed" href="https://cn-blogs.cn/archives/462.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='部分名词解释' href='https://cn-blogs.cn/archives/455.html' />
+<link rel='next' title='the mode of wireless work' href='https://cn-blogs.cn/archives/464.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/462.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=462' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F462.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F462.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-462 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel" rel="category tag">操作系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/455.html" rel="prev">上一篇：部分名词解释</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/464.html" rel="next">下一篇：the mode of wireless work</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            centos 配置无线网卡        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/20</span>
+            <span class="update is-hidden">2018-01-02</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>家庭网络在上班和晚上睡觉的时候，都是空闲不用的；这样太浪费交的网费了。于是就买了个迷你主机，利用空闲网络来下载电影或者其他的。<br />
+操作系统选择的是Centos6，使用samba服务将下载好的使用共享到windows。主要是linux系统比较稳定，并且字符界面占用物理资源小。<br />
+在配置过程中最复杂的就是无线网卡的配置，找了很多资料最终总是配置好了。但是因为无线速度和稳定问题，还是舍弃了；换成有线网络。</p>
+<h2>加载驱动</h2>
+<p>坑1、机器的无线网卡硬件比较旧，是BCM43225；官网已经都不提供网卡驱动的源码包了。在网上搜索安装到的文档都是要去官网下载驱动包进行编译安装，晕，怎么下啊？<br />
+坑2、在wiki中找到一篇文章 https://wiki.archlinux.org/index.php/broadcom_wireless 上面说驱动brcmsmac兼容支持bcm43225网卡。因为前面踩了很多坑，也不知道什么时候，已经将驱动brcmsmac安装成功了。<br />
+因为不熟悉无线网卡的使用，一直还以为没有解决驱动的问题那。<br />
+<strong>a、加载驱动</strong><br />
+lsmod #查看已经加载的驱动<br />
+modprobe 命令<br />
+-a或&#8211;all 　载入全部的模块。<br />
+-c或&#8211;show-conf 　显示所有模块的设置信息。<br />
+-d或&#8211;debug 　使用排错模式。<br />
+-l或&#8211;list 　显示可用的模块。<br />
+-r或&#8211;remove 　模块闲置不用时，即自动卸载模块。<br />
+-t或&#8211;type 　指定模块类型。<br />
+-v或&#8211;verbose 　执行时显示详细的信息。<br />
+-V或&#8211;version 　显示版本信息。<br />
+-help 　显示帮助。<br />
+modprobe brcmsmac #加载brcmsmac驱动<br />
+<strong>b、开机加载驱动</strong><br />
+在CentOS中自动加载内核模块，需要在/etc/sysconfig/modules/目录中增加一个脚本，在此脚本中加载所需的模块。<br />
+下面是我所用的一个名为brcmsmac.modules的脚本；注意：脚本权限为755<br />
+#! /bin/sh<br />
+/sbin/modinfo -F filename brcmsmac &gt; /dev/null 2&gt;&amp;1<br />
+if [ $? -eq 0 ]; then<br />
+/sbin/modprobe brcmsmac<br />
+fi<br />
+上面的脚本首先检查brcmsmac模块文件是否存在，如果存在，则调用/sbin/modprobe命令加载此模块。<br />
+在网上有些文章建议在/etc/rc.local文件中增加modprobe命令，这样做在某些情况下工作会不正常。因为在启动时，/etc/rc.local在执行完rc.d目录中的程序后才执行，因此，如果在rc.d中的程序如果用到了所需加载的模块，就会出错。<br />
+另外有些文章提到修改/etc/modprobe.conf文件，其实是错误的。这个文件仅仅是定义一些内核模块的别名、以及一些特殊的加载、卸载命令。修改此文件并不能使模块在启动时被自动加载。</p>
+<h2>配置网卡</h2>
+<p>3、由上也就是驱动已经安装ok，下面就是对网卡的配置管理了。<br />
+a、安装无线网卡管理工具：yum install wireless wireless-tools -y<br />
+iwconfig #查看无线网卡信息；如果没有列出无线网卡信息，那么网卡驱动还是没有加载成功</p>
+<p>打开无线网卡电源<br />
+iwconfig wlan0 txpower on<br />
+ifconfig wlan0 up #启动网卡<br />
+iwlist wlan0 scanning 查看无线信号<br />
+配置无线网络验证<br />
+安装wpa_supplicant 用于WPA加密<br />
+使用：<br />
+wpa_passphrase &lt;SSID&gt; [password] 。将输出内容添加到/etc/wpa_supplicant/wpa_supplicant.conf中<br />
+连接无线网络<br />
+wpa_supplicant -B -i wlan0 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf<br />
+-B 后台运行 -i 选择网卡 -D wext -c 配置文件地址 -d 调试<br />
+4、编辑网卡文件<br />
+新建网卡管理配置文件<br />
+touch /etc/sysconfig/network-scripts/ifcfg-wlan0<br />
+DEVICE=wlan0<br />
+TYPE=Wireless<br />
+ONBOOT=yes<br />
+NM_CONTROLLED=yes<br />
+BOOTPROTO=dhcp<br />
+DEFROUTE=yes<br />
+PEERDNS=yes<br />
+PEERROUTES=yes<br />
+IPV4_FAILURE_FATAL=yes<br />
+IPV6INIT=no<br />
+WPA=&#8221;yes&#8221;</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

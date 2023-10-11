@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>SQL MODE 罗列 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; SQL MODE 罗列评论Feed" href="https://cn-blogs.cn/archives/347.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='SQL MODE 第一篇' href='https://cn-blogs.cn/archives/342.html' />
+<link rel='next' title='MySQL 二进制日志模式' href='https://cn-blogs.cn/archives/355.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/347.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=347' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F347.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F347.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-347 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases" rel="category tag">数据库</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/342.html" rel="prev">上一篇：SQL MODE 第一篇</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/355.html" rel="next">下一篇：MySQL 二进制日志模式</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            SQL MODE 罗列        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/12/21</span>
+            <span class="update is-hidden">2018-03-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p style="text-align: center;"><strong>STRICT_TRANS_TABLES</strong></p>
+<p>在该模式下，如果一个值不能插入到一个事务表(例如表的存储引擎为InnoDB)中，则中断当前的操作不影响非事务表(例如表的存储引擎为MyISAM)。</p>
+<p style="text-align: center;"><strong>ALLOW_INVALID_DATES</strong></p>
+<p>该选项并不完全对日期的合法性进行检查，只检查月份是否在1～12之间，日期是否在1～31之间。该模式仅对DATE和DATETIME类型有效，而对TIMESTAMP无效，因为TIMESTAMP总是要求一个合法的输入。</p>
+<p style="text-align: center;"><strong>ANSI_QUOTES</strong></p>
+<p>启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它将被解释为识别符，<br />
+<code>mysql&gt; CREATE TABLE z ( a VARCHAR(10))ENGINE=INNODB;<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt;INSERT INTO z SELECT "aaa";<br />
+Query OK, 1 rows affected (0.00 sec)<br />
+mysql&gt; SET sql_mode='ANSI_QUOTES';<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt; INSERT INTO z SELECT "aaa";<br />
+ERROR 1054 (42S22): Unknown column 'aaa' in 'field list'</code></p>
+<p style="text-align: center;"><strong>ERROR_FOR_DIVISION_BY_ZERO</strong></p>
+<p>在INSERT或UPDATE过程中，如果数据被零除(或MOD(X，0))，则产生错误(否则为警告)。如果未给出该模式，那么数据被零除时MySQL返回NULL。如果用到INSERT IGNORE或UPDATE IGNORE中，MySQL生成被零除警告，但操作结果为NULL。</p>
+<p style="text-align: center;"><strong>HIGH_NOT_PRECEDENCE NOT</strong></p>
+<p>操作符的优先顺序是表达式。例如，NOT a BETWEEN b AND c被解释为NOT(a BETWEEN b AND c)，在一些旧版本MySQL中， 前面的表达式被解释为(NOT a)BETWEEN b AND c。启用HIGH_NOT_PRECEDENCE SQL模式，可以获得以前旧版本的更高优先级的结果。<br />
+<code>mysql&gt; SELECT 0 BETWEEN -1 AND 1\G;<br />
+*************************** 1. row ***************************<br />
+0 BETWEEN -1 AND 1: 1<br />
+1 row in set (0.00 sec)<br />
+0在-1到1之间，所以返回1，如果加上NOT，则返回0，过程如下：<br />
+mysql&gt; SELECT @@sql_mode\G;<br />
+*************************** 1. row ***************************<br />
+@@sql_mode:<br />
+1 row in set (0.00 sec)<br />
+mysql&gt; SELECT not 0 BETWEEN -1 AND 1\G;<br />
+*************************** 1. row ***************************<br />
+NOT 0 BETWEEN -1 AND 1: 0<br />
+1 row in set (0.00 sec)<br />
+但是如果启用HIGH_NOT_PRECEDENCE模式，则SELECT NOT 0 BETWEEN -1 AND 1被解释为SELECT(NOT 0)BETWEEN -1 AND 1，结果就完全相反，<br />
+如下所示：<br />
+mysql&gt; SELECT NOT 0 BETWEEN -1 AND 1\G;<br />
+*************************** 1. row ***************************<br />
+NOT 0 BETWEEN -1 AND 1: 1<br />
+1 row in set (0.00 sec)</code><br />
+从上述例子中还能看出，在MySQL数据库中BETWEEN a AND b被解释为[a，b]。下面做两个简单的测试。<br />
+<code>mysql&gt; SELECT 1 BETWEEN -1 AND 1\G;<br />
+*************************** 1. row ***************************<br />
+1 BETWEEN -1 AND 1: 1<br />
+1 row in set (0.00 sec)<br />
+mysql&gt; SELECT -1 BETWEEN -1 AND 1\G;<br />
+*************************** 1. row ***************************<br />
+-1 BETWEEN -1 AND 1: 1<br />
+1 row in set (0.00 sec)<br />
+</code></p>
+<p style="text-align: center;"><strong>IGNORE_SPACE</strong></p>
+<p>函数名和括号“(”之间有空格。除了增加一些烦恼，这个选项好像没有任何好处，要访问保存为关键字的数据库、表或列名，用户必须引用该选项。例如某个表中有user这一列，而MySQL数据库中又有user这个函数， user会被解释为函数，如果想要选择user这一列，则需要引用。</p>
+<p style="text-align: center;"><strong>NO_AUTO_CREATE_USER</strong></p>
+<p>禁止GRANT创建密码为空的用户。</p>
+<p style="text-align: center;"><strong>NO_AUTO_VALUE_ON_ZERO</strong></p>
+<p>该选项影响列为自增长的插入。在默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。</p>
+<p style="text-align: center;"><strong>NO_BACKSLASH_ESCAPES</strong></p>
+<p>反斜杠“\”作为普通字符而非转义符，<br />
+<code>mysql&gt; SET sql_mode='';<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt; SELECT '\\'\G;<br />
+*************************** 1. row ***************************<br />
+\: \<br />
+1 row in set (0.00 sec)<br />
+mysql&gt; SET sql_mode='NO_BACKSLASH_ESCAPES';<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt; SET '\\'\G;<br />
+*************************** 1. row ***************************<br />
+\\: \\<br />
+1 row in set (0.00 sec)</code></p>
+<p style="text-align: center;"><strong>NO_DIR_IN_CREATE</strong></p>
+<p>在创建表时忽视所有INDEX DIRECTORY和DATA DIRECTORY的选项。</p>
+<p style="text-align: center;"><strong>NO_ENGINE_SUBSTITUTION</strong></p>
+<p>如果需要的存储引擎被禁用或未编译，那么抛出错误。默认用默认的存储引擎替代，并抛出一个异常。</p>
+<p style="text-align: center;"><strong>NO_UNSIGNED_SUBTRACTION</strong></p>
+<p>之前已经介绍过，启用这个选项后两个UNSIGNED类型相减返回SIGNED类型。</p>
+<p style="text-align: center;"><strong>NO_ZERO_DATE</strong></p>
+<p>在非严格模式下，可以插入形如“0000-00-00 00:00:00”的非法日期，MySQL数据库仅抛出一个警告。而启用该选项后，MySQL数据库不允许插入零日期，插入零日期会抛出错误而非警告。</p>
+<p style="text-align: center;"><strong>NO_ZERO_IN_DATE</strong></p>
+<p>在严格模式下，不允许日期和月份为零。如“2011-00-01”和“2011-01-00”这样的格式是不允许的。采用日期或月份为零的格式时MySQL都会直接抛出错误而非警告，<br />
+示例如下：</p>
+<p><code>mysql&gt; SET sql_mode='NO_ZERO_IN_DATE';<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt; CREATE TABLE a ( a DATETIME );<br />
+Query OK, 0 rows affected (0.04 sec)<br />
+mysql&gt; INSERT INTO a SELECT '2011-01-00';<br />
+ERROR 1292 (22007): Incorrect datetime value: '2011-01-00' for column 'a' at row 1</code></p>
+<p style="text-align: center;"><strong>ONLY_FULL_GROUP_BY</strong></p>
+<p>对于GROUP BY聚合操作，如果在SELECT中的列没有在GROUP BY中出现，那么这句SQL是不合法的，因为a列不在GROUP BY从句中，示例如下：</p>
+<p><code>mysql&gt; SET sql_mode='ONLY_FULL_GROUP_BY';<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+mysql&gt; SELECT a,SUM(b) FROM t GROUP BY b;<br />
+ERROR 1055 (42000): 'test.t.a' isn't in GROUP BY</code></p>
+<p style="text-align: center;"><strong>PAD_CHAR_TO_FULL_LENGTH</strong></p>
+<p>对于CHAR类型字段，不要截断空洞数据。空洞数据就是自动填充值为0x20的数据。先来看MySQL数据库在默认情况下的表现。<br />
+<code>mysql&gt; CREATE TABLE t ( a CHAR(10) );<br />
+Query OK, 0 rows affected (0.04 sec)<br />
+mysql&gt; INSERT INTO t SELECT 'a';<br />
+Query OK, 1 row affected (0.01 sec)<br />
+Records: 1 Duplicates: 0 Warnings: 0<br />
+mysql&gt;SELECT a,CHAR_LENGTH(a),HEX(a) FROM t\G;<br />
+*************************** 1. row ***************************<br />
+a: a<br />
+CHAR_LENGTH(a): 1<br />
+HEX(a): 61<br />
+1 row in set (0.04 sec)</code><br />
+可以看到，在默认情况下，虽然a列是CHAR类型，但是返回的长度是1，这是因为MySQL数据库已经对后面的空洞数据进行了截断。若启用PAD_CHAR_TO_FULL_LENGTH选项，则反映的是实际存储的内容，例如：<br />
+<code>mysql&gt; SELECT a,CHAR_LENGTH(a),HEX(a) FROM t\G;<br />
+*************************** 1. row ***************************<br />
+a: a<br />
+CHAR_LENGTH(a): 10<br />
+HEX(a): 61202020202020202020<br />
+1 row in set (0.00 sec)</code><br />
+可以看到在CHAR列a中实际存储的值为0x61202020202020202020。</p>
+<p style="text-align: center;"><strong>PIPES_AS_CONCAT</strong></p>
+<p>将“||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似，例如：<br />
+<code>mysql&gt; SET sql_mode='pipes_as_concat';<br />
+Query OK, 0 rows affected (0.01 sec)<br />
+mysql&gt; SELECT 'a'||'b'||'c'\G;<br />
+*************************** 1. row ***************************<br />
+'a'||'b'||'c': abc<br />
+1 row in set (0.00 sec)</code></p>
+<p style="text-align: center;"><strong>REAL_AS_FLOAT</strong></p>
+<p>将REAL视为FLOAT的同义词，而不是DOUBLE的同义词。</p>
+<p style="text-align: center;"><strong>STRICT_ALL_TABLES</strong></p>
+<p>对所有引擎的表都启用严格模式。(STRICT_TRANS_TABLES只对支持事务的表启用严格模式)。</p>
+<p>在严格模式下，一旦任何操作的数据产生问题，都会终止当前的操作。对于启用STRICT_ALL_TABLES选项的非事务引擎来说，这时数据可能停留在一个未知的状态。这可能不是所有非事务引擎愿意看到的一种情况，因此需要非常小心这个选项可能带来的潜在影响。</p>
+<p style="text-align: center;"><strong>NO_FIELD_OPTIONS</strong></p>
+<p>Do not print MySQL-specific column options in the output of SHOW CREATE TABLE. This mode is used by mysqldump in portability mode.</p>
+<p style="text-align: center;"><strong>NO_KEY_OPTIONS</strong></p>
+<p>Do not print MySQL-specific index options in the output of SHOW CREATE TABLE. This mode is used by mysqldump in portability mode.</p>
+<p style="text-align: center;"><strong>NO_TABLE_OPTIONS</strong></p>
+<p>Do not print MySQL-specific table options (such as ENGINE) in the output of SHOW CREATE TABLE. This mode is used by mysqldump in portability mode.</p>
+<p style="text-align: center;"><strong>STRICT_TRANS_TABLES</strong></p>
+<p>Enable strict SQL mode for transactional storage engines, and when possible for nontransactional storage engines. For details, see Strict SQL Mode.<br />
+From MySQL 5.7.4 through 5.7.7, STRICT_TRANS_TABLES includes the effect of the ERROR_FOR_DIVISION_BY_ZERO, NO_ZERO_DATE, and NO_ZERO_IN_DATE modes. For additional discussion, see SQL Mode Changes in MySQL 5.7.</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

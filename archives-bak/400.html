@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>域名解析 | 青春部落    </title>
+    <meta name="keywords"  content="域名解析,ns,ttl,frame,cname" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 域名解析评论Feed" href="https://cn-blogs.cn/archives/400.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL 表操作和字段操作' href='https://cn-blogs.cn/archives/459.html' />
+<link rel='next' title='MySQL 存储IP地址' href='https://cn-blogs.cn/archives/2562.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/400.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=400' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F400.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F400.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-400 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/459.html" rel="prev">上一篇：MySQL 表操作和字段操作</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2562.html" rel="next">下一篇：MySQL 存储IP地址</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            域名解析        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/11/04</span>
+            <span class="update is-hidden">2018-04-27</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>平时购买域名用到的记录也就A记录、MX记录和Cname记录。前端时间工作原因了解到其他的记录的使用。整理记录一下。</p>
+<h4>1、首先要说的是NS记录：NameServer</h4>
+<p>指定域名由那个nameserver服务器进行解析；<br />
+TTL值全称是“生存时间（Time To Live)”，简单的说它表示DNS记录在DNS服务器上缓存时间。</p>
+<h4>2、转址(Frame) 框架转址设定说明</h4>
+<p>主机名称限为英文，允许一组为空白；若设定同样的主机名称却转址至不同位置，网页将无法顺利显示。<br />
+转址标题：若不输入网页标题，则在您网页左上角的标题显示将以网域名称替代。若指向到雅虎部落格将无法套用自行设定之标题，需以雅虎部落格原标题呈现。<br />
+转址 Meta 标记：为了让网站更容易被搜寻引擎找到，您可以设定和网站相关的关键字词，我们会将这些资料放于网页原始档内。设定格式每组关键字请以半角逗号分隔，例如蛋糕,点心,外送,宴会<br />
+本转址功能为frame模式转址，若您的网站内有程式会挡 referer (来自何处) ，如购物车程式、登入机制、https、付款机制等，建议改设定A记录，或是改为 Redirect 设定，否则转址后的页面有可能无法执行原页面程式，您可进行测试再调整。可特别支援转址至雅虎部落格维持购物车正常运作，但转址标题及meta标记在转址至商店街连结时无法启用。<br />
+当使用转址时，由于是使用frame（框架）包覆目的页面，所以当您连结转址后的页面连结时，网址都会固定显示同一个域名连结。<br />
+默写域名维护商可能提供这个功能，反正我没找到</p>
+<h4>3、Redirect 跳页转址设定说明</h4>
+<p>Redirect也是转址的一种模式，当使用这个功能后，网址将会被直接导向到您原来的目的连结，在网址列不再显示您购买的网址。 例如您购买 abc.tw，设定 Redirect 功能，指向到 http://test.com.tw/ooo/321.htm，当 DNS 生效后，在浏览器连结 abc.tw 时，网址列会自动跳回到原始的 http://test.com.tw/ooo/321.htm，不再显示原来购买的 abc.tw 网址。</p>
+<h2>Cname记录工作过程</h2>
+<h4>1、在真实服务器上显示的请求域名</h4>
+<p>配置domain.pre.com cname -&gt; domain.real.com<br />
+当请求domain.pre.com域名,在真实服务器上的请求为domain.pre.com。<br />
+所以在配置时，要在服务器上添加对应的域名。</p>
+<h4>2、cname记录生效的位置</h4>
+<p>当客户端发出domain.pre.com域名请求后，域名服务器（不确定是那台服务器）会自行查找到domain.real.com的A记录返回给客户端。所以在本机上对domain.real.com域名绑定host，并不生效。</p>
+<h4>3、cloudflare隐藏DNS记录</h4>
+<p>在cloudflare服务上配置cname记录，因为服务商提供的安全机制；通过dig或者nslookup等域名客户端工具，无法获取到cname等记录。当然也可以关闭这种安全机制。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

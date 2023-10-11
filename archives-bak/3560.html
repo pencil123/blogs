@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Squid 访问控制规则设置 | 青春部落    </title>
+    <meta name="keywords"  content="Squid,ACL,访问控制规则" />
+    <meta name="description"  content="Squid 代理服务设置访问控制规则的方式说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Squid 访问控制规则设置评论Feed" href="https://cn-blogs.cn/archives/3560.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Squid 进程管理' href='https://cn-blogs.cn/archives/3557.html' />
+<link rel='next' title='Squid 错误页面和隐藏IP' href='https://cn-blogs.cn/archives/3563.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3560.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3560' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3560.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3560.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3560 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool" rel="category tag">运维</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3557.html" rel="prev">上一篇：Squid 进程管理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3563.html" rel="next">下一篇：Squid 错误页面和隐藏IP</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Squid 访问控制规则设置        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/02/14</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Squid 访问控制设置主要包括：访问控制元素和访问控制规则。</p>
+<h2>访问控制元素</h2>
+<p>使用ACL指令规范控制单元的名称;控制单元如下：</p>
+<table>
+<tbody>
+<tr>
+<th>src</th>
+<th>源（客户端）IP地址</th>
+</tr>
+<tr>
+<th>dst</th>
+<th>目标（服务器）IP地址</th>
+</tr>
+<tr>
+<th>myip</th>
+<th>客户端连接的本地IP地址</th>
+</tr>
+<tr>
+<th>arp</th>
+<th>以太网（MAC）地址匹配</th>
+</tr>
+<tr>
+<th>srcdomain</th>
+<th>源（客户端）域名</th>
+</tr>
+<tr>
+<th>dstdomain</th>
+<th>目标（服务器）域名</th>
+</tr>
+<tr>
+<th>srcdom_regex</th>
+<th>源（客户端）正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>dstdom_regex</th>
+<th>目标（服务器）正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>src_as</th>
+<th>源（客户端）自治系统编号</th>
+</tr>
+<tr>
+<th>dst_as</th>
+<th>目标（服务器）自治系统编号</th>
+</tr>
+<tr>
+<th>peername</th>
+<th>分配给预计要发送请求的cache_peer的名称标签。</th>
+</tr>
+<tr>
+<th>time</th>
+<th>一天中的时间和一周中的一天</th>
+</tr>
+<tr>
+<th>url_regex</th>
+<th>URL正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>urlpath_regex</th>
+<th>URL路径正则表达式模式匹配，省略了协议和主机名</th>
+</tr>
+<tr>
+<th>port</th>
+<th>目标（服务器）端口号</th>
+</tr>
+<tr>
+<th>myport</th>
+<th>客户端连接到的本地端口号</th>
+</tr>
+<tr>
+<th>myportname</th>
+<th>分配给客户端连接到的squid侦听端口的名称标记</th>
+</tr>
+<tr>
+<th>proto</th>
+<th>传输协议（http，ftp等）</th>
+</tr>
+<tr>
+<th>method</th>
+<th>HTTP请求方法（get，post等）</th>
+</tr>
+<tr>
+<th>http_status</th>
+<th>HTTP响应状态（200 302 404等）</th>
+</tr>
+<tr>
+<th>browser</th>
+<th>请求用户代理标题上的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>referer_regex</th>
+<th>请求http-referer头部的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>ident</th>
+<th>用户名中的字符串匹配</th>
+</tr>
+<tr>
+<th>ident_regex</th>
+<th>用户名称上的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>proxy_auth</th>
+<th>通过外部进程进行用户认证</th>
+</tr>
+<tr>
+<th>proxy_auth_regex</th>
+<th>通过外部进程进行用户认证的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>snmp_community</th>
+<th>SNMP社区字符串匹配</th>
+</tr>
+<tr>
+<th>maxconn</th>
+<th>来自单个客户端IP地址的最大连接数限制</th>
+</tr>
+<tr>
+<th>max_user_ip</th>
+<th>一个用户可以从中登录的最大IP地址数限制</th>
+</tr>
+<tr>
+<th>req_mime_type</th>
+<th>请求内容类型标题上的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>req_header</th>
+<th>请求标题内容上的正则表达式模式匹配</th>
+</tr>
+<tr>
+<th>rep_mime_type</th>
+<th>回复（下载内容）内容类型标题上的正则表达式模式匹配。这只适用于http_reply_access指令，而不是http_access。</th>
+</tr>
+<tr>
+<th>rep_header</th>
+<th>回复标题内容上的正则表达式模式匹配。这只适用于http_reply_access指令，而不是http_access。</th>
+</tr>
+<tr>
+<th>external</th>
+<th>通过external_acl_type定义的外部acl helper查找</th>
+</tr>
+<tr>
+<th>user_cert</th>
+<th>匹配用户SSL证书中的属性</th>
+</tr>
+<tr>
+<th>ca_cert</th>
+<th>与发布CA SSL证书的用户的属性相匹配</th>
+</tr>
+<tr>
+<th>ext_user</th>
+<th>匹配由external_acl_type定义的外部acl帮助返回的user =字段</th>
+</tr>
+<tr>
+<th>ext_user_regex</th>
+<th>由external_acl_type定义的external acl helper返回的用户=字段上的正则表达式模式匹配</th>
+</tr>
+</tbody>
+</table>
+<h2>访问控制规则</h2>
+<p>对访问控制元素设置允许、拒绝、不缓存等动作</p>
+<table>
+<tbody>
+<tr>
+<th>http_access</th>
+<th>允许HTTP客户端（浏览器）访问HTTP端口。这是主要的访问控制列表。</th>
+</tr>
+<tr>
+<th>http_reply_access</th>
+<th>允许HTTP客户端（浏览器）接收对其请求的回复。这进一步限制了http_access给出的权限，并且主要用于与rep_mime_type acl一起用于阻止不同的内容类型。</th>
+</tr>
+<tr>
+<th>icp_access</th>
+<th>允许邻居缓存用ICP查询你的缓存。</th>
+</tr>
+<tr>
+<th>miss_access</th>
+<th>允许某些客户端通过缓存转​​发缓存未命中。这进一步限制了http_access给出的权限，并且主要用于通过拒绝同辈通过缓存转​​发缓存未命中来强制执行同级关系。</th>
+</tr>
+<tr>
+<th>cache</th>
+<th>定义不应缓存的响应。</th>
+</tr>
+<tr>
+<th>url_rewrite_access</th>
+<th>控制哪些请求通过重定向器池发送。</th>
+</tr>
+<tr>
+<th>ident_lookup_access</th>
+<th>控制哪些请求需要Ident查找。</th>
+</tr>
+<tr>
+<th>always_direct</th>
+<th>控制哪些请求应始终直接转发到原始服务器。</th>
+</tr>
+<tr>
+<th>never_direct</th>
+<th>控制哪些请求不应直接转发到原始服务器。</th>
+</tr>
+<tr>
+<th>snmp_access</th>
+<th>控制SNMP客户端访问缓存。</th>
+</tr>
+<tr>
+<th>broken_posts</th>
+<th>根据某些中断的原始服务器的要求，定义squid在POST消息正文后附加额外CRLF的请求。</th>
+</tr>
+<tr>
+<th>cache_peer_access</th>
+<th>控制哪些请求可以转发给给定的邻居（cache_peer）。</th>
+</tr>
+<tr>
+<th>htcp_access</th>
+<th>控制哪些远程计算机能够发出HTCP请求。</th>
+</tr>
+<tr>
+<th>htcp_clr_access</th>
+<th>控制哪些远程计算机能够发出HTCP CLR请求。</th>
+</tr>
+<tr>
+<th>request_header_access</th>
+<th>控制违反HTTP协议时删除哪个请求标头。</th>
+</tr>
+<tr>
+<th>reply_header_access</th>
+<th>控制在违反HTTP协议时将哪些回复头从客户端传递到客户端。</th>
+</tr>
+<tr>
+<th>delay_access</th>
+<th>控制哪些请求由什么延迟池处理</th>
+</tr>
+<tr>
+<th>icap_access</th>
+<th>（替换adaptation_access在鱿鱼-3.1）可以被发送到一个特定的ICAP服务器什么请求。</th>
+</tr>
+<tr>
+<th>adaptation_access</th>
+<th>可以将哪些请求发送到特定的ICAP或eCAP过滤器服务。</th>
+</tr>
+<tr>
+<th>log_access</th>
+<th>控制记录哪些请求。这是全局性的，并覆盖附加到access_log指令的特定文件访问列表。</th>
+</tr>
+</tbody>
+</table>
+<h2>示例</h2>
+<h3>定义工作时间不可以访问某些域名&lt;/h3<br />
+#定义访问控制元素<br />
+<code>acl All src 0/0<br />
+acl MyNetwork src 172.16.5.0/24 172.16.6.0/24<br />
+acl NotWorkRelated dstdomain "/usr/local/squid/etc/not-work-related-sites"<br />
+acl WorkingHours time D 08:00-17:30</code><br />
+#定义访问控制规则列表<br />
+<code>http_access deny !WorkingHours NotWorkRelated<br />
+http_access allow MyNetwork<br />
+http_access deny All</code></h3>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

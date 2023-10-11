@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 优化请求处理 | 青春部落    </title>
+    <meta name="keywords"  content="nginx,客户端设置,请求头设置,请求体设置" />
+    <meta name="description"  content="nginx 服务客户端设置：请求头设置和请求体设置" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 优化请求处理评论Feed" href="https://cn-blogs.cn/archives/161.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='http core function' href='https://cn-blogs.cn/archives/159.html' />
+<link rel='next' title='Nginx 文件缓存' href='https://cn-blogs.cn/archives/163.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/161.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=161' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F161.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F161.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-161 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/159.html" rel="prev">上一篇：http core function</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/163.html" rel="next">下一篇：Nginx 文件缓存</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 优化请求处理        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/04/25</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Nginx 服务接受到客户端的请求，会从不同方面收集请求信息。<br />
+主要分为：请求头和请求体信息</p>
+<h2>请求头</h2>
+<p>client_header_buffer_size 设置客户端请求的header头缓存区大小<br />
+client_header_timeout 读取客户端请求头的超时。如果客户端在这段时间内没有传输整个报头，则408错误<br />
+large_client_header_buffers 设置请求header的缓冲区最大数量和大小</p>
+<h4>client_header_buffer_size</h4>
+<p>含义：设置用户请求头所使用的buffer大小<br />
+语法：client_header_buffer_size &lt;size&gt;<br />
+缺省：1k<br />
+示例：client_header_buffer_size 2k;<br />
+注意：<br />
+（1）对绝大多数请求来说，1k足以满足请求头所需的buffer；<br />
+（2）对于携带有较大cookie或来自于wap用户的请求头来说，1k的buffer一般不够，这时可以使用指令large_client_header_buffers。</p>
+<h4>client_header_timeout</h4>
+<p>含义：设置用户请求头的超时时间。<br />
+语法：client_header_timeout &lt;time&gt;<br />
+缺省：1m<br />
+示例：client_header_timeout 3m;<br />
+注意：只有请求头需要被1次以上读取时，该超时时间才会被设置。且如果这个时间后用户什么都没发，nginx会返回requests time out 408.</p>
+<h4>large_client_header_buffers number size;</h4>
+<p>Default:<br />
+large_client_header_buffers 4 8k;<br />
+Context: http, server<br />
+设置用于读取客户端请求头的缓冲区的最大数量和大小。<br />
+请求行不能超过一个缓冲区的大小，否则者将414（请求URI太大）错误返回给客户端。<br />
+请求头字段也不能超过一个缓冲区的大小，否则将400（错误请求）错误返回给客户端。缓冲区只能按需分配。<br />
+默认情况下，缓冲区大小等于8K字节。 如果在请求结束处理之后，连接被转换为保持活动状态，这些缓冲区被释放。</p>
+<h4>请求头说明</h4>
+<p>先根据client_header_buffer_size配置的值分配一个buffer;<br />
+如果分配的buffer无法容纳request_line/request_header，那么就会再次根据large_client_header_buffers配置的参数分配large_buffer;<br />
+如果large_buffer还是无法容纳，那么就会返回414（处理request_line）/400（处理request_header）错误。</p>
+<h2>请求体</h2>
+<p>client_body_buffer_size 请求体超过buffer，则将全部或部分内容写入临时文件中<br />
+client_max_body_size 设置允许接受客户端请求体的最大值<br />
+client_body_temp_path 设置存储请求体的临时文件目录<br />
+client_body_timeout 当请求体需要被1次以上的读取时，设置两个读取间隔时间；超时会返回408<br />
+client_body_in_file_only 将请求体存储在一个文件中.用于debug</p>
+<h4>client_body_in_file_only</h4>
+<p>含义：指定是否将用户请求体存储到一个文件里。<br />
+语法：client_body_in_file_only &lt;on | off&gt;<br />
+缺省：off<br />
+示例：client_body_in_file_only on;<br />
+注意：<br />
+（1）该指令为on时，用户的请求体会被存储到一个文件中，但是请求结束后，该文件也不会被删除；<br />
+（2）该指令一般在调试的时候使用。</p>
+<h4>client_body_buffer_size</h4>
+<p>含义：指定用户请求体所使用的buffer的最大值<br />
+语法：client_body_buffer_size &lt;size&gt;<br />
+缺省：两个page的大小，一般为8k或16k<br />
+示例：client_body_buffer_size 512k;<br />
+注意：如果用户请求体超过了buffer的大小，则将全部内容或部分内容存储到一个临时文件中。</p>
+<h4>client_body_temp_path</h4>
+<p>含义：设置存储用户请求体的文件的目录路径<br />
+语法：client_body_temp_path &lt;directory path&gt; [level1 | level2 | level3]<br />
+示例：client_body_temp_path /spool/nginx/client_temp 1 2;</p>
+<h4>client_body_timeout</h4>
+<p>含义：设置用户请求体的超时时间。<br />
+语法：client_body_timeout &lt;time&gt;<br />
+示例：client_body_timeout 120s;<br />
+注意：只有请求体需要被1次以上读取时，该超时时间才会被设置。且如果这个时间后用户什么都没发，nginx会返回requests time out 408.</p>
+<h4>client_max_body_size 8m;</h4>
+<p>lient_max_body_size<br />
+含义：设置所能接收的最大请求体的大小<br />
+语法：client_max_body_size &lt;size&gt;<br />
+缺省：1m<br />
+示例：client_max_body_size 2m;<br />
+注意：根据请求头中的Content-Length来判断请求体大小是否允许。如果大于设定值，则返回“ Request Entity Too Large”(413)错误。不过要注意的是，浏览器一般并不对这个错误进行特殊显示</p>
+<h4>client_body_in_single_buffer on | off;</h4>
+<p>默认：client_body_in_single_buffer关闭<br />
+语境： http，server，location<br />
+确定nginx是否应将整个客户端请求体保存在单个缓冲区中。在使用$request_body 变量时，建议使用该指令 ，以保存涉及的复制操作数。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

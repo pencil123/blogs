@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU 平均负载 | 青春部落    </title>
+    <meta name="keywords"  content="Linux,CPU,load average,平均负载" />
+    <meta name="description"  content="Linux 系统中CPU平均负载数值含义" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; CPU 平均负载评论Feed" href="https://cn-blogs.cn/archives/287.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='strace 跟踪进程' href='https://cn-blogs.cn/archives/281.html' />
+<link rel='next' title='命令结合工具 xargs' href='https://cn-blogs.cn/archives/469.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/287.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=287' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F287.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F287.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-287 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel" rel="category tag">操作系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/281.html" rel="prev">上一篇：strace 跟踪进程</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/469.html" rel="next">下一篇：命令结合工具 xargs</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            CPU 平均负载        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/09/16</span>
+            <span class="update is-hidden">2018-04-29</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>CPU load average 称为CPU 平均负载用来评估CPU的运行状态。不过其值更确切的是说明“目前CPU运行或运行队列的长度”。</p>
+<h3>Linux 平均负载</h3>
+<p>所有Unix和类Unix系统在内核中生成三个“平均负载”数量的无量纲度量。用户可以通过运行uptime命令(w命令或top命令)轻松地从Unix shell查询当前结果。<br />
+在GNU / Linux中，它们也可以通过读取/proc/loadavg文件来访问。</p>
+<h4>无量纲度量</h4>
+<blockquote><p>在量纲分析中，无量纲量，或称无因次量、无维量、无维度量、无维数量、无次元量等，指的是没有量纲的量。它是个单纯的数字，量纲为1。无量纲量在数学、物理学、工程学、经济学以及日常生活中（如数数）被广泛使用。一些广为人知的无量纲量包括圆周率（π）、欧拉常数（e）和黄金分割率（φ）等。与之相对的是有量纲量，拥有诸如长度、面积、时间等单位。</p></blockquote>
+<h3>平均负载计算方式</h3>
+<p>一台空闲的计算机的负载数为0（空闲进程不计算在内）。<br />
+每个使用或等待CPU的进程（就绪队列或运行队列）将Load 值增1；终止的每个进程将其减1。<br />
+大多数UNIX系统仅计算运行（在CPU上）或可运行（等待CPU）状态下的进程。但是，Linux还包含处于不间断睡眠状态（通常等待磁盘活动）的进程，如果由于I/O系统繁忙或停顿导致许多进程在I/O中被阻塞，则可能导致明显不同的结果。<br />
+例如，这包括由于NFS服务器故障或者速度太慢的介质（例如，USB 1.x存储设备）而导致的进程阻塞。这种情况可能会导致负载平均值升高，并不能反映CPU使用的实际增加（但仍可以了解用户需要等待多长时间）。</p>
+<h3>数值受历史影响</h3>
+<p>系统将负载平均值计算为负载数的指数衰减/加权移动平均值。负载平均值的三个数值是指系统运行的过去一分钟，五分钟和十五分钟。从数学上讲，自系统启动以来，所有三个值总是平均所有系统负载。它们都呈指数衰减，但它们以不同的速度衰减：它们分别在1分钟，5分钟和15分钟后以e指数衰减。<br />
+因此，1分钟的平均负荷包括最后一分钟负荷的63％（更准确地说：1-1 / e）和自启动以来的平均负荷的37％（1 / e），不包括最后一分钟。对于5分钟和15分钟的负载平均值，分别在5分钟和15分钟内计算相同的63％/ 37％比率。<br />
+因此，1分钟的平均载荷仅包括最近60秒的活动在技术上并不准确，因为它包括过去37％的活动，但说明它主要包括最后一分钟是正确的。</p>
+<h3>单CPU和多CPU不同</h3>
+<p>对于受CPU限制的单CPU系统，可以将负载平均值视为相应时间段内系统利用率的度量。对于具有多个CPU的系统，必须将负载除以处理器的数量以获得可比较的度量。</p>
+<h4>单CPU</h4>
+<p>例如，可以解释单CPU系统上的平均负载为“1.73 0.60 7.98”，因为：<br />
+在最后一分钟，系统平均负载超过73％（1.73可运行进程，因此0.73进程必须等待平均一个CPU系统）。<br />
+在过去的5分钟内，CPU平均怠速40％。<br />
+在过去的15分钟内，系统平均负载超过698％（7.98个可运行进程，因此6.98个进程平均需要等待单个CPU系统的运行）。<br />
+这意味着如果系统（CPU，磁盘，内存等）的速度是1.73倍，那么它可以处理最后一分钟的所有工作。</p>
+<h4>多CPU</h4>
+<p>在具有四个CPU的系统中，平均3.73的平均负载将表明平均有3.73个进程准备运行，并且每个进程都可以调度到CPU中。</p>
+<h3>确定队列长度</h3>
+<p>在现代UNIX系统上，线程相对于加载平均值的处理方式各不相同。<br />
+一些系统将线程视为进程以达到平均负载计算的目的：<br />
+等待运行的每个线程将向负载加1。<br />
+但是，其他系统，特别是实现所谓M：N线程的系统，使用不同的策略，<br />
+例如只为加载目的计算一次进程（不管线程数量多少），还是只计算当前用户暴露的线程 &#8211; 线程调度程序到内核，这可能取决于进程上设置的并发级别。Linux似乎将每个线程单独计数为加载1</p>
+<h3>补充</h3>
+<p>CPU 平均负载只能看出CPU运行或可运行队列的长度；并不能很好的判断CPU的状态。<br />
+数据监控中cacti是直接采用“load average”进行绘图，而zabbix采用‘load average’/core number 即per core 平均负载。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

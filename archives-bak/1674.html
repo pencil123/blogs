@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx服务URI 重写 | 青春部落    </title>
+    <meta name="keywords"  content="Nginx,url重写,rewrite,last,break,redirect,permanent" />
+    <meta name="description"  content="Nginx服务Rewrite重定向功能主要的falg有last break 和 redirect permanent" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx服务URI 重写评论Feed" href="https://cn-blogs.cn/archives/1674.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx Index 和 AutoIndex 页面索引' href='https://cn-blogs.cn/archives/1625.html' />
+<link rel='next' title='CGI 和 Fast CGI' href='https://cn-blogs.cn/archives/1055.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1674.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1674' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1674.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1674.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1674 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1625.html" rel="prev">上一篇：Nginx Index 和 AutoIndex 页面索引</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1055.html" rel="next">下一篇：CGI 和 Fast CGI</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx服务URI 重写        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/05/23</span>
+            <span class="update is-hidden">2018-04-19</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>nginx的Rewrite规则采用PCRE(Perl Compatible Regular Expressions) Perl兼容的正则表达式的语法进行规则匹配。</p>
+<h2>使用场景</h2>
+<p><strong>伪静态：</strong>动态url地址伪装成Html，便于搜索引擎抓取<br />
+<strong>唯一入口：</strong>一些编程框架MVC结构，默认请求统一交给一个文件进行处理。<br />
+<strong>301调整：</strong>一些由于域名、路径更改，需要做重定向跳转</p>
+<h2>Rewrite 语法</h2>
+<p><code>rewrite regex(匹配规则) replacement(重写规则) [flag](重写类型);<br />
+Default: —<br />
+Context: server, location, if</code><br />
+<strong>匹配规则</strong>：字符串或者正则表达式；匹配想要rewrite操作的URI<br />
+<strong>重写规则</strong>：对匹配URI重写的处理；可以使用$index表示匹配规则使用括号()捕获的分组<br />
+<strong>重写类型</strong>：定义重写操作是302,301或者在浏览器上不显示跳转。</p>
+<ul>
+<li>last ：重写Rewrite后，会继续向下匹配；浏览器地址栏URL地址不变</li>
+<li>break；规则匹配后，不再匹配后面的规则；浏览器地址栏URL地址不变</li>
+<li>redirect：返回302临时重定向，浏览器地址会显示跳转后的URL地址</li>
+<li>permanent：返回301永久重定向，浏览器地址栏会显示跳转后的URL地址</li>
+</ul>
+<h3>Rewrite Flag 说明</h3>
+<p>Nginx服务Rewrite重定向功能主要的falg有last break 和 redirect permanent</p>
+<h4>redirect 和permanent</h4>
+<p>临时重定向(redorect 302)和永久重定向(permanent 301)实际上就是将跳转操作通过返回头(Response Handers)发送到浏览器，浏览器获取新地址后重新发送请求。<br />
+所以这两个Rewrite操作通过将步骤分解，使整个过程清晰明了；也就没有什么复杂之处。</p>
+<h4>last 和 break</h4>
+<p>这两个Rewrite操作是在一次请求活动中处理有关重定向的问题。这里就涉及到修改NGINX接受到和初始化的请求变量(请求环境)和变量作用域问题。</p>
+<h4>使用说明</h4>
+<p>last :停止执行当前一系列Rewrite重写指令(此Location其他指令也不执行)；在Server指令中使用新的URI匹配新的Location。<br />
+<code>stops processing the current set of ngx_http_rewrite_module directives and starts a search for a new location matching the changed URI。</code><br />
+break :停止执行当前一系列Rewrite重写指令;此Location下的其他指令可执行；此请求终结于此Locaton.<br />
+<code>stops processing the current set of ngx_http_rewrite_module directives as with the break directive;</code></p>
+<h4>变量修改</h4>
+<p><code>rewrite /hello /world break|last;</code><br />
+Nginx服务为此次请求建立了一些列的变量；如$request_uri,$user_agent,$request_filename,$arg_name等。<br />
+Rewrite 指令会修改$uri;不会修改$request_uri。</p>
+<h4>使用注意问题</h4>
+<p>如果为静态资源设置Rewrite规则使用last和break；一般不会出现异常。<br />
+如果为动态资源(php)设置此规则；动态资源一般从$request_uri变量中获取请求文件；这样就会导致rewrite规则不生效。</p>
+<h4>解决方式</h4>
+<p><code><br />
+if ($request_uri = "/hello"){set $my_request_uri "/world";}<br />
+if ($request_uri != "hello"){set $my_request_uri $request_uri;}<br />
+location ~ \.php$ {<br />
+fastcgi_pass 127.0.0.1:9000;<br />
+fastcgi_index index.php;<br />
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br />
+include fastcgi_params;<br />
+fastcgi_param REQUEST_URI $my_request_uri; #对$request_uri变量重新赋值<br />
+}</code><br />
+<strong>补充说明</strong>：rewrite指令执行的顺序根据其在配置文件中出现的顺序确定，依次执行。</p>
+<h2>Return 语法</h2>
+<p><code>return code [text];<br />
+return code URL;<br />
+return URL;<br />
+Default:	—<br />
+Context:	server, location, if</code><br />
+停止处理，并返回指定的内容。<br />
+返回&#8221;状态码&#8221;和&#8221;响应主体&#8221;和重定向URL</p>
+<h2>简单例子</h2>
+<p><strong>例子一</strong><br />
+<code>server {<br />
+rewrite /last.html /index.html last;<br />
+#/last.html 转到 /index.html；仍然进行后续匹配<br />
+-<br />
+rewrite /break.html /index.html break;<br />
+#/break.html 转到 /index.html ；不进行后续匹配<br />
+-<br />
+rewrite /redirect.html /index.html redirect;<br />
+#/redirect.html 302定向(临时)到 /index.html<br />
+-<br />
+rewrite /permanent.html /index.html permanent;<br />
+#/permanent.html 301定向(永久)到 /index.html<br />
+-<br />
+rewrite ^/html/(.+?).html$ /post/$1.html permanent;<br />
+#/html/*.html 301定向到 /post/*.html<br />
+-<br />
+rewrite ^/search\/([^\/]+?)(\/|$) /search.html?keyword=$1 permanent;<br />
+#/search/key 301定向到 /search.html?keyword=key<br />
+-<br />
+rewrite ^/archives\/(\d+)$ /archives/$1.html permanent;<br />
+#/archives/数字 301定向到 /archives/数字.html<br />
+}</code></p>
+<p><strong>例子二</strong><br />
+<code>server {<br />
+location / {<br />
+rewrite /last/ /q.html last;<br />
+}<br />
+if (!-f $request_filename){<br />
+rewrite . /index.php last;<br />
+}}<br />
+#Rewrite 操作被location 和if 操作约束</code></p>
+<p><strong>例子三</strong><br />
+<code>location ^~ /login/ {<br />
+return 301 https://$host$requst_uri;<br />
+#login 下的URL进行加密传输<br />
+}</code></p>
+<h2>rewrite_log on | off;</h2>
+<p>记录日志<br />
+<code>Default:<br />
+rewrite_log off;<br />
+Context: http, server, location, if</code><br />
+启用或禁用将ngx_http_rewrite_module 模块指令处理结果记录到该级别的error_lognotice。</p>
+<h2>相关链接</h2>
+<blockquote class="wp-embedded-content" data-secret="kLxFpchxLl"><p><a href="https://www.cn-blogs.cn/archives/1719.html">Nginx Location 指令说明</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/1719.html/embed#?secret=kLxFpchxLl" data-secret="kLxFpchxLl" width="500" height="282" title="《Nginx Location 指令说明》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="Efd0oF9QDF"><p><a href="https://www.cn-blogs.cn/archives/1684.html">If 判断语句使用</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/1684.html/embed#?secret=Efd0oF9QDF" data-secret="Efd0oF9QDF" width="500" height="282" title="《If 判断语句使用》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="HdqmTbEJrJ"><p><a href="https://www.cn-blogs.cn/archives/963.html">Nginx 内置变量</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/963.html/embed#?secret=HdqmTbEJrJ" data-secret="HdqmTbEJrJ" width="500" height="282" title="《Nginx 内置变量》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="DPIdrjDr33"><p><a href="https://www.cn-blogs.cn/archives/920.html">正则表达式</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/920.html/embed#?secret=DPIdrjDr33" data-secret="DPIdrjDr33" width="500" height="282" title="《正则表达式》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

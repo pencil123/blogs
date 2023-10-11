@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>TCP 队列和SYN-Flood | 青春部落    </title>
+    <meta name="keywords"  content="TCP,TCP协议,syn queue,accept queue,半链接队列,全链接队列" />
+    <meta name="description"  content="TCP协议维护半连接和全连接两个队列" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; TCP 队列和SYN-Flood评论Feed" href="https://cn-blogs.cn/archives/1934.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='TCP 协议的一些问题' href='https://cn-blogs.cn/archives/238.html' />
+<link rel='next' title='table标签' href='https://cn-blogs.cn/archives/2575.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1934.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1934' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1934.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1934.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1934 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/238.html" rel="prev">上一篇：TCP 协议的一些问题</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2575.html" rel="next">下一篇：table标签</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            TCP 队列和SYN-Flood        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/01/09</span>
+            <span class="update is-hidden">2018-04-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>TCP 维护队列</h3>
+<p>TCP协议在数据传输过程中会维护两个队列:半连接队列（SYN queue）和全连接队列(accept queue)。</p>
+<h4>半连接队列（SYN Queue）</h4>
+<p>服务器端监听TCP端口后，会创建一个request_sock结构，用于存储半连接队列。<br />
+在TCP三次握手中，当服务器接受到客户端的SYN包后，就将此连接保存到SYN Queue中，并向客户端发送SYN-ACK包;等待客户端发送ACK包。<br />
+此时服务器端记录此链接状态为SYN_RECV。<br />
+SYN Queue的存储数量max(64,/proc/sys/net/ipv4/tcp_max_syn_backlog)。</p>
+<h4>全连接队列Accept Queue</h4>
+<p>客户端收到服务器端的syn-ack包后，就会发出ACK包。服务器端收到ACK包，会将此链接从SYN Queue中删除，添加到Accept Queue。<br />
+此时服务器端记录此链接状态为Established。<br />
+accept queue的存储数量min(backlog,somaxconn)。默认somaxconn为128，即接受129个。</p>
+<h3>SYN Queue队列满(tcp_abort_on_overflow)|SYN Flood攻击</h3>
+<p>当服务器维护的SYN Queue队列满了，默认(tcp_abort_on_overflow=0)情况会发送重置此连接;客户端会重新发送SYN包，尝试多次得不到响应后返回(time out)错误。<br />
+SYN Flood 是DDoS（分布式拒绝服务攻击）的方式之一，这是一种利用TCP协议缺陷，发送大量伪造的TCP连接请求，从而使得被攻击方资源耗尽（CPU满负荷或内存不足）的攻击方式。</p>
+<p>场景1、当Client发送SYN包后就宕机了，这样Server服务发送的SYN-ACK数据包一直得不到确认；会持续一段时间在SYN_RCV状态并维护此链接在SYN Queue队列中。<br />
+场景2、黑客伪造大量的TCP连接请求，服务器端产生大量的SYN_RCV状态链接和SYN Queue队列被填满。</p>
+<h4>tcp_abort_on_overflow</h4>
+<p>默认0：当系统无法处理新连接，则内核重置此连接；尝试之后恢复此连接。<br />
+启动1：如确定新连接请求无法处理，开启此参数，直接拒绝接受连接。启用此选项可能会损害服务器的客户端。</p>
+<h4>SYN_RCV多久关闭</h4>
+<p>目前，Linux下默认会进行5次重发SYN-ACK包，重试的间隔时间从1s开始，下次的重试间隔时间是前一次的双倍，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 63s，TCP才会把断开这个连接。<br />
+当收到SYN Flood攻击时，从影响时间上考虑，我们应该减小SYN_RCV状态的关闭时间。<br />
+<code>net.ipv4.tcp_synack_retries #内核放弃连接之前，发送SYN+ACK包的次数<br />
+net.ipv4.tcp_syn_retries #内核放弃建立连接之前，发送SYN包的次数</code></p>
+<h4>判断Client的真伪</h4>
+<p>Linux 的SYNcookie的机制，默认不开启，通过net.ipv4.tcp_syncookies控制，设置为1表示开启。当服务器端开启了syncookie机制，tcp_max_syn_backlog值就失去了意义。<br />
+SYNcookie机制就是将连接信息(就是cookie)编码在ISN(initialsequencenumber)中返回给客户端；而服务器端不需要将半连接(syn connection)保存在SYN Queue队列中,而是利用客户端随后发来的ACK包中带回的ISN还原连接信息；以完成连接的建立。用于验证客户端是否为攻击，避免了半连接队列被攻击SYN包填满。<br />
+请注意，请先千万别用tcp_syncookies来处理正常的大负载的连接的情况。因为，synccookies是妥协版的TCP协议，并不严谨。</p>
+<h4>增加SYN Queue</h4>
+<p>增加tcp_max_syn_backlog值，增大SYN Queue队列维护的连接数。当开启了syncookie机制，tcp_max_syn_backlog值就失去了意义。</p>
+<h3>Accept Queue队列满</h3>
+<p>当Accept Queue队列满了之后，即使client继续向server发送ACK的包，也会不被响应。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

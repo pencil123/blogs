@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>os 进程管理|系统参数 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; os 进程管理|系统参数评论Feed" href="https://cn-blogs.cn/archives/489.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Python 爬虫模块库说明-PycURL' href='https://cn-blogs.cn/archives/487.html' />
+<link rel='next' title='centos7 Systemctl' href='https://cn-blogs.cn/archives/984.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/489.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=489' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F489.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F489.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-489 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/487.html" rel="prev">上一篇：Python 爬虫模块库说明-PycURL</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/984.html" rel="next">下一篇：centos7 Systemctl</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            os 进程管理|系统参数        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/28</span>
+            <span class="update is-hidden">2017-10-06</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>os.environ<br />
+表示字符串环境的映射对象。<br />
+os.chdir（路径）<br />
+os.fchdir（FD）<br />
+<strong><br />
+进程参数</strong><br />
+os.getcwd（）<br />
+os.ctermid（）返回与进程的控制终端相对应的文件名。<br />
+os.getegid（）返回当前进程的有效组ID。这对应于在当前进程中执行的文件上的“set id”位。<br />
+os.geteuid（）返回当前进程的有效用户ID。<br />
+os.getgid（）返回当前进程的实际组ID。<br />
+os.getgroups（）与当前流程相关联的补充组ID的返回列表。<br />
+os.getlogin（）返回进程控制终端上登录的用户名。对于大多数目的，使用环境变量LOGNAME来查找用户是谁，或者pwd.getpwuid（os.getuid（））[0]来获取进程的真实用户标识的登录名是更有用的。<br />
+os.getpgid（PID）使用进程id pid返回进程的进程组ID。如果pid为0，则返回当前进程的进程组ID。<br />
+os.getpgrp（）返回当前进程组的ID。<br />
+os.getpid（）返回当前进程ID。<br />
+os.getppid（）返回父进程的ID。<br />
+os.getresuid（）返回一个元组（ruid，euid，suid），表示当前进程的真实，有效和已保存的用户ID。<br />
+os.getresgid（）返回一个元组（rgid，egid，sgid），表示当前进程的真实，有效和已保存的组ID。<br />
+os.getuid（）返回当前进程的真实用户ID。<br />
+os.getenv（varname [，value]）返回环境变量varname的值（如果存在），如果不存在则返回值。值默认为无。<br />
+os.putenv（varname，value）将名为varname的环境变量设置为字符串值。对环境的这种更改会影响以os.system（），popen（）或fork（）和execv（）开头的子进程。</p>
+<p><strong>进程管理</strong><br />
+这些功能可用于创建和管理进程。<br />
+os.abort（）<br />
+os.execl（path，arg0，arg1，&#8230; ）<br />
+os._exit（n ）退出状态为n的进程，不调用清理处理程序，刷新stdio缓冲区等。<br />
+os.fork（）叉子进程。0在孩子中返回子进程的父进程ID。如果发生错误OSError提出。<br />
+os.kill（pid，sig ）发送信号SIG的进程PID。在主机平台上可用的特定信号的常量在signal模块中定义。<br />
+os.killpg（pgid，sig ）将信号sig发送到进程组pgid。<br />
+os.nice（增量）加入增量的过程中的“正派”。返回新的优点。<br />
+os.plock（op ）将程序段锁定到内存中。op（定义在 <sys/lock.h>）的值确定哪些段被锁定。<br />
+os.popen（cmd，mode =&#8217;r&#8217;，buffers = -1 ）打开或从命令cmd打开一个管道。<br />
+os.spawnl（模式，路径，&#8230; ）在新进程中执行程序路径<br />
+os.startfile（path [，operation ] ）启动与其关联应用程序的文件。<br />
+os.system（命令）在subshel​​l中执行命令（一个字符串）。<br />
+os.times（）返回当前的全局进程时间。返回值是一个具有五个属性的对象：<br />
+user &#8211; 用户时间<br />
+system &#8211; 系统时间<br />
+children_user &#8211; 所有子进程的用户时间<br />
+children_system &#8211; 所有子进程的系统时间<br />
+elapsed &#8211; 从过去的固定点开始实时运行<br />
+os.wait（）等待完成一个子进程，并返回一个包含其pid和exit状态指示的元组：一个16位数字，其低字节是杀死进程的信号号，高字节是退出状态（如果信号数字为零）; 如果生成核心文件，则设置低字节的高位。<br />
+os.waitid（idtype，id，options ）等待完成一个或多个子进程。<br />
+<strong><br />
+杂项系统信息</strong><br />
+os.confstr（名）返回字符串值系统配置值。<br />
+os.confstr_names字典映射名称被confstr()主机操作系统接受为这些名称定义的整数值。这可以用于确定系统已知的一组名称。<br />
+os.cpu_count（）返回系统中的CPU数量。None如果未确定则返回<br />
+os.getloadavg（）返回在过去1,5和15分钟内平均的系统运行队列中的进程数，OSError如果负载平均值无法获得，则返回。<br />
+os.sysconf（名）返回整数值系统配置值。<br />
+os.sysconf_names字典映射名称被sysconf()主机操作系统接受为这些名称定义的整数值。这可以用于确定系统已知的一组名称。<br />
+os.path模块中定义了更高级别的路径名操作。<br />
+os.curdir操作系统使用的常量字符串引用当前目录。这是&#8217;.&#8217;为Windows和POSIX。也可通过 os.path。<br />
+os.pardir操作系统使用的常量字符串引用父目录。这是&#8217;..&#8217;为Windows和POSIX。也可通过 os.path。<br />
+os.sep操作系统用于分隔路径名组件的字符。这是&#8217;/&#8217;针对POSIX和&#8217;\\&#8217;Windows。请注意，知道这一点不足以解析或连接路径名 &#8211; 使用 os.path.split()和os.path.join()- 但它有时是有用的。也可通过os.path。<br />
+os.altsep操作系统用于分隔路径名组件或None仅存在一个分隔符的替代字符。这&#8217;/&#8217;在Windows系统上设置为 sep反斜杠。也可通过 os.path。<br />
+os.extsep将基本文件名与扩展名分隔开的字符; 例如，&#8217;.&#8217;in os.py。也可通过os.path。<br />
+os.pathsep操作系统常规使用的字符分隔搜索路径组件（如 PATH），如&#8217;:&#8217;POSIX或&#8217;;&#8217;Windows。也可通过os.path。<br />
+os.defpath由环境使用的默认搜索路径exec*p*， spawn*p*如果环境没有&#8217;PATH&#8217; 密钥。也可通过os.path。<br />
+os.linesep用于在当前平台上分离（或者说，终止）行的字符串。这可能是一个单一的字符，例如&#8217;\n&#8217;POSIX或多个字符，例如&#8217;\r\n&#8217;Windows。在以文本模式（默认）打开文件时，不要使用 os.linesep作为行终止符; &#8216;\n&#8217;在所有平台上使用单个代替。<br />
+os.devnull零设备的文件路径。例如：&#8217;/dev/null&#8217;for POSIX，&#8217;nul&#8217;for Windows。也可通过os.path。</p>
+<p><strong>平台相关：</strong><br />
+os.tmpfile() 创建并打开‘w+b&#8217;一个新的临时文件<br />
+os.sep 输出操作系统特定的路径分隔符，win下为&#8221;\\&#8221;,Linux下为&#8221;/&#8221;<br />
+os.linesep 输出当前平台使用的行终止符，win下为&#8221;\t\n&#8221;,Linux下为&#8221;\n&#8221;<br />
+os.pathsep 输出用于分割文件路径的字符串<br />
+os.name 输出字符串指示当前使用平台。win-&gt;&#8217;nt&#8217;; Linux-&gt;&#8217;posix&#8217;<br />
+os.system(&#8220;bash command&#8221;) 运行shell命令，直接显示<br />
+os.popen(&#8220;bash command&#8221;) 运行shell命令，生成对象，可赋给变量，再用read读取</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

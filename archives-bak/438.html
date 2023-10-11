@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Python 包管理工具 | 青春部落    </title>
+    <meta name="keywords"  content="Python,包管理工具,pip,easy_install" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Python 包管理工具评论Feed" href="https://cn-blogs.cn/archives/438.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='磁盘分区和分区挂载' href='https://cn-blogs.cn/archives/432.html' />
+<link rel='next' title='smtp python' href='https://cn-blogs.cn/archives/440.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/438.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=438' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F438.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F438.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-438 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/432.html" rel="prev">上一篇：磁盘分区和分区挂载</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/440.html" rel="next">下一篇：smtp python</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Python 包管理工具        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/13</span>
+            <span class="update is-hidden">2018-05-08</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Python 的包管理工具有 easy_install， setuptools， pip，distribute。</p>
+<h3>distutils</h3>
+<p>Python 自带的基本安装工具，适用于非常简单的应用场景。</p>
+<h3>distribute</h3>
+<p>目前它是 setuptools 的一个弃用版本。</p>
+<h3>setuptools</h3>
+<p>setuptools 是 Python Enterprise Application Kit（PEAK）的一个副项目，它是一组 Python 的 distutilsde 工具的增强工具，可以让程序员更方便的创建和发布 Python 包，特别是那些对其它包具有依赖性的状况。</p>
+<h4>优点</h4>
+<p>相比 Python 自带的用于发布 Python 应用程序的模块 distutils;setuptools 的真正优点并不在于实现 distutils 所能实现的功能——尽管它的确增强了 distutils 的功能并简化了 setup.py 脚本中的内容。<br />
+setuptools 最大的优势是它在包管理能力方面的增强。<br />
+它可以使用一种更加透明的方法来查找、下载并安装依赖包；并可以在一个包的多个版本中自由进行切换，这些版本都安装在同一个系统上；也可以声明对某个包的特定版本的需求；还可以只使用一个简单的命令就能更新到某个包的最新版本。给人印象最为深刻的是，即使有些包的开发人员可能还从未考虑过任何 setuptools 兼容性问题，我们依然可以使用这些包。</p>
+<h4>特性</h4>
+<p>a. 在构建时使用 EasyInstall 工具自动查找、下载、安装、升级所依赖的软件包，EasyInstall 支持通过 HTTP、 FTP、 Subversion 以及 SourceForge 下载软件包，并能自动扫描 PyPI 上的网页以找到下载链接。(对于熟悉 Perl 的用户， PyPI 是 Python 领域最接近的 CPAN了)<br />
+b. 创建 Python Eggs，一种单文件的可导入的发布格式。<br />
+c. 在包中的目录中可以包含数据文件，允许代码访问这些数据文件。(Python 2.4 distutils 也支持这个特性，不过 setuptools 能为面向 Python 2.3 的包也提供这样的特性，此外还支持访问压缩包中的数据。)<br />
+d. 自动包含程序员的源代码树中的所有包，而不需要在独立的 setup.py 中逐个声明。<br />
+e. 自动在源代码发布中包含所有相关的文件，而无需创建 MANIFEST.in 文件，也不必在源代码树改变后强制生成 MANIFEST。<br />
+f. 自动为程序员项目中的任意数量的“main”函数生成封装脚本或者 Windows (控制台或者图行用户界面) .exe 文件。(注：这并不是 py2exe 的替代方案；这里生成的 .exe 需要基于已安装的 Python，而 py2exe 则不需要。)<br />
+g. 透明的 Pyrex(Pyrex 允许程序员编写混合 Python 和 C 数据类型的代码，并编译为 Python 的 C 扩展。)支持，这样程序员的 setup.py 得以列出 .pyx 文件并且即使最终用户没有安装 Pyrex 也能够运行(当然这需要程序员在源代码发布包中包含 Pyrex 生成的 C 代码)。<br />
+h. 对创建命令行别名的支持，setuptools 可以帮助程序员为发布包创建项目需要的、每个用户或者全局的快捷方式，这通常用于命令行或选项中。<br />
+i. 上传发布包到 PyPI 的支持，setuptools 可以帮助程序员将源码包或者 eggs 发布到 PyPI 上。<br />
+j. 可以以“开发模式”发布程序员的项目，这样它可以出现在 sys.path 中，而程序员依然可以直接编辑源代码的工作副本。<br />
+k. 方便的为 distutils 扩展新功能或者 setup() 参数，并能够发布可供不同的项目重复使用的扩展包，而无需复制代码。<br />
+l. 创建具有自动发现扩展功能的可扩展的应用程序或框架，只要在项目的安装脚本中简单的声明“入口点(entry points)”即可。</p>
+<h3>easy_install</h3>
+<p>它是setuptools 和 distribute 自带的安装脚本，也就是一旦 setuptools 或 distribute 安装完毕， easy_install 也便可用. 最大的特点是自动查找 Python 官方维护的包源 PyPI ， 安装第三方 Python 包非常方便。</p>
+<h3>pip</h3>
+<p>pip 是一个安装和管理 Python 包的工具，是 easy_install 的一个替换品。<br />
+pip 的目标非常明确 – 取代 easy_install. easy_install 有很多不足: 安装事务是非原子操作，只支持 svn，没有提供卸载命令，安装一系列包时需要写脚本; pip 解决了以上问题，已俨然成为新的事实标准.</p>
+<h4>安装</h4>
+<p><code>wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate<br />
+python get-pip.py</code><br />
+(如果setuptools or distribute 没有安装，get-pip.py会自动安装setuptools)<br />
+<code>pip install -U pip</code><br />
+ps：如果系统自带的python版本不合适的话，需要编译升级python的话；需要先确定系统是否安装好了openssl 和openssl-devel ；否则升级完python后，会出现python安装pip报缺少HTTPSHANDLE错误</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

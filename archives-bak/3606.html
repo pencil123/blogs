@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>wp_query 参数列表 | 青春部落    </title>
+    <meta name="keywords"  content="wordpress,WP_Query" />
+    <meta name="description"  content="wordpress 中WP_Query对象中的参数列表" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; wp_query 参数列表评论Feed" href="https://cn-blogs.cn/archives/3606.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='wp_query 介绍|属性和方法' href='https://cn-blogs.cn/archives/3604.html' />
+<link rel='next' title='opcache 检查文件更新注意项' href='https://cn-blogs.cn/archives/3625.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3606.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3606' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3606.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3606.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3606 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/php-develop/wordpress" rel="category tag">WordPress</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3604.html" rel="prev">上一篇：wp_query 介绍|属性和方法</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3625.html" rel="next">下一篇：opcache 检查文件更新注意项</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            wp_query 参数列表        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/02/20</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>作者</h2>
+<p>显示某个作者的文章.<br />
+author (int) &#8211; 使用作者 id.<br />
+author_name (string) &#8211; 使用 &#8216;user_nicename&#8217; (不是名称).</p>
+<h2>分类目录</h2>
+<p>显示属于分类目录的文章<br />
+cat (int) &#8211; 使用分类目录 id.<br />
+category_name (string) &#8211; 使用分类目录别名 (不是名称).<br />
+category__and (array) &#8211; 使用分类目录 id.<br />
+category__in (array) &#8211; 使用分类目录 id.<br />
+category__not_in (array) &#8211; 使用分类目录 id.</p>
+<h2>标签</h2>
+<p>显示包含指定标签的文章.<br />
+tag (string) &#8211; 使用标签别名.<br />
+tag_id (int) &#8211; 使用标签 id.<br />
+tag__and (array) &#8211; 使用标签 ids.<br />
+tag__in (array) &#8211; 使用标签 ids.<br />
+tag__not_in (array) &#8211; 使用标签 ids.<br />
+tag_slug__and (array) &#8211; 使用标签别名.<br />
+tag_slug__in (array) &#8211; 使用标签别名.</p>
+<h2>自定义分类法</h2>
+<p>显示属于某个自定义分类法的文章。<br />
+{tax} (string) &#8211; use taxonomy slug. Deprecated as of Version 3.1 in favor of &#8216;tax_query&#8217;.<br />
+tax_query (array) &#8211; use taxonomy parameters (available with Version 3.1).<br />
+taxonomy (string) &#8211; Taxonomy.<br />
+field (string) &#8211; Select taxonomy term by (&#8216;id&#8217; or &#8216;slug&#8217;)<br />
+terms (int/string/array) &#8211; Taxonomy term(s).<br />
+include_children (boolean) &#8211; Whether or not to include children for hierarchical taxonomies. Defaults to true.<br />
+operator (string) &#8211; Operator to test. Possible values are &#8216;IN&#8217;, &#8216;NOT IN&#8217;, &#8216;AND&#8217;.</p>
+<h2>搜索</h2>
+<p>Show posts based on a keyword search.<br />
+s (string) &#8211; Search keyword.</p>
+<h2>文章 &amp; 页面</h2>
+<p>Display content based on post and page parameters.<br />
+p (int) &#8211; use post id.<br />
+name (string) &#8211; use post slug.<br />
+page_id (int) &#8211; use page id.<br />
+pagename (string) &#8211; use page slug.<br />
+post_parent (int) &#8211; use page id. Return just the child Pages.<br />
+post__in (array) &#8211; use post ids. Specify posts to retrieve.<br />
+post__not_in (array) &#8211; use post ids. Specify post NOT to retrieve.</p>
+<h2>文章类型</h2>
+<p>显示某种 文章类型 的文章.<br />
+post_type (string / array) &#8211; 使用文章类型. 通过 Post Types 显示文章, 默认值为 &#8216;文章&#8217;;<br />
+&#8216;post&#8217; &#8211; 文章.<br />
+&#8216;page&#8217; &#8211; 页面.<br />
+&#8216;revision&#8217; &#8211; 文章版本.<br />
+&#8216;attachment&#8217; &#8211; 附件. 默认的 WP_Query 设置 &#8216;post_status&#8217;=&gt;&#8217;publish&#8217;, 但是附件默认设置为 &#8216;post_status&#8217;=&gt;&#8217;inherit&#8217; 所有如果需要显示附件，你需要设置文章状态为 &#8216;inherit&#8217; 或 &#8216;any&#8217;.<br />
+&#8216;any&#8217; &#8211; 显示所有文章类型，除了‘revisions’和&#8217;exclude_from_search&#8217;设置为 TRUE的.<br />
+自定义文章类型 (e.g. movies)</p>
+<h2>文章状态</h2>
+<p>显示处于某种文章状态 文章状态的文章.<br />
+post_status (string / array) &#8211; use post status. Retrieves posts by Post Status. Default value is &#8216;publish&#8217;, but if the user is logged in, &#8216;private&#8217; is added. And if the query is run in an admin context (administration area or AJAX call), protected statuses are added too. By default protected statuses are &#8216;future&#8217;, &#8216;draft&#8217; and &#8216;pending&#8217;.<br />
+&#8216;publish&#8217; &#8211; a published post or page.<br />
+&#8216;pending&#8217; &#8211; post is pending review.<br />
+&#8216;draft&#8217; &#8211; a post in draft status.<br />
+&#8216;auto-draft&#8217; &#8211; a newly created post, with no content.<br />
+&#8216;future&#8217; &#8211; a post to publish in the future.<br />
+&#8216;private&#8217; &#8211; not visible to users who are not logged in.<br />
+&#8216;inherit&#8217; &#8211; a revision. see get_children.<br />
+&#8216;trash&#8217; &#8211; post is in trashbin (available with Version 2.9).<br />
+&#8216;any&#8217; &#8211; retrieves any status except those from post types with &#8216;exclude_from_search&#8217; set to true.</p>
+<h2>分页</h2>
+<p>nopaging (boolean) &#8211; show all posts or use pagination. Default value is &#8216;false&#8217;, use paging.<br />
+posts_per_page (int) &#8211; number of post to show per page (available with Version 2.1, replaced showposts parameter). Use &#8216;posts_per_page&#8217;=&gt;-1 to show all posts. Note: if the query is in a feed, wordpress overwrites this parameter with the stored &#8216;posts_per_rss&#8217; option. To reimpose the limit, try using the &#8216;post_limits&#8217; filter, or filter &#8216;pre_option_posts_per_rss&#8217; and return -1<br />
+posts_per_archive_page (int) &#8211; number of posts to show per page &#8211; on archive pages only. Over-rides posts_per_page and showposts on pages where is_archive() or is_search() would be true.<br />
+offset (int) &#8211; number of post to displace or pass over. Note: Setting offset parameter will ignore the paged parameter.<br />
+paged (int) &#8211; number of page. Show the posts that would normally show up just on page X when using the &#8220;Older Entries&#8221; link.</p>
+<h2>排序</h2>
+<p>Sort retrieved posts.<br />
+order (string) &#8211; Designates the ascending or descending order of the &#8216;orderby&#8217; parameter. Defaults to &#8216;DESC&#8217;.<br />
+&#8216;ASC&#8217; &#8211; ascending order from lowest to highest values (1, 2, 3; a, b, c).<br />
+&#8216;DESC&#8217; &#8211; descending order from highest to lowest values (3, 2, 1; c, b, a).<br />
+orderby (string) &#8211; Sort retrieved posts by parameter. Defaults to &#8216;date&#8217;.<br />
+&#8216;none&#8217; &#8211; No order (available with Version 2.8).<br />
+&#8216;ID&#8217; &#8211; Order by post id. Note the captialization.<br />
+&#8216;author&#8217; &#8211; Order by author.<br />
+&#8216;title&#8217; &#8211; Order by title.<br />
+&#8216;name&#8217; &#8211; Order by post name (post slug).<br />
+&#8216;date&#8217; &#8211; Order by date.<br />
+&#8216;modified&#8217; &#8211; Order by last modified date.<br />
+&#8216;parent&#8217; &#8211; Order by post/page parent id.<br />
+&#8216;rand&#8217; &#8211; Random order.<br />
+&#8216;comment_count&#8217; &#8211; Order by number of comments (available with Version 2.9).<br />
+&#8216;menu_order&#8217; &#8211; Order by Page Order. Used most often for Pages (Order field in the Edit Page Attributes box) and for Attachments (the integer fields in the Insert / Upload Media Gallery dialog), but could be used for any post type with distinct &#8216;menu_order&#8217; values (they all default to 0).<br />
+&#8216;meta_value&#8217; &#8211; Note that a &#8216;meta_key=keyname&#8217; must also be present in the query. Note also that the sorting will be alphabetical which is fine for strings (i.e. words), but can be unexpected for numbers (e.g. 1, 3, 34, 4, 56, 6, etc, rather than 1, 3, 4, 6, 34, 56 as you might naturally expect). Use &#8216;meta_value_num&#8217; instead for numeric values.<br />
+&#8216;meta_value_num&#8217; &#8211; Order by numeric meta value (available with Version 2.8). Also note that a &#8216;meta_key=keyname&#8217; must also be present in the query. This value allows for numerical sorting as noted above in &#8216;meta_value&#8217;.<br />
+&#8216;post__in&#8217; &#8211; Preserve post ID order given in the post__in array (available with Version 3.5).</p>
+<h2>置顶文章</h2>
+<p>显示 Sticky Posts 或忽略置顶文章。</p>
+<h2>时间</h2>
+<p>Show posts associated with a certain time period.<br />
+year (int) &#8211; 4 digit year (e.g. 2011).<br />
+monthnum (int) &#8211; Month number (from 1 to 12).<br />
+w (int) &#8211; Week of the year (from 0 to 53). Uses the MySQL WEEK command. The mode is dependent on the &#8220;start_of_week&#8221; option.<br />
+day (int) &#8211; Day of the month (from 1 to 31).<br />
+hour (int) &#8211; Hour (from 0 to 23).<br />
+minute (int) &#8211; Minute (from 0 to 60).<br />
+second (int) &#8211; Second (0 to 60).</p>
+<h2>自定义字段</h2>
+<p>Show posts associated with a certain custom field.<br />
+meta_key (string) &#8211; Custom field key.<br />
+meta_value (string) &#8211; Custom field value.<br />
+meta_value_num (number) &#8211; Custom field value.<br />
+meta_compare (string) &#8211; Operator to test the &#8216;meta_value&#8217;. Possible values are &#8216;!=&#8217;, &#8216;&gt;&#8217;, &#8216;&gt;=&#8217;, &#8216;&lt;&#8216;, or &#8216;&lt;=&#8217;. Default value is &#8216;=&#8217;.<br />
+meta_query (array) &#8211; Custom field parameters (available with Version 3.1).<br />
+key (string) &#8211; Custom field key.<br />
+value (string|array) &#8211; Custom field value (Note: Array support is limited to a compare value of &#8216;IN&#8217;, &#8216;NOT IN&#8217;, &#8216;BETWEEN&#8217;, or &#8216;NOT BETWEEN&#8217;) (This value may be omitted when using the &#8216;EXISTS&#8217; or &#8216;NOT EXISTS&#8217; comparisons in WordPress 3.5 and up)<br />
+compare (string) &#8211; Operator to test. Possible values are &#8216;=&#8217;, &#8216;!=&#8217;, &#8216;&gt;&#8217;, &#8216;&gt;=&#8217;, &#8216;&lt;&#8216;, &#8216;&lt;=&#8217;, &#8216;LIKE&#8217;, &#8216;NOT LIKE&#8217;, &#8216;IN&#8217;, &#8216;NOT IN&#8217;, &#8216;BETWEEN&#8217;, &#8216;NOT BETWEEN&#8217;, &#8216;EXISTS&#8217; (only in WP &gt;= 3.5), and &#8216;NOT EXISTS&#8217; (also only in WP &gt;= 3.5). Default value is &#8216;=&#8217;.<br />
+type (string) &#8211; Custom field type. Possible values are &#8216;NUMERIC&#8217;, &#8216;BINARY&#8217;, &#8216;CHAR&#8217;, &#8216;DATE&#8217;, &#8216;DATETIME&#8217;, &#8216;DECIMAL&#8217;, &#8216;SIGNED&#8217;, &#8216;TIME&#8217;, &#8216;UNSIGNED&#8217;. Default value is &#8216;CHAR&#8217;.</p>
+<h2>权限</h2>
+<p>perm (string) &#8211; User permission.<br />
+Show posts if user has the appropriate capability:</p>
+<h2>缓存</h2>
+<p>Stop the data retrieved from being added to the cache.<br />
+cache_results (boolean) &#8211; Post information cache.<br />
+update_post_meta_cache (boolean) &#8211; Post meta information cache.<br />
+update_post_term_cache (boolean) &#8211; Post term information cache.</p>
+<h2>返回字段</h2>
+<p>Set return values.<br />
+fields (string|array) &#8211; Which fields to return. Defaults to all.<br />
+&#8216;ids&#8217; &#8211; Return an array of post IDs.<br />
+&#8216;id=&gt;parent&#8217; &#8211; Return an associative array [ parent =&gt; ID, … ].<br />
+any other value or empty (default): return an array of post objects</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

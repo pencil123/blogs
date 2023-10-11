@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Percona 主从数据库一致性检查 | 青春部落    </title>
+    <meta name="keywords"  content="mysql,pt-table-checksum,数据一致性检查" />
+    <meta name="description"  content="mysql 数据库主从架构检查数据库一致性方法" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Percona 主从数据库一致性检查评论Feed" href="https://cn-blogs.cn/archives/3312.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL 数据库主从复制' href='https://cn-blogs.cn/archives/3307.html' />
+<link rel='next' title='MySQL 从库跳过错误计数器' href='https://cn-blogs.cn/archives/3314.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3312.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3312' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3312.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3312.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3312 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3307.html" rel="prev">上一篇：MySQL 数据库主从复制</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3314.html" rel="next">下一篇：MySQL 从库跳过错误计数器</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Percona 主从数据库一致性检查        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/01/26</span>
+            <span class="update is-hidden">2018-05-01</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>pt-table-checksum 是Percona-Toolkit的组件之一，用于检测Mysql数据库的主从架构中主库和从库间的数据一致性。</p>
+<h4>原理</h4>
+<p>pt-table-checksum会对校验的表数据进行数据块(数据块大小根据服务负载情况调整)划分，并对数据块数据进行checksun处理；存储在建立的表中。<br />
+在主库中执行基于statemnet的sql语句，生成数据块的checksum;在从库执行相同的sql语句，获取到数据块的checksum和主库的checksum进行比较。</p>
+<h4>过程</h4>
+<p>1. master设置binlog格式为语句。<code>/ *！50108 SET @@ binlog_format：='STATEMENT'* /</code><br />
+2. master设置RR的隔离级别。RR具有静态数据，因此不需要锁定。<code>SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READREAD&lt;</code><br />
+3. master计算块数据校验和。<code>checksums table：</code><br />
+<code>Use REPLACE INTO select to set this_cnt, this_crc </code>(传递给从属设备，实际上是为每个SLAVE设置cnt，crc).<br />
+该算法来自：<code>COALESCE（LOWER（CONV（BIT_XOR（CAST（CRC32（主键）AS UNSIGNED）），10,16）），0）</code><br />
+4.Slave 当同步完成时，开始运行<code>REPLACE INTO select and set cnt,crc for each chunk of the slave</code> 。<br />
+5.master <code>checksums table：</code>更新master_cnt，master_crc。这是为master的每个块设置cnt，crc。<br />
+6.slave 当同步完成时，开始运行<code>update master_cnt，master_cr</code>c并为master的每个块设置cnt，crc。<br />
+接下来，我们只需要在校验和表中找到master_cnt &lt;&gt; this_cnt或OR master_crc &lt;&gt; this_crc记录。</p>
+<h4>rpm包下载地址</h4>
+<p>https://www.percona.com/doc/percona-toolkit/LATEST/pt-table-checksum.html#downloading</p>
+<h4>为检查用户分配权限</h4>
+<p><code>mysql&gt;  grant select, insert, update, delete, create, process, super, replication slave on *.* to'checksums'@localhost identified by 'checksums';<br />
+mysql&gt; flush privileges;</code><br />
+权限说明<br />
+process &#8211;&gt; show processlist<br />
+super &#8211;&gt; set binlog_format=&#8217;statement&#8217;<br />
+replication slave &#8211;&gt; show slave hosts</p>
+<h2>操作过程的疑问</h2>
+<h4>表数据很大时，是否会影响线上业务</h4>
+<p>1、pt-table-checksum 对较大的数据表会进行数据分块（chunks）分批处理。<br />
+2、防止校验过程中数据块内容修改，会对块中的数据加锁。<br />
+3、为了进行数据一致性检查，我们通常在两台从服务器上进行比较。如果两个从服务器都没问题，一致性就可以认为是可以。</p>
+<h4>其他日志格式是否有效</h4>
+<p>1、如果它处于行模式，则pt-table-checksum将报告错误，但可以通过添加&#8211;no-check-binlog-format来解决。<br />
+2、该工具自动设置binlog-format=statement，因此您不必担心这一点。即使设置了行模式，一致性检查仍然有效。</p>
+<h3>如何连接数据库实例</h3>
+<p>1、pt-table-checksum 工具可以使用h,u,p,P等参数设置连接主数据库服务，使用&#8211;databases指定检查的数据库。</p>
+<h4>参数递归选项</h4>
+<p>&#8211;recursion-method 递归方式<br />
+<code>type: array; default: processlist,hosts</code><br />
+可以使用的递归方式：</p>
+<table>
+<tbody>
+<tr>
+<th>METHOD选项</th>
+<th>USES参数获取方式</th>
+</tr>
+<tr>
+<th>processlist</th>
+<th>SHOW PROCESSLIST</th>
+</tr>
+<tr>
+<th>hosts</th>
+<th>SHOW SLAVE HOSTS</th>
+</tr>
+<tr>
+<th>cluster</th>
+<th>SHOW STATUS LIKE &#8216;wsrep\_incoming\_addresses&#8217;</th>
+</tr>
+<tr>
+<th>dsn=DSN</th>
+<th>DSNs from a table</th>
+</tr>
+<tr>
+<th>none</th>
+<th>Do not find slaves</th>
+</tr>
+</tbody>
+</table>
+<p>1、processlist 默认<br />
+2、hosts 如果端口不是3306，则hosts默认；使用report_host,report_port等参数设置<br />
+3、cluster Percona XtraDB集群<br />
+4、dns是个特殊的方式；服务器连接参数不是自动发现，而是通过一个保存DSNs信息的表中获取。DSN方式指定table方式为<code>dsn=h=host,D=percona,t=dsns</code><br />
+DSNs table结构<br />
+<code>CREATE TABLE `dsns` (<br />
+`id` int(11) NOT NULL AUTO_INCREMENT,<br />
+`parent_id` int(11) DEFAULT NULL,<br />
+`dsn` varchar(255) NOT NULL,<br />
+PRIMARY KEY (`id`)<br />
+);</code><br />
+DSNs数据表中id和parent_id除了用于排序外，不起作用。<br />
+dsn字段存储按照命令行方式DSN信息，如：<code>"h=replica_host,u=repl_user,p=repl_pass".</code><br />
+<code>insert into dsns values(1,1,'h=localhost,u=username,p=password,P=3306');</code></p>
+<blockquote class="wp-embedded-content" data-secret="GohaHXf6wz"><p><a href="https://www.cn-blogs.cn/archives/2998.html">Percona 和 DSN 说明</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/2998.html/embed#?secret=GohaHXf6wz" data-secret="GohaHXf6wz" width="500" height="282" title="《Percona 和 DSN 说明》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<h4>执行命令</h4>
+<p><code>pt-table-checksum --nocheck-replication-filters --replicate=redmine.checksums --nocheck-binlog-format --databases=redmine --tables=t1 h=127.0.0.1,u=root,p=123456,P=3306 --recursion-method=DSN=h=127.0.0.1,D=test,t=dsns</code></p>
+<h4>参数说明</h4>
+<table>
+<tbody>
+<tr>
+<th>&#8211;nocheck-replication-filters</th>
+<th>不检查复制过滤器，建议启用。后面可以用&#8211;databases来指定需要检查的数据库。</th>
+</tr>
+<tr>
+<th>&#8211;nocheck-binlog-format</th>
+<th>不检查复制的binlog模式，要是binlog模式是ROW，则会报错。</th>
+</tr>
+<tr>
+<th>&#8211;replicate-check-only</th>
+<th>只显示不同步的信息。</th>
+</tr>
+<tr>
+<th>&#8211;replicate=</th>
+<th>把checksum的信息写入到指定表中，建议直接写到被检查的数据库当中。</th>
+</tr>
+<tr>
+<th>&#8211;databases=</th>
+<th>指定需要被检查的数据库，多个则用逗号隔开。</th>
+</tr>
+<tr>
+<th>&#8211;tables=</th>
+<th>指定需要被检查的表，多个用逗号隔开</th>
+</tr>
+<tr>
+<th>h=127.0.0.1</th>
+<th>Master的地址</th>
+</tr>
+<tr>
+<th>u=root</th>
+<th>用户名</th>
+</tr>
+<tr>
+<th>p=123456</th>
+<th>密码</th>
+</tr>
+<tr>
+<th>P=3306</th>
+<th>端口</th>
+</tr>
+</tbody>
+</table>
+<h4>输出说明</h4>
+<table>
+<tbody>
+<tr>
+<th>TS</th>
+<th>完成检查的时间。</th>
+</tr>
+<tr>
+<th>ERRORS</th>
+<th>检查时候发生错误和警告的数量。</th>
+</tr>
+<tr>
+<th>DIFFS</th>
+<th>0表示一致，1表示不一致。当指定&#8211;no-replicate-check时，会一直为0，当指定&#8211;replicate-check-only会显示不同的信息。</th>
+</tr>
+<tr>
+<th>ROWS</th>
+<th>表的行数。</th>
+</tr>
+<tr>
+<th>CHUNKS</th>
+<th>被划分到表中的块的数目。</th>
+</tr>
+<tr>
+<th>SKIPPED</th>
+<th>由于错误或警告或过大，则跳过块的数目。</th>
+</tr>
+<tr>
+<th>TIME</th>
+<th>执行的时间。</th>
+</tr>
+<tr>
+<th>TABLE</th>
+<th>被检查的表名。</th>
+</tr>
+</tbody>
+</table>
+<h3>补充参数</h3>
+<h4>安全选项:</h4>
+<table>
+<tbody>
+<tr>
+<th>—check-replication-filters</th>
+<th>是否检查复制过滤规则</th>
+</tr>
+<tr>
+<th>—check-slave-tables</th>
+<th>检查是否所有从库都有被检查的表和列</th>
+</tr>
+<tr>
+<th>—chunk-size-limit</th>
+<th>每个chunk最大不能超过这个大小，超过就忽略它</th>
+</tr>
+</tbody>
+</table>
+<h4>限速选项：</h4>
+<table>
+<tbody>
+<tr>
+<th>—check-interval</th>
+<th>多久检查一次主从延迟、主库负载是否达到上限</th>
+</tr>
+<tr>
+<th>—check-slave-lag</th>
+<th>是否只检查这个从库的延迟</th>
+</tr>
+<tr>
+<th>—max-lag</th>
+<th>最大延迟，超过这个就等待</th>
+</tr>
+<tr>
+<th>—max-load</th>
+<th>最大负载，超过这个就等待</th>
+</tr>
+</tbody>
+</table>
+<h4>过滤选项：</h4>
+<table>
+<tbody>
+<tr>
+<th>—databases</th>
+<th>只检查某些库</th>
+</tr>
+<tr>
+<th>—tables</th>
+<th>只检查某些表</th>
+</tr>
+</tbody>
+</table>
+<p><strong>其他选项</strong></p>
+<table>
+<tbody>
+<tr>
+<th>—resume</th>
+<th>因某种原因中断，下次接着执行，不用从头开始</th>
+</tr>
+<tr>
+<th>—chunk-time</th>
+<th>每个chunk被计算的时间，一般默认为0.5秒</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

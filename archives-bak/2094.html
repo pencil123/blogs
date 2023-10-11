@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>OSI模型 | 青春部落    </title>
+    <meta name="keywords"  content="网络模型,OSI模型,物理成,链接层,网络层,传输层,会话层,表示层,应用层" />
+    <meta name="description"  content="OSI模型架构分为物理成,链接层,网络层,传输层,会话层,表示层,应用层" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; OSI模型评论Feed" href="https://cn-blogs.cn/archives/2094.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='IPv4 类型说明' href='https://cn-blogs.cn/archives/55.html' />
+<link rel='next' title='CSS使用和优先级' href='https://cn-blogs.cn/archives/2729.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2094.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2094' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2094.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2094.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2094 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/55.html" rel="prev">上一篇：IPv4 类型说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2729.html" rel="next">下一篇：CSS使用和优先级</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            OSI模型        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/01/20</span>
+            <span class="update is-hidden">2018-04-27</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>开放式系统互联通信参考模型（Open System Interconnection Reference Model）种概念模型，由国际标准化组织（ISO）提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。定义于ISO/IEC 7498-1。</p>
+<h4>第7层 应用层(Application Layer)</h4>
+<p>提供为应用软件而设的界面，以设置与另一应用软件之间的通信。例如: HTTP，HTTPS，FTP，TELNET，SSH，SMTP，POP3等。</p>
+<h4>第6层 表达层(Presentation Layer)</h4>
+<p>把数据转换为能与接收者的系统格式兼容并适合传输的格式。</p>
+<h4>第5层 会话层(Session Layer)</h4>
+<p>负责在数据传输中设置和维护电脑网络中两台电脑之间的通信连接。</p>
+<h4>第4层 传输层(Transport Layer)</h4>
+<p>把传输表头（TH）加至数据以形成数据包。传输表头包含了所使用的协议等发送信息。例如:传输控制协议义（TCP）等。</p>
+<h4>第3层 网络层(Network Layer)</h4>
+<p>决定数据的路径选择和转寄，将网络表头（NH）加至数据包，以形成分组。网络表头包含了网络数据。例如:互联网协议（IP）等。</p>
+<h4>第2层 数据链接层(Data Link Layer)</h4>
+<p>负责网络寻址、错误侦测和改错。当表头和表尾被加至数据包时，会形成了帧。数据链表头（DLH）是包含了物理地址和错误侦测及改错的方法。数据链表尾（DLT）是一串指示数据包末端的字符串。例如以太网、无线局域网（Wi-Fi）和通用分组无线服务（GPRS）等。<br />
+分为两种子层：logic link control sublayer &amp; media access control sublayer</p>
+<h4>第1层 物理层(Physical Layer)</h4>
+<p>在局部局域网上传送帧，它负责管理电脑通信设备和网络媒体之间的互通。包括了针脚、电压、线缆规范、集线器、中继器、网卡、主机适配器等</p>
+<table style="margin: 1em auto 1em auto;">
+<tbody>
+<tr>
+<th colspan="5">OSI 模型</th>
+</tr>
+<tr>
+<th></th>
+<th>数据单元</th>
+<th>层</th>
+<th style="width: 30em;">功能</th>
+</tr>
+<tr>
+<th rowspan="4">主机层</th>
+<td style="background: #d8ec9c;" rowspan="3">Data（数据）</td>
+<td style="background: #d8ec9b;">7. 应用层</td>
+<td style="background: #d8ec9c;"><small>网络进程到应用程序。</small>针对特定应用规定各层协议、时序、表示等，进行封装 。在端系统中用软件来实现，如HTTP等</td>
+</tr>
+<tr>
+<td style="background: #d8ec9b;">6. 表示层</td>
+<td style="background: #d8ec9b;"><small>数据表示形式，加密和解密，把机器相关的数据转换成独立于机器的数据。</small>规定数据的格式化表示 ，数据格式的转换等</td>
+</tr>
+<tr>
+<td style="background: #d8ec9b;">5. 会话层</td>
+<td style="background: #d8ec9b;"><small>主机间通讯，管理应用程序之间的会话。</small>规定通信时序 ；数据交换的定界、同步，创建检查点等</td>
+</tr>
+<tr>
+<td style="background: #e7ed9c;">Segments（数据段）</td>
+<td style="background: #e7ed9c;">4.传输层</td>
+<td style="background: #e7ed9c;"><small>在网络的各个节点之间可靠地分发数据包。</small>所有传输遗留问题；复用；流量；可靠</td>
+</tr>
+<tr>
+<th rowspan="3">媒介层</th>
+<td style="background: #eddc9c;">Datagram网络分组/数据报文</td>
+<td style="background: #eddc9c;">3. 网络层</td>
+<td style="background: #eddc9c;"><small>在网络的各个节点之间进行地址分配、路由和（不一定可靠的）分发报文。</small>路由（ IP寻址）；拥塞控制。</td>
+</tr>
+<tr>
+<td style="background: #e9c189;">Bit/Frame（数据帧）</td>
+<td style="background: #e9c189;">2. 数据链路层</td>
+<td style="background: #e9c189;"><small>一个可靠的点对点数据直链。</small>检错与纠错（CRC码）；多路访问；寻址</td>
+</tr>
+<tr>
+<td style="background: #e9988a;">Bit（比特）</td>
+<td style="background: #e9988a;">1. 物理层</td>
+<td style="background: #e9988a;"><small>一个（不一定可靠的）点对点数据直链。</small>定义机械特性；电气特性；功能特性；过程特性</td>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

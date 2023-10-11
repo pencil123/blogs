@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串操作符 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 字符串操作符评论Feed" href="https://cn-blogs.cn/archives/13.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='时间date &#038; 时区tzset' href='https://cn-blogs.cn/archives/10.html' />
+<link rel='next' title='cut 截取' href='https://cn-blogs.cn/archives/24.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/13.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=13' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F13.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F13.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-13 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/shell" rel="category tag">Shell 壳</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/10.html" rel="prev">上一篇：时间date &#038; 时区tzset</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/24.html" rel="next">下一篇：cut 截取</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            字符串操作符        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/08/13</span>
+            <span class="update is-hidden">2018-03-04</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>首先需要明白的一点是我们通常所用的变量替代 $varname 其实是 ${varname}的一种简写形式。</p>
+<p>其次,需要知道字符串操作的核心思想是：Bash shell字符串操作是通过在变量名&#8217;varname&#8217;和闭花括号&#8217;}&#8217;之间插入操作符来完成的。</p>
+<p><strong>字符串操作符在处理&#8221; &#8216; ? * 等字符时需要使用\转意</strong></p>
+<p><strong>grep 对字符进行查找时  &#8221; 需要加转意\   &#8216;不需要加</strong></p>
+<p><strong>替换操作符</strong><br />
+${varname:-word}<br />
+含义：如果变量varname存在且非空, 返回变量的值；否则返回值word。<br />
+目的：如果变量未定义，则返回默认值word。<br />
+举例：如果变量count未定义，则：${count:-0}的值为0.<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:-0}<br />
+0<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+root@/export/home/ftp/pub&#8211;&gt;</p>
+<p>${varname:=word}<br />
+含义：如果变量varname存在且非空，返回变量的值；否则将变量的值设为值word后返回变量的值。<br />
+目的：如果变量varname未定义，则将其设置为默认值word.<br />
+举例：如果变量count未定义，则将其设为0</p>
+<p>[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:=0}<br />
+0<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+0<br />
+${varname:+word}<br />
+含义：如果变量varname存在且非空，返回值word；否则返回null。<br />
+目的：测试变量varname是否存在。<br />
+举例：如果变量count存在，返回1（表示存在）<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+0<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:+1}<br />
+1<br />
+root@/export/home/ftp/pub&#8211;&gt;unset count<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:+1}<br />
+root@/export/home/ftp/pub&#8211;&gt;<br />
+${varname:?message}<br />
+含义：如果变量varname存在且非空，返回变量的值；否则打印信息&#8221;varname: message&#8221;；如果message没有指定，则显示parameter null or not set。<br />
+目的：如果变量未定义，则打印错误信息。<br />
+举例：如果变量count未定义，打印消息&#8221;count: undefined!<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $count<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:?&#8221;undefined&#8221;}<br />
+bash: count: undefined<br />
+${varname:offset:length}<br />
+含义：返回变量varname的子字符串，开始位置为offset，长度为length。注意索引开始位置为0。<br />
+目的：返回子字符串。<br />
+举例：如果变量count的值为 frogfootman，则：<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;count=frogfootman<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:4}<br />
+footman<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${count:4:4}<br />
+foot<br />
+root@/export/home/ftp/pub&#8211;&gt;</p>
+<p><strong> ${varname/pattern/string}</strong><br />
+含义：用值string替换varname中模式pattern可以匹配到的最大部分。仅替换第一次匹配。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;echo $PATH<br />
+/usr/sbin:/usr/bin:/export/home/ftp/pub/:/etc/vx/bin:/opt/VRTS/bin:/opt/VRTSvcs/bin:/opt/VRTSat/bin:/sbin:/usr/sbin:/usr/local/bin:/export/home/ftp/pub/<br />
+root@/&#8211;&gt;echo -e ${PATH/:/&#8217;/n&#8217;}<br />
+/usr/sbin<br />
+/usr/bin:/export/home/ftp/pub/:/etc/vx/bin:/opt/VRTS/bin:/opt/VRTSvcs/bin:/opt/VRTSat/bin:/sbin:/usr/sbin:/usr/local/bin:/export/home/ftp/pub/<br />
+root@/&#8211;&gt;<br />
+${varname//pattern/string}<br />
+含义：用值string替换varname中模式pattern可以匹配到的最大部分。全局匹配。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;echo $PATH<br />
+/usr/sbin:/usr/bin:/export/home/ftp/pub/:/etc/vx/bin:/opt/VRTS/bin:/opt/VRTSvcs/bin:/opt/VRTSat/bin:/sbin:/usr/sbin:/usr/local/bin:/export/home/ftp/pub/<br />
+root@/&#8211;&gt;echo -e ${PATH//:/&#8217;/n&#8217;}<br />
+/usr/sbin<br />
+/usr/bin<br />
+/export/home/ftp/pub/<br />
+/etc/vx/bin<br />
+/opt/VRTS/bin<br />
+/opt/VRTSvcs/bin<br />
+/opt/VRTSat/bin<br />
+/sbin<br />
+/usr/sbin<br />
+/usr/local/bin<br />
+/export/home/ftp/pub/<br />
+<strong>   变量长度</strong><br />
+${#varname}<br />
+含义：获取变量varname值长度。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;echo $path<br />
+/export/home/ftp/pub<br />
+root@/&#8211;&gt;echo ${#path}<br />
+20<br />
+<strong>扩展模式匹配操作府</strong><br />
+注意：使用扩展模式匹配操作符时，shopt extglob必须为on .<br />
+[c-sharp] view plaincopy<br />
+root@/tmp/ewang&#8211;&gt;shopt extglob<br />
+extglob         on<br />
+*(patternlist)<br />
+含义：匹配patternlist中０个或多个pattern<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;var=alicealicesophie<br />
+root@/&#8211;&gt;echo ${var/*(alice|edward|stone)/ALICE}<br />
+ALICEsophie<br />
++(patternlist)<br />
+含义：匹配patternlist中１个或多个pattern<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;var=alicesophiealicestone<br />
+root@/&#8211;&gt;echo ${var/+(alice|edward|stone)/ALICE}<br />
+ALICEsophiealicestone<br />
+root@/&#8211;&gt;echo ${var//+(alice|edward|stone)/ALICE}<br />
+ALICEsophieALICE<br />
+?(patternlist)<br />
+含义：匹配patternlist中0各或１个patter<br />
+@(patternlist)<br />
+含义：匹配patterlist中的１个pattern.<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/&#8211;&gt;count=123.5<br />
+root@/&#8211;&gt;echo ${count/@(.)/#}<br />
+123#5<br />
+!(patternlist)<br />
+含义：匹配patterlist中所有pattern之外的pattern。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/tmp/ewang&#8211;&gt;ls<br />
+abc  mn   tv1  vt0  vt1  vt2  vt3<br />
+root@/tmp/ewang&#8211;&gt;rm -fr !(vt+([0-9]))<br />
+root@/tmp/ewang&#8211;&gt;ls<br />
+vt0  vt1  vt2  vt3<br />
+root@/tmp/ewang&#8211;&gt;</p>
+<p><strong>模式匹配操作符</strong><br />
+${varname#pattern}<br />
+含义：如果pattern匹配变量varname值的开始部分，删除最小 的匹配部分并且返回变量剩余部分内容。<br />
+举例：</p>
+<p>[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $path<br />
+/export/home/ftp/pub<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${path#*/}<br />
+export/home/ftp/pub<br />
+${varname##pattern}<br />
+含义：如果pattern匹配变量varname值的开始部分，删除最大 的匹配部分并且返回变量剩余部分内容。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $path<br />
+/export/home/ftp/pub<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${path##*/}<br />
+pub<br />
+${varname%pattern}<br />
+含义：如果pattern匹配变量varname值的结尾部分，删除最小 的匹配部分并且返回变量剩余部分内容。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $path<br />
+/export/home/ftp/pub<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${path%/*}<br />
+/export/home/ftp<br />
+${varname%%pattern}<br />
+含义：如果pattern匹配变量varname值的结尾部分，删除最大 的匹配部分并且返回变量剩余部分内容。<br />
+举例：<br />
+[c-sharp] view plaincopy<br />
+root@/export/home/ftp/pub&#8211;&gt;echo $file<br />
+alicece<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${file%ce*}<br />
+alice<br />
+root@/export/home/ftp/pub&#8211;&gt;echo ${file%%ce*}<br />
+ali</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

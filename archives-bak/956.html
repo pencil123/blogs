@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>SQLite数据库管理命令 | 青春部落    </title>
+    <meta name="keywords"  content="SQLite,轻量级数据库,管理命令" />
+    <meta name="description"  content="SQLite数据库的管理命令说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; SQLite数据库管理命令评论Feed" href="https://cn-blogs.cn/archives/956.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='SQLite附加和分离数据库' href='https://cn-blogs.cn/archives/953.html' />
+<link rel='next' title='可变参数*和**' href='https://cn-blogs.cn/archives/959.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/956.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=956' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F956.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F956.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-956 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/sqlite" rel="category tag">SQLite</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/953.html" rel="prev">上一篇：SQLite附加和分离数据库</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/959.html" rel="next">下一篇：可变参数*和**</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            SQLite数据库管理命令        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/11/02</span>
+            <span class="update is-hidden">2018-03-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>管理命令：数据库创建、数据库备份、数据库还原、SQLite3管理命令</p>
+<h2>创建数据库</h2>
+<p>$sqlite3 DatabaseName.db</p>
+<h2>备份|恢复</h2>
+<p>$sqlite3 testDB.db .dump &gt; testDB.sql<br />
+$sqlite3 testDB.db &lt; testDB.sql</p>
+<h2>管理命令</h2>
+<table>
+<tbody>
+<tr>
+<th style="width: 30%;">命令</th>
+<th style="width: 70%;">描述</th>
+</tr>
+<tr>
+<td>.databases</td>
+<td>列出附加数据库的名称和文件。</td>
+</tr>
+<tr>
+<td>.tables ?PATTERN?</td>
+<td>列出匹配 LIKE 模式的表的名称。</td>
+</tr>
+<tr>
+<td>.indices ?TABLE?</td>
+<td>显示所有索引的名称。如果指定了 TABLE 表，则只显示匹配 LIKE 模式的 TABLE 表的索引。</td>
+</tr>
+<tr>
+<td>.header(s) ON|OFF</td>
+<td>开启或关闭头部显示。</td>
+</tr>
+<tr>
+<td>.schema ?TABLE?</td>
+<td>显示 CREATE 语句。如果指定了 TABLE 表，则只显示匹配 LIKE 模式的 TABLE 表。</td>
+</tr>
+<tr>
+<td>.width NUM NUM</td>
+<td>为 &#8220;column&#8221; 模式设置列宽度。</td>
+</tr>
+<tr>
+<td>.backup ?DB? FILE</td>
+<td>备份 DB 数据库（默认是 &#8220;main&#8221;）到 FILE 文件。</td>
+</tr>
+<tr>
+<td>.bail ON|OFF</td>
+<td>发生错误后停止。默认为 OFF。</td>
+</tr>
+<tr>
+<td>.dump ?TABLE?</td>
+<td>以 SQL 文本格式转储数据库。如果指定了 TABLE 表，则只转储匹配 LIKE 模式的 TABLE 表。</td>
+</tr>
+<tr>
+<td>.echo ON|OFF</td>
+<td>开启或关闭 echo 命令。</td>
+</tr>
+<tr>
+<td>.explain ON|OFF</td>
+<td>开启或关闭适合于 EXPLAIN 的输出模式。如果没有带参数，则为 EXPLAIN on，及开启 EXPLAIN。</td>
+</tr>
+<tr>
+<td>.import FILE TABLE</td>
+<td>导入来自 FILE 文件的数据到 TABLE 表中。</td>
+</tr>
+<tr>
+<td>.load FILE ?ENTRY?</td>
+<td>加载一个扩展库。</td>
+</tr>
+<tr>
+<td>.log FILE|off</td>
+<td>开启或关闭日志。FILE 文件可以是 stderr（标准错误）/stdout（标准输出）。</td>
+</tr>
+<tr>
+<td>.mode MODE</td>
+<td>设置输出模式，MODE 可以是下列之一：</p>
+<ul class="list">
+<li><b>csv</b> 逗号分隔的值</li>
+<li><b>column</b> 左对齐的列</li>
+<li><b>html</b> HTML 的 &lt;table&gt; 代码</li>
+<li><b>insert</b> TABLE 表的 SQL 插入（insert）语句</li>
+<li><b>line</b> 每行一个值</li>
+<li><b>list</b> 由 .separator 字符串分隔的值</li>
+<li><b>tabs</b> 由 Tab 分隔的值</li>
+<li><b>tcl</b> TCL 列表元素</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>.nullvalue STRING</td>
+<td>在 NULL 值的地方输出 STRING 字符串。</td>
+</tr>
+<tr>
+<td>.output FILENAME</td>
+<td>发送输出到 FILENAME 文件。</td>
+</tr>
+<tr>
+<td>.output stdout</td>
+<td>发送输出到屏幕。</td>
+</tr>
+<tr>
+<td>.print STRING&#8230;</td>
+<td>逐字地输出 STRING 字符串。</td>
+</tr>
+<tr>
+<td>.prompt MAIN CONTINUE</td>
+<td>替换标准提示符。</td>
+</tr>
+<tr>
+<td>.read FILENAME</td>
+<td>执行 FILENAME 文件中的 SQL。</td>
+</tr>
+<tr>
+<td>.separator STRING</td>
+<td>改变输出模式和 .import 所使用的分隔符。</td>
+</tr>
+<tr>
+<td>.show</td>
+<td>显示各种设置的当前值。</td>
+</tr>
+<tr>
+<td>.stats ON|OFF</td>
+<td>开启或关闭统计。</td>
+</tr>
+<tr>
+<td>.timeout MS</td>
+<td>尝试打开锁定的表 MS 毫秒。</td>
+</tr>
+<tr>
+<td>.timer ON|OFF</td>
+<td>开启或关闭 CPU 定时器。</td>
+</tr>
+<tr>
+<td>.quit</td>
+<td>退出 SQLite 提示符。</td>
+</tr>
+<tr>
+<td>.exit</td>
+<td>退出 SQLite 提示符。</td>
+</tr>
+<tr>
+<td>.help</td>
+<td>显示消息。</td>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

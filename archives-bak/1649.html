@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>加密算法 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 加密算法评论Feed" href="https://cn-blogs.cn/archives/1649.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Document类和QuerySet 类说明' href='https://cn-blogs.cn/archives/1547.html' />
+<link rel='next' title='ssl证书' href='https://cn-blogs.cn/archives/1651.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1649.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1649' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1649.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1649.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1649 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/uncategorized" rel="category tag">其他</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1547.html" rel="prev">上一篇：Document类和QuerySet 类说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1651.html" rel="next">下一篇：ssl证书</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            加密算法        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/09/22</span>
+            <span class="update is-hidden">2018-03-05</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>对称加密算法</strong></p>
+<p>对称加密是指：加密和解密使用相同密钥的算法。它要求发送方和接收方在安全通信之前，商定一个对称密钥。<br />
+对称算法的安全性完全依赖于密钥，密钥泄漏就意味着任何人都可以对他们发送或接收的消息解密，所以密钥的保密性对通信至关重要。</p>
+<p>对称加密又分为两种模式：流加密和分组加密</p>
+<p><strong>流加密</strong>是将消息作为字节流对待，并且使用数学函数分别作用在每一个字节位上。<br />
+使用流加密时，每加密一次，相同的明文位会转换成不同的密文位。<br />
+流加密使用了密钥流生成器，它生成的字节流与明文字节流进行异或，从而生成密文。</p>
+<p><strong>分组加密</strong>是将消息划分为若干个分组，这些分组随后会通过数学函数进行处理，每次一个分组。<br />
+假设使用64位的分组密码，此时如果消息长度为640位，就会被划分成10个64位的分组（如果最后一个分组长度不到64，则用0补齐之后加到64位），每个分组都用一系列数学公式进行处理，最后得到10个加密文本分组。<br />
+然后，将这条密文消息发送给对端。<br />
+对端必须拥有相同的分组密码，以相反的顺序对10个密文分组使用前面的算法解密，最终得到明文消息。<br />
+比较常用的分组加密算法有DES、3DES、AES。<br />
+其中DES是比较老的加密算法，现在已经被证明不安全。而3DES是一个过渡的加密算法，相当于在DES基础上进行三重运算来提高安全性，但其本质上还是和DES算法一致。<br />
+而AES是DES算法的替代算法，是现在最安全的对称加密算法之一。</p>
+<p><strong>对称加密算法的优缺点：</strong></p>
+<p>优点：<br />
+计算量小、加密速度快、加密效率高。</p>
+<p>缺点：<br />
+交易双方都使用同样密钥，安全性得不到保证；<br />
+每次使用对称加密算法时，都需要使用其他人不知道的惟一密钥，这会使得发收信息双方所拥有的钥匙数量呈几何级数增长，密钥管理成为负担。</p>
+<p>&nbsp;</p>
+<p><strong>非对称加密算法</strong></p>
+<p>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）。公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。</p>
+<p>在非对称密钥交换算法出现以前，对称加密的最主要缺陷就是不知道如何在通信双方之间传输对称密钥，而又不让中间人窃取。</p>
+<p>非对称密钥交换算法诞生之后，专门针对对称密钥传输做加解密，使得对称密钥的交互传输变得非常安全了。</p>
+<p>非对称密钥交换算法本身非常复杂，密钥交换过程涉及到随机数生成，模指数运算，空白补齐，加密，签名等等一系列极其复杂的过程。常见的密钥交换算法有RSA，ECDHE，DH，DHE等算法。</p>
+<p>涉及到比较复杂的数学问题。</p>
+<p>其中，最经典也是最常用的是RSA算法。<br />
+RSA：诞生于1977年，经过了长时间的破解测试，算法安全性很高，最重要的是，算法实现非常简单。<br />
+缺点就是需要比较大的质数（目前常用的是2048位）来保证安全强度，极其消耗CPU运算资源。<br />
+RSA是目前唯一一个既能用于密钥交换又能用于证书签名的算法，RSA 是最经典，同时也是最常用的是非对称加解密算法。</p>
+<p><strong>非对称加密相比对称加密更加安全</strong>，但也存在两个致命的缺点：</p>
+<p>CPU计算资源消耗非常大。<br />
+一次完全TLS握手，密钥交换时的非对称解密计算量占整个握手过程的90%以上。而对称加密的计算量只相当于非对称加密的0.1%。<br />
+如果后续的应用层数据传输过程也使用非对称加解密，那么CPU性能开销太庞大，服务器是根本无法承受的。<br />
+赛门特克给出的实验数据显示，加解密同等数量的文件，非对称算法消耗的CPU资源是对称算法的1000倍以上。</p>
+<p>非对称加密算法对加密内容的长度有限制，不能超过公钥长度。比如现在常用的公钥长度是2048位，意味着待加密内容不能超过256个字节。</p>
+<p>所以非对称加解密（极端消耗CPU资源）目前只能用来作对称密钥交换或者CA签名，不适合用来做应用层内容传输的加解密。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

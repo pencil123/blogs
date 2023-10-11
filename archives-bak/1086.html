@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式 Python | 青春部落    </title>
+    <meta name="keywords"  content="单例模式,python" />
+    <meta name="description"  content="编程模式中的单例模式" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 单例模式 Python评论Feed" href="https://cn-blogs.cn/archives/1086.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Python 面向对象编程特殊方法' href='https://cn-blogs.cn/archives/1083.html' />
+<link rel='next' title='tornado ioloop 运行过程' href='https://cn-blogs.cn/archives/1090.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1086.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1086' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1086.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1086.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1086 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development" rel="category tag">编程开发</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1083.html" rel="prev">上一篇：Python 面向对象编程特殊方法</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1090.html" rel="next">下一篇：tornado ioloop 运行过程</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            单例模式 Python        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/12/28</span>
+            <span class="update is-hidden">2018-06-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例类的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。</p>
+<p><strong>单例模式的要点有三个</strong>；</p>
+<ul>
+<li>一是某个类只能有一个实例；</li>
+<li>二是它必须自行创建这个实例；</li>
+<li>三是它必须自行向整个系统提供这个实例</li>
+</ul>
+<p>在Python中，单例模式有以下几种实现方式。</p>
+<h4>方法一</h4>
+<p>实现__new__方法，然后将类的一个实例绑定到类变量_instance上；如果cls._instance为None，则说明该类还没有被实例化过，new一个该类的实例，并返回；如果cls._instance不为None，直接返回_instance</p>
+<blockquote><p>class Singleton(object):</p>
+<p>&#8212;-def __new__(cls, *args, **kwargs):<br />
+&#8212;&#8212;&#8211;if not hasattr(cls, &#8216;_instance&#8217;):<br />
+&#8212;&#8212;&#8212;&#8212;orig = super(Singleton, cls)<br />
+&#8212;&#8212;&#8212;&#8212;cls._instance = orig.__new__(cls, *args, **kwargs)<br />
+&#8212;&#8212;&#8211;return cls._instance</p>
+<p>class MyClass(Singleton):<br />
+&#8212;-a = 1</p>
+<p>one = MyClass()<br />
+two = MyClass()<br />
+#one和two完全相同,可以用id(), ==, is检测<br />
+print id(one) # 29097904<br />
+print id(two) # 29097904<br />
+print one == two # True<br />
+print one is two # True</p></blockquote>
+<h4>方法二</h4>
+<p>本质上是方法一的升级版，使用__metaclass__（元类）的高级python用法</p>
+<blockquote><p>class Singleton2(type):</p>
+<p>&#8212;-def __init__(cls, name, bases, dict):<br />
+&#8212;&#8212;&#8211;super(Singleton2, cls).__init__(name, bases, dict)<br />
+&#8212;&#8212;&#8211;cls._instance = None</p>
+<p>&#8212;-def __call__(cls, *args, **kwargs):<br />
+&#8212;&#8212;&#8211;if cls._instance is None:<br />
+&#8212;&#8212;&#8212;&#8212;cls._instance = super(Singleton2, cls).__call__(*args, **kwargs)<br />
+&#8212;&#8212;&#8211;return cls._instance</p>
+<p>class MyClass2(object):<br />
+&#8212;-__metaclass__ = Singleton2<br />
+&#8212;-a = 1</p>
+<p>one = MyClass2()<br />
+two = MyClass2()</p>
+<p>print id(one) # 31495472<br />
+print id(two) # 31495472<br />
+print one == two # True<br />
+print one is two # True</p></blockquote>
+<h4>方法三、</h4>
+<p>使用Python的装饰器(decorator)实现单例模式，这是一种更Pythonic的方法；单利类本身的代码不是单例的，通装饰器使其单例化</p>
+<blockquote><p>def singleton(cls, *args, **kwargs):<br />
+&#8212;-instances = {}<br />
+&#8212;-def _singleton():<br />
+&#8212;&#8212;&#8211;if cls not in instances:<br />
+&#8212;&#8212;&#8212;&#8212;instances[cls] = cls(*args, **kwargs)<br />
+&#8212;&#8212;&#8211;return instances[cls]<br />
+&#8212;-return _singleton</p>
+<p>@singleton<br />
+class MyClass3(object):<br />
+&#8212;-a = 1</p>
+<p>one = MyClass3()<br />
+two = MyClass3()</p>
+<p>print id(one) # 29660784<br />
+print id(two) # 29660784<br />
+print one == two # True<br />
+print one is two # True</p></blockquote>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

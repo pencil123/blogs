@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 日志概述 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,数据库,日志,日志分类" />
+    <meta name="description"  content="MySQL数据库中日志管理概述" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 日志概述评论Feed" href="https://cn-blogs.cn/archives/3025.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='InnoDB存储引擎和事务说明' href='https://cn-blogs.cn/archives/3016.html' />
+<link rel='next' title='存储引擎第一篇' href='https://cn-blogs.cn/archives/2833.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3025.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3025' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3025.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3025.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3025 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3016.html" rel="prev">上一篇：InnoDB存储引擎和事务说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2833.html" rel="next">下一篇：存储引擎第一篇</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 日志概述        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/02/26</span>
+            <span class="update is-hidden">2018-04-12</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>MySQL服务器有几种日志可以帮助你找出正在发生的活动。</p>
+<table>
+<tbody>
+<tr>
+<th>日志类型</th>
+<th>写入日志的信息</th>
+</tr>
+<tr>
+<th>错误日志</th>
+<th>在启动，运​​行或停止mysqld时遇到的问题</th>
+</tr>
+<tr>
+<th>一般查询日志</th>
+<th>建立Client链接和接受的执行语句</th>
+</tr>
+<tr>
+<th>二进制日志</th>
+<th>改变数据的语句（也用于Replication）</th>
+</tr>
+<tr>
+<th>中继日志</th>
+<th>从Master服务器接收的数据更改</th>
+</tr>
+<tr>
+<th>慢查询日志</th>
+<th>查询花费了超过 long_query_time秒时间的执行语句</th>
+</tr>
+<tr>
+<th>DDL日志（元数据日志）</th>
+<th>由DDL语句执行元数据操作</th>
+</tr>
+</tbody>
+</table>
+<h3>日志文件刷新</h3>
+<p>1、当在会话中执行FLUSH LOGS语句，会强制关闭并重新打开日志文件。<br />
+2、当二进制日志大于max_binlog_size 设置时，会自动刷新日志。</p>
+<h3>一般日志和慢查询日志</h3>
+<p>可以在运行的服务中修改一般日志和慢查询日志的配置。<br />
+一般日志和慢查询日志可以存储在文件中或者存储在MySQL库的general_log和slow_log表中。</p>
+<h3>中继日志</h3>
+<p>仅仅用于MySQL主从配置中，Slave服务从Master服务读取数据库修改的二进制日志数据的信息存储。</p>
+<h3>其他</h3>
+<p>MySQL服务对日志维护的功能<br />
+设置日志的安全</p>
+<h2>一般日志和慢查询日志的输出位置</h2>
+<p>如果启动了MySQL服务的一般日志和慢查询日志，MySQL服务器可以灵活地控制日志的输出位置。<br />
+&#8211;log-output 参数应该设置为一个或多个单词(逗号分开)</p>
+<table>
+<tbody>
+<tr>
+<th>table</th>
+<th>记录到表</th>
+</tr>
+<tr>
+<th>file(default)</th>
+<th>记录到文件</th>
+</tr>
+<tr>
+<th>None</th>
+<th>不记录到表或者文件</th>
+</tr>
+</tbody>
+</table>
+<h3>运行时控制日志记录</h3>
+<ul>
+<li>全局log_output系统变量指示当前的日志记录目标。它可以在运行时修改以更改目标。</li>
+<li>全局变量general_log和 slow_query_log变量指示常规查询日志和慢查询日志是启用（ON）还是禁用（OFF）。您可以在运行时设置这些变量以控制是否启用日志。</li>
+<li>全局 变量general_log_file 和slow_query_log_file变量指示一般查询日志和慢速查询日志文件的名称。您可以在服务器启动时或运行时设置这些变量以更改日志文件的名称。</li>
+<li>要禁用或启用当前连接的常规查询记录，请将会话sql_log_off变量设置 为 ON或OFF。</li>
+</ul>
+<h3>日志表实现具有以下特征</h3>
+<ul>
+<li>一般来说，日志表的主要目的是为用户提供一个接口，以观察服务器的运行时执行情况，而不是干扰其运行时执行。</li>
+<li>CREATE TABLE， ALTER TABLE并且 DROP TABLE是日志表上的有效操作。对于ALTER TABLE 和DROP TABLE，日志表不能被使用，并且必须被禁用，如后面所述。</li>
+<li>默认情况下，日志表使用CSV 以逗号分隔值格式写入数据的存储引擎。对于有权访问 .CSV包含日志表数据的文件的用户，这些文件很容易导入其他程序，例如可处理CSV输入的电子表格。<br />
+日志表可以更改为使用 MyISAM存储引擎。您不能使用它 ALTER TABLE来更改正在使用的日志表。日志必须先禁用。除日志表以外CSV或 没有其他引擎MyISAM合法的日志表。</li>
+<li>要禁用日志记录以便可以更改（或删除）日志表，可以使用以下策略。该示例使用通用查询日志; 慢查询日志的过程类似，但使用slow_log表和 slow_query_log系统变量。<br />
+<code>    SET @old_log_state = @@ global.general_log;<br />
+SET GLOBAL general_log ='OFF';<br />
+ALTER TABLE mysql.general_log ENGINE = MyISAM;<br />
+SET GLOBAL general_log = @old_log_state;</code></li>
+<li>TRUNCATE TABLE是日志表上的有效操作。它可以用来过期日志条目。</li>
+<li>RENAME TABLE是日志表上的有效操作。您可以使用以下策略以原子方式重命名日志表（例如，执行日志循环）：<br />
+<code>    使用mysql;<br />
+DROP TABLE IF EXISTS general_log2;<br />
+CREATE TABLE general_log2 LIKE general_log;<br />
+RENAME TABLE general_log TO general_log_backup，general_log2 TO general_log;</code></li>
+<li>CHECK TABLE 是日志表上的有效操作。</li>
+<li>LOCK TABLES 不能在日志表上使用。</li>
+<li>INSERT， DELETE并且 UPDATE不能在日志表上使用。这些操作只能在服务器内部进行。</li>
+<li>FLUSH TABLES WITH READ LOCK并且read_only 系统变量的状态对日志表没有影响。服务器始终可以写入日志表。</li>
+<li>写入日志表的条目不写入二进制日志，因此不会复制到从属服务器。</li>
+<li>要刷新日志表或日志文件，分别使用 FLUSH TABLES或 FLUSH LOGS。</li>
+<li>不允许对日志表进行分区。</li>
+<li>一个mysqldump的转储包括报表中重新创建这些表，以便它们不会重新加载转储文件后失踪。日志表内容不会被转储。</li>
+</ul>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

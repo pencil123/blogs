@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MongoDB 主从复制 | 青春部落    </title>
+    <meta name="keywords"  content="MongoDB,MongoDB数据库,主从复制" />
+    <meta name="description"  content="MongoDB数据库集群中的主从复制操作说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MongoDB 主从复制评论Feed" href="https://cn-blogs.cn/archives/4573.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MongoDB 存储引擎 WiredTiger和In-Memory' href='https://cn-blogs.cn/archives/4567.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4573.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4573' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4573.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4573.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4573 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mongodb" rel="category tag">MongoDB</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4567.html" rel="prev">上一篇：MongoDB 存储引擎 WiredTiger和In-Memory</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MongoDB 主从复制        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/10/13</span>
+            <span class="update is-hidden">2018-10-14</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>主从复制MongoDB中比较常用的一种方式，如果要实现主从复制至少应该有两个MongoDB实例。<br />
+一个作为主节点负责客户端请求，另一个作为从节点负责从主节点映射数据，提供数据备份，客户端读取等，推荐一主多从模式</p>
+<h3>MongoDB主从复制的实现方式</h3>
+<ul>
+<li>主节点的操作会被记录为oplog,存储在系统数据库local的集合oplog.$main中，这个集合中的每个文档都代表主节点的一个操作（不包括查询）</li>
+<li>从节点定期从主服务器获取oplog数据，并在本机进行执行</li>
+<li>oplog使用的是固定集合，随着操作的逐渐增加，新的文档会逐渐覆盖旧的文档</li>
+</ul>
+<h3>MongoDB使用注意点或缺点</h3>
+<ul>
+<li>每个从节点必须知晓其对应的主节点地址</li>
+<li>只允许主节点进行数据更新操作</li>
+<li>主节点宕机服务不可用</li>
+<li>3.2版本以后已经移除</li>
+</ul>
+<h3>Mongodb主从复制配置项详解</h3>
+<ol>
+<li>master：默认为false，当设置为true，则配置当前实例作为主节点。</li>
+<li>slave：默认为false，当设置为true，则配置当前实例作为从节点。</li>
+<li>source：默认为空，用于从节点，指定从节点的复制来源（主节点的IP+端口），格式为：&lt;:port&gt;</li>
+<li>only：默认为空，用于从节点，主动复制默认复制主节点上所有的数据库，通过设置此项指定需要复制的数据库名称</li>
+<li>slavedelay：设置从库同步主库的延迟时间，用于从设置，默认为0，单位秒。</li>
+<li>autoresync：默认为false，用于从设置。是否自动重新同步。设置为true，如果落后主超过10秒，会强制从自动重新同步。如果oplogSize太小，此设置可能有问题。如果OPLOG大小不足以存储主的变化状态和从的状态变化之间的差异，这种情况下强制重新同步是不必要的。当设置autoresync选项设置为false，10分钟内从不会进行大于1次的自动重新同步。</li>
+</ol>
+<h2>主从配置实例（一主一从）</h2>
+<h3>主节点 master.conf</h3>
+<p><code>dbpath=D:\mongodb\zhucong\master\data<br />
+logpath=D:\mongodb\zhucong\master\logs\mongodb.log<br />
+port=27017<br />
+bind_ip=127.0.0.1<br />
+master=true</code></p>
+<h3>从节点配置</h3>
+<p><code>dbpath=D:\mongodb\zhucong\slave\data<br />
+logpath=D:\mongodb\zhucong\slave\logs\mongodb.log<br />
+port=27018<br />
+bind_ip=127.0.0.1<br />
+master=true<br />
+slave=true<br />
+source=127.0.0.1:27017</code></p>
+<h3>分别启动两个MongoDB实例</h3>
+<p><code>mongod --config D:\mongodb\zhucong\master\master.conf<br />
+mongod --config D:\mongodb\zhucong\slave\slave.conf</code></p>
+<h3>查看主节点和从节点状态信息</h3>
+<p><code>db.printReplicationInfo(): //查看主节点的信息<br />
+db.printSlaveReplicationInfo(): //查看从节点的信息</code></p>
+<h3>常见问题</h3>
+<p>在SECONDARY查询出发现如下错误：<br />
+<code>SECONDARY&gt; show collections;<br />
+Sat Aug  4 15:29:00 uncaught exception: error: { "$err" : "not master and slaveok=false", "code" : 13435 }</code><br />
+这是正常的，因为SECONDARY是不允许读写的，如果非要解决，方法如下：<br />
+<code>SECONDARY&gt; rs.slaveOk();</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

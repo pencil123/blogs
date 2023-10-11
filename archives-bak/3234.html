@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>kill 发送管理信号 | 青春部落    </title>
+    <meta name="keywords"  content="linux 系统,发送管理信号,kill,杀死进程,killall,pkill,skill" />
+    <meta name="description"  content="linux 系统发送管理信号命令kill、killall、pkill和skill" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; kill 发送管理信号评论Feed" href="https://cn-blogs.cn/archives/3234.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='shell 脚本管理锁命令' href='https://cn-blogs.cn/archives/3231.html' />
+<link rel='next' title='tee 从标准输入读，写入到文件中' href='https://cn-blogs.cn/archives/3238.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3234.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3234' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3234.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3234.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3234 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3231.html" rel="prev">上一篇：shell 脚本管理锁命令</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3238.html" rel="next">下一篇：tee 从标准输入读，写入到文件中</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            kill 发送管理信号        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/03/19</span>
+            <span class="update is-hidden">2018-01-21</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Linux 系统用于对进程发送管理信号的部分命令：</p>
+<table>
+<tbody>
+<tr>
+<th>kill</th>
+<th>terminate a process</th>
+<th>终止一个进程</th>
+</tr>
+<tr>
+<th>killall</th>
+<th>kill processes by name</th>
+<th>根据名字杀掉所有进程</th>
+</tr>
+<tr>
+<th>pkill [pgrep]</th>
+<th>look up or signal processes based on name and other attributes</th>
+<th>根据名字和其它属性查看或者发出进程信号</th>
+</tr>
+<tr>
+<th>skill</th>
+<th>send a signal or report process status</th>
+<th>发送一个信号或者报告进程状态</th>
+</tr>
+</tbody>
+</table>
+<h2>kill 对进程发送特定信号</h2>
+<p>不同服务程序对这些控制信号有不同的处理机制。<br />
+usage: kill [-s signal|-p] [&#8211;] pid&#8230;<br />
+<strong>-l &lt;信号&gt;：</strong>若不加&lt;信号&gt;选项，则-l参数会列出全部的信号<br />
+<strong>-u：</strong>指定用户</p>
+<h2>killall 对所有进程发送特定的信号</h2>
+<p>使用参数可以对进程做其他处理<br />
+<strong>-I &#8211;ignore-case:</strong> 忽略大小写<br />
+<strong>-i &#8211;interactive: </strong>交互式终止进程<br />
+<strong>-q &#8211;quiet: </strong> 关闭命令执行回显</p>
+<h2>pkill 识别进程属性发送信号</h2>
+<p><code>pkill [-signal] [-fvx] [-n|-o] [-P ppid,...] [-g pgrp,...]<br />
+[-s sid,...] [-u euid,...] [-U uid,...]<br />
+[-G gid,...] [-t term,...] [pattern]</code></p>
+<p><strong>-P：</strong>指定父进程号发送信号；<br />
+<strong>-g：</strong>指定进程组；<br />
+<strong>-t：</strong>指定开启进程的终端。</p>
+<p><strong>踢出系统登陆用户</strong><br />
+pkill -9 -t pts/0</p>
+<p><strong>关联命令</strong>:pgrep</p>
+<h2>skill 发送信号和报告进程状态</h2>
+<p><code>skill [signal to send] [options] process selection criteria</code></p>
+<p>常规参数<br />
+<strong>-f：</strong>快速模式；<br />
+<strong>-i：</strong>交互模式，每一步操作都需要确认；<br />
+<strong>-v：</strong>冗余模式；<br />
+<strong>-w：</strong>激活模式；</p>
+<p>进程选择参数<br />
+<strong>-t：</strong>进程|用户终端<br />
+<strong>-u：</strong>用户名<br />
+<strong>-p：</strong>进程号<br />
+<strong>-c：</strong>进程名</p>
+<p>关联命令:snice</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

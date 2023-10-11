@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Gearman 任务管理 | 青春部落    </title>
+    <meta name="keywords"  content="Gearman,任务管理,任务分发,命令管理,持久化" />
+    <meta name="description"  content="任务管理分发服务Gearman原理说明和管理及持久化配置" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Gearman 任务管理评论Feed" href="https://cn-blogs.cn/archives/2736.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='POST 提交数据方式' href='https://cn-blogs.cn/archives/2733.html' />
+<link rel='next' title='Gearman 工作过程详解' href='https://cn-blogs.cn/archives/2745.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2736.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2736' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2736.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2736.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2736 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/baseservers" rel="category tag">基础服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2733.html" rel="prev">上一篇：POST 提交数据方式</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2745.html" rel="next">下一篇：Gearman 工作过程详解</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Gearman 任务管理        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/11/24</span>
+            <span class="update is-hidden">2018-06-05</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Gearman 服务是用来管理任务的服务；可以接受任务提交，并将任务分发给工作进程。</p>
+<h4>特点说明</h4>
+<p>1、分布式；工作进程可以在不同的服务器上，从Gearmand获取任务。<br />
+2、跨语言；gearman 服务扩展了多种语言的支持。client 和 worker 可以使用不同开发语言实现。<br />
+3、开源、灵活、上手快、易植入</p>
+<h4>架构和工作原理</h4>
+<p>Gearman 使用由三部分组成：一个Client、一个Worker、一个任务服务器。<br />
+1、Client提交一个 Job 任务交给 Job Server 任务服务器。它是请求的发起者。<br />
+2、Job Server 会去寻找一个合适的 Worker 来完成这项任务。任务调度者<br />
+3、Worker 执行由 Client 发送过来的 Job，并且将结果通过 Job Server 返回给 Client。<br />
+Gearman 提供了 Client 和 Worker 的 API，利用这些API 应用可以同 Gearman Job Server来进行通信。Gearman 内部 Client 和 Worker 之间的通信都是通过 TCP 连接来进行的。<br />
+<a href="http://www.cn-blogs.cn/archives/2736.html/attachment/1111" rel="attachment wp-att-2737"><img class="size-full wp-image-2737 aligncenter" src="http://www.cn-blogs.cn/wp-content/uploads/2017/11/1111.png" alt="1111" width="532" height="330" srcset="https://cn-blogs.cn/wp-content/uploads/2017/11/1111.png 532w, https://cn-blogs.cn/wp-content/uploads/2017/11/1111-300x186.png 300w" sizes="(max-width: 532px) 100vw, 532px" /></a></p>
+<h4>Gearmand命令</h4>
+<table>
+<tbody>
+<tr>
+<th>-L [&#8211;listen] arg</th>
+<th>地址服务器应该监听。缺省值是INADDR_ANY。</th>
+</tr>
+<tr>
+<th>-P [&#8211;pid-file] arg（= / var / gearmand.pid）</th>
+<th>将进程ID写入的文件。</th>
+</tr>
+<tr>
+<th>-b [&#8211;backlog] arg（= 32）</th>
+<th>listen监听端口维持的半连接数。</th>
+</tr>
+<tr>
+<th>-d [ &#8211;daemon]</th>
+<th>守护进程，分离并在后台运行。</th>
+</tr>
+<tr>
+<th>-f [&#8211;file-descriptors] arg</th>
+<th>允许进程的文件描述符的数量（总连接数将稍小）。默认值是用户最多允许的。</th>
+</tr>
+<tr>
+<th>-j [&#8211;job-retries] arg（= 0）</th>
+<th>在作业服务器删除作业之前尝试运行作业的次数。这有助于确保不好的工作不会使所有可用的工作人员崩溃。默认是没有限制的。</th>
+</tr>
+<tr>
+<th>&#8211;job-handle-prefix arg</th>
+<th>用于生成作业处理字符串的前缀。如果未提供，则使用默认的“H：&lt;主机名&gt;”。</th>
+</tr>
+<tr>
+<th>&#8211;hashtable-bucket arg（= 991）</th>
+<th>内部作业哈希表中的桶数。对于大约三百万个队列中的工作，缺省值为991。如果队列中的任务数量随时超过三百万，则按比例使用较大的值（991 *工作数/ 3M）。</th>
+</tr>
+<tr>
+<th>&#8211;keepalive</th>
+<th>在套接字上启用keepalive。</th>
+</tr>
+<tr>
+<th>&#8211;keepalive-idle arg（= -1）</th>
+<th>如果启用keepalive，则为支持它的系统设置TCP_KEEPIDLE的值。值为-1意味着系统不支持它或尝试检索默认值时发生错误。</th>
+</tr>
+<tr>
+<th>&#8211;keepalive-interval arg（= -1）</th>
+<th>如果启用keepalive，则为支持它的系统设置TCP_KEEPINTVL的值。值为-1意味着系统不支持它或尝试检索默认值时发生错误。</th>
+</tr>
+<tr>
+<th>&#8211;keepalive-count arg（= -1）</th>
+<th>如果启用了keepalive，请为支持它的系统设置TCP_KEEPCNT的值。值为-1意味着系统不支持它或尝试检索默认值时发生错误。</th>
+</tr>
+<tr>
+<th>-l [&#8211;log-file] arg（= / var / log / gearmand.log）</th>
+<th>将错误和信息写入日志文件。如果log-file参数指定为“stderr”，则输出将转到stderr。如果“无”，则不会生成日志文件。</th>
+</tr>
+<tr>
+<th>&#8211;verbose arg（= ERROR）</th>
+<th>设置详细级别（FATAL, ALERT, CRITICAL, ERROR, WARNING, NOTICE, INFO, DEBUG）。</th>
+</tr>
+<tr>
+<th>-r [&#8211;protocol] arg</th>
+<th>加载协议模块。</th>
+</tr>
+<tr>
+<th>-R [ &#8211; round-robin]</th>
+<th>按照每个工作人员连接的循环顺序分配工作。默认是按工作人员添加的功能顺序分配工作。 -q [&#8211;queue-type] arg（= builtin）要使用的持久化队列类型。</th>
+</tr>
+<tr>
+<th>&#8211;config-file arg（= / etc / gearmand.conf）</th>
+<th>也可以用&#8217;@name&#8217;来指定</th>
+</tr>
+<tr>
+<th>&#8211;syslog</th>
+<th>使用syslog。</th>
+</tr>
+<tr>
+<th>&#8211;coredump</th>
+<th>是否为未被捕获的信号创建核心转储。</th>
+</tr>
+<tr>
+<th>-t [&#8211;threads] arg（= 4）</th>
+<th>要使用的I / O线程数量，0意味着gearmand将尝试猜测可以使用的最大数量。默认值= 4。</th>
+</tr>
+<tr>
+<th>-u [&#8211;user] arg</th>
+<th>启动后切换到给定的用户。</th>
+</tr>
+<tr>
+<th>-V [&#8211;version]</th>
+<th>显示gearmand的版本并退出。</th>
+</tr>
+<tr>
+<th>-w [&#8211;worker-wakeup] arg（= 0）</th>
+<th>为每个收到的作业唤醒的工作人员数量。默认是唤醒所有可用的工作人员。</th>
+</tr>
+<tr>
+<th>&#8211;exceptions</th>
+<th>默认情况下启用协议例外。</th>
+</tr>
+<tr>
+<th>-h [&#8211;help]</th>
+<th>打印此帮助菜单。</th>
+</tr>
+</tbody>
+</table>
+<h4>Gearman命令</h4>
+<p>Common options to both client and worker modes.</p>
+<table>
+<tbody>
+<tr>
+<th>-f &#8211;</th>
+<th>Function name to use for jobs (can give many)处理任务的函数名</th>
+</tr>
+<tr>
+<th>-h &#8211;</th>
+<th>Job server host （Job Server主机，默认是localhost）</th>
+</tr>
+<tr>
+<th>-H &#8211;</th>
+<th>Print this help menu</th>
+</tr>
+<tr>
+<th>-p &#8211;</th>
+<th>Job server port （Job Server端口，默认是4730）</th>
+</tr>
+<tr>
+<th>-t &#8211;</th>
+<th>Timeout in milliseconds （执行多长时间超时，微秒）</th>
+</tr>
+<tr>
+<th>-i &#8211;</th>
+<th>Create a pidfile for the process （创建进程的pid文件）</th>
+</tr>
+</tbody>
+</table>
+<p>Client部分参数</p>
+<table>
+<tbody>
+<tr>
+<th>-b &#8211;</th>
+<th>Run jobs in the background （后台运行任务）</th>
+</tr>
+<tr>
+<th>-I &#8211;</th>
+<th>Run jobs as high priority （高优先级运行任务）</th>
+</tr>
+<tr>
+<th>-L &#8211;</th>
+<th>Run jobs as low priority （低优先级运行任务）</th>
+</tr>
+<tr>
+<th>-n &#8211;</th>
+<th>Run one job per line （逐行执行任务）</th>
+</tr>
+<tr>
+<th>-N &#8211;</th>
+<th>Same as -n, but strip off the newline</th>
+</tr>
+<tr>
+<th>-P &#8211;</th>
+<th>Prefix all output lines with functions names （在输入结果前面加处理的函数名）</th>
+</tr>
+<tr>
+<th>-s &#8211;</th>
+<th>Send job without reading from standard input 执行任务不返回结果</th>
+</tr>
+<tr>
+<th>-u &#8211;</th>
+<th>Unique key to use for job 任务的唯一标识</th>
+</tr>
+</tbody>
+</table>
+<p>Worker部分参数</p>
+<table>
+<tbody>
+<tr>
+<th>-c &#8211;</th>
+<th>Number of jobs for worker to run before exiting （统计worker进程处理多少个任务后中止）</th>
+</tr>
+<tr>
+<th>-n &#8211;</th>
+<th>Send data packet for each line</th>
+</tr>
+<tr>
+<th>-N &#8211;</th>
+<th>Same as -n, but strip off the newline</th>
+</tr>
+<tr>
+<th>-w &#8211;</th>
+<th>Run in worker mode 以worker模式运行</th>
+</tr>
+</tbody>
+</table>
+<h4>Gearadmin 命令</h4>
+<blockquote><p>-h [ &#8211;host ] arg (=localhost) 要连接的 host ，默认为「localhost」<br />
+-p [ &#8211;port ] arg (=4730) 要连接到的端口号，默认为 4730<br />
+&#8211;server-version 获得 gearman 服务器的版本号<br />
+&#8211;server-verbose 获得服务器的详细设置<br />
+&#8211;create-function arg 从服务器创建一个函数<br />
+&#8211;cancel-job arg 从服务器中取消置顶的任务<br />
+&#8211;drop-function arg 从服务器中删除一个函数<br />
+&#8211;show-unique-jobs 列出服务器上不重复的任务<br />
+&#8211;show-jobs 列出服务器上所有的任务<br />
+&#8211;getpid 获取服务器的进程 ID<br />
+&#8211;status 服务器的状态<br />
+&#8211;workers 服务器的 workers<br />
+&#8211;shutdown 关闭服务器<br />
+-S [ &#8211;ssl ] 启用 SSL 链接的支持</p></blockquote>
+<h3>持久化</h3>
+<p>gearman的job server中的工作队列存储在内存中，一旦服务器有未处理的任务时重启或者宕机，那么这些任务就会丢失。<br />
+持久化存储队列可以允许添加后台任务，并将其存储在外部的持久型队列里。支持mysql，pgsql,sqlite,libtokyocabinet。</p>
+<p>官方文档：http://gearman.org/manual/job_server/#persistent_queues</p>
+<p>1、手动创建存储数据的表<br />
+<code>CREATE DATABASE gearman;<br />
+CREATE TABLE `gearman_queue` (<br />
+`unique_key` varchar(64) NOT NULL,<br />
+`function_name` varchar(255) NOT NULL,<br />
+`priority` int(11) NOT NULL,<br />
+`data` longblob NOT NULL,<br />
+`when_to_run` int(11),<br />
+PRIMARY KEY (`unique_key`)<br />
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></p>
+<p>2、启动gearmand时，指定存储信息<br />
+<code>gearmand -q mysql \<br />
+--mysql-host=192.168.1.100 \<br />
+--mysql-port=3306 \<br />
+--mysql-user=gearman \<br />
+--mysql-password=123456 \<br />
+--mysql-db=gearman \<br />
+--mysql-table=gearman_queue<br />
+-d</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

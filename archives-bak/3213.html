@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Linux 系统基本信息 | 青春部落    </title>
+    <meta name="keywords"  content="linux 系统,uname,系统版本,内核版本,系统发行版,getconf" />
+    <meta name="description"  content="linux 操作系统版本查询方式和参数说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Linux 系统基本信息评论Feed" href="https://cn-blogs.cn/archives/3213.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='lsof 系统打开文件列表' href='https://cn-blogs.cn/archives/3209.html' />
+<link rel='next' title='定时重复执行并全屏输出 watch' href='https://cn-blogs.cn/archives/3216.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3213.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3213' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3213.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3213.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3213 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3209.html" rel="prev">上一篇：lsof 系统打开文件列表</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3216.html" rel="next">下一篇：定时重复执行并全屏输出 watch</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Linux 系统基本信息        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/03/16</span>
+            <span class="update is-hidden">2018-04-29</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>系统版本信息</h3>
+<p>获取当前系统的版本信息：<strong>uname -a</strong><br />
+<code>Linux temp-server 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</code></p>
+<table>
+<tbody>
+<tr>
+<th>kernel name</th>
+<th>内核名称</th>
+<th>linux</th>
+</tr>
+<tr>
+<th>hostname</th>
+<th>系统主机名称</th>
+<th>temp-server</th>
+</tr>
+<tr>
+<th>kernel release</th>
+<th>内核发行版</th>
+<th>2.6.32-504.el6.x86_64</th>
+</tr>
+<tr>
+<th>kernel version</th>
+<th>内核版本</th>
+<th>#1 SMP Wed Oct 15 04:27:16 UTC 2014</th>
+</tr>
+<tr>
+<th>machine hardware name</th>
+<th>硬件名</th>
+<th>x86_64</th>
+</tr>
+<tr>
+<th>processor type</th>
+<th>处理器类型</th>
+<th>x86_64</th>
+</tr>
+<tr>
+<th>hardware platform</th>
+<th>硬件平台</th>
+<th>x86_64</th>
+</tr>
+<tr>
+<th>operating system</th>
+<th>操作系统</th>
+<th>GNU/Linux</th>
+</tr>
+</tbody>
+</table>
+<h4>kernel release</h4>
+<p>2.6.32：内核版本号<br />
+-504：打的补丁集<br />
+.e16：redhat Enterprise Linux 6<br />
+.x86_64：cpu指令集体系结构，支持64位</p>
+<blockquote class="wp-embedded-content" data-secret="SBNm2czxBq"><p><a href="https://www.cn-blogs.cn/archives/3082.html">CPU 简单说明</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/3082.html/embed#?secret=SBNm2czxBq" data-secret="SBNm2czxBq" width="500" height="282" title="《CPU 简单说明》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<h4>kernel version</h4>
+<p>显示内核编译日期</p>
+<h4>GUN/Linux</h4>
+<p>操作系统由系统内核和多种基础程序构成。<br />
+它们使计算机可以与用户进行交流并接受指令，读取数据或将其写入硬盘、磁带或打印机，控制内存的使用，以及运行其它软件。<br />
+操作系统最重要的组成部分是内核。<br />
+在 GNU/Linux 系统中，Linux 就是内核组件。<br />
+而该系统的其余部分主要是由 GNU 工程编写和提供的程序组成。<br />
+因为单独的 Linux 内核并不能成为一个可以正常工作的操作系统，所以我们更倾向使用 “GNU/Linux” 一词来表达人们通常所说的 “Linux”。</p>
+<h3>系统环境参数</h3>
+<p>获取变量VAR的配置值或路径PATH的变量PATH_VAR。如果给出SPEC，则给出编译环境SPEC的值</p>
+<h4>使用说明 Usage</h4>
+<p><code>getconf -a<br />
+getconf [-v specification] system_var<br />
+getconf [-v specification] PATH_VAR PATH</code></p>
+<h4>选项:-a</h4>
+<p>显示当前系统的所有配置变量和数值;包括</p>
+<table>
+<tbody>
+<tr>
+<th>PathName</th>
+<th>为 PathConfiguration 参数指定路径名。</th>
+</tr>
+<tr>
+<th>SystemwideConfiguration</th>
+<th>指定一个系统配置变量。</th>
+</tr>
+<tr>
+<th>PathConfiguration</th>
+<th>指定一个系统路径配置变量。</th>
+</tr>
+<tr>
+<th>DeviceName</th>
+<th>指定一个设备路径名。</th>
+</tr>
+<tr>
+<th>DeviceVariable</th>
+<th>指定一个设备变量。</th>
+</tr>
+</tbody>
+</table>
+<h4>选项:-v 规格</h4>
+<p>指明应确定配置变量的具体规范和版本。如果未指定此选项，则返回的值对应于实现默认符合的编译环境。</p>
+<h4>系统范围配置变量</h4>
+<p>SystemwideConfiguration 参数指定系统配置变量，其值在整个系统中都可用。有两种系统配置变量：<br />
+<strong>系统范围配置变量</strong><br />
+系统范围配置变量包含系统各部分中的最小值。<br />
+<strong>系统标准配置变量</strong><br />
+系统标准配置变量包含由一个特殊系统标准所要求的最小值。_POSIX_、POSIX2_ 和 _XOPEN_ 前缀显示变量包含分别由 POSIX 1003.1、POSIX 1003.2 和 X/Open 系统标准要求的系统特性最小值。系统标准是系统满足的用来支持特定系统标准的全系统最小值。实际配置值可能超出这些标准。</p>
+<h4>主要关注信息</h4>
+<table>
+<tbody>
+<tr>
+<th>PAGESIZE</th>
+<th>系统内存页大小 单位为Bytes</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

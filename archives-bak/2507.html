@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Redis持久化方式比较 | 青春部落    </title>
+    <meta name="keywords"  content="redis,aof,rdb,持久化" />
+    <meta name="description"  content="redis数据库持久化方式" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Redis持久化方式比较评论Feed" href="https://cn-blogs.cn/archives/2507.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Redis持久化过程' href='https://cn-blogs.cn/archives/2509.html' />
+<link rel='next' title='Redis 保护模式' href='https://cn-blogs.cn/archives/2521.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2507.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2507' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2507.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2507.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2507 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/redis" rel="category tag">Redis</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2509.html" rel="prev">上一篇：Redis持久化过程</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2521.html" rel="next">下一篇：Redis 保护模式</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Redis持久化方式比较        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/09/16</span>
+            <span class="update is-hidden">2018-03-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>Redis持久化选择</h2>
+<p>Redis提供了两种持久化方式RDB和AOF.</p>
+<h2>RDB持久化</h2>
+<p>RDB持久性以指定的时间间隔执行数据集的时间点快照</p>
+<h3>RDB的优势</h3>
+<p>1、RDB是一个非常紧凑的、单文件的、时间点的redis数据快照文件。<br />
+2、RDB是对redis数据的单文件快照备份，非常适合做异地数据备份和灾备数据恢复。<br />
+3、RDB最大限度的减少持久化对redis服务性能的损害。redis服务只需要Fork一个子进程用于RDB文件快照，而redis服务（父进程）不需要处理磁盘I/O相关的操作。<br />
+4、redis重启时，RDB能比AOF更快的加载好数据（尤其是数据量很大的情况）。</p>
+<h3>RDB的缺点</h3>
+<p>1、当系统崩溃时，RDB很有可能会丢失数据。<br />
+2、RDB在fork()子进程来将数据写入到磁盘时，需要申请和父进程相同的内存使用量。<br />
+当数据量很大时；很可能会导致内存不够用而报错、CPU运算量增加和磁盘写入影响服务运行速度，降低响应速度。</p>
+<h2>AOF持久化</h2>
+<p>AOF持久性记录了服务器接收到的每个写入操作日志，在服务器启动时将再次播放，重建原始数据集。使用与Redis协议本身相同的格式以附加方式记录命令。<br />
+Redis可以在日志文件太大的情况下，在后台重写日志文件。</p>
+<h3>AOF的优势</h3>
+<p>1、可以选择不同的fsync(文件同步写入)策略：no-fsync、everysec、always<br />
+2、AOF日志是一个只能追加日志。即使由于某种原因（磁盘已满或其他原因）日志以半写命令结束，redis-check-aof工具也可以轻松修复。<br />
+3、当AOF日志太大时，它能够在后台自动重写AOF。<br />
+重写是完全安全的，因为在Redis继续附加到旧文件时，会产生一个全新的文件，并创建当前数据集所需的最少操作集(当前数据，使用命令记录)，一旦第二个文件准备就绪，Redis将切换两个文件并开始追加到新的那一个。<br />
+4、AOF以容易理解和解析的格式一个接一个地包含所有操作的日志。 您甚至可以轻松导出AOF文件。</p>
+<h3>AOF的缺点</h3>
+<p>1、AOF文件通常比相同数据集的等效RDB文件大。<br />
+2、根据确切的fsync策略，AOF可能比RDB慢。<br />
+3、在过去，遇到了特定命令中罕见的错误，导致产生的AOF不能在重新加载时重现完全相同的数据集。</p>
+<h2>补充</h2>
+<p>当服务器和redis服务可以保证运行正常的情况下，可以不使用持久化。<br />
+将AOF和RDB组合使用。在这种情况下，当Redis重新启动时，将使用AOF文件重建原始数据集，因为它保证是最完整的。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

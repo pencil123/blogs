@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>php array 数组 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; php array 数组评论Feed" href="https://cn-blogs.cn/archives/511.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='php 对象|方法' href='https://cn-blogs.cn/archives/509.html' />
+<link rel='next' title='eval assert' href='https://cn-blogs.cn/archives/307.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/511.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=511' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F511.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F511.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-511 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/php" rel="category tag">PHP服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/509.html" rel="prev">上一篇：php 对象|方法</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/307.html" rel="next">下一篇：eval assert</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            php array 数组        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/02/16</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>数组函数允许您访问和操作数组。</strong><br />
+支持单维和多维数组。<br />
+<strong>1、数组的定义</strong><br />
+&lt;?php<br />
+$cars=array(&#8220;Volvo&#8221;,&#8221;BMW&#8221;,&#8221;Toyota&#8221;);<br />
+echo &#8220;I like &#8221; . $cars[0] . &#8220;, &#8221; . $cars[1] . &#8221; and &#8221; . $cars[2] . &#8220;.&#8221;;</p>
+<p>$age=array(&#8220;Bill&#8221;=&gt;&#8221;60&#8243;,&#8221;Steve&#8221;=&gt;&#8221;56&#8243;,&#8221;Mark&#8221;=&gt;&#8221;31&#8221;);<br />
+echo &#8220;Bill is &#8221; . $age[&#8216;Bill&#8217;] . &#8221; years old.&#8221;;<br />
+?&gt;</p>
+<p>&lt;?php<br />
+$str = &#8216;one,two,three,four&#8217;;</p>
+<p>// 零 limit<br />
+print_r(explode(&#8216;,&#8217;,$str,0));</p>
+<p>// 正的 limit<br />
+print_r(explode(&#8216;,&#8217;,$str,2));</p>
+<p>// 负的 limit<br />
+print_r(explode(&#8216;,&#8217;,$str,-1));<br />
+?&gt;<br />
+<strong>2、遍历数组</strong><br />
+第一、foreach()<br />
+foreach()是一个用来遍历数组中数据的最简单有效的方法。<br />
+&lt;?php<br />
+$urls= array(&#8216;aaa&#8217;,&#8217;bbb&#8217;,&#8217;ccc&#8217;,&#8217;ddd&#8217;);<br />
+foreach ($urls as $url){<br />
+echo &#8220;This Site url is $url! &lt;br /&gt;&#8221;;<br />
+}<br />
+?&gt;<br />
+显示结果：<br />
+This Site url is aaa<br />
+This Site url is bbb<br />
+This Site url is ccc<br />
+This Site url is ddd<br />
+第二、while() 和 list()，each()配合使用。<br />
+&lt;?php<br />
+$urls= array(&#8216;aaa&#8217;,&#8217;bbb&#8217;,&#8217;ccc&#8217;,&#8217;ddd&#8217;);<br />
+while(list($key,$val)= each($urls)) {<br />
+echo &#8220;This Site url is $val.&lt;br /&gt;&#8221;;<br />
+}<br />
+?&gt;<br />
+显示结果：<br />
+This Site url is aaa<br />
+This Site url is bbb<br />
+This Site url is ccc<br />
+This Site url is ddd<br />
+第三、for()运用for遍历数组<br />
+&lt;?php<br />
+$urls= array(&#8216;aaa&#8217;,&#8217;bbb&#8217;,&#8217;ccc&#8217;,&#8217;ddd&#8217;);<br />
+for ($i= 0;$i&lt; count($urls); $i++){<br />
+$str= $urls[$i];<br />
+echo &#8220;This Site url is $str.&lt;br /&gt;&#8221;;<br />
+}<br />
+?&gt;<br />
+显示结果：<br />
+This Site url is aaa<br />
+This Site url is bbb<br />
+This Site url is ccc<br />
+This Site url is ddd</p>
+<p><strong>contine break exit 跳出foreach循环<br />
+</strong>&lt;?php<br />
+$i = 1;<br />
+while (true) { // 这里看上去这个循环会一直执行<br />
+if ($i==2) {// 2跳过不显示<br />
+$i++;<br />
+continue;<br />
+} else if ($i==5) {// 但到这里$i=5就跳出循循环了<br />
+break;<br />
+} else {<br />
+echo $i . &#8216;&lt;br&gt;&#8217;;<br />
+}<br />
+$i++;<br />
+}<br />
+exit;<br />
+echo &#8216;这里不输出&#8217;;<br />
+?&gt;</p>
+<p><strong>3、判断数组是否为空</strong></p>
+<p>方法1：count($arr),size($arr);<br />
+$arr= array(&#8220;&#8221;);<br />
+echo count($arr);<br />
+echo size($arr);<br />
+//输出1<br />
+$arr= array();<br />
+echo count($arr);<br />
+echo size($arr);<br />
+//输出0<br />
+PHP判断数组为空方法2：empty($arr);<br />
+$arr= array(&#8220;&#8221;);<br />
+$result = empty($arr);</p>
+<p>//$result = false<br />
+$arr = array();<br />
+$result = empty($arr);<br />
+//$result = true</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

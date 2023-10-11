@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII码和Unicode码和UTF编码 | 青春部落    </title>
+    <meta name="keywords"  content="ASCII,Unicode,UTF,字符编码" />
+    <meta name="description"  content="信息技术中字符编码机制中ASCII码,Unicode编码和UTF编码说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; ASCII码和Unicode码和UTF编码评论Feed" href="https://cn-blogs.cn/archives/545.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='VIM 命令模式' href='https://cn-blogs.cn/archives/2400.html' />
+<link rel='next' title='python unicode 编码的转换' href='https://cn-blogs.cn/archives/547.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/545.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=545' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F545.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F545.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-545 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel" rel="category tag">操作系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2400.html" rel="prev">上一篇：VIM 命令模式</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/547.html" rel="next">下一篇：python unicode 编码的转换</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            ASCII码和Unicode码和UTF编码        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/09/01</span>
+            <span class="update is-hidden">2018-02-16</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>字符编码是用来解决自然语言符号(这个说法不准确，范围小了)在计算机中识别、处理和存储的方式。<br />
+这里有两个概念：字符集&#8211;自然语法符号；编码方式&#8211;字符集的字符和计算机中的Bit对应关系。</p>
+<h2>ASCII</h2>
+<p>美国标准信息交换码<br />
+ASCII第一次以规范标准的类型发表是在1967年，最后一次更新则是在1986年，至今为止共定义了128个字符。<br />
+ASCII将字母、数字和其它符号编号，并用7比特的二进制来表示这个整数。通常会额外使用一个扩充的比特，以便于以1个字节的方式存储。<br />
+ASCII码的局限性是显而易见的。一个字节的存储单位，做多能表示256个字符。</p>
+<h2>ASCII变体</h2>
+<p>在美国以外的其他国家，发明了很多ASCII的变体。包括7位编码和8为编码。如印度，越南，那斯拉夫等。</p>
+<h2>ASCII扩展</h2>
+<p>Unicode和ISO/IEC 10646通用字符集（UCS）具有更广泛的字符阵列，其各种编码形式已在许多环境中开始快速取代ISO / IEC 8859和ASCII。</p>
+<h3>Unicode和UCS通过分离唯一标识和编码的概念来支持更多字符</h3>
+<p><strong>分离唯一标识</strong>:使用称为代码点的自然数<br />
+<strong>编码</strong>：8位，16位或32位二进制格式，称为UTF-8，UTF-16和UTF-32</p>
+<h2>Unicode 兼容ASCII</h2>
+<p>ASCII被纳入Unicode（1991）字符集作为前128个符号，因此7位ASCII字符在两组中都有相同的数字代码。<br />
+这允许UTF-8向后兼容7位ASCII，因为仅包含ASCII字符的UTF-8文件与包含相同字符序列的ASCII文件相同。</p>
+<h2>Unicode</h2>
+<p>Unicode是一种计算行业标准，用于对大多数世界写作系统中表达的文本进行一致的编码，表示和处理。</p>
+<h3>Unicode编码系统可分为编码方式和实现方式两个层次</h3>
+<p><strong>编码方式</strong>:每个字符占用2个字节。这样理论上一共最多可以表示216（即65536）个字符。基本满足各种语言的使用。<br />
+<strong>实现方式</strong>：Unicode的实现方式不同于编码方式。一个字符的Unicode编码是确定的。但是在实际传输过程中，由于不同系统平台的设计不一定一致，以及出于节省空间的目的，对Unicode编码的实现方式有所不同。<br />
+Unicode的实现方式称为Unicode转换格式（Unicode Transformation Format，简称为UTF）</p>
+<h3>Unicode可以通过不同的字符编码来实现</h3>
+<p>Unicode标准定义了UTF-8，UTF-16和UTF-32，以及其他一些编码正在使用中。最常用的编码是UTF-8，UTF-16和UCS-2，UTF-16的前身。<br />
+主要由网站使用的UTF-8（超过90％）对前128个码点使用一个字节，对其他字符使用最多4个字节。前128个Unicode代码点是ASCII字符，这意味着任何ASCII文本也是UTF-8文本。<br />
+UTF-8每个代码点使用1到4个字节，并且对于拉丁编码和ASCII兼容。</p>
+<h2>UTF编码</h2>
+<p>UTF-1是UTF-8的退役前身，它最大限度地兼容ISO 2022，不再是Unicode标准的一部分;<br />
+UTF-7是一种有时用于电子邮件的7位编码，通常被认为是过时的（不是Unicode标准的一部分，但只记录为信息RFC，即不在Internet Standards Track上）;<br />
+UTF-8，一种8位可变宽度编码，可最大限度地兼容ASCII ;<br />
+UTF-EBCDIC，一种类似于UTF-8的8位可变宽度编码，但设计用于与EBCDIC（不属于Unicode标准）的兼容性;<br />
+UTF-16，一种16位可变宽度编码;<br />
+UTF-32是一种32位固定宽度编码。</p>
+<h2>UTF-8</h2>
+<p>最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。</p>
+<h3>UTF-8编码方式</h3>
+<p>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。<br />
+2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p>
+<p>下表总结了编码规则，字母x表示可用编码的位。<br />
+Unicode符号范围 | UTF-8编码方式<br />
+(十六进制) | （二进制）<br />
+——————–+———————————————<br />
+0000 0000-0000 007F | 0xxxxxxx<br />
+0000 0080-0000 07FF | 110xxxxx 10xxxxxx<br />
+0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx<br />
+0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</p>
+<h2>示例：Unicode和UTF-8</h2>
+<p>已知”严”的unicode是4E25（100111000100101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此”严”的UTF-8编码需要三个字节，即格式是”1110xxxx 10xxxxxx 10xxxxxx”。<br />
+然后，从”严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。<br />
+这样就得到了，”严”的UTF-8编码是”11100100 10111000 10100101″，转换成十六进制就是E4B8A5。</p>
+<h2>ANSI编码</h2>
+<p>ANSI是默认的编码方式。对于英文文件是ASCII编码，对于简体中文文件是GB2312编码，繁体中文版会采用Big5码。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

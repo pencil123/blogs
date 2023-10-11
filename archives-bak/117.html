@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Samba 错误排查 | 青春部落    </title>
+    <meta name="keywords"  content="文件共享服务,Samba,排查问题" />
+    <meta name="description"  content="文件共享服务Samba排查问题方法" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Samba 错误排查评论Feed" href="https://cn-blogs.cn/archives/117.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Samba 配置文件' href='https://cn-blogs.cn/archives/111.html' />
+<link rel='next' title='Samba 配置记录' href='https://cn-blogs.cn/archives/119.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/117.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=117' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F117.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F117.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-117 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/baseservers" rel="category tag">基础服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/111.html" rel="prev">上一篇：Samba 配置文件</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/119.html" rel="next">下一篇：Samba 配置记录</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Samba 错误排查        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/05/19</span>
+            <span class="update is-hidden">2018-05-07</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Samba的故障排除可以在SMB服务器和SMB客户机上通过各自的命令来完成。</p>
+<h4>1 SMB服务器上的操作</h4>
+<p>1)．使用下面的命令来查看是否有错误的配置。<br />
+<strong>/usr/bin/testparm /etc/smb.conf</strong><br />
+2)． 在服务器上以及客户机上用ping命令检查tcp/ip是否正常工作。<br />
+3)． 在SMB服务器上用<br />
+<code>/usr/bin/smbclient -L SMBserver</code><br />
+命令将得到一个共享的列表。<br />
+如果出现失败信息，则要检查与服务器相关的&#8221;hosts allow&#8221;、&#8221;hosts deny&#8221;、&#8221;valid users&#8221;、&#8221;invlid users&#8221;等参数的设置。如果出现&#8221;connection refused&#8221;，则检查Samba服务器进程是否启动；若Samba以守护进程形式运行的话用&#8221;netstat -a&#8221;命令检查端口是否处于监听状态。<br />
+4)． 运行了命令&#8221;<code>/usr/bin/nmblookup SMBserver</code>&#8220;，将返回SMB服务器的IP地址。否则nmbd没有正确的运行。<br />
+5)． 运行&#8221;<code>/usr/bin/nmblookup -d 2 \'*\'</code>&#8220;命令，在子网中运行NetBIOS/TCPIP的主机将会响应。否则说明nmblookup不能正确的得到广播地址，可以尝试在smb.conf文件中用interfaces参数人工设置IP地址、广播地址和子网掩码。<br />
+6)． 运行<code>"/usr/bin/smbclient \' \\\\SMBserver\\homes"</code>命令，需要输入客户在SMB服务器上的用户口令，然后会出现类似&#8221;smb&gt;&#8221;的提示符。这时可以使用 dir命令浏览客户在SMB服务器帐户目录下的文件，用help命令可以得到其他命令的帮助。如果不能出现类似&#8221;smb&gt;&#8221;的提示符，并且有 &#8220;invalid network name&#8221;的错误信息，则有可能homes共享没有正确的设置；或者有&#8221;Bad password&#8221;，则要检查&#8221;shadow password&#8221;、&#8221;password encryption&#8221;以及参数&#8221;valid users&#8221;和&#8221;path&#8221;的设置。</p>
+<h4>2、SMB客户机上的操作</h4>
+<p>1)． 运行&#8221;<code>net view \\\\SMBserver</code>&#8220;命令，应该能够列出SMB服务器上的共享。<br />
+如果出现类似&#8221;network name not found&#8221;的错误，则要检查客户机上DNS或WINS的设置。如果出现&#8221;Invalid network name&#8221;或&#8221;bad password error&#8221;的错误，则参照与上面&#8221;smbclient -L&#8221;命令中同样的错误结果的解决方法。要注意客户机将要用客户注册客户机时所用的用户名/口令去与SMB服务器连接，所以在SMB服务器上，用户最好有同样的用户名/口令。<br />
+2)． 使用<code>"net use x;\\\\SMBserver\\homes"</code>命令，可以把SMB服务器上客户home目录映射到客户机&#8221;x:&#8221;盘，&#8221;x:&#8221;应该是一个客户机上未用的盘号。这样，共享的目录可以在客户机上以&#8221;x:&#8221;盘来看待。<br />
+正常的信息为&#8221;command complete successfully&#8221;。<br />
+如果要停止使用&#8221;x:&#8221;盘，可以使用<code>"net use x:/delete"</code>命令。如果不能正常的把客户的home目录映射到&#8221;x:&#8221;盘，则要检查SMB服务器上&#8221;hosts allow&#8221;等参数的配置。如果客户机上的用户名不能与服务器上的用户名匹配，尝试使用&#8221;username map&#8221;选项。<br />
+3)． 如果在SMB服务器上没有使用&#8221;encrypted passwords&#8221;，则在客户机上要在注册表中允许使?quot;普通文本&#8221;格式的口令。</p>
+<h4>net use ipc$错误解决（发生系统错误 67）</h4>
+<p>找不到网络名<br />
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br />
+解决：运行serivces.msc(即服务管理）<br />
+开启：<br />
+1.Server服务（显示名称）（对应名称为：lanmanserver）<br />
+2.Workstation服务（显示名称）（对应名称为：lanmanWorkstation）</p>
+<h4>一部分文件被锁定，进程无法写入文件（error no FILE*）</h4>
+<p>samba共享的路径是由nfs共享的，在挂载nfs时，使用-o nolock 参数可以避免samba服务共享出的路径在客户端上出现锁定的错误情况。</p>
+<h4>日志文件</h4>
+<p>Samba为smbd、nmbd和访问Samba的客户提供了下列记录文件，分别记录有关smbd、nmbd运行信息和每个客户的访问信息：<br />
+记录smbd 信息：<code>/var/log/samba/log.smb</code><br />
+记录nmbd信息：<code>/var/log/samba/log.nmb</code><br />
+记录客户访问信息:<code>/var/log/samba/log.%m</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

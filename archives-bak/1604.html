@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 配置Main和Event | 青春部落    </title>
+    <meta name="keywords"  content="Nginx,main,event" />
+    <meta name="description"  content="Nginx服务配置文件中main模块和event模块" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 配置Main和Event评论Feed" href="https://cn-blogs.cn/archives/1604.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx 架构和扩展' href='https://cn-blogs.cn/archives/1601.html' />
+<link rel='next' title='Nginx 修改响应header' href='https://cn-blogs.cn/archives/1633.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1604.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1604' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1604.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1604.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1604 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1601.html" rel="prev">上一篇：Nginx 架构和扩展</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1633.html" rel="next">下一篇：Nginx 修改响应header</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 配置Main和Event        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/06/21</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>概述</h2>
+<p>Nginx的主配置文件由几个段组成，这个段通常也被称为NGINX的上下文。</p>
+<p><strong>Main</strong>用于配置错误日志、进程及权限等相关的参数，<br />
+<strong>Events</strong>用于配置IO模型，如epoll、kqueue、select或poll等，它们是必备模块。</p>
+<p>location block 中所配置的各个指令则会启动不同的模块去完成工作；因此模块可以看做Nginx真正的劳动工作者。<br />
+通常一个location中的指令会涉及一个handler模块和多个filter模块（当然，多个location可以复用同一个模块）。<br />
+handler模块负责处理请求，完成响应内容的生成，而filter模块对响应内容进行处理。</p>
+<h3>配置Main模块</h3>
+<h4>user</h4>
+<p>主模块指令，指定Nginx Worker进程运行用户以及用户组，默认由nobody账号运行。</p>
+<h4>error_log</h4>
+<p>用于配置错误日志，可用于main、http、server及location上下文中；<br />
+语法格式为：<br />
+<code>error_log file | stderr [ debug | info | notice | warn | error | crit | alert | emerg ]</code><br />
+如果在编译nginx时使用了&#8211;with-debug选项，还可以使用如下格式打开调试功能。<br />
+<code>error_log LOGFILE [debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap];</code><br />
+要禁用错误日志，不能使用“error_log off;”，而要使用类似如下选项：<br />
+<code>error_log /dev/null crit;</code></p>
+<h4>timer_resolution</h4>
+<p>用于降低gettimeofday()系统调用的次数。默认情况下，每次从kevent()、epoll、/dev/poll、select()或poll()返回时都会执行此系统调用。<br />
+语法格式为：<code>timer_resolution interval<br />
+例如：<br />
+timer_resolution 100ms;</code></p>
+<h4>worker_cpu_affinity</h4>
+<p>通过sched_setaffinity()将worker绑定至CPU上，只能用于main上下文。<br />
+语法格式为：<code>worker_cpu_affinity cpumask ...<br />
+例如：<br />
+worker_processes 4;<br />
+worker_cpu_affinity 0001 0010 0100 1000;</code></p>
+<h4>worker_priority</h4>
+<p>为worker进程设定优先级(指定nice值)，此参数只能用于main上下文中，默认为0；<br />
+语法格式为：<code>worker_priority number</code></p>
+<h4>worker_processes</h4>
+<p>worker_processes是个主模块指令，<br />
+可以设置为auto，nginx启动是worker进程的个数和服务器的线程数相同。</p>
+<p>worker进程是单线程进程。<br />
+1、Nginx用于CPU密集型的场景中，如SSL或gzip，且主机上的CPU个数至少有2个，那么应该将此参数值设定为与CPU核心数相同；<br />
+2、Nginx用于大量静态文件访问的场景中，且所有文件的总大小大于可用内存时，应该将此参数的值设定得足够大以充分利用磁盘带宽。</p>
+<p>指定了Nginx要开启的进程数。每个Nginx进程平均耗费10MB～12MB内存。根据经验，一般指定一个进程足够了，如果是多核CPU，建议指定和CPU的数量一样多的进程数即可。<br />
+此参数与Events上下文中的work_connections变量一起决定了maxclient的值：<br />
+<code>maxclients = work_processes * work_connections</code></p>
+<h4>worker_rlimit_nofile</h4>
+<p>设定worker进程所能够打开的文件描述符个数的最大值。<br />
+语法格式：<br />
+<code>worker_rlimit_nofile number</code></p>
+<h3>配置Events模块</h3>
+<h4>worker_connections</h4>
+<p>设定每个worker所处理的最大连接数，默认值512，根据服务器资源设置合理数，大多数服务器都支持更大的设置；可以通过压测确定。</p>
+<p>它与来自main上下文的worker_processes一起决定了maxclients的值。<br />
+<code>max clients = worker_processes * worker_connections</code></p>
+<p>而在反向代理场景中，其计算方法与上述公式不同，因为默认情况下浏览器将打开2个连接，而nginx会为每一个连接打开2个文件描述符，因此，其maxclients的计算方法为：<br />
+<code>max clients = worker_processes * worker_connections/4</code></p>
+<h4>use</h4>
+<p>在有着多于一个的事件模型IO的应用场景中，可以使用此指令设定nginx所使用的IO机制，默认为./configure脚本选定的各机制中最适用当前OS的版本。语法格式：<br />
+<code>use [ kqueue | rtsig | epoll | /dev/poll | select | poll | eventport ]</code></p>
+<h3>一个配置示例</h3>
+<p><code>user nginx;<br />
+# the load is CPU-bound and we have 16 cores<br />
+worker_processes 16;<br />
+error_log /var/log/nginx/error.log;<br />
+pid /var/run/nginx.pid;<br />
+events {<br />
+use epoll;<br />
+worker_connections 2048;<br />
+}</code><br />
+进程的最大连接数受Linux系统进程的最大打开文件数限制，在执行操作系统命令“ulimit -n 65536”后worker_connections的设置才能生效。</p>
+<h4>tip连接数</h4>
+<p>一般浏览器默认会打开多个连接，从而提高打开速度。<br />
+网站也会通过二级域名或者其他域名的方式，增加浏览器对资源的请求连接数，从而提供网站的访问。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

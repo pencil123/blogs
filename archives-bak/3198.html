@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>find 搜索文件 | 青春部落    </title>
+    <meta name="keywords"  content="linux 系统,文件查找,find 命令" />
+    <meta name="description"  content="linux 系统查找文件find命令" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; find 搜索文件评论Feed" href="https://cn-blogs.cn/archives/3198.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='数词' href='https://cn-blogs.cn/archives/3708.html' />
+<link rel='next' title='帮助命令' href='https://cn-blogs.cn/archives/3203.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3198.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3198' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3198.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3198.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3198 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/shell" rel="category tag">Shell 壳</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3708.html" rel="prev">上一篇：数词</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3203.html" rel="next">下一篇：帮助命令</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            find 搜索文件        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/03/15</span>
+            <span class="update is-hidden">2018-01-21</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>文件名称</h2>
+<p>查找txt和pdf文件:<br />
+<code>find . \( -name "*.txt" -o -name "*.pdf" \) -print</code></p>
+<p>正则方式查找.txt和pdf:<br />
+<code>find . -regex ".*\(\.txt|\.pdf\)$"</code><br />
+-iregex： 忽略大小写的正则</p>
+<p>否定参数 ,查找所有非txt文本:<br />
+<code>find . ! -name "*.txt" -print</code></p>
+<h2>目录深度</h2>
+<p>指定搜索深度,打印出当前目录的文件（深度为1）:<br />
+<code>find . -maxdepth 1 -type f</code></p>
+<h2>文件类型</h2>
+<p>按类型搜索<br />
+-type f 文件 / l 符号链接 / d 目录<br />
+<code>find . -type d -print </code>//只列出所有目录</p>
+<p>find支持的文件检索类型可以区分普通文件和符号链接、目录等，</p>
+<p>但是二进制文件和文本文件无法直接通过find的类型区分出来；</p>
+<p>file命令可以检查文件具体类型（二进制或文本）:</p>
+<p>$file redis-cli # 二进制文件<br />
+redis-cli: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.9, not stripped</p>
+<p>$file redis.pid # 文本文件<br />
+redis.pid: ASCII text</p>
+<p>所以,可以用以下命令组合来实现查找本地目录下的所有二进制文件:<br />
+<code>ls -lrt | awk '{print $9}'|xargs file|grep ELF| awk '{print $1}'|tr -d ':'</code></p>
+<h2>按时间搜索</h2>
+<p>-atime 访问时间 (单位是天，分钟单位则是-amin，以下类似）<br />
+-mtime 修改时间 （内容被修改）<br />
+-ctime 变化时间 （元数据或权限变化）</p>
+<p>最近第7天被访问过的所有文件:<br />
+<code>find . -atime 7 -type f -print</code></p>
+<p>最近7天内被访问过的所有文件:<br />
+<code>find . -atime -7 -type f -print</code></p>
+<p>查询7天前被访问过的所有文件:<br />
+<code>find . -atime +7 type f -print</code></p>
+<h2>按大小搜索：</h2>
+<p>w字 k M G 寻找大于2k的文件:<br />
+<code>find . -type f -size +2k</code></p>
+<h2>按权限查找:</h2>
+<p><code>find . -type f -perm 644 -print </code>//找具有可执行权限的所有文件</p>
+<h2>按用户查找:</h2>
+<p><code>find . -type f -user weber -print</code>// 找用户weber所拥有的文件<br />
+找到后的后续动作</p>
+<h2>匹配文件再处理</h2>
+<p>删除<br />
+删除当前目录下所有的swp文件:<br />
+<code>find . -type f -name "*.swp" -delete</code></p>
+<p><strong>xargs使用</strong><br />
+<code>find . type f -name "*.swp" | xargs rm</code></p>
+<p><strong>执行动作（强大的exec）</strong><br />
+将当前目录下的所有权变更为weber:<br />
+<code>find . -type f -user root -exec chown weber {} \;</code><br />
+注：{}是一个特殊的字符串，对于每一个匹配的文件，{}会被替换成相应的文件名；</p>
+<p>将找到的文件全都copy到另一个目录:<br />
+<code>find . -type f -mtime +10 -name "*.txt" -exec cp {} OLD \;</code></p>
+<p>结合多个命令<br />
+如果需要后续执行多个命令，可以将多个命令写成一个脚本。然后 -exec 调用时执行脚本即可:<br />
+<code>-exec ./commands.sh {} \;</code></p>
+<h2>另外查找文件还有locate命令</h2>
+<p>locate会为文件系统建立索引数据库，如果有文件更新，需要定期执行更新命令来更新索引库:<br />
+<code>$locate filename</code><br />
+更新文件索引信息：$updatedb</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

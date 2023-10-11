@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>fastcgi 参数配置 | 青春部落    </title>
+    <meta name="keywords"  content="nginx,fastcgi,fastcgi参数配置" />
+    <meta name="description"  content="nginx 服务fastcig参数配置" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; fastcgi 参数配置评论Feed" href="https://cn-blogs.cn/archives/187.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='sub-内容替换' href='https://cn-blogs.cn/archives/182.html' />
+<link rel='next' title='http keep-alive socket' href='https://cn-blogs.cn/archives/1119.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/187.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=187' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F187.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F187.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-187 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/182.html" rel="prev">上一篇：sub-内容替换</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1119.html" rel="next">下一篇：http keep-alive socket</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            fastcgi 参数配置        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/04/27</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>ngx_http_fastcgi_module模块</h2>
+<p>将请求传递给FastCGI服务器</p>
+<h2>配置参数参考</h2>
+<p><code>fastcgi_connect_timeout 300;<br />
+fastcgi_send_timeout 300;<br />
+fastcgi_read_timeout 300;<br />
+fastcgi_buffer_size 64k;<br />
+fastcgi_buffers 4 64k;<br />
+fastcgi_busy_buffers_size 128k;<br />
+fastcgi_temp_file_write_size 128k;<br />
+fastcgi_intercept_errors on;<br />
+location / {<br />
+fastcgi_pass localhost:9000;<br />
+fastcgi_index index.php;<br />
+fastcgi_param SCRIPT_FILENAME /home/www/scripts/php$fastcgi_script_name;<br />
+fastcgi_param QUERY_STRING $query_string;<br />
+fastcgi_param REQUEST_METHOD $request_method;<br />
+fastcgi_param CONTENT_TYPE $content_type;<br />
+fastcgi_param CONTENT_LENGTH $content_length;<br />
+}</code></p>
+<p><strong>fastcgi_buffer_size size;</strong><br />
+<code>Default:<br />
+fastcgi_buffer_size 4k|8k;<br />
+Context: http, server, location</code><br />
+用于读取从FastCGI服务器接收的响应的第一部分的缓冲区。<br />
+这部分通常包含一个小的响应头。默认情况下，缓冲区大小等于一个内存页面。这是4K或8K，取决于一个平台。然而，它可以做得更小。</p>
+<p><strong>fastcgi_buffers number size;</strong><br />
+<code>Default:<br />
+fastcgi_buffers 8 4k|8k;<br />
+Context: http, server, location</code><br />
+为单个连接 设置用于从FastCGI服务器读取响应的缓冲区number和size缓冲区。默认情况下，缓冲区大小等于一个内存页面。这是4K或8K，取决于一个平台。</p>
+<p><strong>fastcgi_cache zone | off;</strong><br />
+<code>Default:<br />
+fastcgi_cache off;<br />
+Context: http, server, location</code><br />
+定义用于缓存的共享内存区域。相同的区域可以在几个地方使用。参数值可以包含变量（1.7.9）。该off参数禁用从先前配置级别继承的缓存。</p>
+<p><strong>fastcgi_cache_key string;</strong><br />
+<code>Default: —<br />
+Context: http, server, location</code><br />
+设置被缓存的key；fastcgi_cache_key localhost:9000$request_uri;</p>
+<p><strong>fastcgi_cache_methods GET | HEAD | POST …;</strong><br />
+<code>Default:<br />
+fastcgi_cache_methods GET HEAD;<br />
+Context: http, server, location</code><br />
+This directive appeared in version 0.7.59.<br />
+If the client request method is listed in this directive then the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. See also the fastcgi_no_cache directive.<br />
+#设置哪些请求被缓存</p>
+<p><strong>fastcgi_connect_timeout time;</strong><br />
+<code>Default:<br />
+fastcgi_connect_timeout 60s;<br />
+Context: http, server, location</code><br />
+定义与FastCGI服务器建立连接的超时时间。应该注意，这个超时通常不能超过75秒。</p>
+<p><strong>fastcgi_hide_header field;</strong><br />
+<code>Default: —<br />
+Context: http, server, location</code><br />
+默认情况下，nginx不会从FastCGI服务器的响应中将头字段“Status”和“X-Accel -&#8230;”传递给客户端。该fastcgi_hide_header指令设置不会传递的其他字段。如果恰恰相反，需要允许字段的传递，那么可以使用fastcgi_pass_header指令。</p>
+<p><strong>fastcgi_ignore_client_abort on | off;</strong><br />
+<code>Default:<br />
+fastcgi_ignore_client_abort off;<br />
+Context: http, server, location</code><br />
+确定当客户端关闭连接而不等待响应时，是否应该关闭与FastCGI服务器的连接。</p>
+<p><strong>fastcgi_index name;</strong><br />
+<code>Default: —<br />
+Context: http, server, location</code><br />
+如果请求的FastCGI URI以“/”结束；该指令设置的文件会被附加到URI后面并保存在变量$fastcgi_script_name中。</p>
+<p><code>fastcgi_index index.php;<br />
+fastcgi_param SCRIPT_FILENAME /home/www/scripts/php$fastcgi_script_name;<br />
+and the “/page.php” request, the SCRIPT_FILENAME parameter will be equal to “/home/www/scripts/php/page.php”, and with the “/” request it will be equal to “/home/www/scripts/php/index.php”.</code></p>
+<p><strong>fastcgi_intercept_errors on | off;</strong><br />
+<code>Default:<br />
+fastcgi_intercept_errors off;<br />
+Context: http, server, location</code><br />
+这指令指定是否传递4xx和5xx错误信息到客户端，或者允许nginx使用error_page处理错误信息。<br />
+你必须明确的在error_page中指定处理方法使这个参数有效，正如Igor所说“如果没有适当的处理方法，nginx不会拦截一个错误，这个错误不会显示自己的默认页面，这里允许通过某些方法拦截错误。</p>
+<p><strong>fastcgi_max_temp_file_size size;</strong><br />
+<code>Default:<br />
+fastcgi_max_temp_file_size 1024m;<br />
+Context: http, server, location</code><br />
+When buffering of responses from the FastCGI server is enabled, and the whole response does not fit into the buffers set by the fastcgi_buffer_size and fastcgi_buffers directives, a part of the response can be saved to a temporary file. This directive sets the maximum size of the temporary file. The size of data written to the temporary file at a time is set by the fastcgi_temp_file_write_size directive.<br />
+当缓存来自FastCGI服务器的响应时，并且整个响应不适用于由fastcgi_buffer_size和fastcgi_buffers 指令设置的缓冲区中，响应的一部分可以保存到临时文件中。此伪指令设置size临时文件的最大值。一次写入临时文件的数据大小由fastcgi_temp_file_write_size指令设置。</p>
+<p><strong>fastcgi_param parameter value [if_not_empty];</strong><br />
+<code>Default: —<br />
+Context: http, server, location</code><br />
+设置一个parameter应该传递给FastCGI服务器的。该value可以包含文本，变量，他们的组合。当且仅当fastcgi_param 在当前级别上没有定义指令时，这些指令将从上一级继承 。</p>
+<p><strong>fastcgi_pass address;</strong><br />
+<code>Default: —<br />
+Context: location, if in location</code><br />
+设置FastCGI服务器的地址。地址可以指定为域名或IP地址，端口号或者unix的端口号</p>
+<p><strong>fastcgi_pass_header field;</strong><br />
+<code>Default: —<br />
+Context: http, server, location</code><br />
+Permits passing otherwise disabled header fields from a FastCGI server to a client.<br />
+允许从FastCGI服务器传递否则禁用的头字段到客户端。</p>
+<p><strong>fastcgi_read_timeout time;</strong><br />
+<code>Default:<br />
+fastcgi_read_timeout 60s;<br />
+Context: http, server, location</code><br />
+定义从FastCGI服务器读取响应的超时。超时仅在两个连续读操作之间设置，而不是传输整个响应。如果FastCGI服务器在此时间内没有传输任何内容，则连接被关闭。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

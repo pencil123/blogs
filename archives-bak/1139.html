@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>分词器 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 分词器评论Feed" href="https://cn-blogs.cn/archives/1139.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Git 多人协作过程简单举例' href='https://cn-blogs.cn/archives/1768.html' />
+<link rel='next' title='Anslysis分析' href='https://cn-blogs.cn/archives/1141.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1139.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1139' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1139.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1139.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1139 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/elk" rel="category tag">日志分析</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1768.html" rel="prev">上一篇：Git 多人协作过程简单举例</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1141.html" rel="next">下一篇：Anslysis分析</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            分词器        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/01/27</span>
+            <span class="update is-hidden">2017-11-13</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>基本概念</strong><br />
+全文搜索引擎会用某种算法对要建索引的文档进行分析， 从文档中提取出若干Token(词元)， 这些算法称为Tokenizer(分词器)。<br />
+这些Token会被进一步处理， 比如转成小写等， 这些处理算法被称为Token Filter(词元处理器)。<br />
+被处理后的结果被称为Term(词)， 文档中包含了几个这样的Term被称为Frequency(词频)。</p>
+<p>引擎会建立Term和原文档的Inverted Index(倒排索引)， 这样就能根据Term很快到找到源文档了。<br />
+文本被Tokenizer处理前可能要做一些预处理， 比如去掉里面的HTML标记， 这些处理的算法被称为Character Filter(字符过滤器)， 这整个的分析算法被称为Analyzer(分析器)。</p>
+<p><strong>ES内置了很多Analyzer, 还有很多第三方的Analyzer插件， 比如一些处理中文的Analyzer(中文分词)</strong>。</p>
+<p>analyzer、 tokenizer、 filter可以在elasticsearch.yml 配置， 下面是配置例子</p>
+<blockquote><p>index :<br />
+~~~~~analysis :<br />
+~~~~~~~~~~analyzer :<br />
+~~~~~~~~~~~~~~~standard :<br />
+~~~~~~~~~~~~~~~~~~~~type : standard<br />
+~~~~~~~~~~~~~~~~~~~~stopwords : [stop1, stop2]<br />
+~~~~~~~~~~~~~~~myAnalyzer1 :<br />
+~~~~~~~~~~~~~~~~~~~~type : standard<br />
+~~~~~~~~~~~~~~~~~~~~stopwords : [stop1, stop2, stop3]<br />
+~~~~~~~~~~~~~~~~~~~~max_token_length : 500<br />
+~~~~~~~~~~~~~~~# configure a custom analyzer which is<br />
+~~~~~~~~~~~~~~~# exactly like the default standard analyzer<br />
+~~~~~~~~~~~~~~~myAnalyzer2 :<br />
+~~~~~~~~~~~~~~~~~~~~tokenizer : standard<br />
+~~~~~~~~~~~~~~~~~~~~filter : [standard, lowercase, stop]<br />
+~~~~~~~~~~tokenizer :<br />
+~~~~~~~~~~~~~~~myTokenizer1 :<br />
+~~~~~~~~~~~~~~~~~~~~type : standard<br />
+~~~~~~~~~~~~~~~~~~~~max_token_length : 900<br />
+~~~~~~~~~~~~~~~myTokenizer2 :<br />
+~~~~~~~~~~~~~~~~~~~~type : keyword<br />
+~~~~~~~~~~~~~~~~~~~~buffer_size : 512<br />
+~~~~~~~~~~filter :<br />
+~~~~~~~~~~~~~~~myTokenFilter1 :<br />
+~~~~~~~~~~~~~~~~~~~~type : stop<br />
+~~~~~~~~~~~~~~~~~~~~stopwords : [stop1, stop2, stop3, stop4]<br />
+~~~~~~~~~~~~~~~myTokenFilter2 :<br />
+~~~~~~~~~~~~~~~~~~~~type : length<br />
+~~~~~~~~~~~~~~~~~~~~min : 0<br />
+~~~~~~~~~~~~~~~~~~~~max : 2000</p></blockquote>
+<p><strong>analyzer</strong><br />
+ES内置若干analyzer, 另外还可以用内置的character filter, tokenizer, token filter组装一个analyzer(custom analyzer)， 比如</p>
+<blockquote><p>index :<br />
+~~~~~analysis :<br />
+~~~~~~~~~~analyzer :<br />
+~~~~~~~~~~~~~~~myAnalyzer :<br />
+~~~~~~~~~~~~~~~~~~~~tokenizer : standard<br />
+~~~~~~~~~~~~~~~~~~~~filter : [standard, lowercase, stop]</p></blockquote>
+<p><strong>如果你要使用第三方的analyzer插件，</strong>需要先在配置文件elasticsearch.yml中注册, 下面是配置IkAnalyzer的例子</p>
+<p><strong>index:<br />
+analysis:<br />
+~~~~~analyzer:~~~~~<br />
+~~~~~ ik:<br />
+~~~~~~~~~~ alias: [ik_analyzer]<br />
+~~~~~~~~~~ type: org.elasticsearch.index.analysis.IkAnalyzerProvider</strong><br />
+当一个analyzer在配置文件中被注册到一个名字(logical name)下后，在mapping定义或者一些API里就可以用这个名字来引用该analyzer了，比如</p>
+<blockquote><p>&#8220;message&#8221;: {<br />
+~~~~~&#8221;type&#8221;: &#8220;string&#8221;,<br />
+~~~~~&#8221;indexAnalyzer&#8221;: &#8220;ik&#8221;,<br />
+~~~~~&#8221;searchAnalyzer&#8221;: &#8220;ik&#8221;<br />
+}</p></blockquote>
+<p>如果没有指定索引和搜索用的analyzer，ES会用默认的analyzer来处理，也就是名字(logical name)为default, default_index, default_search的analyzer。 从名字可以看出来，default是索引和搜索时用的默认的analyzer，default_index是索引时用的默认的analyzer， default_search是查询时用的默认analyzer。<br />
+<strong><br />
+下面是在elasticsearch.yml中配置默认analyzer的例子</strong></p>
+<blockquote><p>index:<br />
+analysis:<br />
+~~~~~analyzer:<br />
+~~~~~~~~~~default_index:<br />
+~~~~~~~~~~~~~~~tokenizer: standard<br />
+~~~~~~~~~~~~~~~filter: [standard, lowercase, my_synonym, my_snow]<br />
+~~~~~~~~~~default_search:<br />
+~~~~~~~~~~~~~~~tokenizer: standard<br />
+~~~~~~~~~~~~~~~filter: [standard, lowercase, stop]</p></blockquote>
+<p>或者用这种格式</p>
+<p>index.analysis.analyzer.default.type : &#8220;mmseg&#8221;<br />
+一个analyzer可以起若干别名，比如在下面的例子中，standard analyzer可以用alias1或者alias2来引用</p>
+<blockquote><p>index :<br />
+analysis :<br />
+~~~~~analyzer。 :<br />
+~~~~~ standard :<br />
+~~~~~~~~~~alias: [alias1, alias2]<br />
+~~~~~~~~~~type : standard<br />
+~~~~~~~~~~stopwords : [test1, test2, test3]</p></blockquote>
+<p>下面是内置的一些analyzer。</p>
+<p>analyzer logical name description<br />
+standard analyzer standard standard tokenizer, standard filter, lower case filter, stop filter<br />
+simple analyzer simple lower case tokenizer<br />
+stop analyzer stop lower case tokenizer, stop filter<br />
+keyword analyzer keyword 不分词，内容整体作为一个token(not_analyzed)<br />
+pattern analyzer whitespace 正则表达式分词，默认匹配\W+<br />
+language analyzers lang 各种语言<br />
+snowball analyzer snowball standard tokenizer, standard filter, lower case filter, stop filter, snowball filter<br />
+custom analyzer custom 一个Tokenizer, 零个或多个Token Filter, 零个或多个Char Filter</p>
+<p>tokenizer<br />
+ES内置的tokenizer列表。</p>
+<p>tokenizer logical name description<br />
+standard tokenizer standard<br />
+edge ngram tokenizer edgeNGram<br />
+keyword tokenizer keyword 不分词<br />
+letter analyzer letter 按单词分<br />
+lowercase analyzer lowercase letter tokenizer, lower case filter<br />
+ngram analyzers nGram<br />
+whitespace analyzer whitespace 以空格为分隔符拆分<br />
+pattern analyzer pattern 定义分隔符的正则表达式<br />
+uax email url analyzer uax_url_email 不拆分url和email<br />
+path hierarchy analyzer path_hierarchy 处理类似/path/to/somthing样式的字符串</p>
+<p>token filter<br />
+ES内置的token filter列表。</p>
+<p>token filter logical name description<br />
+standard filter standard<br />
+ascii folding filter asciifolding<br />
+length filter length 去掉太长或者太短的<br />
+lowercase filter lowercase 转成小写<br />
+ngram filter nGram<br />
+edge ngram filter edgeNGram<br />
+porter stem filter porterStem 波特词干算法<br />
+shingle filter shingle 定义分隔符的正则表达式<br />
+stop filter stop 移除 stop words<br />
+word delimiter filter word_delimiter 将一个单词再拆成子分词<br />
+stemmer token filter stemmer<br />
+stemmer override filter stemmer_override<br />
+keyword marker filter keyword_marker<br />
+keyword repeat filter keyword_repeat<br />
+kstem filter kstem<br />
+snowball filter snowball<br />
+phonetic filter phonetic 插件<br />
+synonym filter synonyms 处理同义词<br />
+compound word filter dictionary_decompounder, hyphenation_decompounder 分解复合词<br />
+reverse filter reverse 反转字符串<br />
+elision filter elision 去掉缩略语<br />
+truncate filter truncate 截断字符串<br />
+unique filter unique<br />
+pattern capture filter pattern_capture<br />
+pattern replace filte pattern_replace 用正则表达式替换<br />
+trim filter trim 去掉空格<br />
+limit token count filter limit 限制token数量<br />
+hunspell filter hunspell 拼写检查<br />
+common grams filter common_grams<br />
+normalization filter arabic_normalization, persian_normalization</p>
+<p>character filter<br />
+ES内置的character filter列表</p>
+<p>character filter logical name description<br />
+mapping char filter mapping 根据配置的映射关系替换字符<br />
+html strip char filter html_strip 去掉HTML元素<br />
+pattern replace char filter pattern_replace 用正则表达式处理字符串<br />
+icu plugin<br />
+icu analysis 插件</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

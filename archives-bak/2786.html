@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQLDump 工具参数说明 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,MySQLDump,数据库,备份工具" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQLDump 工具参数说明评论Feed" href="https://cn-blogs.cn/archives/2786.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MoinMoin wiki' href='https://cn-blogs.cn/archives/191.html' />
+<link rel='next' title='MySQLDump 锁表和主从' href='https://cn-blogs.cn/archives/2790.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2786.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2786' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2786.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2786.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2786 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/191.html" rel="prev">上一篇：MoinMoin wiki</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2790.html" rel="next">下一篇：MySQLDump 锁表和主从</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQLDump 工具参数说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/10/30</span>
+            <span class="update is-hidden">2018-04-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <table>
+<tr>
+<th>&#8211;help：</th>
+<th>显示帮助信息并退出。</th>
+</tr>
+<tr>
+<th>&#8211;version, -V：</th>
+<th>输出mysqldump版本信息并退出</th>
+</tr>
+</table>
+<h3>连接服务器信息</h3>
+<table>
+<tr>
+<th>&#8211;host, -h：</th>
+<th>需要导出的主机信息</th>
+</tr>
+<tr>
+<th>&#8211;port, -P：</th>
+<th>连接数据库端口号</th>
+</tr>
+<tr>
+<th>&#8211;user, -u：</th>
+<th>指定连接的用户名</th>
+</tr>
+<tr>
+<th>&#8211;password, -p：</th>
+<th>连接数据库密码</th>
+</tr>
+<tr>
+<th>&#8211;socket,-S：</th>
+<th>指定连接mysql的socket文件位置，默认路径/tmp/mysql.sock<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;socket=/tmp/mysqld.sock</th>
+</tr>
+<tr>
+<th>&#8211;protocol：</th>
+<th>使用的连接协议，包括：tcp, socket, pipe, memory.<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;protocol=tcp</th>
+</tr>
+<tr>
+<th>&#8211;compress, -C：</th>
+<th>在客户端和服务器之间启用压缩传递所有信息<br />mysqldump -uroot -p &#8211;all-databases &#8211;compress</th>
+</tr>
+<tr>
+<th>&#8211;max_allowed_packet：</th>
+<th>服务器发送和接受的最大包长度。<br />mysqldump  -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;max_allowed_packet=10240</th>
+</tr>
+<tr>
+<th>&#8211;net_buffer_length：</th>
+<th>TCP/IP和socket连接的缓存大小。<br />mysqldump  -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;net_buffer_length=1024</th>
+</tr>
+</table>
+<h3>选择数据库或者表</h3>
+<table>
+<tr>
+<th>&#8211;all-databases , -A：</th>
+<th>导出全部数据库。<br />mysqldump -uroot -p &#8211;all-databases</th>
+</tr>
+<tr>
+<th>&#8211;databases, -B</th>
+<th>导出几个数据库。参数后面所有名字参量都被看作数据库名。<br />mysqldump -uroot -p &#8211;databases test mysql</th>
+</tr>
+<tr>
+<th>&#8211;tables：</th>
+<th>覆盖&#8211;databases (-B)参数，指定需要导出的表名。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;databases test &#8211;tables test</th>
+</tr>
+<tr>
+<th>&#8211;ignore-table</th>
+<th>不导出指定表。指定忽略多个表时，需要重复多次，每次一个表。每个表必须同时指定数据库和表名。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;ignore-table=mysql.user</th>
+</tr>
+</table>
+<h3>输出的信息</h3>
+<table>
+<tr>
+<th>&#8211;add-drop-database</th>
+<th>每个数据库创建之前添加drop数据库语句。<br />mysqldump -uroot -p &#8211;all-databases &#8211;add-drop-database</th>
+</tr>
+<tr>
+<th>&#8211;no-create-db, -n</th>
+<th>只导出数据，而不添加CREATE DATABASE 语句。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;no-create-db</th>
+</tr>
+<tr>
+<th>&#8211;no-data, -d</th>
+<th>不导出任何数据，只导出数据库表结构。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;no-data</th>
+</tr>
+<tr>
+<th>&#8211;add-drop-table</th>
+<th>每个数据表创建之前添加drop数据表语句。(默认为打开状态，使用&#8211;skip-add-drop-table取消选项)<br />mysqldump -uroot -p &#8211;all-databases (默认添加drop语句)<br />mysqldump -uroot -p &#8211;all-databases –skip-add-drop-table (取消drop语句)</th>
+</tr>
+<tr>
+<th>&#8211;no-create-info, -t</th>
+<th>只导出数据，而不添加CREATE TABLE 语句。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;no-create-info</th>
+</tr>
+<tr>
+<th>&#8211;create-options, -a</th>
+<th>在CREATE TABLE语句中包括所有MySQL特性选项。(默认为打开状态)<br />mysqldump -uroot -p &#8211;all-databases</th>
+</tr>
+<tr>
+<th>&#8211;comments</th>
+<th>附加注释信息。默认为打开，可以用&#8211;skip-comments取消<br />mysqldump -uroot -p &#8211;all-databases (默认记录注释)<br />mysqldump -uroot -p &#8211;all-databases &#8211;skip-comments (取消注释)</th>
+</tr>
+<tr>
+<th>&#8211;extended-insert, -e</th>
+<th>使用具有多个VALUES列的INSERT语法。这样使导出文件更小，并加速导入时的速度。默认为打开状态，使用&#8211;skip-extended-insert取消选项。<br />mysqldump -uroot -p &#8211;all-databases<br />mysqldump -uroot -p &#8211;all-databases&#8211;skip-extended-insert (取消选项)</th>
+</tr>
+<tr>
+<th>&#8211;compact</th>
+<th>导出更少的输出信息(用于调试)。去掉注释和头尾等结构。可以使用选项：&#8211;skip-add-drop-table &#8211;skip-add-locks &#8211;skip-comments &#8211;skip-disable-keys<br />mysqldump -uroot -p &#8211;all-databases &#8211;compact</th>
+</tr>
+<tr>
+<th>&#8211;complete-insert, -c</th>
+<th>使用完整的insert语句(包含列名称)。这么做能提高插入效率，但是可能会受到max_allowed_packet参数的影响而导致插入失败。<br />mysqldump -uroot -p &#8211;all-databases &#8211;complete-insert</th>
+</tr>
+<tr>
+<th>&#8211;disable-keys</th>
+<th>对于每个表，用/*!40000 ALTER TABLE tbl_name DISABLE KEYS */;和/*!40000 ALTER TABLE tbl_name ENABLE KEYS */;语句引用INSERT语句。这样可以更快地导入dump出来的文件，因为它是在插入所有行后创建索引的。该选项只适合MyISAM表，默认为打开状态。mysqldump -uroot -p &#8211;all-databases</th>
+</tr>
+<tr>
+<th>&#8211;insert-ignore</th>
+<th>在插入行时使用INSERT IGNORE语句.<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;insert-ignore</th>
+</tr>
+<tr>
+<th>&#8211;tab,-T</th>
+<th>为每个表在给定路径创建tab分割的文本文件。注意：仅仅用于mysqldump和mysqld服务器运行在相同机器上。<br />mysqldump -uroot -p &#8211;host=localhost test test &#8211;tab=&#8221;/home/mysql&#8221;</th>
+</tr>
+</table>
+<h3>输出格式fields设置</h3>
+<table>
+<tr>
+<th>&#8211;fields-terminated-by</th>
+<th>导出文件中忽略给定字段。与&#8211;tab选项一起使用，不能用于&#8211;databases和&#8211;all-databases选项<br />mysqldump -uroot -p test test &#8211;tab=”/home/mysql” &#8211;fields-terminated-by=”#”</th>
+</tr>
+<tr>
+<th>&#8211;fields-enclosed-by</th>
+<th>输出文件中的各个字段用给定字符包裹。与&#8211;tab选项一起使用，不能用于&#8211;databases和&#8211;all-databases选项<br />mysqldump -uroot -p test test &#8211;tab=”/home/mysql” &#8211;fields-enclosed-by=”#”</th>
+</tr>
+<tr>
+<th>&#8211;fields-optionally-enclosed-by</th>
+<th>输出文件中的各个字段用给定字符选择性包裹。与&#8211;tab选项一起使用，不能用于&#8211;databases和&#8211;all-databases选项<br />mysqldump -uroot -p test test &#8211;tab=”/home/mysql” &#8211;fields-enclosed-by=”#” &#8211;fields-optionally-enclosed-by =”#”</th>
+</tr>
+<tr>
+<th>&#8211;fields-escaped-by</th>
+<th>输出文件中的各个字段忽略给定字符。与&#8211;tab选项一起使用，不能用于&#8211;databases和&#8211;all-databases选项<br />mysqldump -uroot -p mysql user &#8211;tab=”/home/mysql” &#8211;fields-escaped-by=”#”</th>
+</tr>
+</table>
+<h3>编码相关</h3>
+<table>
+<tr>
+<th>&#8211;character-sets-dir：</th>
+<th>字符集文件的目录<br />mysqldump -uroot -p &#8211;all-databases &#8211;character-sets-dir=/usr/local/mysql/share/mysql/charsets</th>
+</tr>
+<tr>
+<th>&#8211;default-character-set：</th>
+<th>设置默认字符集，默认值为utf8<br />mysqldump -uroot -p &#8211;all-databases &#8211;default-character-set=latin1</th>
+</tr>
+<tr>
+<th>&#8211;set-charset</th>
+<th>添加&#8217;SET NAMES default_character_set&#8217;到输出文件。默认为打开状态，使用&#8211;skip-set-charset关闭选项。<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases<br />mysqldump -uroot -p &#8211;host=localhost &#8211;all-databases &#8211;skip-set-charset</th>
+</tr>
+</table>
+<h3>调试相关</h3>
+<table>
+<tr>
+<th>&#8211;debug</th>
+<th>输出debug信息，用于调试。默认值为：d:t:o,/tmp/mysqldump.trace<br />mysqldump -uroot -p &#8211;all-databases &#8211;debug=” d:t:o,/tmp/debug.trace”</th>
+</tr>
+<tr>
+<th>&#8211;debug-check：</th>
+<th>检查内存和打开文件使用说明并退出。<br />mysqldump -uroot -p &#8211;all-databases &#8211;debug-check</th>
+</tr>
+<tr>
+<th>&#8211;debug-info：</th>
+<th>输出调试信息并退出<br />mysqldump -uroot -p &#8211;all-databases &#8211;debug-info</th>
+</tr>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

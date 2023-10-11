@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Dockerfile 文件配置 | 青春部落    </title>
+    <meta name="keywords"  content="容器服务,docker,dockerfile,创建镜像" />
+    <meta name="description"  content="容器服务docker创建镜像文件dockerfile编辑说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Dockerfile 文件配置评论Feed" href="https://cn-blogs.cn/archives/4650.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='docker 服务错误汇总' href='https://cn-blogs.cn/archives/4646.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4650.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4650' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4650.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4650.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4650 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/docker" rel="category tag">容器服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4646.html" rel="prev">上一篇：docker 服务错误汇总</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Dockerfile 文件配置        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/12/07</span>
+            <span class="update is-hidden">2018-12-07</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>在容器服务使用过程中，我们少不了需要创建自定义镜像，使工作更加便利。<br />
+制作容器镜像的方式一般有两种：<br />
+1、创建容器，对容器修改后;使用commit命令,封装为新的镜像。<br />
+2、通过Dockerfile文件，基于已有镜像和依赖的文件，编写对镜像的操作命令集合；通过 build 命令将以上资源封装为新镜像。<br />
+在使用过程中，自然推荐第二种操作方式。另外还有一种情况为通过文件创建原始镜像，即最初的系统镜像；这里不作说明。</p>
+<h3>一、Dockerfile 概述</h3>
+<p>一般情况下 Dockerfile 文件内容分为四部分：<br />
+基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令<br />
+除了FROM命令，其他命令都会在上一条指令所生成的镜像的基础上执行，执行完成后生成新的镜像层。新的镜像层覆盖在原来的镜像上形成新的镜像。为了提供镜像构建速度，build 执行过程中会缓存构建过程中的中间镜像。<br />
+<em>’#’ 为 Dockerfile 中的注释<br />
+Dockerfile中的指令不区分大小写，不过为了与参数区分，推荐使用大写。</em></p>
+<h4>1、基础镜像信息</h4>
+<p><code># This is Test Dockerfile<br />
+# Version 1.0<br />
+FROM centos</code></p>
+<h4>2、维护者信息</h4>
+<p><code>MAINTAINER cn-blogs</code></p>
+<h4>3、镜像操作指令</h4>
+<p><code>#ENV 设置环境变量<br />
+ENV PATH /usr/local/nginx/sbin:$PATH<br />
+#ADD  文件放在当前目录下，拷过去会自动解压<br />
+ADD nginx-1.8.0.tar.gz /usr/local/<br />
+#COPY 拷贝文件到镜像<br />
+COPY epel-release-latest-7.noarch.rpm /usr/local/<br />
+#RUN 执行以下命令<br />
+RUN rpm -ivh /usr/local/epel-release-latest-7.noarch.rpm<br />
+RUN yum install -y wget lftp gcc gcc-c++ make openssl-devel pcre-devel pcre &amp;&amp; yum clean all<br />
+RUN useradd -s /sbin/nologin -M www<br />
+#WORKDIR 指明指令运行目录<br />
+WORKDIR /usr/local/nginx-1.8.0<br />
+RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-pcre &amp;&amp; make &amp;&amp; make install<br />
+RUN echo "daemon off;" &gt;&gt; /etc/nginx.conf<br />
+#EXPOSE 映射端口<br />
+EXPOSE 80</code></p>
+<h4>4、容器启动时执行指令</h4>
+<p><code>#CMD 运行以下命令<br />
+CMD ["nginx"]</code></p>
+<h3>二、指令详解</h3>
+<h5>FROM 指定基础镜像</h5>
+<p>格式为：<code>FROM &lt;image&gt;或FROM &lt;image&gt;:&lt;tag&gt;</code><br />
+第一条指令必须为 FROM 指令。<br />
+Dockerfile 中可以多次使用 FROM 命令，这样可以创建多个镜像。<br />
+tag为空时，默认为lastest。</p>
+<h5>MAINTAINER 指定维护者信息</h5>
+<p>格式为：<code>MAINTAINER [name]</code></p>
+<h5>RUN 在镜像中要执行的命令</h5>
+<p>格式为：<code>RUN &lt;command&gt;<command></command>或 RUN ["executable", "param1", "param2"]</code><br />
+前者将在 shell 终端中运行命令，即 /bin/bash -c ；<br />
+后者则使用 exec 执行;命令是直接运行的，容器不调用shell程序。<br />
+指定使用其它终端可以通过第二种方式实现，例如 RUN [“/bin/bash”, “-c”,”echo hello”] 。</p>
+<h5>WORKDIR 当前工作目录</h5>
+<p>格式为 :<code>WORKDIR /path_to_workdir(绝对路径|相对路径)</code><br />
+后续的 RUN、CMD、ENTRYPOINT 指令基于此工作目录；<br />
+Dockerfile可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前的路径确定当前路径。</p>
+<h5>EXPOSE 指定容器要暴露的端口</h5>
+<p>格式为 EXPOSE [port]<br />
+等同于在启动容器时需要通过 -P 指定暴露的端口。</p>
+<h5>ENV 定义环境变量</h5>
+<p>格式为:<code>ENV &lt;key&gt;  &lt;value&gt;</code><br />
+指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。<br />
+<code>ENV PATH /usr/local/nginx/sbin:$PATH</code></p>
+<h5>COPY 拷贝本机文件（Dockerfile所在目录的相对路径）到容器</h5>
+<p>格式为：<code>COPY &lt;src&gt; &lt;dst&gt;</code></p>
+<h5>ADD : COPY 功能更强大</h5>
+<p>格式为:<code>ADD &lt;src&gt; &lt;dst&gt;</code><br />
+该命令将复制指定的 到容器中的。其中可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL；还可以是一个归档文件，复制进容器会自动解压。</p>
+<h5>VOLUME 挂载目录</h5>
+<p>格式为VOLUME [&#8220;/data&#8221;]<br />
+创建一个可以从本地主机或其他容器挂载的挂载点。无法指定主机上对应的目录，是自动生成的。</p>
+<h5>USER 设置运行容器的UID</h5>
+<p>格式为:<code>USER [uid]</code><br />
+指定运行容器时的用户名或 UID。</p>
+<h5>ENTRYPOINT 容器启动时运行的命令</h5>
+<p>容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。<br />
+两种格式：<br />
+ENTRYPOINT [&#8220;executable&#8221;, &#8220;param1&#8221;, &#8220;param2&#8221;]<br />
+ENTRYPOINT &lt;command&gt;<br />
+配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。每个 Dockerfile 中只能有一个 ENTRYPOINT ，当指定多个时，只有最后一个起效。</p>
+<h5>CMD 容器启动时运行的命令</h5>
+<p>支持三种格式<br />
+CMD &lt;command&gt;<br />
+CMD [&#8220;executable&#8221;,&#8221;param1&#8243;,&#8221;param2&#8243;] 使用 exec 执行，推荐方式；<br />
+CMD [&#8220;param1&#8243;,&#8221;param2&#8221;] 提供给 ENTRYPOINT 的默认参数；<br />
+指定启动容器时执行的命令，每个 Dockerfile 只能有一条 CMD 命令。如果指定了多条命令，只有最后一条会被执行。如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令。</p>
+<h5>ONBUILD 在构建本镜像时不生效，在基于此镜像构建镜像时生效</h5>
+<p>格式为 ONBUILD [INSTRUCTION]<br />
+配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令。<br />
+ENTRYPOINT 和 CMD 的区别：<br />
+ENTRYPOINT 指定了该镜像启动时的入口，CMD 则指定了容器启动时的命令，当两者共用时，完整的启动命令像是 ENTRYPOINT + CMD 这样。使用 ENTRYPOINT 的好处是在我们启动镜像就像是启动了一个可执行程序，在 CMD 上仅需要指定参数；另外在我们需要自定义 CMD 时不容易出错。</p>
+<h3>三、创建镜像</h3>
+<p>在构建镜像时，要将要使用的包及 Dockerfile 文件放在同一个目录中；然后在此目录下，执行下面的命令创建名为cn-blogs/nginx的镜像。<br />
+<code># docker build -t cn-blogs/nginx:1.8 .</code><br />
+使用此镜像创建容器<br />
+<code># docker run -d -p 8080:80 --name mynginx cn-blogs/nginx:1.8</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

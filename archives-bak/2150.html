@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU缓存和转址旁路缓存TLB | 青春部落    </title>
+    <meta name="keywords"  content="CPU,缓存,高速缓存,旁路缓存,转址旁路缓存" />
+    <meta name="description"  content="CPU技术之缓存,高速缓存和转址旁路缓存" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; CPU缓存和转址旁路缓存TLB评论Feed" href="https://cn-blogs.cn/archives/2150.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='硬盘说明' href='https://cn-blogs.cn/archives/2138.html' />
+<link rel='next' title='文件系统' href='https://cn-blogs.cn/archives/2167.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2150.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2150' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2150.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2150.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2150 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2138.html" rel="prev">上一篇：硬盘说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2167.html" rel="next">下一篇：文件系统</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            CPU缓存和转址旁路缓存TLB        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/05/21</span>
+            <span class="update is-hidden">2018-04-25</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>CPU 高速缓存</h2>
+<p>在计算机系统中，CPU高速缓存（CPU Cache）是用于减少处理器访问内存所需平均时间的部件。<br />
+在金字塔式存储体系中<strong>它位于自顶向下的第二层，仅次于CPU寄存器</strong>。其容量远小于内存，但速度却可以接近处理器的频率。<br />
+当处理器发出内存访问请求时，会先查看缓存内是否有请求数据。如果存在（命中），则不经访问内存直接返回该数据；如果不存在（失效），则要先把内存中的相应数据载入缓存，再将其返回处理器。</p>
+<p>缓存之所以有效，主要是因为程序运行时对内存的访问呈现局部性（Locality）特征。这种局部性既包括<strong>空间局部性（Spatial Locality</strong>），也包括<strong>时间局部性（Temporal Locality</strong>）。<br />
+有效利用这种局部性，缓存可以达到极高的命中率。<br />
+在处理器看来，缓存是一个透明部件。因此，程序员通常无法直接干预对缓存的操作。但是，确实可以根据缓存的特点对程序代码实施特定优化，从而更好地利用缓存。</p>
+<h4>缓存的存储结构</h4>
+<p>结构上，一个直接映射（Direct Mapped）缓存由若干<strong>缓存块</strong>（Cache Block，或Cache Line）构成。每个缓存块存储具有连续内存地址的若干个存储单元。<br />
+每个缓存块有一个索引（Index），它一般是内存地址的低端部分，但不含块内偏移和字节偏移所占的最低若干位。</p>
+<p><strong>缓存块：标签、索引、块内偏移、字节偏移。</strong><br />
+处理器执行数据写入指令时，控制逻辑依如下<strong>流程</strong>：<br />
+1、用索引定位到相应的缓存块。<br />
+2、用标签尝试匹配该缓存块的对应标签值。其结果为命中或未命中。<br />
+3、如命中，用块内偏移定位此块内的目标字。然后直接改写这个字。<br />
+4、如未命中，依系统设计不同可有两种处理策略，分别称为按写分配（Write allocate）和不按写分配（No-write allocate）。如果是按写分配，则先如处理读未命中一样，将未命中数据读入缓存，然后再将数据写到被读入的字单元。如果是不按写分配，则直接将数据写回内存。</p>
+<h4>置换策略</h4>
+<p>对于组相联缓存，当一个组的全部缓存块都被占满后，如果再次发生缓存失效，就必须选择一个缓存块来替换掉。存在多种策略决定哪个块被替换。<br />
+显然，最理想的替换块应当是距下一次被访问最晚的那个。这种理想策略无法真正实现，但它为设计其他策略提供了方向。</p>
+<p><strong>先进先出算法（FIFO）</strong>替换掉进入组内时间最长的缓存块。<br />
+<strong>最久未使用算法（LRU）</strong>则跟踪各个缓存块的使用状况，并根据统计比较出哪个块已经最长时间未被访问。对于2路以上相联，这个算法的时间代价会非常高。<br />
+对最久未使用算法的一个近似是非<strong>最近使用（NMRU）</strong>。这个算法仅记录哪一个缓存块是最近被使用的。在替换时，会随机替换掉任何一个其他的块。</p>
+<h4>回写策略</h4>
+<p>为了和下级存储（如内存）保持数据一致性，就必须把数据更新适时传播下去。这种传播通过回写来完成。<strong>一般有两种回写策略：写回（Write back）和写通（Write through）</strong>。</p>
+<p><strong>写回是指</strong>，仅当一个缓存块需要被替换回内存时，才将其内容写入内存。如果缓存命中，则总是不用更新内存。为了减少内存写操作，缓存块通常还设有一个脏位（dirty bit），用以标识该块在被载入之后是否发生过更新。如果一个缓存块在被置换回内存之前从未被写入过，则可以免去回写操作。<br />
+写回的优点是节省了大量的写操作。这主要是因为，对一个数据块内不同单元的更新仅需一次写操作即可完成。这种内存带宽上的节省进一步降低了能耗，因此颇适用于嵌入式系统。</p>
+<p><strong>写通是指</strong>，每当缓存接收到写数据指令，都直接将数据写回到内存。如果此数据地址也在缓存中，则必须同时更新缓存。由于这种设计会引发造成大量写内存操作，有必要设置一个缓冲来减少硬件冲突。这个缓冲称作写缓冲器（Write buffer），通常不超过4个缓存块大小。不过，出于同样的目的，写缓冲器也可以用于写回型缓存。<br />
+写通较写回易于实现，并且能更简单地维持数据一致性。</p>
+<h4>地址翻译</h4>
+<p>由于计算机程序一般使用虚拟地址，一个必须决定的设计策略是缓存的地址标签及索引是使用<strong>虚拟地址还是物理地址</strong>。</p>
+<p><strong>虚缓存</strong><br />
+一个简单的方案就是缓存的标签和索引均使用虚拟地址。这种缓存称为虚缓存（virtual cache）。这种缓存的优点是仅在缓存失效时才需要进行页面翻译。由于缓存命中率很高，需要翻译的次数也相对较少。</p>
+<p><strong>实缓存</strong><br />
+实缓存（physical cache）完全使用物理地址做缓存块的标签和索引，故地址翻译必须在访问缓存之前进行。这种传统方法所以可行的一个重要原因是TLB的访问周期非常短（因为本质上TLB也是一个缓存），因而可以被纳入流水线。</p>
+<h4>多级缓存</h4>
+<p>介于处理器和内存二者之间的缓存有两个天然冲突的性能指标：速度和容积。如果只向处理器看齐而追求速度，则必然要靠减少容积来换取访问时间；如果只向内存看齐而追求容积，则必然以增加处理器的访问时间为牺牲。这种矛盾促使人们考虑使用多级缓存。</p>
+<p>在一个两级缓存体系中，一级缓存靠近处理器一侧，二级缓存靠近内存一侧。当一级缓存发生失效时，它向二级缓存发出请求。如果请求在二级缓存上命中，则数据交还给一级缓存；如失效，二级缓存进一步向内存发出请求。对于三级缓存可依此类推。</p>
+<h4>优化技术</h4>
+<p>根据AMAT的计算式，可以看出优化缓存可从三个方面入手：一、减少命中时间；二、降低失效率；三、减轻失效代价。此外，增加缓存访问带宽也能有效较低AMAT</p>
+<h2>转址旁路缓存</h2>
+<p>转址旁路缓存：TLB（Translation Lookaside Buffer），也称为页表缓存，为CPU的一种缓存，由内存管理单元用于改进<strong>虚拟地址到物理地址的转译速度</strong>。<br />
+目前所有的桌面型及服务器型处理器皆使用TLB。TLB具有<strong>固定数目的空间槽</strong>，用于<strong>存放将虚拟地址映射至物理地址的</strong>标签页<strong>表条目</strong>。为典型的内容可寻址内存（content-addressable memory，首字母缩略字：CAM）。</p>
+<p>其搜索<strong>关键字为虚拟内存地址</strong>，其<strong>搜索结果为物理地址</strong>。<br />
+如果请求的虚拟地址在TLB中存在，CAM 将给出一个非常快速的匹配结果，之后就可以使用得到的物理地址访问内存。<br />
+如果请求的虚拟地址不在 TLB 中，就会使用标签页表进行虚实地址转换，而标签页表的访问速度比TLB慢很多。<br />
+有些系统允许标签页表被交换到次级存储器，那么虚实地址转换可能要花非常长的时间。</p>
+<h4>概观</h4>
+<p>TLB 用于缓存一部分标签页表条目。<br />
+TLB可<strong>介于 CPU 和 CPU缓存之间</strong>，或<strong>在 CPU 缓存和主存之间</strong>，这取决于缓存使用的是物理寻址或是虚拟寻址。<br />
+如果缓存是虚拟定址，定址请求将会直接从 CPU 发送给缓存，然后从缓存访问所需的 TLB 条目。<br />
+如果缓存使用物理定址，CPU 会先对每一个内存操作进行 TLB 查寻，并且将获取的物理地址发送给缓存。</p>
+<h4>TLB 不命中</h4>
+<p>两种在现代体系结构中常用的解决 TLB 不命中的方案：</p>
+<h4>硬件式 TLB 管理</h4>
+<p>CPU 自行遍历标签页表，查看是否存在包含指定的虚拟地址的有效标签页表条目。<br />
+如果存在这样的分页表条目，就把此分页表条目存入 TLB ，并重新执行 TLB 访问，而此次访问肯定会寻中，程序可正常运行。<br />
+如果 CPU 在标签页表中不能找到包含指定的虚拟地址有效条目，就会发生标签页错误异常，操作系统必须处理这个异常。处理标签页错误通常是把被请求的数据载入物理内存中，并在标签页表中创建将出错的虚拟地址映射到正确的物理地址的相应条目，并重新引导程序。</p>
+<h4>软件管理式 TLB</h4>
+<p>TLB 不命中时会产生“TLB 失误”异常，且操作系统遍历标签页表，以软件方式进行虚实地址转译。<br />
+然后操作系统将分页表中响应的条目加载 TLB 中，然后从引起 TLB 失误的指令处重新引导程序。<br />
+如同硬件式 TLB 管理，如果 操作系统 在标签页表中不能找到有效的虚实地址转译条目，就会发生标签页错误， 操作系统必须进行相应的处理。</p>
+<h4>典型的 TLB</h4>
+<p>容量：8 &#8211; 4,096 分页表条目<br />
+寻中时间：0.5 &#8211; 1 时钟频率周期<br />
+不命中代价：10 &#8211; 30 时钟频率周期<br />
+不命中率: 0.01% &#8211; 3%<br />
+假如 TLB 寻中需要 1 个时钟频率周期，一次不命中访问需要 30 个时钟频率周期，而且不命中率是 1%，有效的内存访问周期的平均值是 {\displaystyle 1\times 0.99+(1+30)\times 0.01=1.30} 1\times 0.99+(1+30)\times 0.01=1.30 个时钟频率周期／每一内存访问。<br />
+指令与数据可以分别使用不同的TLB ，即Instruction TLB (ITLB)与 Data TLB (DTLB)，或者指令与数据使用统一的TLB，即Unified TLB (UTLB)，再或者使用分块的TLB (BTLB)。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

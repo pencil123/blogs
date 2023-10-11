@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>python set 集合 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; python set 集合评论Feed" href="https://cn-blogs.cn/archives/1047.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='js cookie 操作' href='https://cn-blogs.cn/archives/1040.html' />
+<link rel='next' title='return tuple' href='https://cn-blogs.cn/archives/1052.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1047.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1047' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1047.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1047.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1047 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1040.html" rel="prev">上一篇：js cookie 操作</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1052.html" rel="next">下一篇：return tuple</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            python set 集合        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/12/19</span>
+            <span class="update is-hidden">2017-11-18</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>python的set和其他语言类似, 是一个无序不重复元素集,</strong><br />
+基本功能包括关系测试和消除重复元素. 集合对象还支持union(联合), intersection(交), difference(差)和sysmmetric difference(对称差集)等数学运算.<br />
+sets 支持 x in set, len(set),和 for x in set。作为一个无序的集合，sets不记录元素位置或者插入点。因此，sets不支持 indexing, slicing, 或其它类序列（sequence-like）的操作。</p>
+<p><strong>1、下面来点简单的小例子说明把。</strong><br />
+&gt;&gt; x = set(&#8216;spam&#8217;)<br />
+&gt;&gt;&gt; y = set([&#8216;h&#8217;,&#8217;a&#8217;,&#8217;m&#8217;])<br />
+&gt;&gt;&gt; x, y<br />
+(set([&#8216;a&#8217;, &#8216;p&#8217;, &#8216;s&#8217;, &#8216;m&#8217;]), set([&#8216;a&#8217;, &#8216;h&#8217;, &#8216;m&#8217;]))<br />
+<strong>2、再来些小应用</strong><br />
+&gt;&gt;&gt; x &amp; y # 交集<br />
+set([&#8216;a&#8217;, &#8216;m&#8217;])<br />
+&gt;&gt;&gt; x | y # 并集<br />
+set([&#8216;a&#8217;, &#8216;p&#8217;, &#8216;s&#8217;, &#8216;h&#8217;, &#8216;m&#8217;])<br />
+&gt;&gt;&gt; x &#8211; y # 差集<br />
+set([&#8216;p&#8217;, &#8216;s&#8217;])</p>
+<p>3、记得以前个网友提问怎么去除海量列表里重复元素，用hash来解决也行，只不过感觉在性能上不是很高，用set解决还是很不错的，示例如下：<br />
+&gt;&gt;&gt; a = [11,22,33,44,11,22]<br />
+&gt;&gt;&gt; b = set(a)<br />
+&gt;&gt;&gt; b<br />
+set([33, 11, 44, 22])<br />
+&gt;&gt;&gt; c = [i for i in b]<br />
+&gt;&gt;&gt; c<br />
+[33, 11, 44, 22]<br />
+很酷把，几行就可以搞定。<br />
+<strong>一、集合</strong><br />
+集合用于包含一组无序的对象。要创建集合，可使用set()函数并像下面这样提供一系列的项：</p>
+<p>s = set([3,5,9,10]) #创建一个数值集合<br />
+t = set(&#8220;Hello&#8221;) #创建一个唯一字符的集合</p>
+<p>与列表和元组不同，集合是无序的，也无法通过数字进行索引。此外，集合中的元素不能重复。例如，如果检查前面代码中t集合的值，结果会是：<br />
+&gt;&gt;&gt; t<br />
+set([&#8216;H&#8217;, &#8216;e&#8217;, &#8216;l&#8217;, &#8216;o&#8217;])</p>
+<p>注意只出现了一个&#8217;l&#8217;。<br />
+1、集合支持一系列标准操作，包括并集、交集、差集和对称差集，例如：</p>
+<p>a = t | s # t 和 s的并集<br />
+b = t &amp; s # t 和 s的交集<br />
+c = t – s # 求差集（项在t中，但不在s中）<br />
+d = t ^ s # 对称差集（项在t或s中，但不会同时出现在二者中）</p>
+<p>2、基本操作：<br />
+t.add(&#8216;x&#8217;) # 添加一项<br />
+s.update([10,37,42]) # 在s中添加多项</p>
+<p>使用remove()可以删除一项：<br />
+t.remove(&#8216;H&#8217;)</p>
+<p>len(s)<br />
+set 的长度<br />
+x in s<br />
+测试 x 是否是 s 的成员<br />
+x not in s<br />
+测试 x 是否不是 s 的成员<br />
+s.issubset(t)<br />
+s &lt;= t<br />
+测试是否 s 中的每一个元素都在 t 中<br />
+s.issuperset(t)<br />
+s &gt;= t<br />
+测试是否 t 中的每一个元素都在 s 中<br />
+s.union(t)<br />
+s | t<br />
+返回一个新的 set 包含 s 和 t 中的每一个元素<br />
+s.intersection(t)<br />
+s &amp; t<br />
+返回一个新的 set 包含 s 和 t 中的公共元素<br />
+s.difference(t)<br />
+s &#8211; t<br />
+返回一个新的 set 包含 s 中有但是 t 中没有的元素<br />
+s.symmetric_difference(t)<br />
+s ^ t<br />
+返回一个新的 set 包含 s 和 t 中不重复的元素<br />
+s.copy()<br />
+返回 set “s”的一个浅复制</p>
+<p>请注意：union(), intersection(), difference() 和 symmetric_difference() 的非运算符（non-operator，就是形如 s.union()这样的）版本将会接受任何 iterable 作为参数。<br />
+相反，它们的运算符版本（operator based counterparts）要求参数必须是 sets。这样可以避免潜在的错误，<br />
+如：为了更可读而使用 set(&#8216;abc&#8217;) &amp; &#8216;cbs&#8217; 来替代 set(&#8216;abc&#8217;).intersection(&#8216;cbs&#8217;)。从 2.3.1 版本中做的更改：以前所有参数都必须是 sets。<br />
+另外，Set 和 ImmutableSet 两者都支持 set 与 set 之间的比较。<br />
+两个 sets 在也只有在这种情况下是相等的：每一个 set 中的元素都是另一个中的元素（二者互为subset）。<br />
+一个 set 比另一个 set 小，只有在第一个 set 是第二个 set 的 subset 时（是一个 subset，但是并不相等）。<br />
+一个 set 比另一个 set 打，只有在第一个 set 是第二个 set 的 superset 时（是一个 superset，但是并不相等）。<br />
+子 set 和相等比较并不产生完整的排序功能。<br />
+例如：任意两个 sets 都不相等也不互为子 set，因此以下的运算都会返回 False：a&lt;b, a==b, 或者a&gt;b。因此，sets 不提供 __cmp__ 方法。<br />
+因为 sets 只定义了部分排序功能（subset 关系），list.sort() 方法的输出对于 sets 的列表没有定义。</p>
+<p><strong>二、运算符</strong><br />
+运算结果<br />
+hash(s)<br />
+返回 s 的 hash 值<br />
+下面这个表列出了对于 Set 可用二对于 ImmutableSet 不可用的运算：<br />
+运算符（voperator）<br />
+等价于<br />
+运算结果<br />
+s.update(t)<br />
+s |= t<br />
+返回增加了 set “t”中元素后的 set “s”<br />
+s.intersection_update(t)<br />
+s &amp;= t<br />
+返回只保留含有 set “t”中元素的 set “s”<br />
+s.difference_update(t)<br />
+s -= t<br />
+返回删除了 set “t”中含有的元素后的 set “s”<br />
+s.symmetric_difference_update(t)<br />
+s ^= t<br />
+返回含有 set “t”或者 set “s”中有而不是两者都有的元素的 set “s”<br />
+s.add(x)<br />
+向 set “s”中增加元素 x<br />
+s.remove(x)<br />
+从 set “s”中删除元素 x, 如果不存在则引发 KeyError<br />
+s.discard(x)<br />
+如果在 set “s”中存在元素 x, 则删除<br />
+s.pop()<br />
+删除并且返回 set “s”中的一个不确定的元素, 如果为空则引发 KeyError<br />
+s.clear()<br />
+删除 set “s”中的所有元素<br />
+请注意：非运算符版本的 update(), intersection_update(), difference_update()和symmetric_difference_update()将会接受任意 iterable 作为参数。从 2.3.1 版本做的更改：以前所有参数都必须是 sets。<br />
+还请注意：这个模块还包含一个 union_update() 方法，它是 update() 方法的一个别名。包含这个方法是为了向后兼容。程序员们应该多使用 update() 方法，因为这个方法也被内置的 set() 和 frozenset() 类型支持。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

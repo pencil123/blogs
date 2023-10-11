@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU 组成单元 | 青春部落    </title>
+    <meta name="keywords"  content="CPU,组成单元,控制单元,算数逻辑单元,内存管理单元" />
+    <meta name="description"  content="CPU 的组成单元：控制单元,算数逻辑单元和内存管理单元" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; CPU 组成单元评论Feed" href="https://cn-blogs.cn/archives/2172.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='文件系统' href='https://cn-blogs.cn/archives/2167.html' />
+<link rel='next' title='网络管理程序' href='https://cn-blogs.cn/archives/2182.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2172.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2172' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2172.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2172.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2172 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2167.html" rel="prev">上一篇：文件系统</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2182.html" rel="next">下一篇：网络管理程序</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            CPU 组成单元        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/05/22</span>
+            <span class="update is-hidden">2018-04-25</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>1、控制单元</h2>
+<p>控制单元（CU）是指导处理器的操作的计算机的中央处理单元（CPU）的组件。它告诉计算机的内存，算术/逻辑单元以及输入和输出设备如何响应程序的指令。<br />
+它通过提供定时和控制信号来指导其他单元的操作。大多数计算机资源由CU管理。它指导CPU和其他设备之间的数据流。在现代计算机设计中，控制单元通常是CPU的内部部分，其总体作用和操作自其引入以来不变。<br />
+组成部分:程序计算器、指令寄存器、指令译码器</p>
+<h4>程序计数器（Program Counter (PC)）</h4>
+<p>在电脑处理器中的一个寄存器，用来指示电脑下一步要运行的指令序列。依照特定机器的细节而不同，他可能是保存着正在被运行的指令，也可能是下一个要运行指令的地址。程序计数器在每个指令周期会自动地增加，所以指令会正常地从寄存器中连续地被取出。某些指令，像是跳跃和子程序调用，会中断程序执行的序列，将新的数值内容存放到程序计数器中。<br />
+在大部分的处理器，指令指针都是在提取程序指令后就被立即增加；也就是说跳跃指令的目的地址，是由跳跃指令的运算对象加上跳跃指令之后下一个指令的地址（比特或字节，视电脑形态而定）来获得目的地。</p>
+<h4>指令寄存器（Instruction register(IR)）</h4>
+<p>计算机科学中是中央处理器中控制单元用来储存执行中指令的暂存器。在简易的处理器中，每个将被执行的指令都会被存入指令寄存器中。从解码、准备到执行完成的过程中都会被持续的保存。<br />
+有些较为复杂的处理器使用管线化暂存器，其中管线上每个阶段只负责解码、准备或执行的其中一个，然后再传递至下一个阶段。现代的处理器甚至可以不用按照顺序做某些动作，也就是平行计算。<br />
+在指令寄存器中将运算代码解码的步骤包含确定指令、确定运算对象所在的内存位址、从内存中提取运算对象、分配处理器的资源来执行指令。<br />
+指令寄存器的输出可以用来控制执行指令时产生控制处理元件时间讯号的电路。<br />
+在指令周期中，指令在处理器从程式计数器取出其内存位址后才存入指令寄存器。</p>
+<h4>指令译码器</h4>
+<p>在CPU设计中，指令译码器是CPU的一部分，能将存储在指令寄存器或微程序指令中的比特转换为能控制CPU其他部分的控制信号。<br />
+8个寄存器组成的简单CPU会使用指令译码器中的3线－8线逻辑译码器来选择寄存器文件的源寄存器并输出到ALU以及目的寄存器中，以接受ALU的输出。典型的CPU指令译码器也包括其他很多组件。<br />
+译码器可以由与门或与非门来负责输出。译码器包括2线－4线译码器、3线－8线译码器或4线－16线译码器</p>
+<h2>2、算术逻辑单元：运算器</h2>
+<p>一个算术逻辑单元ALU（Arithmetic Logic Unit, ALU）是组合数字电子电路，是中央处理器的执行单元。<br />
+ALU是许多类型的计算电路的基本构建块，包括计算机的中央处理单元（CPU），FPU和图形处理单元（GPU）。单个CPU，FPU或GPU可能包含多个ALU。</p>
+<p>ALU的输入是要被操作的数据，称为操作数，以及指示要执行的操作的代码; ALU的输出是执行操作的结果。<br />
+在许多设计中，ALU还具有分别在ALU和外部状态寄存器之间传送关于先前操作或当前操作的信息的状态输入或输出，或两者。</p>
+<h4>ALU信号</h4>
+<p>ALU具有多种输入和输出网，它们是用于在ALU和外部电路之间传送数字信号的电导体。<br />
+当ALU工作时，外部电路将信号施加到ALU输入端，ALU作为响应，通过其输出产生和传送信号到外部电路。</p>
+<h4>数据</h4>
+<p>基本ALU具有由两个输入操作数（A和B）和结果输出（Y）组成的三条并行数据总线。每个数据总线是一组传送一个二进制整数的信号。通常，A，B和Y总线宽度（包括每个总线的信号数）是相同的，并且与外部电路（例如，封装的CPU或其他处理器）的本机字大小相匹配。</p>
+<h4>操作码</h4>
+<p>的操作码的输入是一个并行总线，其输送到ALU的操作选择的代码，它是一个枚举值，指定要由ALU来执行所期望的算术或逻辑操作。操作码大小（其总线宽度）决定了ALU可以执行的不同操作的最大数量; 例如，四位操作码最多可以指定十六种不同的ALU操作。通常，ALU操作码与机器语言操作码不同，尽管在某些情况下，它可以直接编码为机器语言操作码中的位字段。</p>
+<h4>状态之输出</h4>
+<p>状态输出是传达有关当前ALU操作结果的补充信息的各种信号。存储状态输出的位寄存器的集合通常被视为单个多位寄存器，被称为“状态寄存器”或“条件代码寄存器”。</p>
+<h4>状态之输入</h4>
+<p>状态输入允许在执行操作时向ALU提供附加信息。通常，这是一个单独的“进位”位，它是先前ALU操作的存储进位。</p>
+<h3>算术逻辑单元功能</h3>
+<p>ALU通常支持多种基本算术和按位逻辑功能。基本的通用ALU通常包括这些操作有：<br />
+<strong>算术运算</strong>：加、加上进位、减去、借用借款减、二的补数（否定）、增量、递减、通过<br />
+<strong>按位逻辑运算</strong>：AND、或、异或、补码、<br />
+<strong>比特移位操作</strong><br />
+算术移位：操作数被视为二进制补码整数，意味着最高有效位是一个“符号”位并被保留。<br />
+逻辑移位：逻辑0被移入操作数。这用于移位无符号整数。<br />
+旋转：操作数被视为位的循环缓冲区，因此其最小和最高有效位有效地相邻。<br />
+通过进位旋转：进位位和操作数被统称为位循环缓冲器。</p>
+<h2>3、内存管理单元</h2>
+<p>内存管理单元（memory management unit，缩写为MMU），有时称作分页内存管理单元（paged memory management unit，缩写为PMMU）。<br />
+它是一种负责处理中央处理器（CPU）的内存访问请求的计算机硬件。<br />
+它的功能包括:<br />
+<strong>虚拟地址到物理地址的转换（即虚拟内存管理）、</strong><br />
+<strong>内存保护、</strong><br />
+<strong>中央处理器高速缓存的控制，</strong><br />
+在较为简单的计算机体系结构中，负责总线的仲裁以及存储体切换（bank switching，尤其是在8位的系统上）。</p>
+<h4>工作机制</h4>
+<p>现代的内存管理单元是以页的方式，分区虚拟地址空间（处理器使用的地址范围）的；页的大小是2的n次方，通常为几KB。<br />
+<strong>地址尾部的n位</strong>（页大小的2的次方数）作为页内的偏移量保持不变。<br />
+<strong>其余的地址位</strong>（address）为（虚拟）页号。</p>
+<h4>地址转换</h4>
+<p>内存管理单元通常借助一种叫做<strong>转译旁观缓冲器</strong>（Translation Lookaside Buffer，缩写为TLB）的相联高速缓存（associative cache）来将<strong>虚拟页号转换为物理页号</strong>。<br />
+当后备缓冲器中没有转换记录时，则使用一种较慢的机制，其中包括专用硬件（hardware-specific）的数据结构（Data structure）或软件辅助手段。<br />
+这个数据结构称为分页表，页表中的数据就叫做页表项（page table entry，缩写为PTE）。物理页号结合页偏移量便提供出了完整的物理地址。</p>
+<h4>页表或转换后备缓冲器中数据项包括的信息有：</h4>
+<p>一、“脏位”（页面重写标志位，dirty bit）——表示该页是否被写过。<br />
+二、“访问位”（accessed bit）——表示该页最后使用于何时，以便于最近最少使用页面置换算法（least recently used page replacement algorithm）的实现。<br />
+三、哪种进程可以读写该页的信息，例如用户模式（user mode）进程还是特权模式（supervisor mode）进程。<br />
+四、该页是否应被高速缓冲的信息。</p>
+<h4>访问异常</h4>
+<p>有时，TLB或PTE会禁止对虚拟页的访问，这可能是因为没有物理随机存取存储器（random access memory）与虚拟页相关联。<br />
+如果是这种情况，MMU将向CPU发出页错误（page fault）的信号。</p>
+<p>操作系统operating system）将进行处理，也许会尝试寻找RAM的空白帧，同时创建一个新的PTE将之映射到所请求的虚拟地址。<br />
+如果没有空闲的RAM，可能必须关闭一个已经存在的页面，使用一些替换算法，将之保存到磁盘中（这被称之为页面调度（paging）。<br />
+在一些MMU中，PTEs或者TLB也存在一些缺点，在这样的情况下操作系统将必须释放空间以供新的映射。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>lsof 系统打开文件列表 | 青春部落    </title>
+    <meta name="keywords"  content="linux 系统,lsof 命令,系统打开文件列表" />
+    <meta name="description"  content="linux 系统打印系统打开的文件列表 lsof" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; lsof 系统打开文件列表评论Feed" href="https://cn-blogs.cn/archives/3209.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='paste 按列拼接文本' href='https://cn-blogs.cn/archives/3207.html' />
+<link rel='next' title='Linux 系统基本信息' href='https://cn-blogs.cn/archives/3213.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3209.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3209' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3209.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3209.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3209 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/shell" rel="category tag">Shell 壳</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3207.html" rel="prev">上一篇：paste 按列拼接文本</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3213.html" rel="next">下一篇：Linux 系统基本信息</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            lsof 系统打开文件列表        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/03/16</span>
+            <span class="update is-hidden">2018-01-21</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>lsof（list open files）系统所有打开的文件列表和进程信息<br />
+系统打开的文件包括所有进程使用的磁盘文件，命名管道，网络套接字和设备文件等。</p>
+<h2><strong>命令参数</strong></h2>
+<table>
+<tbody>
+<tr>
+<th>-a</th>
+<th>列出打开文件存在的进程</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-c&lt;进程名&gt;</span></th>
+<th>列出指定进程所打开的文件</th>
+</tr>
+<tr>
+<th>-g &lt;groupname|gid&gt;</th>
+<th>列出GID号进程详情</th>
+</tr>
+<tr>
+<th>-d&lt;文件描述符&gt;</th>
+<th>列出占用该文件号的进程</th>
+</tr>
+<tr>
+<th>+d&lt;目录&gt;</th>
+<th>列出目录下被打开的文件</th>
+</tr>
+<tr>
+<th>+D&lt;目录&gt;</th>
+<th>递归列出目录下被打开的文件</th>
+</tr>
+<tr>
+<th>-n</th>
+<th>不对IP进行域名反向查询</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-i&lt;网络地址IPV4|6&gt;</span></th>
+<th><span style="color: #ff0000;">列出符合条件的进程。（4、6、协议、:端口、 @ip ）</span></th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-p&lt;进程号&gt;</span></th>
+<th>列出指定进程号所打开的文件</th>
+</tr>
+<tr>
+<th><span style="color: #ff0000;">-u &lt;username|uid&gt;</span></th>
+<th>列出指定用户打开的文件</th>
+</tr>
+</tbody>
+</table>
+<h2><strong>输出信息各列说明</strong></h2>
+<table>
+<tbody>
+<tr>
+<th>COMMAND</th>
+<th>进程的名称</th>
+</tr>
+<tr>
+<th>PID</th>
+<th>进程标识符</th>
+</tr>
+<tr>
+<th>PPID</th>
+<th>父进程标识符（需要指定-R参数）</th>
+</tr>
+<tr>
+<th>USER</th>
+<th>进程所有者</th>
+</tr>
+<tr>
+<th>PGID</th>
+<th>进程所属组</th>
+</tr>
+<tr>
+<th>FD</th>
+<th>文件描述符，应用程序通过文件描述符识别该文件。</th>
+</tr>
+<tr>
+<th>TYPE</th>
+<th>文件类型，如DIR、REG等，常见的文件类型:</th>
+</tr>
+<tr>
+<th>DEVICE</th>
+<th>指定磁盘的名称</th>
+</tr>
+<tr>
+<th>SIZE</th>
+<th>文件的大小</th>
+</tr>
+<tr>
+<th>NODE</th>
+<th>索引节点（文件在磁盘上的标识）</th>
+</tr>
+<tr>
+<th>NAME</th>
+<th>打开文件的确切名称</th>
+</tr>
+</tbody>
+</table>
+<p><strong>文件描述符说明</strong></p>
+<table>
+<tbody>
+<tr>
+<th>（1）cwd</th>
+<th>表示current work dirctory，即应用程序的当前工作目录，这是该应用程序启动的目录，除非它本身对这个目录进行更改</th>
+</tr>
+<tr>
+<th>（2）txt</th>
+<th>该类型的文件是程序代码，如应用程序二进制文件本身或共享库，如上列表中显示的 /sbin/init 程序</th>
+</tr>
+<tr>
+<th>（3）lnn</th>
+<th>library references (AIX);</th>
+</tr>
+<tr>
+<th>（4）er</th>
+<th>FD information error (see NAME column);</th>
+</tr>
+<tr>
+<th>（5）jld</th>
+<th>jail directory (FreeBSD);</th>
+</tr>
+<tr>
+<th>（6）ltx</th>
+<th>shared library text (code and data);</th>
+</tr>
+<tr>
+<th>（7）mxx</th>
+<th>hex memory-mapped type number xx.</th>
+</tr>
+<tr>
+<th>（8）m86</th>
+<th>DOS Merge mapped file;</th>
+</tr>
+<tr>
+<th>（9）mem</th>
+<th>memory-mapped file;</th>
+</tr>
+<tr>
+<th>（10）mmap</th>
+<th>memory-mapped device;</th>
+</tr>
+<tr>
+<th>（11）pd</th>
+<th>parent directory;</th>
+</tr>
+<tr>
+<th>（12）rtd</th>
+<th>root directory;</th>
+</tr>
+<tr>
+<th>（13）tr</th>
+<th>kernel trace file (OpenBSD);</th>
+</tr>
+<tr>
+<th>（14）v86</th>
+<th>VP/ix mapped file;</th>
+</tr>
+<tr>
+<th>（15）0</th>
+<th>表示标准输入</th>
+</tr>
+<tr>
+<th>（16）1</th>
+<th>表示标准输出</th>
+</tr>
+<tr>
+<th>（17）2</th>
+<th>表示标准错误</th>
+</tr>
+</tbody>
+</table>
+<p><strong>一般在标准输出、标准错误、标准输入后还跟着文件状态模式：r、w、u等</strong><br />
+（1）u：表示该文件被打开并处于读取/写入模式<br />
+（2）r：表示该文件被打开并处于只读模式<br />
+（3）w：表示该文件被打开并处于<br />
+（4）空格：表示该文件的状态模式为unknow，且没有锁定<br />
+（5）-：表示该文件的状态模式为unknow，且被锁定</p>
+<p><strong>同时在文件状态模式后面，还跟着相关的锁</strong><br />
+（1）N：for a Solaris NFS lock of unknown type;<br />
+（2）r：for read lock on part of the file;<br />
+（3）R：for a read lock on the entire file;<br />
+（4）w：for a write lock on part of the file;（文件的部分写锁）<br />
+（5）W：for a write lock on the entire file;（整个文件的写锁）<br />
+（6）u：for a read and write lock of any length;<br />
+（7）U：for a lock of unknown type;<br />
+（8）x：for an SCO OpenServer Xenix lock on part of the file;<br />
+（9）X：for an SCO OpenServer Xenix lock on the entire file;<br />
+（10）space：if there is no lock.</p>
+<p><strong>文件类型说明</strong><br />
+（1）DIR：表示目录<br />
+（2）CHR：表示字符类型<br />
+（3）BLK：块设备类型<br />
+（4）UNIX： UNIX 域套接字<br />
+（5）FIFO：先进先出 (FIFO) 队列<br />
+（6）IPv4：网际协议 (IP) 套接字</p>
+<h2>实例</h2>
+<p><strong>1、使用文件的进程信息</strong><br />
+$lsof /bin/bash<br />
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME<br />
+bash 20121 root txt REG 253,0 938736 4587562 /bin/bash</p>
+<p><strong>2、某用户使用的文件列表</strong><br />
+$lsof -u username</p>
+<p><strong>3、进程名打开的文件</strong><br />
+$lsof -c mysql<br />
+-c 选项将会列出所有以mysql这个进程开头的程序的文件</p>
+<p><strong>4、列出某个用户下某个进程所打开的文件</strong><br />
+$lsof -u test -c mysql</p>
+<p><strong>5、通过某个进程号显示该进程打开的文件</strong><br />
+$lsof -p 11968</p>
+<p><strong>6、列出所有的网络连接</strong><br />
+$lsof -i</p>
+<p><strong>7、列出所有tcp 网络连接信息</strong><br />
+$lsof -i tcp</p>
+<p><strong>8、列出谁在使用某个端口</strong><br />
+$lsof -i :3306</p>
+<p><strong>9、列出某个用户的所有活跃的网络端口</strong><br />
+$lsof -a -u test -i</p>
+<p><strong>10、根据文件描述列出对应的文件信息</strong><br />
+$lsof -d 3 | grep PARSER1<br />
+tail 6499 tde 3r REG 253,3 4514722 417798 /opt/applog/open/log/HOSTPARSER1_ERROR_141217.log.001<br />
+说明： 0表示标准输入，1表示标准输出，2表示标准错误，从而可知：所以大多数应用程序所打开的文件的 FD 都是从 3 开始</p>
+<p><strong>11、列出被进程号为1234的进程所打开的所有IPV4 network files</strong><br />
+$lsof -i 4 -a -p 1234</p>
+<p><strong>12、列出目前连接主机nf5260i5-td上端口为：20，21，80相关的所有文件信息，且每隔3秒重复执行</strong><br />
+lsof -i @nf5260i5-td:20,21,80 -r 3</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

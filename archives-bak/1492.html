@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Redis配置文件 | 青春部落    </title>
+    <meta name="keywords"  content="Redis,配置文件,配置" />
+    <meta name="description"  content="Redis服务的配置文件指令说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Redis配置文件评论Feed" href="https://cn-blogs.cn/archives/1492.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Redis 简要说明' href='https://cn-blogs.cn/archives/1489.html' />
+<link rel='next' title='Redis数据类型和数据操作命令' href='https://cn-blogs.cn/archives/1508.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1492.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1492' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1492.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1492.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1492 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/redis" rel="category tag">Redis</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1489.html" rel="prev">上一篇：Redis 简要说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1508.html" rel="next">下一篇：Redis数据类型和数据操作命令</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Redis配置文件        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/09/15</span>
+            <span class="update is-hidden">2018-03-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>INCLUDES #包含</h2>
+<p>包含一个或多个配置文件；可以设置标准的配置模板；<br />
+Reids的配置参数以最后一次设置为准；所以最好将include放在最后一行；避免被后续的设置参数覆盖。<br />
+<code># include /path/to/local.conf<br />
+# include /path/to/other.conf</code></p>
+<h2>GENERAL #概括</h2>
+<h4>daemonize on|yes</h4>
+<p>redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes时，启用守护进程</p>
+<h4>pidfile /var/run/redis_6379.pid</h4>
+<p>redis以守护进程方式运行时，系统默认会把pid写入/var/run/redis.pid，可以通过pidfile指定pid文件</p>
+<h4>port 6379</h4>
+<p>redis默认监听6379端口，可以通过port指定redis要监听的端口</p>
+<h4>bind 127.0.0.1</h4>
+<p>绑定主机地址</p>
+<h4>unixsocket /tmp/redis.sock</h4>
+<p>指定redis监听的unix socket 路径</p>
+<h4>timeout 300</h4>
+<p>当客户端闲置多长时间，关闭连接，单位秒</p>
+<h4>loglevel verbose|debug|notice|warning</h4>
+<p>指定日志记录级别，默认是verbose</p>
+<h4>logfile /var/log/redis_6379.log</h4>
+<p>日志记录文件，默认是标准输出stdout，如果redis以守护进程方式运行，logfile 配置为stdout时，logs将要输出到/dev/null</p>
+<h4>syslog-enabled no|yes</h4>
+<p>当配置为yes时，日志输出到系统日志，默认是no</p>
+<h4>syslog-ident redis</h4>
+<p>指定syslog的标示符</p>
+<h4>syslog-facility local0</h4>
+<p>指定syslog设备(facility)，必须是user或则local0到local7</p>
+<h4>databases 16</h4>
+<p>设置redis中数据库的个数，默认数据库是DB 0，可以通过select ，选择使用的数据库。dbis大于等于0，小于等于databases -1 【这里是16-1】</p>
+<h2>SNAPSHOTTING #持久化-快照</h2>
+<h2>主从复制</h2>
+<h4>slaveof</h4>
+<p>当本机是slave服务时，设置master服务的ip和端口</p>
+<h4>masterauth</h4>
+<p>当master服务设置了密码时，slave服务连接master的密码。如果配置不对，slave服务请求将被拒绝</p>
+<h4>slave-serve-stale-data yes|no</h4>
+<p>当slave和master之间的连接断开或slave正在于master同步时，如果有slave请求，当slave-serve-stale-data配置为yes时，slave可以相应客户端请求；当为no时，slave将要响应错误，默认是yes</p>
+<h2>安全认证</h2>
+<h4>requirepass foobared</h4>
+<p>设置redis连接密码</p>
+<h2>限制</h2>
+<h4>maxclients 128</h4>
+<p>设置同一时间客户端最大连接数，默认是无限制。如果设置maxclients 0 时，表示不限制</p>
+<h4>maxmemory</h4>
+<p>指定redis最大内存限制，redis在启动时，会把数据加载到内存中，达到最大内存后，redis会先清除已到期或将过期的key，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读操作</p>
+<h4>maxmemory-policy</h4>
+<p>volatile-lru|allkeys-lru|volatile-random|allkeys-&gt;random|volatile-ttl|noeviction<br />
+当redis使用内存达到最大时，使用哪种策略移除内存中数据</p>
+<h2>APPEND ONLY MODE 持久化-AOF</h2>
+<h2>lua脚本</h2>
+<h2>慢日志</h2>
+<h4>slowlog-log-slower-than 10000</h4>
+<p>配置记录慢日志的条件，单位是微妙，当是负值时，关闭慢日志记录，当是0时，记录所有操作</p>
+<h4>slowlog-max-len 1024</h4>
+<p>配置记录慢查询的最大条数</p>
+<h2>事件通知</h2>
+<h2>高级配置</h2>
+<h4>hash-max-zipmap-entries 512</h4>
+<p>配置最大元素数，当超过该配置数据时，redis采用特殊hash算法</p>
+<h4>hash-max-zipmap-value 64</h4>
+<p>配置最大元素值，当草果配置值时，采用特殊hash算法</p>
+<h4>activerehashing yes</h4>
+<p>指定是否激活充值hash，默认开启</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

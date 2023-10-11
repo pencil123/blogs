@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>OPcache配置参数 | 青春部落    </title>
+    <meta name="keywords"  content="php,php 进程缓存,页面级缓存,OPcache,参数说明" />
+    <meta name="description"  content="php 进程配置页面级缓存OPcache配置参数说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; OPcache配置参数评论Feed" href="https://cn-blogs.cn/archives/2360.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PHP 编译安装操作过程' href='https://cn-blogs.cn/archives/2336.html' />
+<link rel='next' title='php 进程扩展页面级缓存 OPcache' href='https://cn-blogs.cn/archives/2363.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2360.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2360' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2360.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2360.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2360 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/php" rel="category tag">PHP服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2336.html" rel="prev">上一篇：PHP 编译安装操作过程</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2363.html" rel="next">下一篇：php 进程扩展页面级缓存 OPcache</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            OPcache配置参数        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/03/30</span>
+            <span class="update is-hidden">2018-02-22</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p style="text-align: center;"><strong>全局配置</strong></p>
+<h3>opcache.enable (default &#8220;1&#8221;)</h3>
+<p>OPcache开/关开关。 当设置为Off时，代码不被优化和缓存。</p>
+<h3>opcache.enable_cli (default &#8220;0&#8221;)</h3>
+<p>启用CLI版本的PHP的OPcache。 它主要用于测试和调试。</p>
+<h3>opcache.restrict_api (default &#8220;&#8221;)</h3>
+<p>opcache管理控制；允许仅从PHP脚本调用OPcache API函数，该字符串标志指定的路径下的文件。 默认的“”表示没有限制。</p>
+<h3>opcache.consistency_checks (default &#8220;0&#8221;)</h3>
+<p>校验缓存；检查每个N请求的缓存校验和。默认值“0”表示检查被禁用。<br />
+因为计算校验和会损害性能，所以该指令只能作为调试过程的一部分启用。</p>
+<h3>opcache.force_restart_timeout (default &#8220;180&#8221;)</h3>
+<p>-没被访问，怀疑有错，重启操作<br />
+如果缓存未被访问，则等待（以秒为单位）等待重新启动计时。<br />
+OPcache使用此指令来确定进程可能有问题的情况。 在这段时间过去之后，OPcache假设发生了一些事情，并开始杀死仍然保留阻止重新启动的锁的进程。<br />
+如果日志级别为3或以上，则发生这种情况时，Apache日志记录中会出现“死锁”错误。</p>
+<h3>opcache.fast_shutdown (default &#8220;0&#8221;)</h3>
+<p>如果启用，加速代码使用快速关闭序列。 快速关闭序列不能释放每个分配的块，而是让Zend Engine内存管理器完成工作。</p>
+<h3>opcache.max_wasted_percentage (default &#8220;5&#8221;)</h3>
+<p>在重新启动计划之前，“浪费”内存的最大百分比。</p>
+<h3>opcache.optimization_level (default &#8220;0xffffffff&#8221;)</h3>
+<p>优化级别；控制优化级别的二进制位掩码。</p>
+<p style="text-align: center;"><strong>内存</strong></p>
+<h3>opcache.memory_consumption (default &#8220;64&#8221;)</h3>
+<p>内存配置；OPcache共享内存存储大小。 用于存储预编译PHP代码（以Mbytes为单位）的内存量。</p>
+<h3>opcache.interned_strings_buffer (default &#8220;4&#8221;)</h3>
+<p>内存临时字符串的内存量（Mbytes）。</p>
+<h3>opcache.preferred_memory_model</h3>
+<p>-内存管理模块；opcache首选的内存模块。 留空，让系统决定。可选值包括mmap,shm，posix以及win32</p>
+<h3>opcache.protect_memory (default &#8220;0&#8221;)</h3>
+<p>-内存保护；在脚本执行期间保护共享内存免于意外写入。仅适用于内部调试。</p>
+<p style="text-align: center;"><strong>文件</strong></p>
+<h3>opcache.max_accelerated_files (default &#8220;2000&#8221;)</h3>
+<p>缓存文件数目；OPcache哈希表中可以存储的脚本文件数量上限；<br />
+真实的取值是下列素数组中的第一个大于所提供数值的素数：{223,463,983,1979,3907,7963，16229,32531,65407,130987,262237,524521,108793}。<br />
+只允许200到1000000之间的数字。</p>
+<h3>opcache.use_cwd (default &#8220;1&#8221;)</h3>
+<p>-缓存文件全路径<br />
+启用此指令时，OPcache会在哈希表的脚本键之后附件脚本的目录，以避免同名脚本的冲突问题。<br />
+禁用指令可提高性能，但可能会破坏现有应用程序。</p>
+<h3>opcache.validate_timestamps (default &#8220;1&#8221;)</h3>
+<p>-检查文件是否更新<br />
+禁用时，您必须手动重新设置OPcache，或重新启动Web服务器，以使更改文件系统生效。<br />
+启动时，检查的频率由指令“opcache.revalidate_freq”控制。</p>
+<h3>opcache.revalidate_freq (default &#8220;2&#8221;)</h3>
+<p>检查共享内存存储分配更改的文件时间戳的频率（秒）。<br />
+（“1”表示每秒验证一次，但每次请求只能一次。“0”表示总是验证）</p>
+<h3>opcache.file_update_protection (default &#8220;2&#8221;)</h3>
+<p>-文件更新保护；防止缓存小于此旧数的文件。<br />
+它保护不完全更新文件的缓存。<br />
+如果您的站点上的所有文件更新都是原子的，则可以将性能设置为“0”。</p>
+<p>参见APC的介绍：当你在一个运行中的服务器上修改文件时，你应当执行原子操作。当你在一个运行中的服务器上修改文件时，你应当执行原子操作。 也就是先写进一个临时文件，然后将该文件重命名(mv)到最终的名字。 文本编辑器以及 cp, tar 等程序却并不是这样操作的，从而导致有可能缓冲了残缺的文件。 默认值 2 表示在访问文件时如果发现修改时间距离访问时间小于 2 秒则不做缓冲。 那个不幸的访问者可能得到残缺的内容，但是这种坏影响却不会通过缓存扩大化。 如果你能确保所有的更新操作都是原子操作，那么可以用 0 关闭此特性。 如果你的系统由于大量的IO操作导致更新缓慢，你就需要增大此值。</p>
+<h3>opcache.enable_file_override (default &#8220;0&#8221;)</h3>
+<p>如果启用，则在调用函数 file_exists()， is_file() 以及 is_readable() 的时候， 都会检查操作码缓存，无论文件是否已经被缓存。<br />
+如果应用中包含检查 PHP 脚本存在性和可读性的功能，这样可以提升性能。 但是如果禁用了 opcache.validate_timestamps 选项， 可能存在返回过时数据的风险。</p>
+<h3>opcache.revalidate_path (default &#8220;0&#8221;)</h3>
+<p>php 中的include_path参数相关<br />
+在include_path优化中启用或禁用文件搜索。<br />
+如果文件搜索被禁用，并且找到使用相同的include_path的缓存文件，则不会再次搜索该文件。因此，如果具有相同名称的文件出现在include_path中的其他位置，则将不会找到它。<br />
+如果此优化对您的应用程序有影响，请启用此指令。 此伪指令的默认值被禁用，这意味着优化是活动的。</p>
+<h3>opcache.blacklist_filename</h3>
+<p>-黑名单<br />
+OPcache黑名单文件的位置（允许通配符）。<br />
+每个OPcache黑名单文件都是一个文本文件，其中包含不应加速的文件的名称。 文件格式是将每个文件名添加到新行。 文件名可以是完整路径，也可以是文件前缀<br />
+（即/var/www /x将以“x”开头的/var/www中的所有文件和目录）列入黑名单。 一行开始; 被忽略（注释）。<br />
+文件通常由以下三个原因之一触发：<br />
+1）包含自动生成代码的目录，如Smarty或ZFW缓存。<br />
+2）由于某些延迟的编译时间评估，加速时不能正常工作的代码。<br />
+3）触发OPcache错误的代码。</p>
+<h3>opcache.max_file_size (default &#8220;0&#8221;)</h3>
+<p>允许排除大文件被缓存。 默认情况下，所有文件都被缓存。</p>
+<p style="text-align: center;"><strong>注释</strong></p>
+<h3>opcache.save_comments (default &#8220;1&#8221;)</h3>
+<p>如果禁用，则会从代码中删除所有PHPDoc注释，以减少优化代码的大小。<br />
+禁用“文档注释”可能会破坏一些现有的应用程序和框架（例如，Doctrine，ZF2，PHPUnit）</p>
+<h3>opcache.load_comments (default &#8220;1&#8221;)</h3>
+<p>如果禁用，则即使文件中包含注释，也不会加载这些注释内容。 本选项可以和 opcache.save_comments 一起使用，以实现按需加载注释内容。</p>
+<p style="text-align: center;"><strong>日志</strong></p>
+<h3>opcache.error_log</h3>
+<p>OPcache error_log文件名。 空字符串假定为“stderr”。<br />
+opcache.log_verbosity_level (default &#8220;1&#8221;)<br />
+所有的OPcache错误都会转到Web服务器日志。<br />
+默认情况下，仅记录致命错误（级别0）或错误（级别1）。<br />
+您还可以启用警告（级别2），信息消息（级别3）或调试消息（级别4））。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

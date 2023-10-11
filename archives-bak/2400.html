@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>VIM 命令模式 | 青春部落    </title>
+    <meta name="keywords"  content="linux 系统文件编辑VIM命令模式下光标移动操作" />
+    <meta name="description"  content="linux 系统文件编辑VIM命令模式下光标移动操作" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; VIM 命令模式评论Feed" href="https://cn-blogs.cn/archives/2400.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='VIM 底线命令模式' href='https://cn-blogs.cn/archives/2392.html' />
+<link rel='next' title='ASCII码和Unicode码和UTF编码' href='https://cn-blogs.cn/archives/545.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2400.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2400' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2400.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2400.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2400 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/shell" rel="category tag">Shell 壳</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2392.html" rel="prev">上一篇：VIM 底线命令模式</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/545.html" rel="next">下一篇：ASCII码和Unicode码和UTF编码</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            VIM 命令模式        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/08/31</span>
+            <span class="update is-hidden">2018-04-30</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>光标移动</h3>
+<h4>字符移动</h4>
+<p>h (小写)光标左移一个字符,相当于左方向键<br />
+l (小写)光标右移一个字符,相当于右方向键<br />
+k (小写)光标垂直上移一行,相当于上方向键<br />
+j (小写)光标垂直下移一行,相当于下方向键<br />
+你也可以使用键盘上的方向键来移动，但这么做h j k l的存在就失去了意义<br />
+之所以使用h j k l来控制方向，其主要目的是让你的手不离开键盘中心，从而提高效率<br />
+tips：在命令前加上数字代表命令执行次数，如：5k，表示上移5行</p>
+<h4>单词移动</h4>
+<p>W w 移动到下一个单词开头<br />
+E e 移动到下一个单词结尾<br />
+B b 倒退到上一个单词开头<br />
+需要注意的是，E会忽略标点符号，如：I‘m，e会当成两个单词，E则不会<br />
+同样，在命令前加上数字代表执行次数，如：2w，表示往下移动2个单词<br />
+开头我也许会多说几遍，因为这个技巧很重要</p>
+<h4>整行移动</h4>
+<p>0 移动到行首<br />
+$ 移动到行末<br />
++ 移动到下一行开头<br />
+– 移动到上一行开头<br />
+这里需要注意的是+ -和上面的j k有什么不同之处<br />
+j k也是移动到上一行和下一行，但它们移动的是光标所在的位置<br />
++ -不管你的光标在何处，总是移动到下一行或上一行的行首</p>
+<h4>滚屏</h4>
+<p>Ctrl+f 往前滚动一整屏<br />
+Ctrl+b 往后滚动一整屏<br />
+Ctrl+d 往前滚动半屏<br />
+Ctrl+u 往后滚动半屏<br />
+Ctrl+e 往后滚动一行<br />
+Ctrl+y 往前滚动一行<br />
+看似比较多，但是可以根据键盘的位置来进行记忆，并且下面两个也不常用<br />
+上面的滚屏都有一个共同点，就是会改变光标的位置，且屏幕也在改变<br />
+如果想让光标维持在原来的位置实现滚屏请看下面</p>
+<h4>用z调整光标</h4>
+<p>z 将光标所在行移动到屏幕顶端<br />
+z. 将光标所在行移动到屏幕中间<br />
+z- 将光标所在行移动到屏幕低端<br />
+tips：980z可以将第980行移动到屏幕顶端<br />
+好吧，有时候你其实不想滚屏，你只想在当前屏幕中移动</p>
+<h4>在屏幕中移动</h4>
+<p>H 移动到屏幕顶端的行<br />
+M 移动到屏幕中央的行<br />
+L 移动到屏幕底端的行<br />
+nH 移动到屏幕顶端往下的第n行<br />
+nL 移动到屏幕顶端往上的第n行<br />
+据我猜测这三个字母应该是HIgh、Middle和Low的缩写，其实挺好记的<br />
+多练习几遍就行了，需要注意的是：这里只是光标的位置变化，和上面两种不同<br />
+tips：你可以用+ -和j k实现同样的位置变化，只不过要操作多次而已<br />
++ -和j k的区别忘了吗？往上看看吧</p>
+<h4>在当前行移动</h4>
+<p>^ 移动到当前行的第一个非空格处<br />
+n| 移动到当前行的第n列<br />
+这里的^与上面的0通常情况下表示的位置是一样的<br />
+而n|，个人感觉还没有h l方便，慢慢的数出行数还不如直接按着h l 左右移</p>
+<h4>根据文本块移动</h4>
+<p>所谓的文本块也就是句子、段落、小节等<br />
+( (左小括号)移动到上一个句子首<br />
+) (右小括号)移动到下一个句子首<br />
+{ (左大括号)移动到上一个段落首<br />
+} (右大括号)移动到下一个段落首<br />
+[[ 移动到当前这一节的开头<br />
+]] 移动到下一节的开头<br />
+其中，VIM以? . !等符号来标记一个句子<br />
+空白行来标记一个段落<br />
+用节宏来标记一个节（节宏是什么我还没搞清楚）</p>
+<h4>根据行号来移动</h4>
+<p>Ctrl+g 显示当前行信息<br />
+nG 转至第n行<br />
+G 转至文本末尾<br />
+gg　　　　　　　　 移至文本开头<br />
+如果你不知道当前是多少行的话就可以用Ctrl+g来查看<br />
+如果想转到第800行，可以用800G<br />
+其实z命令也可以做到，并且把光标移动到第一行<br />
+tips：“反引号可以返回到使用G之前的位置</p>
+<h4>其他</h4>
+<p>% 光标跳转到匹配到括号处,支持{}()<br />
+[[ 光标跳转到代码块开头即{处,要求{独占一行<br />
+gD 光标跳转到局部变量定义处<br />
+” (两个单引号)光标跳转到上次停靠处</p>
+<p>zz (小写)让光标所在行居于屏幕中央<br />
+zt (小写)让光标所在行居于屏幕最顶部<br />
+zb (小写)让光标所在行居于屏幕底部</p>
+<p>编辑模式下<br />
+:n 指定移动到第n行</p>
+<h3>VIM 插入</h3>
+<h4>光标位置插入</h4>
+<p>i 在光标之前插入<br />
+a 在光标之后追加</p>
+<h4>行位置插入</h4>
+<p>A 在一行的结尾处追加<br />
+I 在一行的开头处插入<br />
+o 在光标所在位置的下一行打开新行插入<br />
+O 在光标所在位置的上一行打开新行插入</p>
+<h3>VIM 删除</h3>
+<h4>字符删除</h4>
+<p>x (小写)删除光标前一个字符<br />
+X (大写)删除光标后一个字符</p>
+<h4>单词删除</h4>
+<p>dw (小写)删除光标所在处一个单词<br />
+de 删除到本单词末尾<br />
+dE 删除到本单词末尾包括标点在内<br />
+db 删除到前一个单词<br />
+dB 删除到前一个单词包括标点在内</p>
+<h4>行删除</h4>
+<p>dd (小写)删除光标所在整行<br />
+D (大写)删除到行尾,包含光标处的字符<br />
+d$ 与D效果相同<br />
+d0 删除到行首，不包含光标处的字符<br />
+d^ 与d0效果相同</p>
+<h4>文档删除</h4>
+<p>dgg 删除光标所在整行到文件首<br />
+dG 删除光标所在整行到文件尾</p>
+<h4>补充</h4>
+<p>:n1,n2d 编辑模式下，删除n1-n2行</p>
+<h2>复制(yank)</h2>
+<h4>单词和字符复制</h4>
+<p>ynl 向右复制n个字符<br />
+ynh 向左复制n个字符<br />
+ynw 向前复制n个单词<br />
+ynb 向后复制n个单词<br />
+yw 复制一个单词,光标必须在单词首部</p>
+<h4>行复制</h4>
+<p>yy或 Y 复制光标所在整行<br />
+y^ 复制到光标所在行行首,不包括光标位置字符<br />
+y$ 复制到光标所在行行尾,包括光标位置字符</p>
+<h4>文档复制</h4>
+<p>yG 复制到文件尾<br />
+y1G 复制到文件首<br />
+nyy 复制光标所在行开始的n行</p>
+<h3>粘贴</h3>
+<p>p (小写)粘贴到光标后<br />
+P (大写)粘贴到光标前</p>
+<h3>撤销操作</h3>
+<p>u 无限次保存前撤销<br />
+U 恢复整行<br />
+ctrl+r 重做<br />
+. 重复<br />
+e！ 全文恢复</p>
+<h3>修改操作</h3>
+<h4>字符替换</h4>
+<p>r (小写)替换光标所在处一个字符<br />
+R (大写)开始替换<br />
+~ 转换大小写</p>
+<h4>单词修改</h4>
+<p>cw 从光标处修改到单词结尾<br />
+cb 从光标处修改到单词开头</p>
+<h4>行修改</h4>
+<p>cc (小写)取代光标所在整行<br />
+S (大写)与ss(小写)效果相同<br />
+C (大写)取代到行尾,包括光标处字符<br />
+c0 (小写,数字0)取代到行首,不包括光标处字符<br />
+c^ (小写)与c0(小写,数字0)效果相同</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

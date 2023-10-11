@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>查询域名解析 Dig &#038; Host | 青春部落    </title>
+    <meta name="keywords"  content="查询域名解析,dig,host" />
+    <meta name="description"  content="查询域名解析命令dig和host" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 查询域名解析 Dig &#038; Host评论Feed" href="https://cn-blogs.cn/archives/5.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='proxy代理' href='https://cn-blogs.cn/archives/1779.html' />
+<link rel='next' title='uniq 去重' href='https://cn-blogs.cn/archives/8.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/5.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=5' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F5.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F5.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-5 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1779.html" rel="prev">上一篇：proxy代理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/8.html" rel="next">下一篇：uniq 去重</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            查询域名解析 Dig &#038; Host        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/08/13</span>
+            <span class="update is-hidden">2018-04-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>Dig 命令</h2>
+<p>DIG命令是一个用于询问DNS 域名服务器的灵活的工具。服务端口:UDP53。<br />
+它执行 DNS 搜索，显示从受请求的域名服务器返回的答复。虽然通常情况下使用DIG命令行参数，但它也可以按批处理模式从文件读取搜索请求。<br />
+windows 平台命令：nslookup</p>
+<h4>命令安装</h4>
+<p><code>yum install bind-utils</code></p>
+<h4>功能说明</h4>
+<p><strong>1、当未指定任何命令行参数或选项时，dig 将对“.”（根）执行 NS 查询。</strong><br />
+<strong>2、在dig 后加&#8217;.&#8217;，</strong>即为查找.域名的A记录；不加参数时，dig默认输出域名的A记录。<br />
+<strong>3、@指令；</strong>指定nameserver服务器；<br />
+<strong>4、查询根域名的NS</strong>记录 -t ns<br />
+<strong>5、其他记录查询方式 -t</strong> A记录 MX记录 TXT记录 等<br />
+<strong>6、-f filename</strong> 使 dig 在批处理模式下运行，通过从文件 filename 读取一系列搜索请求加以处理。文件包含许多查询；每行一个。<br />
+<strong>7、+trace指令</strong>：跟踪域名的解析过程<br />
+<strong>8、反向解析</strong> dig -x 210.52.83.228 @server</p>
+<h4>Usage:使用说明</h4>
+<p>dig [@global-server] [domain] [q-type] [q-class] {q-opt}<br />
+{global-d-opt} host [@local-server] {local-d-opt}<br />
+[ host [@local-server] {local-d-opt} [&#8230;]]<br />
+Where: domain is in the Domain Name System<br />
+<strong>q-class is one of (in,hs,ch,&#8230;) [default: in]</strong><br />
+<strong> q-type is one of (a,any,mx,ns,soa,hinfo,axfr,txt,&#8230;) [default:a]</strong><br />
+(Use ixfr=version for type ixfr)<br />
+q-opt is one of:<br />
+-x dot-notation (shortcut for reverse lookups)<br />
+-i (use IP6.INT for IPv6 reverse lookups)<br />
+-f filename (batch mode)<br />
+-b address[#port] (bind to source address/port)<br />
+-p port (specify port number)<br />
+-q name (specify query name)<br />
+-t type (specify query type)<br />
+-c class (specify query class)<br />
+-k keyfile (specify tsig key file)<br />
+-y [hmac:]name:key (specify named base64 tsig key)<br />
+-4 (use IPv4 query transport only)<br />
+-6 (use IPv6 query transport only)<br />
+-m (enable memory usage debugging)<br />
+<strong>d-opt is of the form +keyword[=value], where keyword is:</strong><br />
++[no]vc (TCP mode)<br />
++[no]tcp (TCP mode, alternate syntax)<br />
++time=### (Set query timeout) [5]<br />
++tries=### (Set number of UDP attempts) [3]<br />
++retry=### (Set number of UDP retries) [2]<br />
++domain=### (Set default domainname)<br />
++bufsize=### (Set EDNS0 Max UDP packet size)<br />
++ndots=### (Set NDOTS value)<br />
++edns=### (Set EDNS version)<br />
++[no]search (Set whether to use searchlist)<br />
++[no]showsearch (Search with intermediate results)<br />
++[no]defname (Ditto)<br />
++[no]recurse (Recursive mode)<br />
++[no]ignore (Don&#8217;t revert to TCP for TC responses.)<br />
++[no]fail (Don&#8217;t try next server on SERVFAIL)<br />
++[no]besteffort (Try to parse even illegal messages)<br />
++[no]aaonly (Set AA flag in query (+[no]aaflag))<br />
++[no]adflag (Set AD flag in query)<br />
++[no]cdflag (Set CD flag in query)<br />
++[no]cl (Control display of class in records)<br />
++[no]cmd (Control display of command line)<br />
++[no]comments (Control display of comment lines)<br />
++[no]question (Control display of question)<br />
++[no]answer (Control display of answer)<br />
++[no]authority (Control display of authority)<br />
++[no]additional (Control display of additional)<br />
++[no]stats (Control display of statistics)<br />
++[no]short (Disable everything except short<br />
+form of answer)<br />
++[no]ttlid (Control display of ttls in records)<br />
++[no]all (Set or clear all display flags)<br />
++[no]qr (Print question before sending)<br />
++[no]nssearch (Search all authoritative nameservers)<br />
++[no]identify (ID responders in short answers)<br />
++[no]trace (Trace delegation down from root)<br />
++[no]dnssec (Request DNSSEC records)<br />
++[no]nsid (Request Name Server ID)<br />
++[no]sigchase (Chase DNSSEC signatures)<br />
++trusted-key=#### (Trusted Key when chasing DNSSEC sigs)<br />
++[no]topdown (Do DNSSEC validation top down mode)<br />
++[no]multiline (Print records in an expanded format)<br />
++[no]onesoa (AXFR prints only one soa record)<br />
+global d-opts and servers (before host name) affect all queries.<br />
+local d-opts and servers (after host name) affect only that lookup.<br />
+-h (print help and exit)<br />
+-v (print version and exit)</p>
+<h2>Host 命令</h2>
+<p>host 命令用于DNS查询和DNS反向查询<br />
+Usage: host [-aCdlriTwv] [-c class] [-N ndots] [-t type] [-W time]<br />
+[-R number] [-m flag] hostname [server]</p>
+<table>
+<tbody>
+<tr>
+<th><span style="color: #ff0000;">-a</span></th>
+<th>显示详细的DNS信息；等于-v -t ANY</th>
+</tr>
+<tr>
+<th>-c class</th>
+<th>指定查询类型，默认值为“IN“；</th>
+</tr>
+<tr>
+<th>-C</th>
+<th>查询指定主机的完整的SOA记录</th>
+</tr>
+<tr>
+<th>-d</th>
+<th>is equivalent to -v;详细信息</th>
+</tr>
+<tr>
+<th>-l</th>
+<th>lists all hosts in a domain, using AXFR</th>
+</tr>
+<tr>
+<th>-i</th>
+<th>IP6.INT reverse lookups</th>
+</tr>
+<tr>
+<th>-N</th>
+<th>changes the number of dots allowed before root lookup is done</th>
+</tr>
+<tr>
+<th>-r</th>
+<th><span style="color: #ff0000;">在查询域名时，不使用递归的查询方式</span></th>
+</tr>
+<tr>
+<th>-R</th>
+<th>specifies number of retries for UDP packets</th>
+</tr>
+<tr>
+<th>-s</th>
+<th>a SERVFAIL response should stop query</th>
+</tr>
+<tr>
+<th>-t</th>
+<th><span style="color: #ff0000;">指定查询的域名信息类型；</span></th>
+</tr>
+<tr>
+<th>-T</th>
+<th>enables TCP/IP mode</th>
+</tr>
+<tr>
+<th>-v</th>
+<th>显示指令执行的详细信息</th>
+</tr>
+<tr>
+<th>-w</th>
+<th>无限超时，直到服务器有返回</th>
+</tr>
+<tr>
+<th>-W timeout</th>
+<th>设置超时时间</th>
+</tr>
+<tr>
+<th>-4</th>
+<th>仅使用IPV4</th>
+</tr>
+<tr>
+<th>-6</th>
+<th>仅使用IPV6</th>
+</tr>
+<tr>
+<th>-m</th>
+<th>set memory debugging flag (trace|record|usage)</th>
+</tr>
+</tbody>
+</table>
+<h4>-t 查询类型 A:主机的网际地址</h4>
+<p>CNAME:别名的规范名称<br />
+HINFO:主机 CPU与操作系统类型<br />
+KEY:安全密钥记录<br />
+MINFO: 邮箱或邮件列表信息<br />
+MX:邮件交换器<br />
+NS:指定范围的名称服务器<br />
+PTR:如果查询的是一个网际地址则为主机名；否则，为其他信息的指针<br />
+SIG:签名记录<br />
+SOA: 域的&#8221;授权开始&#8221;信息<br />
+TXT:文本信息<br />
+UINFO:用户信息<br />
+WKS:所支持的众所周知的服务</p>
+<h4>-c Class：当搜索非网际数据时要指定要查找的类</h4>
+<p>有效类为:<br />
+IN:网际类<br />
+CHAOS:Chaos类<br />
+HESIOD:MIT Althena Hesiod类<br />
+ANY:通配符（以上任意一个）<br />
+*:通配符（以上任意一个）</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

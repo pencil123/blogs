@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Condition 条件变量 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Condition 条件变量评论Feed" href="https://cn-blogs.cn/archives/771.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='lock rlock 锁' href='https://cn-blogs.cn/archives/760.html' />
+<link rel='next' title='event 事件' href='https://cn-blogs.cn/archives/777.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/771.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=771' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F771.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F771.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-771 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/760.html" rel="prev">上一篇：lock rlock 锁</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/777.html" rel="next">下一篇：event 事件</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Condition 条件变量        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/02/16</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>使用Condition实现复杂同步</strong><br />
+目前我们已经会使用Lock去对公共资源进行互斥访问了，也探讨了同一线程可以使用RLock去重入锁，但是尽管如此我们只不过才处理了一些程序中简单的同步现象，我们甚至还不能很合理的去解决使用Lock锁带来的死锁问题。所以我们得学会使用更深层的解决同步问题。<br />
+Python提供的Condition对象提供了对复杂线程同步问题的支持。<br />
+<strong>Condition被称为条件变量，除了提供与Lock类似的acquire和release方法外，还提供了wait和notify方法。</strong><br />
+<strong>使用Condition的主要方式为：</strong><br />
+线程首先acquire一个条件变量，然后判断一些条件。<br />
+如果条件不满足则wait；<br />
+如果条件满足，进行一些处理改变条件后，通过notify方法通知其他线程，<br />
+其他处于wait状态的线程接到通知后会重新判断条件。<br />
+不断的重复这一过程，从而解决复杂的同步问题。</p>
+<p><strong>可以认为Condition对象维护了一个锁（Lock/RLock)和一个waiting池</strong>。线程通过acquire获得Condition对象，当调用wait方法时，线程会释放Condition内部的锁并进入blocked状态，同时在waiting池中记录这个线程。当调用notify方法时，Condition对象会从waiting池中挑选一个线程，通知其调用acquire方法尝试取到锁。<br />
+Condition对象的构造函数可以接受一个Lock/RLock对象作为参数，如果没有指定，则Condition对象会在内部自行创建一个RLock。<br />
+除了notify方法外，Condition对象还提供了<strong>notifyAll方法</strong>，可以通知waiting池中的所有线程尝试acquire内部锁。</p>
+<p>下面我们通过很著名的“生产者-消费者”模型来来演示下，在Python中使用Condition实现复杂同步。</p>
+<p>import threading<br />
+import time<br />
+condition = threading.Condition()<br />
+products = 0</p>
+<p>class Producer(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)<br />
+———def run(self):<br />
+——————global condition, products<br />
+——————while True:<br />
+—————————if condition.acquire():<br />
+————————————if products &lt; 10:<br />
+———————————————products += 1;<br />
+———————————————print &#8220;Producer(%s):deliver one, now products:%s&#8221; %(self.name, products)<br />
+———————————————condition.notify()<br />
+————————————else:<br />
+———————————————print &#8220;Producer(%s):already 10, stop deliver, now products:%s&#8221; %(self.name, products)<br />
+———————————————condition.wait();<br />
+————————————condition.release()<br />
+————————————time.sleep(2)</p>
+<p>class Consumer(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)<br />
+———def run(self):<br />
+——————global condition, products<br />
+——————while True:<br />
+—————————if condition.acquire():<br />
+————————————if products &gt; 1:<br />
+———————————————products -= 1<br />
+———————————————print &#8220;Consumer(%s):consume one, now products:%s&#8221; %(self.name, products)<br />
+———————————————condition.notify()<br />
+————————————else:<br />
+———————————————print &#8220;Consumer(%s):only 1, stop consume, products:%s&#8221; %(self.name, products)<br />
+———————————————condition.wait();<br />
+————————————condition.release()<br />
+————————————time.sleep(2)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for p in range(0, 2):<br />
+——————p = Producer()<br />
+——————p.start()</p>
+<p>———for c in range(0, 10):<br />
+——————c = Consumer()<br />
+——————c.start()<br />
+代码中主要实现了生产者和消费者线程，双方将会围绕products来产生同步问题，首先是2个生成者生产products ，而接下来的10个消费者将会消耗products，代码运行如下：<br />
+Producer(Thread-1):deliver one, now products:1<br />
+Producer(Thread-2):deliver one, now products:2<br />
+Consumer(Thread-3):consume one, now products:1<br />
+Consumer(Thread-4):only 1, stop consume, products:1<br />
+Consumer(Thread-5):only 1, stop consume, products:1<br />
+Consumer(Thread-6):only 1, stop consume, products:1<br />
+Consumer(Thread-7):only 1, stop consume, products:1<br />
+Consumer(Thread-8):only 1, stop consume, products:1<br />
+Consumer(Thread-10):only 1, stop consume, products:1<br />
+Consumer(Thread-9):only 1, stop consume, products:1<br />
+Consumer(Thread-12):only 1, stop consume, products:1<br />
+Consumer(Thread-11):only 1, stop consume, products:1<br />
+另外：Condition对象的构造函数可以接受一个Lock/RLock对象作为参数，如果没有指定，则Condition对象会在内部自行创建一个RLock；<br />
+除了notify方法外，Condition对象还提供了notifyAll方法，可以通知waiting池中的所有线程尝试acquire内部锁。由于上述机制，处于waiting状态的线程只能通过notify方法唤醒，所以notifyAll的作用在于防止有线程永远处于沉默状态。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

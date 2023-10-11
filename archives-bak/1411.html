@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MongoDB数据更新 | 青春部落    </title>
+    <meta name="keywords"  content="MongoDB,数据库,数据更新" />
+    <meta name="description"  content="MongoDB数据库更新数据操作" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MongoDB数据更新评论Feed" href="https://cn-blogs.cn/archives/1411.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='python yaml' href='https://cn-blogs.cn/archives/1032.html' />
+<link rel='next' title='MongoDB 索引说明和操作' href='https://cn-blogs.cn/archives/1497.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1411.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1411' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1411.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1411.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1411 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mongodb" rel="category tag">MongoDB</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1032.html" rel="prev">上一篇：python yaml</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1497.html" rel="next">下一篇：MongoDB 索引说明和操作</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MongoDB数据更新        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/11/16</span>
+            <span class="update is-hidden">2018-03-29</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>db.collection.update( criteria, objNew, upsert, multi )</h2>
+<p>update()函数接受以下四个参数：</p>
+<table>
+<tbody>
+<tr>
+<th>criteria</th>
+<th>update的查询条件，类似sql update查询内where后面的</th>
+</tr>
+<tr>
+<th>objNew</th>
+<th>update的对象和一些更新的操作符（如$,$inc&#8230;）等，也可以理解为sql update查询内set后面的</th>
+</tr>
+<tr>
+<th>upsert</th>
+<th>这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入</th>
+</tr>
+<tr>
+<th>multi</th>
+<th>mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新</th>
+</tr>
+</tbody>
+</table>
+<h3>更新操作</h3>
+<p>更新操作定位于一个集合。通过过滤器定位到要更新文档，过滤器的使用方法和查询的方法相同。</p>
+<h4>字段操作：</h4>
+<table>
+<tbody>
+<tr>
+<th>$currentDate</th>
+<th>字段值设为当前时间；<br />
+Sets the value of a field to current date, either as a Date or a Timestamp.</th>
+</tr>
+<tr>
+<th>$inc</th>
+<th>字段值增加指定数量；<br />
+Increments the value of the field by the specified amount.</th>
+</tr>
+<tr>
+<th>$min</th>
+<th>比较给定值和存储值；取小的<br />
+Only updates the field if the specified value is less than the existing field value.</th>
+</tr>
+<tr>
+<th>$max</th>
+<th>比较给定值和存储值；取大的<br />
+Only updates the field if the specified value is greater than the existing field value.</th>
+</tr>
+<tr>
+<th>$mul</th>
+<th>字段值乘以指定值；<br />
+Multiplies the value of the field by the specified amount.</th>
+</tr>
+<tr>
+<th>$rename</th>
+<th>重命名；Renames a field.</th>
+</tr>
+<tr>
+<th>$set</th>
+<th>设置新值；Sets the value of a field in a document.</th>
+</tr>
+<tr>
+<th>$setOnInsert</th>
+<th>如果更新导致文档插入，则设置字段值；<br />
+Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.</th>
+</tr>
+<tr>
+<th>$unset</th>
+<th>删除字段；<br />
+Removes the specified field from a document.</th>
+</tr>
+</tbody>
+</table>
+<p>例子：<br />
+db.user.update({&#8220;name&#8221;:&#8221;james&#8221;},{$set:{&#8220;addr&#8221;:&#8221;China&#8221;},$currentDate:{lastModified:true}})<br />
+名字为james #过滤器；更改addr为China,修改最后修改时间为当前时间</p>
+<h4>数组操作</h4>
+<table>
+<tbody>
+<tr>
+<th>$</th>
+<th>Acts as a placeholder to update the first element that matches the query condition in an update.</th>
+</tr>
+<tr>
+<th>$addToSet</th>
+<th>Adds elements to an array only if they do not already exist in the set.</th>
+</tr>
+<tr>
+<th>$pop</th>
+<th>删除数组的第一个或最后一个项目<br />
+Removes the first or last item of an array.</th>
+</tr>
+<tr>
+<th>$pull</th>
+<th>删除与指定查询匹配的所有数组元素<br />
+Removes all array elements that match a specified query.</th>
+</tr>
+<tr>
+<th>$pushAll</th>
+<th>Deprecated. Adds several items to an array.</th>
+</tr>
+<tr>
+<th>$push</th>
+<th>Adds an item to an array.</th>
+</tr>
+<tr>
+<th>$pullAll</th>
+<th>Removes all matching values from an array.</th>
+</tr>
+</tbody>
+</table>
+<h4>修饰符Modifiers</h4>
+<table>
+<tbody>
+<tr>
+<th>$each</th>
+<th>Modifies the $push and $addToSet operators to append multiple items for array updates.</th>
+</tr>
+<tr>
+<th>$position</th>
+<th>Modifies the $push operator to specify the position in the array to add elements.</th>
+</tr>
+<tr>
+<th>$slice</th>
+<th>Modifies the $push operator to limit the size of updated arrays.</th>
+</tr>
+<tr>
+<th>$sort</th>
+<th>Modifies the $push operator to reorder documents stored in an array.</th>
+</tr>
+</tbody>
+</table>
+<h4>二进制</h4>
+<table>
+<tbody>
+<tr>
+<th>$bit</th>
+<th>Performs bitwise AND, OR, and XOR updates of integer values.</th>
+</tr>
+</tbody>
+</table>
+<h4>隔离</h4>
+<table>
+<tbody>
+<tr>
+<th>$isolated</th>
+<th>Modifies the behavior of a write operation to increase the isolation of the operation.</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式 Python re模块 | 青春部落    </title>
+    <meta name="keywords"  content="Python,编程语言,正则表达式,re模块" />
+    <meta name="description"  content="Python编程语言使用正则表达式的re模块" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 正则表达式 Python re模块评论Feed" href="https://cn-blogs.cn/archives/912.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='platform 模块' href='https://cn-blogs.cn/archives/864.html' />
+<link rel='next' title='stringIO' href='https://cn-blogs.cn/archives/902.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/912.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=912' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F912.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F912.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-912 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/864.html" rel="prev">上一篇：platform 模块</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/902.html" rel="next">下一篇：stringIO</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            正则表达式 Python re模块        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/02/28</span>
+            <span class="update is-hidden">2018-05-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Python 中re模块代替了过时的regex模块和regsub模块；re模式使用方式有两种。</p>
+<blockquote class="wp-embedded-content" data-secret="DzAwAL9kB5"><p><a href="https://cn-blogs.cn/archives/920.html">正则表达式</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://cn-blogs.cn/archives/920.html/embed#?secret=DzAwAL9kB5" data-secret="DzAwAL9kB5" width="500" height="282" title="《正则表达式》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<h4>一、使用re模块对象</h4>
+<p>正则表达式模式编译为正则表达式对象，有利于提高执行性能。<br />
+<code>re.compile(strPattern[, flag]):</code><br />
+这个方法用于将字符串形式的正则表达式编译为正则表达式对象。</p>
+<p>第二个参数flag是匹配模式，取值可以使用按位或运算符&#8217;|&#8217;表示同时生效，比如re.I | re.M。<br />
+另外，你也可以在regex字符串中指定模式，比如re.compile(&#8216;pattern&#8217;, re.I | re.M)与re.compile(&#8216;(?im)pattern&#8217;)是等价的。<br />
+可选值有：</p>
+<table>
+<tbody>
+<tr>
+<th>re.I(re.IGNORECASE)</th>
+<th>忽略大小写（括号内是完整写法）</th>
+</tr>
+<tr>
+<th>M(MULTILINE)</th>
+<th>多行模式，改变&#8217;^&#8217;和&#8217;$&#8217;的行为</th>
+</tr>
+<tr>
+<th>S(DOTALL)</th>
+<th>点任意匹配模式，改变&#8217;.&#8217;的行为</th>
+</tr>
+<tr>
+<th>L(LOCALE)</th>
+<th>使预定字符类 \w \W \b \B \s \S 取决于当前区域设定</th>
+</tr>
+<tr>
+<th>U(UNICODE)</th>
+<th>使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</th>
+</tr>
+<tr>
+<th>X(VERBOSE)</th>
+<th>详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。</th>
+</tr>
+</tbody>
+</table>
+<p>以下两个正则表达式是等价的：<br />
+<code>a = re.compile(r"""\d + # the integral part<br />
+————————\. # the decimal point<br />
+————————\d * # some fractional digits""", re.X)<br />
+b = re.compile(r"\d+\.\d*")</code></p>
+<h4>二、直接使用re模块的函数</h4>
+<p><code>m = re.match(r'hello', 'hello world!')<br />
+print m.group()</code><br />
+re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。</p>
+<h2>正则表达式对象</h2>
+<p>正则表达式对象是一个编译好的正则表达式，通过正则表达式对象提供的一系列方法可以对文本进行匹配查找。<br />
+正则表达式对象不能直接实例化，必须使用re.compile()进行构造。</p>
+<p>正则表达式对象属性（用于获取表达式的相关信息）：</p>
+<table>
+<tbody>
+<tr>
+<th>pattern</th>
+<th>编译时用的表达式字符串。</th>
+</tr>
+<tr>
+<th>flags</th>
+<th>编译时用的匹配模式。数字形式。</th>
+</tr>
+<tr>
+<th>groups</th>
+<th>表达式中分组的数量。</th>
+</tr>
+<tr>
+<th>groupindex</th>
+<th>以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。</th>
+</tr>
+</tbody>
+</table>
+<h4>对象使用实例</h4>
+<p><code>import re<br />
+p = re.compile(r'(\w+) (\w+)(?P.*)', re.DOTALL)<br />
+print "p.pattern:", p.pattern<br />
+print "p.flags:", p.flags<br />
+print "p.groups:", p.groups<br />
+print "p.groupindex:", p.groupindex</code></p>
+<p><code>### output ###<br />
+# p.pattern: (\w+) (\w+)(?P.*)<br />
+# p.flags: 16<br />
+# p.groups: 3<br />
+# p.groupindex: {'sign': 3}</code></p>
+<h3>对象方法实例[ | re模块方法]</h3>
+<h4>1、match 方法</h4>
+<p><code>match(string[, pos[, endpos]]) #re对象调用<br />
+re.match(pattern, string[, flags]) #re模块直接调用</code><br />
+pos和endpos的默认值分别为0和len(string)re.match()无法指定这两个参数。参数flags用于编译正则表达对象时指定匹配模式。<br />
+将从string的pos下标处起尝试匹配pattern。如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。<br />
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符&#8217;$&#8217;。</p>
+<h4>2、search 方法</h4>
+<p><code>search(string[, pos[, endpos]])<br />
+re.search(pattern, string[, flags])</code><br />
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数。参数flags用于编译pattern时指定匹配模式。<br />
+用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。</p>
+<hr />
+<p># 将正则表达式编译成Pattern对象<br />
+<code>pattern = re.compile(r'world'</code></p>
+<p># 使用search()查找匹配的子串，不存在能匹配的子串时将返回None<br />
+# 这个例子中使用match()无法成功匹配<br />
+<code>match = pattern.search('hello world!')</code></p>
+<p><code>if match:<br />
+# 使用Match获得分组信息<br />
+print match.group()<br />
+### 输出 ###<br />
+# world</code></p>
+<h4>3、split 方法</h4>
+<p><code>split(string[, maxsplit])<br />
+re.split(pattern, string[, maxsplit])</code><br />
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。</p>
+<hr />
+<p><code>p = re.compile(r'\d+')<br />
+print p.split('one1two2three3four4')<br />
+### output ###<br />
+# ['one', 'two', 'three', 'four', '']</code></p>
+<h4>4、findall 方法</h4>
+<p><code>findall(string[, pos[, endpos]])<br />
+re.findall(pattern, string[, flags])</code><br />
+搜索string，以列表形式返回全部能匹配的子串。</p>
+<hr />
+<p><code>p = re.compile(r'\d+')<br />
+print p.findall('one1two2three3four4')<br />
+### output ###<br />
+# ['1', '2', '3', '4']</code></p>
+<h4>5、finditer 方法</h4>
+<p><code>finditer(string[, pos[, endpos]])<br />
+re.finditer(pattern, string[, flags])</code><br />
+搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。</p>
+<hr />
+<p><code>p = re.compile(r'\d+')<br />
+for m in p.finditer('one1two2three3four4'):<br />
+print m.group(),<br />
+### output ###<br />
+# 1 2 3 4</code></p>
+<h4>6、sub 方法</h4>
+<p><code>sub(repl, string[, count])<br />
+re.sub(pattern, repl, string[, count])</code><br />
+使用repl替换string中每一个匹配的子串后返回替换后的字符串。<br />
+当repl是一个字符串时，可以使用\id或\g、\g引用分组，但不能使用编号0。<br />
+当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。<br />
+count用于指定最多替换次数，不指定时全部替换。</p>
+<hr />
+<p><code>p = re.compile(r'(\w+) (\w+)')<br />
+s = 'i say, hello world!'<br />
+print p.sub(r'\2 \1', s)<br />
+def func(m):<br />
+return m.group(1).title() + ' ' + m.group(2).title()<br />
+print p.sub(func, s)<br />
+### output ###<br />
+# say i, world hello!<br />
+# I Say, Hello World!</code></p>
+<h4>7、subn 方法</h4>
+<p><code>subn(repl, string[, count])<br />
+re.sub(pattern, repl, string[, count])</code><br />
+返回 (sub(repl, string[, count]), 替换次数)。</p>
+<hr />
+<p><code>p = re.compile(r'(\w+) (\w+)')<br />
+s = 'i say, hello world!'<br />
+print p.subn(r'\2 \1', s)<br />
+def func(m):<br />
+return m.group(1).title() + ' ' + m.group(2).title()<br />
+print p.subn(func, s)<br />
+### output ###<br />
+# ('say i, world hello!', 2)<br />
+# ('I Say, Hello World!', 2)</code></p>
+<h2>匹配对象</h2>
+<p>匹配对象是一次匹配的结果，包含了很多关于此次匹配的信息；这些事成功调用match() 或者search()返回的对象。</p>
+<h4>属性</h4>
+<table>
+<tbody>
+<tr>
+<th>string</th>
+<th>匹配时使用的文本。</th>
+</tr>
+<tr>
+<th>re</th>
+<th>匹配时使用的Pattern对象。</th>
+</tr>
+<tr>
+<th>pos</th>
+<th>文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</th>
+</tr>
+<tr>
+<th>endpos</th>
+<th>文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</th>
+</tr>
+<tr>
+<th>lastindex</th>
+<th>最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。</th>
+</tr>
+<tr>
+<th>lastgroup</th>
+<th>最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。</th>
+</tr>
+</tbody>
+</table>
+<h3>方法：</h3>
+<h4>1、group([group1, …])</h4>
+<p>获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。<br />
+group1可以使用编号也可以使用别名；编号0代表整个匹配的子串；不填写参数时，返回group(0)；<br />
+没有截获字符串的组返回None；截获了多次的组返回最后一次截获的子串。</p>
+<h4>2、groups([default])</h4>
+<p>以元组形式返回全部分组截获的字符串。<br />
+相当于调用group(1,2,…last)。default表示没有截获字符串的组以这个值替代，默认为None。</p>
+<h4>3、groupdict([default])</h4>
+<p>返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。default含义同上。</p>
+<h4>4、start([group])</h4>
+<p>返回指定的组截获的子串在string中的起始索引（子串第一个字符的索引）。group默认值为0。</p>
+<h4>5、end([group])</h4>
+<p>返回指定的组截获的子串在string中的结束索引（子串最后一个字符的索引+1）。group默认值为0。</p>
+<h4>6、span([group])</h4>
+<p>返回(start(group), end(group))。</p>
+<h4>7、expand(template)</h4>
+<p>将匹配到的分组代入template中然后返回。<br />
+template中可以使用\id或\g、\g引用分组，但不能使用编号0。\id与\g是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符&#8217;0&#8217;，只能使用\g0。</p>
+<h3>实例</h3>
+<p><code>import re<br />
+m = re.match(r'(\w+) (\w+)(?P.*)', 'hello world!')</code></p>
+<p><code>print "m.string:", m.string<br />
+print "m.re:", m.re<br />
+print "m.pos:", m.pos<br />
+print "m.endpos:", m.endpos<br />
+print "m.lastindex:", m.lastindex<br />
+print "m.lastgroup:", m.lastgroup<br />
+### output ###<br />
+# m.string: hello world!<br />
+# m.re:<br />
+# m.pos: 0<br />
+# m.endpos: 12<br />
+# m.lastindex: 3<br />
+# m.lastgroup: sign</code></p>
+<p><code>print "m.group(1,2):", m.group(1, 2)<br />
+print "m.groups():", m.groups()<br />
+print "m.groupdict():", m.groupdict()<br />
+print "m.start(2):", m.start(2)<br />
+print "m.end(2):", m.end(2)<br />
+print "m.span(2):", m.span(2)<br />
+print r"m.expand(r'\2 \1\3'):", m.expand(r'\2 \1\3')<br />
+### output ###<br />
+# m.group(1,2): ('hello', 'world')<br />
+# m.groups(): ('hello', 'world', '!')<br />
+# m.groupdict(): {'sign': '!'}<br />
+# m.start(2): 6<br />
+# m.end(2): 11<br />
+# m.span(2): (6, 11)<br />
+# m.expand(r'\2 \1\3'): world hello!</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

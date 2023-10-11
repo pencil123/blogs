@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 文件缓存 | 青春部落    </title>
+    <meta name="keywords"  content="Nginx,静态文件缓存,aio,directio,open_file_cache,open_file_cache_min_uses,open_file_cache_valid,sendfile" />
+    <meta name="description"  content="Nginx服务配置静态文件缓存" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 文件缓存评论Feed" href="https://cn-blogs.cn/archives/163.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx 优化请求处理' href='https://cn-blogs.cn/archives/161.html' />
+<link rel='next' title='keepalive 长连接' href='https://cn-blogs.cn/archives/169.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/163.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=163' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F163.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F163.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-163 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/161.html" rel="prev">上一篇：Nginx 优化请求处理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/169.html" rel="next">下一篇：keepalive 长连接</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 文件缓存        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/04/25</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>有关文件IO类指令:<br />
+aio、directio、open_file_cache、open_file_cache_min_uses、open_file_cache_valid和sendfile等；</p>
+<h3>示例 Example</h3>
+<p><code>open_file_cache max=1000 inactive=20s;<br />
+open_file_cache_valid 30s;<br />
+open_file_cache_min_uses 2;<br />
+open_file_cache_errors on;</code></p>
+<h3>open_file_cache off;</h3>
+<p>设置打开文件的缓存<br />
+<code>open_file_cache max=N [inactive=time];<br />
+Default: off;<br />
+Context: http, server, location</code></p>
+<p>配置一个缓存用于存储：<br />
+打开的文件描述符；文件大小和修改时间<br />
+存在的目录信息<br />
+文件检索错误信息；如文件不存在，没有权限<br />
+是否缓存文件检索错误信息，使用open_file_cache_errors命令设置</p>
+<p>max：sets the maximum number of elements in the cache; on cache overflow the least recently used (LRU) elements are removed;<br />
+#缓存的最大数量<br />
+inactive：defines a time after which an element is removed from the cache if it has not been accessed during this time; by default, it is 60 seconds;<br />
+#缓存的过期时间<br />
+off：disables the cache.<br />
+#禁用缓存</p>
+<h3>open_file_cache_errors on | off;</h3>
+<p>是否缓存文件检索中的错误信息<br />
+<code>Default:off;<br />
+Context: http, server, location<br />
+Enables or disables caching of file lookup errors by open_file_cache.</code></p>
+<h3>open_file_cache_min_uses number;</h3>
+<p>文件缓存最小使用数<br />
+<code>Default:1;<br />
+Context:http, server, location</code></p>
+<p>Sets the minimum number of file accesses during the period configured by the inactive parameter of the open_file_cache directive, required for a file descriptor to remain open in the cache.<br />
+#在open_file_cache指令设置的缓存时间内，文件最小的访问次数；如果超过这个数，则文件描述符会保持缓存中的打开状态。</p>
+<h3>open_file_cache_valid time;</h3>
+<p>指定多长时间检查一次缓存信息是否变更<br />
+<code>Default:60s;<br />
+Context: http, server, location<br />
+Sets a time after which open_file_cache elements should be validated.</code></p>
+<h3>一种特殊情况</h3>
+<p>当用户使用新图片，覆盖线上的图片时，如果图片的URI没有更改；那么在刷新图片时，会出现图片更新失败的情况。<br />
+即使设置图片不进行缓存(expires 0)依然不生效；浏览器还是会使用本地缓存。<br />
+抓包发现，浏览器发现图片过期并发送了请求带有If-Modified-Since，得到的是304且Last-Modified时间没变，也就是说nginx说此图片没有更改，浏览器就用本地缓存了。</p>
+<h4>原因就是nginx文件缓存的设置：</h4>
+<p><code>open_file_cache max=102400 inactive=20s;<br />
+open_file_cache_valid 30s;<br />
+open_file_cache_min_uses 1;</code><br />
+文件信息将会给缓存20秒；<br />
+每30秒才会检查一次缓存信息是否更改；<br />
+如果20s内使用过一次文件，文件描述符将持续缓存。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

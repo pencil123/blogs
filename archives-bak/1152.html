@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 日志配置 | 青春部落    </title>
+    <meta name="keywords"  content="nginx,access_log,log_format,error_log" />
+    <meta name="description"  content="nginx 服务设置日志参数包括访问日志设置，日志格式，日志文件描述符缓存和错误日志" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 日志配置评论Feed" href="https://cn-blogs.cn/archives/1152.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx 主进程和工作进程说明' href='https://cn-blogs.cn/archives/909.html' />
+<link rel='next' title='Nginx 架构和扩展' href='https://cn-blogs.cn/archives/1601.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1152.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1152' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1152.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1152.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1152 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/909.html" rel="prev">上一篇：Nginx 主进程和工作进程说明</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1601.html" rel="next">下一篇：Nginx 架构和扩展</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 日志配置        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/06/02</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Nginx 服务和其他服务一样提供了记录进程操作日志的模块。Nginx 服务记录的日志分为错误日志和访问日志。<br />
+错误日志：Nginx服务Master进程的日志；进程关闭、进程启动、运行中警告和错误<br />
+访问日志：由ngx_http_log_module支持；记录Web服务器的请求日志；由access_log\log_format\open_log_file_cache 等指令配置。</p>
+<h2>错误日志</h2>
+<p>语法: error_log file | stderr | syslog:server=address[,parameter=value] [debug | info | notice | warn | error | crit | alert | emerg];<br />
+默认值: error_log logs/error.log error;<br />
+配置段: main, http, server, location<br />
+配置错误日志。</p>
+<h2>访问日志</h2>
+<p>nginx中有关日志的配置命令</p>
+<ul>
+<li>access_log 访问日志记录配置</li>
+<li>log_format 日志格式</li>
+<li>open_log_file_cache 日志文件描述符缓存</li>
+<li>log_not_found</li>
+<li>log_subrequest</li>
+<li>rewrite_log</li>
+</ul>
+<h4>access_log 访问日志</h4>
+<p>语法:<br />
+access_log path [format [buffer=size [flush=time]]];<br />
+access_log path format gzip[=level] [buffer=size] [flush=time];<br />
+access_log syslog:server=address[,parameter=value] [format];<br />
+access_log off;<br />
+默认值:access_log logs/access.log combined;<br />
+配置段:http, server, location, if in location, limit_except<br />
+参数：<br />
+gzip压缩等级。<br />
+buffer设置内存缓存区大小。<br />
+flush保存在缓存区中的最长时间。<br />
+不记录日志：access_log off;</p>
+<p>使用默认combined格式记录日志：<br />
+access_log logs/access.log 或 access_log logs/access.log combined;</p>
+<h4>log_format 日志格式</h4>
+<p>语法: log_format name string …;<br />
+默认值: log_format combined “…”;<br />
+配置段: http</p>
+<p>日志格式允许包含的变量注释如下：</p>
+<ul>
+<li>$remote_addr, $http_x_forwarded_for 记录客户端IP地址</li>
+<li>$remote_user 记录客户端用户名称</li>
+<li>$request 记录请求的URL和HTTP协议</li>
+<li>$status 记录请求状态</li>
+<li>$body_bytes_sent 发送给客户端的字节数，不包括响应头的大小； 该变量与Apache模块mod_log_config里的“%B”参数兼容。</li>
+<li>$bytes_sent 发送给客户端的总字节数。</li>
+<li>$connection 连接的序列号。</li>
+<li>$connection_requests 当前通过一个连接获得的请求数量。</li>
+<li>$msec 日志写入时间。单位为秒，精度是毫秒。</li>
+<li>$pipe 如果请求是通过HTTP流水线(pipelined)发送，pipe值为“p”，否则为“.”。</li>
+<li>$http_referer 记录从哪个页面链接访问过来的</li>
+<li>$http_user_agent 记录客户端浏览器相关信息</li>
+<li>$request_length 请求的长度（包括请求行，请求头和请求正文）。</li>
+<li>$request_time 请求处理时间，单位为秒，精度毫秒； 从读入客户端的第一个字节开始，直到把最后一个字符发送给客户端后进行日志写入为止。</li>
+<li>$time_iso8601 ISO8601标准格式下的本地时间。</li>
+<li>$time_local 通用日志格式下的本地时间。</li>
+</ul>
+<p>更多请参考Nginx 内置变量</p>
+<blockquote class="wp-embedded-content" data-secret="enKojlviil"><p><a href="https://www.cn-blogs.cn/archives/963.html">Nginx 内置变量</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.cn-blogs.cn/archives/963.html/embed#?secret=enKojlviil" data-secret="enKojlviil" width="500" height="282" title="《Nginx 内置变量》—青春部落" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<h4>open_log_file_cache</h4>
+<p>语法:<br />
+open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];<br />
+open_log_file_cache off;<br />
+默认值: open_log_file_cache off;<br />
+配置段: http, server, location</p>
+<p>对于每一条日志记录，都将是先打开文件，再写入日志，然后关闭。可以使用open_log_file_cache来设置日志文件缓存(默认是off)，格式如下：<br />
+参数注释如下：<br />
+max:设置缓存中的最大文件描述符数量，如果缓存被占满，采用LRU算法将描述符关闭。<br />
+inactive:设置存活时间，默认是10s<br />
+min_uses:设置在inactive时间段内，日志文件最少使用多少次后，该日志文件描述符记入缓存中，默认是1次<br />
+valid:设置检查频率，默认60s<br />
+off：禁用缓存</p>
+<p>实例如下：<br />
+<code>open_log_file_cache max=1000 inactive=20s valid=1m min_uses=2;</code></p>
+<h2>日志分割脚本</h2>
+<p><code>#!/bin/bash<br />
+#设置日志文件存放目录<br />
+logs_path="/data/logs/"<br />
+#设置pid文件<br />
+pid_path="/usr/local/nginx/nginx.pid"<br />
+#<br />
+#重命名日志文件<br />
+mv ${logs_path}defaul.log ${logs_path}access$(date -d "yesterday" +"%Y%m%d").log<br />
+#向nginx主进程发信号重新打开日志<br />
+kill -USR1 `cat ${pid_path}`<br />
+#<br />
+find /data/logs -mtime +365 -name "*.*" -exec rm -rf {} \;</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

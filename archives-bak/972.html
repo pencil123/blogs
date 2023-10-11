@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PEP 8  Python 编码风格 | 青春部落    </title>
+    <meta name="keywords"  content="PEP 8,Python,编码风格,编程语言" />
+    <meta name="description"  content="Python编程语言PEP8 编码风格" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; PEP 8  Python 编码风格评论Feed" href="https://cn-blogs.cn/archives/972.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='可变参数*和**' href='https://cn-blogs.cn/archives/959.html' />
+<link rel='next' title='_future_' href='https://cn-blogs.cn/archives/978.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/972.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=972' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F972.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F972.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-972 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development" rel="category tag">编程开发</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/959.html" rel="prev">上一篇：可变参数*和**</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/978.html" rel="next">下一篇：_future_</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            PEP 8  Python 编码风格        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/11/05</span>
+            <span class="update is-hidden">2018-06-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h4>代码编排</h4>
+<p>1、缩进。4个空格的缩进（编辑器都可以完成此功能），不使用Tap，更不能混合使用Tap和空格。<br />
+2、每行最大长度79，换行可以使用反斜杠，最好使用圆括号。换行点要在操作符的后边敲回车。<br />
+3、类和top-level函数定义之间空两行；类中的方法定义之间空一行；函数内逻辑无关段落之间空一行；其他地方尽量不要再空行。</p>
+<h4>文档编排</h4>
+<p>1、模块内容的顺序：<br />
+模块说明和<code>docstring—import—globals&amp;constants</code>—其他定义。其中import部分，又按标准、三方和自己编写顺序依次排放，之间空一行。<br />
+2、不要在一句import中多个库，比如import os, sys不推荐。<br />
+3、如果采用<code>from XX import XX</code>引用库，可以省略‘module.’，都是可能出现命名冲突，这时就要采用import XX。</p>
+<h4>空格的使用</h4>
+<p>总体原则，避免不必要的空格。<br />
+1、各种右括号前不要加空格。<br />
+2、逗号、冒号、分号前不要加空格。<br />
+3、函数的左括号前不要加空格。如Func(1)。<br />
+4、序列的左括号前不要加空格。如list[2]。<br />
+5、操作符左右各加一个空格，不要为了对齐增加空格。<br />
+6、函数默认参数使用的赋值符左右省略空格。<br />
+7、不要将多句语句写在同一行，尽管使用‘；’允许。<br />
+8、if/for/while语句中，即使执行语句只有一句，也必须另起一行。</p>
+<h4>注释</h4>
+<p>总体原则，错误的注释不如没有注释。所以当一段代码发生变化时，第一件事就是要修改注释！<br />
+注释必须使用英文，最好是完整的句子，首字母大写，句后要有结束符，结束符后跟两个空格，开始下一句。如果是短语，可以省略结束符。<br />
+1、块注释，在一段代码前增加的注释。在‘#’后加一空格。段落之间以只有‘#’的行间隔。比如：<br />
+<code># Description : Module config.<br />
+#<br />
+# Input : None<br />
+#<br />
+# Output : None</code><br />
+2、行注释，在一句代码后加注释。比如：<code>x = x + 1 # Increment x</code>但是这种方式尽量少使用。<br />
+3、避免无谓的注释。</p>
+<h4>文档描述</h4>
+<p>1、为所有的共有模块、函数、类、方法写docstrings；非共有的没有必要，但是可以写注释（在def的下一行）。<br />
+2、如果docstring要换行，参考如下例子,详见PEP 257<br />
+<code>"""Return a foobang</code></p>
+<p>Optional plotz says to frobnicate the bizbaz first.</p>
+<p>&#8220;&#8221;&#8221;</p>
+<h4>命名规范</h4>
+<p>总体原则，新编代码必须按下面命名风格进行，现有库的编码尽量保持风格。<br />
+1、尽量单独使用小写字母‘l’，大写字母‘O’等容易混淆的字母。<br />
+2、模块命名尽量短小，使用全部小写的方式，可以使用下划线。<br />
+3、包命名尽量短小，使用全部小写的方式，不可以使用下划线。<br />
+4、类的命名使用CapWords的方式，模块内部使用的类采用_CapWords的方式。<br />
+5、异常命名使用CapWords+Error后缀的方式。<br />
+6、全局变量尽量只在模块内有效，类似C语言中的static。实现方法有两种，一是__all__机制;二是前缀一个下划线。<br />
+7、函数命名使用全部小写的方式，可以使用下划线。<br />
+8、常量命名使用全部大写的方式，可以使用下划线。<br />
+9、类的属性（方法和变量）命名使用全部小写的方式，可以使用下划线。<br />
+9、类的属性有3种作用域public、non-public和subclass API，可以理解成C++中的public、private、protected，non-public属性前，前缀一条下划线。<br />
+11、类的属性若与关键字名字冲突，后缀一下划线，尽量不要使用缩略等其他方式。<br />
+12、为避免与子类属性命名冲突，在类的一些属性前，前缀两条下划线。比如：类Foo中声明__a,访问时，只能通过Foo._Foo__a，避免歧义。如果子类也叫Foo，那就无能为力了。<br />
+13、类的方法第一个参数必须是self，而静态方法第一个参数必须是cls。</p>
+<h4>编码建议</h4>
+<p>1、编码中考虑到其他python实现的效率等问题，比如运算符‘+’在CPython（Python）中效率很高，都是Jython中却非常低，所以应该采用.join()的方式。<br />
+2、尽可能使用‘is’‘is not’取代‘==’，比如if x is not None 要优于if x。<br />
+3、使用基于类的异常，每个模块或包都有自己的异常类，此异常类继承自Exception。<br />
+4、异常中不要使用裸露的except，except后跟具体的exceptions。<br />
+5、异常中try的代码尽可能少。比如：<br />
+<code>try:<br />
+value = collection[key]<br />
+except KeyError:<br />
+return key_not_found(key)<br />
+else:<br />
+return handle_value(value)</code><br />
+要优于<br />
+<code>try:<br />
+# Too broad!<br />
+return handle_value(collection[key])<br />
+except KeyError:<br />
+# Will also catch KeyError raised by handle_value()<br />
+return key_not_found(key)</code><br />
+6、使用startswith() and endswith()代替切片进行序列前缀或后缀的检查。比如：<br />
+<code>Yes: if foo.startswith('bar'):优于<br />
+No: if foo[:3] == 'bar':</code><br />
+7、使用isinstance()比较对象的类型。比如<br />
+<code>Yes: if isinstance(obj, int): 优于<br />
+No: if type(obj) is type(1):</code><br />
+8、判断序列空或不空，有如下规则<br />
+<code>Yes: if not seq:<br />
+if seq:<br />
+优于<br />
+No: if len(seq)<br />
+if not len(seq)</code><br />
+9、字符串不要以空格收尾。<br />
+10、二进制数据判断使用 if boolvalue的方式。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

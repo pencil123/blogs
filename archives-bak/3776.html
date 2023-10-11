@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS @media 和 @keyframes | 青春部落    </title>
+    <meta name="keywords"  content="css,@media,@keyframes" />
+    <meta name="description"  content="CSS @media标签 和 @keyframes标签" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; CSS @media 和 @keyframes评论Feed" href="https://cn-blogs.cn/archives/3776.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Flex 布局' href='https://cn-blogs.cn/archives/3772.html' />
+<link rel='next' title='隐藏SSH服务的欢迎消息和警告消息' href='https://cn-blogs.cn/archives/3778.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3776.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3776' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3776.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3776.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3776 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/html-css-js" rel="category tag">前端</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3772.html" rel="prev">上一篇：Flex 布局</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3778.html" rel="next">下一篇：隐藏SSH服务的欢迎消息和警告消息</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            CSS @media 和 @keyframes        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/03/19</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>css @media 标签</h2>
+<p>使用 @media 查询，你可以针对不同的媒体类型定义不同的样式。<br />
+@media 可以针对不同的屏幕尺寸设置不同的样式，特别是如果你需要设置设计响应式的页面，@media 是非常有用的。<br />
+当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面。</p>
+<h3>语法</h3>
+<p><code>@media mediatype and|not|only (media feature) {<br />
+CSS-Code;<br />
+}</code></p>
+<h3>媒体类型(mediatype)</h3>
+<table>
+<tbody>
+<tr>
+<th>all</th>
+<th>用于所有设备</th>
+</tr>
+<tr>
+<th>aural</th>
+<th>已废弃。用于语音和声音合成器</th>
+</tr>
+<tr>
+<th>braille</th>
+<th>已废弃。 应用于盲文触摸式反馈设备</th>
+</tr>
+<tr>
+<th>embossed</th>
+<th>已废弃。 用于打印的盲人印刷设备</th>
+</tr>
+<tr>
+<th>handheld</th>
+<th>已废弃。 用于掌上设备或更小的装置，如PDA和小型电话</th>
+</tr>
+<tr>
+<th>print</th>
+<th>用于打印机和打印预览</th>
+</tr>
+<tr>
+<th>projection</th>
+<th>已废弃。 用于投影设备</th>
+</tr>
+<tr>
+<th>screen</th>
+<th>用于电脑屏幕，平板电脑，智能手机等。</th>
+</tr>
+<tr>
+<th>speech</th>
+<th>应用于屏幕阅读器等发声设备</th>
+</tr>
+<tr>
+<th>tty</th>
+<th>已废弃。 用于固定的字符网格，如电报、终端设备和对字符有限制的便携设备</th>
+</tr>
+<tr>
+<th>tv</th>
+<th>已废弃。 用于电视和网络电视</th>
+</tr>
+</tbody>
+</table>
+<h3>媒体特征(media feature)</h3>
+<table>
+<tbody>
+<tr>
+<th>aspect-ratio</th>
+<th>定义输出设备中的页面可见区域宽度与高度的比率</th>
+</tr>
+<tr>
+<th>color</th>
+<th>定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0</th>
+</tr>
+<tr>
+<th>color-index</th>
+<th>定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0</th>
+</tr>
+<tr>
+<th>device-aspect-ratio</th>
+<th>定义输出设备的屏幕可见宽度与高度的比率。</th>
+</tr>
+<tr>
+<th>device-height</th>
+<th>定义输出设备的屏幕可见高度。</th>
+</tr>
+<tr>
+<th>device-width</th>
+<th>定义输出设备的屏幕可见宽度。</th>
+</tr>
+<tr>
+<th>grid</th>
+<th>用来查询输出设备是否使用栅格或点阵。</th>
+</tr>
+<tr>
+<th>height</th>
+<th>定义输出设备中的页面可见区域高度。</th>
+</tr>
+<tr>
+<th>max-aspect-ratio</th>
+<th>定义输出设备的屏幕可见宽度与高度的最大比率。</th>
+</tr>
+<tr>
+<th>max-color</th>
+<th>定义输出设备每一组彩色原件的最大个数。</th>
+</tr>
+<tr>
+<th>max-color-index</th>
+<th>定义在输出设备的彩色查询表中的最大条目数。</th>
+</tr>
+<tr>
+<th>max-device-aspect-ratio</th>
+<th>定义输出设备的屏幕可见宽度与高度的最大比率。</th>
+</tr>
+<tr>
+<th>max-device-height</th>
+<th>定义输出设备的屏幕可见的最大高度。</th>
+</tr>
+<tr>
+<th>max-device-width</th>
+<th>定义输出设备的屏幕最大可见宽度。</th>
+</tr>
+<tr>
+<th>max-height</th>
+<th>定义输出设备中的页面最大可见区域高度。</th>
+</tr>
+<tr>
+<th>max-monochrome</th>
+<th>定义在一个单色框架缓冲区中每像素包含的最大单色原件个数。</th>
+</tr>
+<tr>
+<th>max-resolution</th>
+<th>定义设备的最大分辨率。</th>
+</tr>
+<tr>
+<th>max-width</th>
+<th>定义输出设备中的页面最大可见区域宽度。</th>
+</tr>
+<tr>
+<th>min-aspect-ratio</th>
+<th>定义输出设备中的页面可见区域宽度与高度的最小比率。</th>
+</tr>
+<tr>
+<th>min-color</th>
+<th>定义输出设备每一组彩色原件的最小个数。</th>
+</tr>
+<tr>
+<th>min-color-index</th>
+<th>定义在输出设备的彩色查询表中的最小条目数。</th>
+</tr>
+<tr>
+<th>min-device-aspect-ratio</th>
+<th>定义输出设备的屏幕可见宽度与高度的最小比率。</th>
+</tr>
+<tr>
+<th>min-device-width</th>
+<th>定义输出设备的屏幕最小可见宽度。</th>
+</tr>
+<tr>
+<th>min-device-height</th>
+<th>定义输出设备的屏幕的最小可见高度。</th>
+</tr>
+<tr>
+<th>min-height</th>
+<th>定义输出设备中的页面最小可见区域高度。</th>
+</tr>
+<tr>
+<th>min-monochrome</th>
+<th>定义在一个单色框架缓冲区中每像素包含的最小单色原件个数</th>
+</tr>
+<tr>
+<th>min-resolution</th>
+<th>定义设备的最小分辨率。</th>
+</tr>
+<tr>
+<th>min-width</th>
+<th>定义输出设备中的页面最小可见区域宽度。</th>
+</tr>
+<tr>
+<th>monochrome</th>
+<th>定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0</th>
+</tr>
+<tr>
+<th>orientation</th>
+<th>定义输出设备中的页面可见区域高度是否大于或等于宽度。</th>
+</tr>
+<tr>
+<th>resolution</th>
+<th>定义设备的分辨率。如：96dpi, 300dpi, 118dpcm</th>
+</tr>
+<tr>
+<th>scan</th>
+<th>定义电视类设备的扫描工序。</th>
+</tr>
+<tr>
+<th>width</th>
+<th>定义输出设备中的页面可见区域宽度。</th>
+</tr>
+</tbody>
+</table>
+<h2>@keyframes 标签</h2>
+<p>你可以创建动画。<br />
+创建动画是通过逐步改变从一个CSS样式设定到另一个。<br />
+在动画过程中，您可以更改CSS样式的设定多次。<br />
+指定的变化时发生时使用％，或关键字&#8221;from&#8221;和&#8221;to&#8221;，这是和0％到100％相同。<br />
+0％是开头动画，100％是当动画完成。<br />
+为了获得最佳的浏览器支持，您应该始终定义为0％和100％的选择器。<br />
+注意: 使用animation属性来控制动画的外观，还使用选择器绑定动画。</p>
+<h3>语法</h3>
+<p><code>@keyframes animationname {keyframes-selector {css-styles;}}</code></p>
+<h3>属性</h3>
+<table>
+<tbody>
+<tr>
+<th>animationname</th>
+<th>必需的。定义animation的名称。</th>
+</tr>
+<tr>
+<th>keyframes-selector</th>
+<th>必需的。动画持续时间的百分比。</p>
+<p>合法值：0-100%;</p>
+<p>from (和0%相同);</p>
+<p>to (和100%相同);</p>
+<p>注意： 您可以用一个动画keyframes-selectors。</th>
+</tr>
+<tr>
+<th>css-styles</th>
+<th>必需的。一个或多个合法的CSS样式属性</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

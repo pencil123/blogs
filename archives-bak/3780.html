@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Linux 系统密码策略 | 青春部落    </title>
+    <meta name="keywords"  content="Linux,系统安全,密码策略,密码质量检测,密码有效期" />
+    <meta name="description"  content="Linux 系统密码策略设置，包括密码质量检测、密码有效期设置和防止重复使用旧密码" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Linux 系统密码策略评论Feed" href="https://cn-blogs.cn/archives/3780.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='隐藏SSH服务的欢迎消息和警告消息' href='https://cn-blogs.cn/archives/3778.html' />
+<link rel='next' title='SSH服务登录很慢' href='https://cn-blogs.cn/archives/3790.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3780.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3780' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3780.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3780.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3780 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li>
+	<li><a href="https://cn-blogs.cn/archives/category/security" rel="category tag">安全</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3778.html" rel="prev">上一篇：隐藏SSH服务的欢迎消息和警告消息</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3790.html" rel="next">下一篇：SSH服务登录很慢</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Linux 系统密码策略        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/03/22</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>当前的网络环境，黑客行为猖獗地超出一个善良人的想象。<br />
+一台在线服务器如果没有限制sshd服务的端口，每天不会少于几百次的暴力破解密码操作。<br />
+为了服务器的安全着想，最好要限制可登录IP地址；不然可以限制使用证书登录；再不然就是设置密码机制了。</p>
+<h2>密码机制</h2>
+<p>包括几个方面，根据个人情况选择使用。<br />
+1、密码质量检测：包括字符设定(数字|大小写|特殊字符)和密码长度<br />
+2、密码有效期：一个密码的有效时间<br />
+3、防止重复使用旧密码</p>
+<h2>密码质量检测</h2>
+<p>pam_cracklib(PAM模块)根据字典单词检测密码<br />
+该模块可以嵌入到“应用程序的密码堆栈”中，提供对密码强度的检测功能。<br />
+该模块的作用是提示用户输入密码，并根据系统字典和一系列密码规则检查密码的强度。</p>
+<h3>工作过程</h3>
+<p>首先提示“输入新密码”，并检测密码的质量；如果密码质量合格，则提示“重新输入密码”，用于检验密码的一致性。<br />
+两者都通过后，会将密码提交给后续的模块处理。</p>
+<h3>密码强度检测过程</h3>
+<p>1、检测密码是否为字典单词的一部分<br />
+2、新密码是否和之前密码相同<br />
+3、新密码只是更改了大小写<br />
+4、新密码和旧密码相似度（difok）<br />
+5、密码是否指令合格（minlen\maxclassrepeat\dcredit\ucredit\lvredit\ocredit）<br />
+6、新密码是否为旧密码的前后颠倒<br />
+7、检测连续字符<br />
+8、太长的单调字符排序<br />
+9、包含用户名字<br />
+此模块没有设置参数也可以很好的使用到标准UNIX密码加密机制中。以上的检测密码强度的操作，可以更加自己需要选择使用。</p>
+<h3>配置选择</h3>
+<table>
+<tbody>
+<tr>
+<th>debug</th>
+<th>模块将信息写入到日志中</th>
+</tr>
+<tr>
+<th>authtok_type</th>
+<th>提供输入密码后的默认操作</th>
+</tr>
+<tr>
+<th>retry</th>
+<th>用户输入N次错误密码后，断开连接</th>
+</tr>
+<tr>
+<th>difok</th>
+<th>新密码和旧密码中的字符更改数目</th>
+</tr>
+<tr>
+<th>minlen</th>
+<th>最小的密码长度；密码每多使用一种类型(以下四种)密码长度可以减一。注意Craklib本身也有长度限制</th>
+</tr>
+<tr>
+<th>dcredit</th>
+<th>数字（N&gt; = 0）这是新密码中有数字的最大值。 如果您的位数少于或等于N位，则每个数字将计数+1以满足当前的minlen值。</th>
+</tr>
+<tr>
+<th>ucredit</th>
+<th>大写字母 （N = 1）默认值，这是minlen的推荐值小于10。</th>
+</tr>
+<tr>
+<th>lcredit</th>
+<th>小写字母 （N &lt;0）这是新密码必须满足的最小小写字母数。</th>
+</tr>
+<tr>
+<th>ocredit</th>
+<th>其他字符 和以上3个配置相同;注意N=1 包含在N》=0中</th>
+</tr>
+<tr>
+<th>minclass</th>
+<th>密码中的最少字符类型：上面的4中default:disabled</th>
+</tr>
+<tr>
+<th>maxrepeat</th>
+<th>拒绝包括多余N个连续相同的字符default:disabled</th>
+</tr>
+<tr>
+<th>maxsequence</th>
+<th>拒绝包括多余N个的单调字符序列的密码。如‘12345’和‘fedcb’;default:disabled</th>
+</tr>
+<tr>
+<th>maxclassrepeat</th>
+<th>拒绝包含同一类的N个以上连续字符的密码;default:disabled</th>
+</tr>
+<tr>
+<th>reject_username</th>
+<th>拒绝新密码是否包含直接或反转形式的用户名</th>
+</tr>
+<tr>
+<th>gecoscheck</th>
+<th>拒绝新密码包含长度超过3个字符的正向和反向GECOS字段（通常是用户的全名）</th>
+</tr>
+<tr>
+<th>enforce_for_root</th>
+<th>设置ROOT用户也要遵循设定的规则；default:disabled</th>
+</tr>
+<tr>
+<th>use_authtok</th>
+<th>该参数用于强制模块不提示用户输入新密码</th>
+</tr>
+<tr>
+<th>dictpath</th>
+<th>指定cracklib字典的路径</th>
+</tr>
+</tbody>
+</table>
+<h3>返回值</h3>
+<table>
+<tbody>
+<tr>
+<th>PAM_SUCCESS</th>
+<th>新密码通过所有检查。</th>
+</tr>
+<tr>
+<th>PAM_AUTHTOK_ERR</th>
+<th>没有输入新密码，无法确定用户名，或新密码未通过强度检查。</th>
+</tr>
+<tr>
+<th>PAM_AUTHTOK_RECOVERY_ERR</th>
+<th>旧密码不是由以前的模块提供的，或者不是来自用户的请求。</th>
+</tr>
+<tr>
+<th>PAM_SERVICE_ERR</th>
+<th>发生内部错误。</th>
+</tr>
+</tbody>
+</table>
+<h3>案例</h3>
+<p>编辑配置文件/etc/pam.d/system-auth<br />
+<code>password  required pam_cracklib.so difok=3 minlen=15 dcredit= 2 ocredit=2<br />
+password  required pam_cracklib.so dcredit=-1 ucredit=-1 ocredit=-1 lcredit=0 minlen=8</code></p>
+<h2>密码有效期</h2>
+<p>配置文件为/etc/login.defs<br />
+<code># Password aging controls:<br />
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.<br />
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.<br />
+#	PASS_MIN_LEN	Minimum acceptable password length.<br />
+#	PASS_WARN_AGE	Number of days warning given before a password expires.</code></p>
+<h3>命令</h3>
+<p>chage -l 查看密码有效期信息</p>
+<h2>防止重复使用旧密码</h2>
+<p>pam_unix 用于传统密码认证的模块<br />
+这是标准的Unix认证模块。它使用来自系统库的标准调用来检索和设置帐户信息以及认证。通常这是从/ etc / passwd和/ etc / shadow文件获得的，如果启用了shadow。</p>
+<h3>其中的配置参数</h3>
+<p>remember 每个用户的最后n个密码保存在/ etc / security / opasswd中，以强制密码更改历史记录，并防止用户频繁地在相同密码之间交替。<br />
+<code>password   required   pam_unix.so use_authtok nullok md5</code><br />
+至于pam_unix 模块中其他说明，以后找时间更新</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

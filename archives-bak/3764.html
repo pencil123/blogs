@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 数据库开发注意事项 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,优化规则,开发注意事项" />
+    <meta name="description"  content="MySQL 数据库开发注意事项" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 数据库开发注意事项评论Feed" href="https://cn-blogs.cn/archives/3764.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Sass\Sccs和Less' href='https://cn-blogs.cn/archives/3759.html' />
+<link rel='next' title='知识共享 Creative Commons' href='https://cn-blogs.cn/archives/3770.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3764.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3764' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3764.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3764.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3764 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3759.html" rel="prev">上一篇：Sass\Sccs和Less</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3770.html" rel="next">下一篇：知识共享 Creative Commons</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 数据库开发注意事项        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/03/18</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>核心规则</h2>
+<h3>1、尽量不要在数据库中做运算</h3>
+<p>尽可能简单应用MySQL;不要在数据库中做运算，将复杂运算移到程序端。<br />
+如md5()\Order by Rand()</p>
+<h3>2、控制单表数据量</h3>
+<p>纯INT不超过1000W；含CHAR不超过500W<br />
+合理分表不超载;USERID\DATE\AREA<br />
+建议单库不超过300表。</p>
+<h3>3、优化表字段配置</h3>
+<p>1、表字段数少而精<br />
+IO高效、全表遍历、表修复快、提高并发、修改表格式快<br />
+2、单表1G体积，500W行评估<br />
+顺序读1G文件需要N表<br />
+单行不超过200Byte<br />
+单表不超过50个纯INT字段<br />
+单表不超过20个CHAR(10)字段<br />
+单表字段数控制在20-50个</p>
+<h3>4、平衡范式与冗余</h3>
+<p>效率优先、提升性能<br />
+适当牺牲范式、加入冗余<br />
+平衡代码复杂度的增加</p>
+<h3>5、拒绝3B</h3>
+<p>数据库并发处理非线性增长<br />
+拒绝：Big SQL\Big Transaction \Big Batch</p>
+<h2>字段类</h2>
+<p>1、考虑数值字段占用的存储空间<br />
+2、数字字段比字符串有优势<br />
+3、优先使用ENUM或SET<br />
+4、避免使用NULL字段：很难进行查询优化\NULL列加索引需要额外空间\含NULL复合索引无效<br />
+5、少用TEXT\BLOB字段：<br />
+TEXT字段类型处理性能远低于varchar：强制生成硬盘临时表\浪费更多空间\varchar的存储空间不要小觑<br />
+将TEXT/BLOB字段拆分到独立表中<br />
+5、不要在数据库中存储图片</p>
+<h2>索引类</h2>
+<p>1、合理添加索引<br />
+提高查询速度、降低更新速度、综合评估数据密度和数据分布、最好不超过字段数的20%；<br />
+2、字符字段设置前缀索引，设置区分度。<br />
+3、不要在索引中做运算<br />
+4、尽量不用外键；高并发容易死锁、由程序保证约束</p>
+<h3>补充：</h3>
+<p>索引的区分度，主要是衡量索引值不相同的程度，区分度越大，越有利于索引的查询。<br />
+设想一下，对于sex列，列值只有male和female，那么也就是说列中绝大多数值都是重复的，那么用此索引进行row的查找其实意义并不大。所以这样的列建索引的意义并不大。<br />
+对于列值比较长的列，我们往往不能将整个列做索引，因为这样会导致索引过大，降低索引效率。我们需要取列值的前缀进行索引，那么索引前缀的大小选择就需要计算区分度。<br />
+索引的区分度计算主要计算是通过 不重复的索引值/数据表的总记录数。区分度越高，索引查询时会让mysql在查询时过滤掉更多的行。值越接近1，证明区分度越高。</p>
+<h2>SQL语句</h2>
+<p>1、建议多个小SQL：一个SQL只有一个CPU运算、高并发下小SQL执行快、小SQL缓存命中率高<br />
+2、短小事务：减少锁资源的占用、使用短事务代替长事务<br />
+3、减少SP\TRIG\FUNC:减少存储过程、触发器、函数<br />
+4、减少select*:更多的CPU、内存、IO、网络宽带<br />
+5、改写OR为IN()<br />
+6、改写OR为UNION<br />
+7、避免反向查询：NOT\!=\NOT EXISTS\NOT IN\NOT LIKE&#8230;<br />
+8、避免%前缀模糊查询：不能使用索引，全表扫描<br />
+9、少用Count(*):count(*)!=count(col)<br />
+10、Limit高效分页：偏移量越大则越慢<br />
+11、使用UNION ALL 而非UNION<br />
+12、分解联接保证高并发<br />
+13、group by 去除排序：order by null<br />
+14、同数据类型进行比较</p>
+<h2>开发管理</h2>
+<p>隔离线上线下<br />
+不在程序端对数据库显式加锁<br />
+统一字符串编码</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

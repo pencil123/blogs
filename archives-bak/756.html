@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>threading 启用线程 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; threading 启用线程评论Feed" href="https://cn-blogs.cn/archives/756.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='python threading' href='https://cn-blogs.cn/archives/730.html' />
+<link rel='next' title='lock rlock 锁' href='https://cn-blogs.cn/archives/760.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/756.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=756' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F756.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F756.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-756 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/730.html" rel="prev">上一篇：python threading</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/760.html" rel="next">下一篇：lock rlock 锁</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            threading 启用线程        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/02/16</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3><strong>threading.thread起线程</strong></h3>
+<p>在Python中我们主要是通过thread和threading这两个模块来实现的，其中Python的threading模块是对thread做了一些包装的，可以更加方便的被使用，所以我们使用threading模块实现多线程编程。一般来说，使用线程有三种模式，<br />
+第一种是创建线程要执行的函数，把这个函数传递进Thread对象里，让它来执行；<br />
+第二种是创建可调用的类；即类中有__call__方法；<br />
+第三种是直接从Thread继承，创建一个新的class，把线程执行的代码放到这个新的 class里。</p>
+<h3><strong>将函数传递进Thread对象：</strong></h3>
+<p>import threading<br />
+def thread_fun(num):<br />
+———for n in range(0, int(num)):<br />
+——————print &#8221; I come from %s, num: %s&#8221; %( threading.currentThread().getName(), n)<br />
+def main(thread_num):<br />
+———thread_list = list();<br />
+———# 先创建线程对象<br />
+———for i in range(0, thread_num):<br />
+——————thread_name = &#8220;thread_%s&#8221; %i<br />
+——————thread_list.append(threading.Thread(target = thread_fun, name = thread_name, args = (20,)))</p>
+<p>———# 启动所有线程<br />
+———for thread in thread_list:<br />
+——————thread.start()</p>
+<p>———# 主线程中等待所有子线程退出<br />
+———for thread in thread_list:<br />
+——————thread.join()</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———main(3)<br />
+程序启动了3个线程，并且打印了每一个线程的线程名字，这个比较简单吧，处理重复任务就派出用场了，下面介绍使用继承threading的方式；</p>
+<h3><strong>配置可调用类</strong></h3>
+<p>import threading<br />
+class MyThread():<br />
+def __call__(self):<br />
+print &#8220;thread running&#8221;</p>
+<p>t = threading.Thread(target = MyThread)<br />
+t.start()</p>
+<h3><strong>继承自threading.Thread类:</strong></h3>
+<p>import threading<br />
+class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self);</p>
+<p>———def run(self):<br />
+——————print &#8220;I am %s&#8221; %self.name</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for thread in range(0, 5):<br />
+——————t = MyThread()<br />
+——————t.start()<br />
+控制这些线程，包括子线程的退出，子线程是否存活及将子线程设置为守护线程<strong>(Daemon)。</strong><br />
+threading.Thread类的重要函数<br />
+介绍threading模块中的主类Thread的一些主要方法，实例代码如下：</p>
+<p>import threading<br />
+class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)</p>
+<p>———def run(self):<br />
+——————print &#8220;I am %s&#8221; % (self.name)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for i in range(0, 5):<br />
+——————my_thread = MyThread()<br />
+——————my_thread.start()</p>
+<h3><strong>1、name相关</strong></h3>
+<p>你可以为每一个thread指定name，默认的是Thread-No形式的，如上述实例代码打印出的一样：<br />
+———I am Thread-1<br />
+———I am Thread-2<br />
+当然你可以指定每一个thread的name，这个通过setName方法，代码：<br />
+def __init__(self):<br />
+——— threading.Thread.__init__(self)<br />
+——— self.setName(&#8220;new&#8221; + self.name)</p>
+<h3><strong>2、join方法</strong></h3>
+<p>join方法原型如下，这个方法是用来阻塞当前上下文，直至该线程运行结束：<br />
+1<br />
+def join(self, timeout=None):<br />
+timeout可以设置超时时间</p>
+<h3><strong>3、setDaemon方法</strong></h3>
+<p>当我们在程序运行中，执行一个主线程，如果主线程又创建一个子线程，主线程和子线程就分兵两路，当主线程完成想退出时，会检验子线程是否完成。如果子线程未完成，则主线程会等待子线程完成后再退出。但是有时候我们需要的是，只要主线程完成了，不管子线程是否完成，都要和主线程一起退出，这时就可以用setDaemon方法，并设置其参数为True。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

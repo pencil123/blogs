@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>lock rlock 锁 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; lock rlock 锁评论Feed" href="https://cn-blogs.cn/archives/760.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='threading 启用线程' href='https://cn-blogs.cn/archives/756.html' />
+<link rel='next' title='Condition 条件变量' href='https://cn-blogs.cn/archives/771.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/760.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=760' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F760.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F760.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-760 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/756.html" rel="prev">上一篇：threading 启用线程</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/771.html" rel="next">下一篇：Condition 条件变量</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            lock rlock 锁        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/02/16</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2><strong>使用Lock互斥锁</strong></h2>
+<p><strong>状态</strong><br />
+锁有两种状态：被锁（locked）和没有被锁（unlocked）。拥有acquire()和release()两种方法，并且遵循一下的规则：<br />
+如果一个锁的状态是unlocked，调用acquire()方法改变它的状态为locked；<br />
+如果一个锁的状态是locked，acquire()方法将会阻塞，直到另一个线程调用release()方法释放了锁；<br />
+如果一个锁的状态是unlocked调用release()会抛出RuntimeError异常；<br />
+如果一个锁的状态是locked，调用release()方法改变它的状态为unlocked。</p>
+<p><strong>资源被无序抢占</strong><br />
+现在我们考虑这样一个问题：假设各个线程需要访问同一公共资源，我们的代码该怎么写？</p>
+<p>import threading<br />
+import time<br />
+counter = 0</p>
+<p>class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)</p>
+<p>———def run(self):<br />
+——————global counter<br />
+——————time.sleep(1);<br />
+——————counter += 1<br />
+——————print &#8220;I am %s, set counter:%s&#8221; % (self.name, counter)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for i in range(0, 200):<br />
+——————my_thread = MyThread()<br />
+——————my_thread.start()<br />
+解决上面的问题，我们兴许会写出这样的代码，我们假设跑200个线程，但是这200个线程都会去访问counter这个公共资源，并对该资源进行处理(counter += 1)，代码看起来就是这个样了，但是我们看下运行结果：<br />
+I am Thread-69, set counter:64<br />
+I am Thread-73, set counter:66<br />
+I am Thread-74, set counter:67<br />
+I am Thread-75, set counter:68<br />
+I am Thread-76, set counter:69<br />
+I am Thread-78, set counter:70<br />
+I am Thread-77, set counter:71<br />
+I am Thread-58, set counter:72<br />
+I am Thread-60, set counter:73<br />
+I am Thread-62, set counter:74<br />
+I am Thread-66, set counter:75<br />
+I am Thread-70, set counter:76<br />
+I am Thread-72, set counter:77<br />
+I am Thread-79, set counter:78<br />
+I am Thread-71, set counter:78<br />
+打印结果我只贴了一部分，从中我们已经看出了这个全局资源(counter)被抢占的情况，问题产生的原因就是没有控制多个线程对同一资源的访问，对数据造成破坏，使得线程运行的结果不可预期。这种现象称为“线程不安全”。在开发过程中我们必须要避免这种情况，那怎么避免？这就用到了我们在综述中提到的互斥锁了。<br />
+<strong>互斥锁概念</strong><br />
+Python编程中，引入了对象互斥锁的概念，来保证共享数据操作的完整性。每个对象都对应于一个可称为” 互斥锁” 的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。在Python中我们使用threading模块提供的Lock类。<br />
+我们对上面的程序进行整改，为此我们需要<strong>添加一个互斥锁变量</strong>mutex = threading.Lock()，然后在争夺资源的时候之前我们会先抢占这把锁mutex.acquire()，对资源使用完成之后我们在释放这把锁mutex.release()。代码如下：</p>
+<p>import threading<br />
+import time<br />
+counter = 0<br />
+mutex = threading.Lock()</p>
+<p>class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)</p>
+<p>———def run(self):<br />
+——————global counter, mutex<br />
+——————time.sleep(1);<br />
+——————if mutex.acquire():<br />
+—————————counter += 1<br />
+—————————print &#8220;I am %s, set counter:%s&#8221; % (self.name, counter)<br />
+—————————mutex.release()</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for i in range(0, 100):<br />
+——————my_thread = MyThread()<br />
+——————my_thread.start()<br />
+<strong>同步阻塞</strong><br />
+当一个线程调用Lock对象的acquire()方法获得锁时，这把锁就进入“locked”状态。因为每次只有一个线程1可以获得锁，所以如果此时另一个线程2试图获得这个锁，该线程2就会变为“block“同步阻塞状态。直到拥有锁的线程1调用锁的release()方法释放锁之后，该锁进入“unlocked”状态。线程调度程序从处于同步阻塞状态的线程中选择一个来获得锁，并使得该线程进入运行（running）状态。<br />
+进一步考虑<br />
+通过对公共资源使用互斥锁，这样就简单的到达了我们的目的，但是如果我们又遇到下面的情况：<br />
+1、遇到锁嵌套的情况该怎么办，这个嵌套是指当我一个线程在获取临界资源时，又需要再次获取；<br />
+2、如果有多个公共资源，在线程间共享多个资源的时候，如果两个线程分别占有一部分资源并且同时等待对方的资源；<br />
+上述这两种情况会直接造成程序挂起，即死锁，下面我们会谈死锁及可重入锁RLock。<br />
+<strong>死锁的形成</strong><br />
+如何使用互斥锁来保护我们的公共资源了，现在考虑下面的情况；<br />
+如果有多个公共资源，在线程间共享多个资源的时候，如果两个线程分别占有一部分资源并且同时等待对方的资源，这会引起什么问题？<br />
+<strong>死锁概念</strong><br />
+所谓死锁： 是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。<br />
+由于资源占用是互斥的，当某个进程提出申请资源后，使得有关进程在无外力协助下，永远分配不到必需的资源而无法继续运行，这就产生了一种特殊现象死锁。</p>
+<p>import threading<br />
+counterA = 0<br />
+counterB = 0<br />
+mutexA = threading.Lock()<br />
+mutexB = threading.Lock()</p>
+<p>class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)</p>
+<p>———def run(self):<br />
+——————self.fun1()<br />
+——————self.fun2()</p>
+<p>———def fun1(self):<br />
+——————global mutexA, mutexB<br />
+——————if mutexA.acquire():<br />
+—————————print &#8220;I am %s , get res: %s&#8221; %(self.name, &#8220;ResA&#8221;)</p>
+<p>—————————if mutexB.acquire():<br />
+————————————print &#8220;I am %s , get res: %s&#8221; %(self.name, &#8220;ResB&#8221;)<br />
+————————————mutexB.release()</p>
+<p>——————mutexA.release()</p>
+<p>———def fun2(self):<br />
+——————global mutexA, mutexB<br />
+——————if mutexB.acquire():<br />
+—————————print &#8220;I am %s , get res: %s&#8221; %(self.name, &#8220;ResB&#8221;)</p>
+<p>—————————if mutexA.acquire():<br />
+————————————print &#8220;I am %s , get res: %s&#8221; %(self.name, &#8220;ResA&#8221;)<br />
+————————————mutexA.release()</p>
+<p>——————mutexB.release()</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for i in range(0, 100):<br />
+——————my_thread = MyThread()<br />
+——————my_thread.start()<br />
+代码中展示了一个线程的两个功能函数分别在获取了一个竞争资源之后再次获取另外的竞争资源，我们看运行结果：<br />
+I am Thread-1 , get res: ResA<br />
+I am Thread-1 , get res: ResB<br />
+I am Thread-2 , get res: ResAI am Thread-1 , get res: ResB<br />
+可以看到，程序已经挂起在那儿了，这种现象我们就称之为”死锁“。<br />
+<strong>避免死锁</strong><br />
+避免死锁主要方法就是：正确有序的分配资源，避免死锁算法中最有代表性的算法是Dijkstra E.W 于1968年提出的银行家算法。</p>
+<h2><strong>可重入锁RLock</strong></h2>
+<p>考虑这种情况：如果一个线程遇到锁嵌套的情况该怎么办，这个嵌套是指当我一个线程在获取临界资源时，又需要再次获取。<br />
+根据这种情况，代码如下：</p>
+<p>import threading<br />
+import time<br />
+counter = 0<br />
+mutex = threading.Lock()<br />
+class MyThread(threading.Thread):<br />
+———def __init__(self):<br />
+——————threading.Thread.__init__(self)</p>
+<p>———def run(self):<br />
+——————global counter, mutex<br />
+——————time.sleep(1);<br />
+——————if mutex.acquire():<br />
+—————————counter += 1<br />
+—————————print &#8220;I am %s, set counter:%s&#8221; % (self.name, counter)<br />
+—————————if mutex.acquire():<br />
+————————————counter += 1<br />
+————————————print &#8220;I am %s, set counter:%s&#8221; % (self.name, counter)<br />
+————————————mutex.release()<br />
+—————————mutex.release()</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+———for i in range(0, 200):<br />
+——————my_thread = MyThread()<br />
+——————my_thread.start()<br />
+<strong>这种情况的代码运行情况如下：</strong><br />
+I am Thread-1, set counter:1<br />
+之后就直接挂起了，这种情况形成了最简单的死锁。<br />
+那有没有一种情况可以在某一个线程使用互斥锁访问某一个竞争资源时，可以再次获取呢？在Python中为了支持在同一线程中多次请求同一资源，python提供了“可重入锁”：threading.RLock。这个RLock内部维护着一个Lock和一个counter变量，counter记录了acquire的次数，从而使得资源可以被多次require。直到一个线程所有的acquire都被release，其他的线程才能获得资源。上面的例子如果使用RLock代替Lock，则不会发生死锁：<br />
+<strong>代码只需将上述的：</strong><br />
+mutex = threading.Lock()<br />
+替换成：<br />
+mutex = threading.RLock()</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

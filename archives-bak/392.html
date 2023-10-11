@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>innodb | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; innodb评论Feed" href="https://cn-blogs.cn/archives/392.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='myisam' href='https://cn-blogs.cn/archives/389.html' />
+<link rel='next' title='主键和外键' href='https://cn-blogs.cn/archives/395.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/392.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=392' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F392.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F392.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-392 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/389.html" rel="prev">上一篇：myisam</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/395.html" rel="next">下一篇：主键和外键</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            innodb        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/06/29</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>innodb_buffer_pool_size</strong><br />
+InnoDB用来缓存它的数据和索引的内存缓冲区的大小。把innodb_buffer_pool_size参数值设得越高，访问表中数据需要的磁盘I/O就越少。在一个专用的数据库服务器上，最高可以将这个参数值设置为机器物理内存大小的80%。尽管如此，建议还是不要把它设置得太大，因为对物理内存的竞争可能在操作系统上导致内存调度。<br />
+innodb_buffer_pool_size是InnoDB性能的决定性因素，如果你的数据库大小小于innodb_buffer_pool_size设置的缓冲池大小，那么此时数据库的性能是最好的，因为客户端访问的数据都在内存里。<br />
+InnoDB_Buffer_Pool缓冲池复制管理着free list（初始化空闲页，为每一个page指定一个block头结构，并初始化各种mutex与rw-lock，将page加入Buffer_ Pool的free list链表，等待分配）、flush list（缓冲池产生的脏页（数据库被修改，但未写入磁盘），当innodb_max_dirty_pages_pct超过设置的值时，会把修改时间较早的page刷进磁盘）、 LRU（在内存中但最近又不用的数据块，按照最近最少使用算法，MySQL会根据哪些数据属于LRU而将其移出内存，从而腾出空间来加载另外的数据）等，当InnoDB_Buffer_Pool缓冲池达到好几十GB时，如果某个线程正在更新缓冲池，将会造成其他线程必须等待的瓶颈。<br />
+<strong>innodb_buffer_pool_instances</strong><br />
+在MySQL5.5里，可以通过innodb_buffer_pool_instances参数来增加InnoDB_Buffer_Pool实例的个数，并使用哈希函数将读取缓存的数据页随机分配到一个缓冲池里面，这样每个缓冲区实例就可以分别管理着自己的free list、flush list和LRU，也就可以解决上面的问题了。<br />
+简单地说，就是以前是由一个人负责管理上百台服务器，当任务较多时，务必会出现差错，领导安排的任务不能在指定的时间里完成，现在改由多个人一起管理，每个人分配的机器数量少了，管理上也轻松了，这样可以更有效地提高工作效率。<br />
+注意<br />
+innodb_buffer_pool_size必须大于1 GB，生成InnoDB_Buffer_Pool多实例才有效，最多支持64个InnoDB_Buffer_Pool实例。<br />
+修改my.cnf配置文件，设置3个Buffer_Pool实例，添加的内容如下：<br />
+innodb_buffer_pool_instances = 3<br />
+调整后，你可以用命令“show engine innodb status\G;”来查看：</p>
+<p><strong>innodb_data_home_dir</strong><br />
+这是InnoDB表的目录共用设置。如果没有在 my.cnf 进行设置，InnoDB 将使用MySQL的 datadir 目录为缺省目录。如果设定一个空字串,可以在 innodb_data_file_path 中设定绝对路径。<br />
+<strong>innodb_data_file_path</strong><br />
+单独指定数据文件的路径与大小。数据文件的完整路径由 innodb_data_home_dir 与这里所设定值的组合。 文件大小以 MB 单位指定。因此在文件大小指定后必有“M”。 InnoDB 也支持缩写“G”， 1G = 1024M。从 3.23.44 开始，在那些支持大文件的操作系统上可以设置数据文件大小大于 4 GB。而在另一些操作系统上数据文件必须小于 2 GB。数据文件大小总和至少要达到 10 MB。在 MySQL-3.23 中这个参数必须在 my.cnf 中明确指定。在 MySQL-4.0.2 以及更新版本中则不需如此，系统会默认在 MySQL 的 datadir 目录下创建一个 16 MB 自扩充(auto-extending)的数据文件 ibdata1。你同样可以使用一个 原生磁盘分区(RAW raw disk partitions(raw devices)) 作为数据文件， 如何在 my.cnf 中详细指定它们请查看第 12.1 节。</p>
+<p><strong>innodb_file_per_table = 1</strong><br />
+<strong>innodb_file_per_table = 1</strong><br />
+<strong>innodb_write_io_threads =12</strong><br />
+<strong>innodb_read_io_threads =12</strong><br />
+<strong>innodb_thread_concurrency</strong><br />
+InnoDB 会试图将 InnoDB 服务的使用的操作系统进程小于或等于这里所设定的数值。此参数默认值为 8。如果计算机系统性能较低或 innodb_monitor 显示有很多线程等侍信号，应该将这个值设小一点。如果你的计算机系统有很好的处理器与磁盘系统，则可以将这个值设高一点以充分利用你的系统资源。建议设值为处理器数目+ 磁盘数目。 从 3.23.44 和 4.0.1 开始，此参数可用。在 my.cnf 中以数字格式设置。<br />
+<strong>innodb_thread_sleep_delay=10</strong><br />
+<strong>innodb_flush_log_at_trx_commit</strong><br />
+通常设置为 1，意味着在事务提交前日志已被写入磁盘， 事务可以运行更长以及服务崩溃后的修复能力。如果你愿意减弱这个安全，或你运行的是比较小的事务处理，可以将它设置为 0 ，以减少写日志文件的磁盘 I/O。这个选项默认设置为 0。<br />
+<strong>innodb_max_dirty_pages_pct = 50</strong><br />
+<strong>innodb_lock_wait_timeout = 120</strong><br />
+在回滚(rooled back)之前，InnoDB 事务将等待超时的时间(单位 秒)。InnoDB 会自动检查自身在锁定表与事务回滚时的事务死锁。如果使用 LOCK TABLES 命令，或在同一个事务中使用其它事务安全型表处理器(transaction safe table handlers than InnoDB)，那么可能会发生一个 InnoDB 无法注意到的死锁。在这种情况下超时将用来解决这个问题。这个参数的默认值为 50 秒。在 my.cnf 中以数字格式设置。<br />
+<strong>innodb_rollback_on_timeout=1</strong><br />
+<strong>innodb_open_files=2000</strong><br />
+<strong>innodb_concurrency_tickets=2000</strong><br />
+<strong>delayed_queue_size=2000</strong><br />
+<strong>max_delayed_threads=200</strong><br />
+<strong>innodb_io_capacity=4000</strong></p>
+<p><strong>innodb_mirrored_log_groups</strong><br />
+为了保护数据而设置的日志文件组的拷贝数目，默认设置为 1。在 my.cnf 中以数字格式设置。</p>
+<p><strong>innodb_additional_mem_pool_size</strong><br />
+InnoDB 用来存储数据字典(data dictionary)信息和其它内部数据结构(internal data structures)的存储器组合(memory pool)大小。理想的值为 2M，如果有更多的表你就需要在这里重新分配。如果 InnoDB 用尽这个池中的所有内存，它将从操作系统中分配内存，并将错误信息写入 MySQL 的错误日志中。在 my.cnf 中以数字格式设置。<br />
+<strong>innodb_file_io_threads</strong><br />
+InnoDB 中的文件 I/O 线程。 通常设置为 4，但是在 Windows 下可以设定一个更大的值以提高磁盘 I/O。在 my.cnf 中以数字格式设置。<br />
+<strong>innodb_force_recovery</strong><br />
+警告：此参数只能在你希望从一个被损坏的数据库中转储(dump)数据的紧急情况下使用！ 可能设置的值范围为 1 &#8211; 6。查看下面的章节 &#8216;Forcing recovery&#8217; 以了解这个参数的具体含义。参数设置大于 0 的值代表着 InnoDB 防止用户修改数据的安全度。从 3.23.44 开始，这个参数可用。在 my.cnf 中以数字格式设置。<br />
+<strong>innodb_fast_shutdown</strong><br />
+InnoDB 缺少在关闭之前清空插入缓冲。这个操作可能需要几分钟，在极端的情况下可以需要几个小时。如果这个参数据设置为 1 ，InnoDB 将跳过这个过程而直接关闭。从 3.23.44 和 4.0.1 开始，此参数可用。从 3.23.50 开始，此参数的默认值为 1。</p>
+<h2>事务日志</h2>
+<p><strong>innodb_log_arch_dir</strong><br />
+The directory where fully written log files would be archived if we used log archiving. 这里设置的参数必须与 innodb_log_group_home_dir 相同。 从 4.0.6 开始，可以忽略这个参数。<br />
+<strong>innodb_flush_method</strong><br />
+这个参数仅仅与 Unix 相关。这个参数默认值为 fdatasync。 另一个设置项为 O_DSYNC。这仅仅影响日志文件的转储，在 Unix 下以 fsync 转储数据。<br />
+InnoDB 版本从 3.23.40b 开始，在 Unix 下指定 fdatasync 为使用 fsync 方式、指定 O_DSYNC 为使用 O_SYNC 方式。由于这在某些 Unix 环境下还有些问题所以在 &#8216;data&#8217; versions 并没有被使用。</p>
+<p><strong>innodb_log_files_in_group</strong><br />
+日志组中的日志文件数目。InnoDB 以环型方式(circular fashion)写入文件。数值 3 被推荐使用。在 my.cnf 中以数字格式设置。</p>
+<p><strong>innodb_log_file_size</strong><br />
+日志组中的每个日志文件的大小(单位 MB)。如果 n 是日志组中日志文件的数目，那么理想的数值为 1M 至下面设置的缓冲池(buffer pool)大小的 1/n。较大的值，可以减少刷新缓冲池的次数，从而减少磁盘 I/O。<br />
+但是大的日志文件意味着在崩溃时需要更长的时间来恢复数据。 日志文件总和必须小于 2 GB，3.23.55 和 4.0.9 以上为小于 4 GB。在 my.cnf 中以数字格式设置。</p>
+<p><strong>innodb_log_group_home_dir</strong><br />
+InnoDB 日志文件的路径。必须与 innodb_log_arch_dir 设置相同值。 如果没有明确指定将默认在 MySQL 的 datadir 目录下建立两个 5 MB 大小的 ib_logfile&#8230; 文件。</p>
+<p><strong>innodb_log_buffer_size</strong><br />
+InnoDB 将日志写入日志磁盘文件前的缓冲大小。理想值为 1M 至 8M。大的日志缓冲允许事务运行时不需要将日志保存入磁盘而只到事务被提交(commit)。<br />
+因此，如果有大的事务处理，设置大的日志缓冲可以减少磁盘I/O。 在 my.cnf 中以数字格式设置。</p>
+<p><strong>innodb_log_archive</strong><br />
+这个值通常设为 0。 既然从备份中恢复(recovery)适合于 MySQL 使用它自己的 log files，因而通常不再需要 archive InnoDB log files。这个选项默认设置为 0。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

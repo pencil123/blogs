@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>内置函数-字符串 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 内置函数-字符串评论Feed" href="https://cn-blogs.cn/archives/636.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQLdb 扩展包使用' href='https://cn-blogs.cn/archives/602.html' />
+<link rel='next' title='对象 class 类对象的成员访问' href='https://cn-blogs.cn/archives/641.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/636.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=636' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F636.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F636.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-636 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/602.html" rel="prev">上一篇：MySQLdb 扩展包使用</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/641.html" rel="next">下一篇：对象 class 类对象的成员访问</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            内置函数-字符串        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/01/08</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>字符串内建函数</strong></p>
+<table>
+<tbody>
+<tr>
+<th>string.capitalize()</th>
+<th>把字符串的第一个字符大写</th>
+</tr>
+<tr>
+<th>string.center(width)</th>
+<th>返回一个原字符串居中,并使用空格填充至长度 width 的新字符串</th>
+</tr>
+<tr>
+<th>string.count(str, beg=0, end=len(string))</th>
+<th>返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数</th>
+</tr>
+<tr>
+<th>string.decode(encoding=&#8217;UTF-8&#8242;, errors=&#8217;strict&#8217;)</th>
+<th>以 encoding 指定的编码格式解码 string，如果出错默认报一个 ValueError 的 异 常 ， 除 非 errors 指 定 的 是 &#8216;ignore&#8217; 或 者&#8217;replace&#8217;</th>
+</tr>
+<tr>
+<th>string.encode(encoding=&#8217;UTF-8&#8242;, errors=&#8217;strict&#8217;)</th>
+<th>以 encoding 指定的编码格式编码 string，如果出错默认报一个ValueError 的异常，除非 errors 指定的是&#8217;ignore&#8217;或者&#8217;replace&#8217;</th>
+</tr>
+<tr>
+<th>string.endswith(obj, beg=0, end=len(string))</th>
+<th>检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False.</th>
+</tr>
+<tr>
+<th>string.expandtabs(tabsize=8)</th>
+<th>把字符串 string 中的 tab 符号转为空格，默认的空格数 tabsize 是 8.</th>
+</tr>
+<tr>
+<th>string.find(str, beg=0, end=len(string))</th>
+<th>检测 str 是否包含在 string 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1</th>
+</tr>
+<tr>
+<th>string.index(str, beg=0, end=len(string))</th>
+<th>跟find()方法一样，只不过如果str不在 string中会报一个异常.</th>
+</tr>
+<tr>
+<th>string.isalnum()</th>
+<th>如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False</th>
+</tr>
+<tr>
+<th>string.isalpha()</th>
+<th>如果 string 至少有一个字符并且所有字符都是字母则返回 True,否则返回 False</th>
+</tr>
+<tr>
+<th>string.isdecimal()</th>
+<th>如果 string 只包含十进制数字则返回 True 否则返回 False.</th>
+</tr>
+<tr>
+<th>string.isdigit()</th>
+<th>如果 string 只包含数字则返回 True 否则返回 False.</th>
+</tr>
+<tr>
+<th>string.islower()</th>
+<th>如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False</th>
+</tr>
+<tr>
+<th>string.isnumeric()</th>
+<th>如果 string 中只包含数字字符，则返回 True，否则返回 False</th>
+</tr>
+<tr>
+<th>string.isspace()</th>
+<th>如果 string 中只包含空格，则返回 True，否则返回 False.</th>
+</tr>
+<tr>
+<th>string.istitle()</th>
+<th>如果 string 是标题化的(见 title())则返回 True，否则返回 False</th>
+</tr>
+<tr>
+<th>string.isupper()</th>
+<th>如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False</th>
+</tr>
+<tr>
+<th>string.join(seq)</th>
+<th>Merges (concatenates)以 string 作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串</th>
+</tr>
+<tr>
+<th>string.ljust(width)</th>
+<th>返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串</th>
+</tr>
+<tr>
+<th>string.lower()</th>
+<th>转换 string 中所有大写字符为小写.</th>
+</tr>
+<tr>
+<th>string.lstrip()</th>
+<th>截掉 string 左边的空格</th>
+</tr>
+<tr>
+<th>string.maketrans(intab, outtab])</th>
+<th>用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</th>
+</tr>
+<tr>
+<th>max(str)</th>
+<th>返回字符串 str 中最大的字母。</th>
+</tr>
+<tr>
+<th>min(str)</th>
+<th>返回字符串 str 中最小的字母。</th>
+</tr>
+<tr>
+<th>string.partition(str)</th>
+<th>有点像 find()和 split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组 (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string.</th>
+</tr>
+<tr>
+<th>string.replace(str1, str2, num=string.count(str1))</th>
+<th>把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次.</th>
+</tr>
+<tr>
+<th>string.rfind(str, beg=0,end=len(string) )</th>
+<th>类似于 find()函数，不过是从右边开始查找.</th>
+</tr>
+<tr>
+<th>string.rindex( str, beg=0,end=len(string))</th>
+<th>类似于 index()，不过是从右边开始.</th>
+</tr>
+<tr>
+<th>string.rjust(width)</th>
+<th>返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串</th>
+</tr>
+<tr>
+<th>string.rpartition(str)</th>
+<th>类似于 partition()函数,不过是从右边开始查找.</th>
+</tr>
+<tr>
+<th>string.rstrip()</th>
+<th>删除 string 字符串末尾的空格.</th>
+</tr>
+<tr>
+<th>string.split(str=&#8221;&#8221;, num=string.count(str))</th>
+<th>以 str 为分隔符切片 string，如果 num有指定值，则仅分隔 num 个子字符串</th>
+</tr>
+<tr>
+<th>string.splitlines(num=string.count(&#8216;\n&#8217;))</th>
+<th>按照行分隔，返回一个包含各行作为元素的列表，如果 num 指定则仅切片 num 个行.</th>
+</tr>
+<tr>
+<th>string.startswith(obj, beg=0,end=len(string))</th>
+<th>检查字符串是否是以 obj 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定范围内检查.</th>
+</tr>
+<tr>
+<th>string.strip([obj])</th>
+<th>在 string 上执行 lstrip()和 rstrip()</th>
+</tr>
+<tr>
+<th>string.swapcase()</th>
+<th>翻转 string 中的大小写</th>
+</tr>
+<tr>
+<th>string.title()</th>
+<th>返回&#8221;标题化&#8221;的 string,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())</th>
+</tr>
+<tr>
+<th>string.translate(str, del=&#8221;&#8221;)</th>
+<th>根据 str 给出的表(包含 256 个字符)转换 string 的字符,要过滤掉的字符放到 del 参数中</th>
+</tr>
+<tr>
+<th>string.upper()</th>
+<th>转换 string 中的小写字母为大写</th>
+</tr>
+<tr>
+<th>string.zfill(width)</th>
+<th>返回长度为 width 的字符串，原字符串 string 右对齐，前面填充0</th>
+</tr>
+<tr>
+<th>string.isdecimal()</th>
+<th>isdecimal()方法检查字符串是否只包含十进制字符。这种方法只存在于unicode对象。</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

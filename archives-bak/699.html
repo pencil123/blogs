@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>python logging 日志模块 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; python logging 日志模块评论Feed" href="https://cn-blogs.cn/archives/699.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Python 扩展包|模块' href='https://cn-blogs.cn/archives/661.html' />
+<link rel='next' title='python threading' href='https://cn-blogs.cn/archives/730.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/699.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=699' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F699.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F699.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-699 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/661.html" rel="prev">上一篇：Python 扩展包|模块</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/730.html" rel="next">下一篇：python threading</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            python logging 日志模块        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/01/13</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p><strong>python 中的logging日志模块；</strong>类似于java中的Log4j模块。logging模块是在2.3新引进的功能，下面是一些常用的类和模块级函数</p>
+<p><strong>1、模块级函数</strong><br />
+logging.getLogger([name]):返回一个logger对象，如果没有指定名字将返回root logger<br />
+logging.debug()、logging.info()、logging.warning()、logging.error()、logging.critical()：设定root logger的日志级别<br />
+logging.basicConfig():用默认Formatter为日志系统建立一个StreamHandler，设置基础配置并加到root logger中</p>
+<p><strong>2、Logger</strong><br />
+每个程序在输出信息之前都要获得一个Logger（对日志命名分类）。Logger通常对应了程序的模块名，比如聊天工具的图形界面模块可以这样获得它的Logger：<br />
+LOG=logging.getLogger(”chat.gui”)<br />
+而核心模块可以这样：<br />
+LOG=logging.getLogger(”chat.kernel”)</p>
+<p><strong>3、设置记录日志的等级；过滤器；处理器；等级日志输出</strong><br />
+Logger.setLevel(lel):指定最低的日志级别，低于lel的级别将被忽略。debug是最低的内置级别，critical为最高<br />
+Logger.addFilter(filt)、Logger.removeFilter(filt):添加或删除指定的filter<br />
+Logger.addHandler(hdlr)、Logger.removeHandler(hdlr)：增加或删除指定的handler<br />
+Logger.debug()、Logger.info()、Logger.warning()、Logger.error()、Logger.critical()：可以设置的日志级别</p>
+<p><strong>4、设置记录日志的等级level</strong><br />
+NOTSET &lt; DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL<br />
+如果把looger的级别设置为INFO， 那么小于INFO级别的日志都不输出， 大于等于INFO级别的日志都输出</p>
+<p><strong>5、Handlers 处理器；对输出的日志，怎么处理</strong><br />
+handler对象负责发送相关的信息到指定目的地。<br />
+Python的日志系统有多种Handler可以使用。有些Handler可以把信息输出到控制台，有些Logger可以把信息输出到文件，还有些 Handler可以把信息发送到网络上。如果觉得不够用，还可以编写自己的Handler。可以通过addHandler()方法添加多个多handler<br />
+Handler.setLevel(lel):指定被处理的信息级别，低于lel级别的信息将被忽略<br />
+Handler.setFormatter()：给这个handler选择一个格式<br />
+Handler.addFilter(filt)、Handler.removeFilter(filt)：新增或删除一个filter对象</p>
+<p><strong>6、Formatters 日志格式</strong><br />
+Formatter对象设置日志信息最后的规则、结构和内容，默认的时间格式为%Y-%m-%d %H:%M:%S，下面是Formatter常用的一些信息<br />
+%(name)s ##### Logger的名字<br />
+%(levelno)s ##### 数字形式的日志级别<br />
+%(levelname)s ##### 文本形式的日志级别<br />
+%(pathname)s ##### 调用日志输出函数的模块的完整路径名，可能没有<br />
+%(filename)s ##### 调用日志输出函数的模块的文件名<br />
+%(module)s ##### 调用日志输出函数的模块名<br />
+%(funcName)s ##### 调用日志输出函数的函数名<br />
+%(lineno)d ##### 调用日志输出函数的语句所在的代码行<br />
+%(created)f ##### 当前时间，用UNIX标准的表示时间的浮 点数表示<br />
+%(relativeCreated)d ##### 输出日志信息时的，自Logger创建以 来的毫秒数<br />
+%(asctime)s ##### 字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒<br />
+%(thread)d ##### 线程ID。可能没有<br />
+%(threadName)s ##### 线程名。可能没有<br />
+%(process)d ##### 进程ID。可能没有<br />
+%(processName)s 进程名<br />
+%(message)s ##### 用户输出的消息<br />
+<strong>如果要正常的记录日志：请注意logger和handler 的setlevel（）方法设置的日志等级</strong><br />
+<strong>7、设置过滤器</strong><br />
+细心的朋友一定会发现前文调用logging.getLogger()时参数的格式类似于“A.B.C”。采取这样的格式其实就是为了可以配置过滤器。看一下这段代码：<br />
+LOG=logging.getLogger(”chat.gui.statistic”)<br />
+console = logging.StreamHandler()<br />
+console.setLevel(logging.INFO)<br />
+formatter = logging.Formatter(’%(asctime)s %(levelname)s %(message)s’)<br />
+console.setFormatter(formatter)<br />
+filter=logging.Filter(”chat.gui”)<br />
+console.addFilter(filter)<br />
+LOG.addHandler(console)<br />
+和前面不同的是我们在Handler上添加了一个过滤器。现在我们输出日志信息的时候就会经过过滤器的处理。名为“A.B”的过滤器只让名字带有 “A.B”前缀的Logger输出信息。可以添加多个过滤器，只要有一个过滤器拒绝，日志信息就不会被输出。另外，在Logger中也可以添加过滤器。</p>
+<p><strong>每个Logger可以附加多个Handler。接下来我们就来介绍一些常用的Handler：</strong><br />
+<strong>1) logging.StreamHandler</strong><br />
+使用这个Handler可以向类似与sys.stdout或者sys.stderr的任何文件对象(file object)输出信息。它的构造函数是：<br />
+StreamHandler([strm])<br />
+其中strm参数是一个文件对象。默认是sys.stderr</p>
+<p><strong>2) logging.FileHandler</strong><br />
+和StreamHandler类似，用于向一个文件输出日志信息。不过FileHandler会帮你打开这个文件。它的构造函数是：<br />
+FileHandler(filename[,mode])<br />
+filename是文件名，必须指定一个文件名。<br />
+mode是文件的打开方式。参见Python内置函数open()的用法。默认是’a&#8217;，即添加到文件末尾。</p>
+<p><strong>3) logging.handlers.RotatingFileHandler</strong><br />
+这个Handler类似于上面的FileHandler，但是它可以管理文件大小。当文件达到一定大小之后，它会自动将当前日志文件改名，然后创建 一个新的同名日志文件继续输出。比如日志文件是chat.log。当chat.log达到指定的大小之后，RotatingFileHandler自动把 文件改名为chat.log.1。不过，如果chat.log.1已经存在，会先把chat.log.1重命名为chat.log.2。。。最后重新创建 chat.log，继续输出日志信息。它的构造函数是：<br />
+RotatingFileHandler( filename[, mode[, maxBytes[, backupCount]]])<br />
+其中filename和mode两个参数和FileHandler一样。<br />
+maxBytes用于指定日志文件的最大文件大小。如果maxBytes为0，意味着日志文件可以无限大，这时上面描述的重命名过程就不会发生。<br />
+backupCount用于指定保留的备份文件的个数。比如，如果指定为2，当上面描述的重命名过程发生时，原有的chat.log.2并不会被更名，而是被删除。</p>
+<p><strong>4) logging.handlers.TimedRotatingFileHandler</strong><br />
+这个Handler和RotatingFileHandler类似，不过，它没有通过判断文件大小来决定何时重新创建日志文件，而是间隔一定时间就 自动创建新的日志文件。重命名的过程与RotatingFileHandler类似，不过新的文件不是附加数字，而是当前时间。它的构造函数是：<br />
+TimedRotatingFileHandler( filename [,when [,interval [,backupCount]]])<br />
+其中filename参数和backupCount参数和RotatingFileHandler具有相同的意义。<br />
+interval是时间间隔。<br />
+when参数是一个字符串。表示时间间隔的单位，不区分大小写。它有以下取值：<br />
+S 秒<br />
+M 分<br />
+H 小时<br />
+D 天<br />
+W 每星期（interval==0时代表星期一）<br />
+midnight 每天凌晨</p>
+<p><strong>5) logging.handlers.SocketHandler</strong><br />
+<strong> 6) logging.handlers.DatagramHandler</strong><br />
+以上两个Handler类似，都是将日志信息发送到网络。不同的是前者使用TCP协议，后者使用UDP协议。它们的构造函数是：<br />
+Handler(host, port)<br />
+其中host是主机名，port是端口名<br />
+<strong>7) logging.handlers.SysLogHandler</strong><br />
+<strong> 8) logging.handlers.NTEventLogHandler</strong><br />
+<strong> 9) logging.handlers.SMTPHandler</strong><br />
+<strong> 10) logging.handlers.MemoryHandler</strong><br />
+<strong> 11) logging.handlers.HTTPHandler</strong></p>
+<p><strong>例子：</strong></p>
+<p><strong># encoding:utf-8</strong><br />
+<strong> #import logging</strong></p>
+<p>#FORMAT = &#8216;%(asctime)-15s %(clientip)s %(user)-8s %(message)s&#8217;<br />
+#logging.basicConfig(format=FORMAT)<br />
+#d = {&#8216;clientip&#8217;: &#8216;192.168.0.1&#8217;, &#8216;user&#8217;: &#8216;fbloggs&#8217;}<br />
+#logger = logging.getLogger(&#8216;tcpserver&#8217;)<br />
+#logger.warning(&#8216;Protocol problem: %s&#8217;, &#8216;connection reset&#8217;, extra=d)</p>
+<p>#FORMAT = &#8216;%(asctime)-15s %(message)s&#8217;<br />
+#logging.basicConfig(filename = &#8220;C:\\Users\\june\\Desktop\\1.txt&#8221;, level = logging.DEBUG, filemode = &#8220;a&#8221;, format=FORMAT)<br />
+#logging.debug(&#8216;this is a message&#8217;)<br />
+#logging.debug(&#8216;test&#8217;)</p>
+<p>#import logging<br />
+#import datetime<br />
+#<br />
+#curDate = datetime.date.today() &#8211; datetime.timedelta(days=0)<br />
+#logName = &#8216;C:\\Users\\june\\Desktop\\error_%s.log&#8217; %curDate<br />
+#<br />
+#logging.basicConfig(level=logging.INFO,<br />
+# format=&#8217;%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s&#8217;,<br />
+# #datefmt=&#8217;%a, %d %b %Y %H:%M:%S&#8217;,<br />
+# filename=logName,<br />
+# filemode=&#8217;a&#8217;)<br />
+#<br />
+##2013-10-21 03:25:51,509 writeLog.py[line:14] INFO This is info message<br />
+##2013-10-21 03:25:51,510 writeLog.py[line:15] WARNING This is warning message<br />
+#logging.debug(&#8216;This is debug message&#8217;)<br />
+#logging.info(&#8216;This is info message&#8217;)<br />
+#logging.warning(&#8216;This is warning message&#8217;)</p>
+<p><strong>import logging</strong><br />
+<strong> import logging.config</strong></p>
+<p>logging.config.fileConfig(&#8220;logging.conf&#8221;)</p>
+<p>#create logger<br />
+loggerInfo = logging.getLogger(&#8220;infoLogger&#8221;)</p>
+<p>#&#8221;application&#8221; code<br />
+loggerInfo.debug(&#8220;debug message&#8221;)<br />
+loggerInfo.info(&#8220;info message&#8221;)<br />
+loggerInfo.warn(&#8220;warn message&#8221;)<br />
+loggerInfo.error(&#8220;error message&#8221;)<br />
+loggerInfo.critical(&#8220;critical message&#8221;)</p>
+<p>loggerError = logging.getLogger(&#8220;errorLogger&#8221;)<br />
+loggerError.error(&#8220;Error: Hello world!&#8221;)</p>
+<p># 定义logger模块，root是父类，必需存在的，其它的是自定义。<br />
+# logging.getLogger(NAME)便相当于向logging模块注册了一种日志打印<br />
+# name 中用 . 表示 log 的继承关系<br />
+[loggers]<br />
+keys=root,infoLogger,errorLogger</p>
+<p># 定义handler<br />
+[handlers]<br />
+keys=infoHandler,errorHandler</p>
+<p># 定义格式化输出<br />
+[formatters]<br />
+keys=infoFmt,errorFmt</p>
+<p>#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+# 实现上面定义的logger模块，必需是[logger_xxxx]这样的形式<br />
+#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+# [logger_xxxx] logger_模块名称<br />
+# level 级别，级别有DEBUG、INFO、WARNING、ERROR、CRITICAL<br />
+# handlers 处理类，可以有多个，用逗号分开<br />
+# qualname logger名称，应用程序通过 logging.getLogger获取。对于不能获取的名称，则记录到root模块。<br />
+# propagate 是否继承父类的log信息，0:否 1:是<br />
+[logger_root]<br />
+level=INFO<br />
+handlers=errorHandler</p>
+<p>[logger_errorLogger]<br />
+level=ERROR<br />
+handlers=errorHandler<br />
+propagate=0<br />
+qualname=errorLogger</p>
+<p>[logger_infoLogger]<br />
+level=INFO<br />
+handlers=infoHandler<br />
+propagate=0<br />
+qualname=infoLogger</p>
+<p>#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+# handler<br />
+#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+# [handler_xxxx]<br />
+# class handler类名<br />
+# level 日志级别<br />
+# formatter，上面定义的formatter<br />
+# args handler初始化函数参数</p>
+<p>[handler_infoHandler]<br />
+class=StreamHandler<br />
+level=INFO<br />
+formatter=infoFmt<br />
+args=(sys.stdout,)</p>
+<p>[handler_errorHandler]<br />
+class=logging.handlers.TimedRotatingFileHandler<br />
+level=ERROR<br />
+formatter=errorFmt<br />
+# When computing the next rollover time for the first time (when the handler is created),<br />
+# the last modification time of an existing log file, or else the current time,<br />
+# is used to compute when the next rotation will occur.<br />
+# 这个功能太鸡肋了，是从handler被创建的时间算起，不能按自然时间 rotation 切分，除非程序一直运行，否则这个功能会有问题<br />
+# 临时解决方案参考下面的链接：Python 多进程日志记录<br />
+# http://blogread.cn/it/article/4175?f=wb2<br />
+args=(&#8216;C:\\Users\\june\\Desktop\\error.log&#8217;, &#8216;M&#8217;, 1, 5)</p>
+<p>&nbsp;</p>
+<p>[formatter_infoFmt]<br />
+format=%(asctime)s %(levelname)s %(message)s<br />
+datefmt=<br />
+class=logging.Formatter</p>
+<p>[formatter_errorFmt]<br />
+format=%(asctime)s %(levelname)s %(message)s<br />
+datefmt=<br />
+class=logging.Formatter</p>
+<p>#coding=utf-8<br />
+import logging<br />
+import datetime</p>
+<p>format=&#8217;%(asctime)s &#8211; %(filename)s &#8211; [line:%(lineno)d] &#8211; %(levelname)s &#8211; %(message)s&#8217;<br />
+curDate = datetime.date.today() &#8211; datetime.timedelta(days=0)<br />
+infoLogName = r&#8217;C:/Users/june/Desktop/info_%s.log&#8217; %curDate<br />
+errorLogName = r&#8217;C:/Users/june/Desktop/error_%s.log&#8217; %curDate</p>
+<p>formatter = logging.Formatter(format)</p>
+<p>infoLogger = logging.getLogger(&#8220;infoLog&#8221;)<br />
+errorLogger = logging.getLogger(&#8220;errorLog&#8221;)</p>
+<p>infoLogger.setLevel(logging.INFO)<br />
+errorLogger.setLevel(logging.ERROR)</p>
+<p>infoHandler = logging.FileHandler(infoLogName, &#8216;a&#8217;)<br />
+infoHandler.setLevel(logging.INFO)<br />
+infoHandler.setFormatter(formatter)</p>
+<p>errorHandler = logging.FileHandler(errorLogName, &#8216;a&#8217;)<br />
+errorHandler.setLevel(logging.ERROR)<br />
+errorHandler.setFormatter(formatter)</p>
+<p>testHandler = logging.StreamHandler()<br />
+testHandler.setFormatter(formatter)<br />
+testHandler.setLevel(logging.ERROR)</p>
+<p>infoLogger.addHandler(infoHandler)<br />
+infoLogger.addHandler(testHandler)<br />
+errorLogger.addHandler(errorHandler)</p>
+<p>#infoLogger.debug(&#8220;debug message&#8221;)<br />
+#infoLogger.info(&#8220;info message&#8221;)<br />
+#infoLogger.warn(&#8220;warn message&#8221;)<br />
+# # 下面这行会同时打印在文件和终端上<br />
+#infoLogger.error(&#8220;error message&#8221;)<br />
+#<br />
+#errorLogger.error(&#8220;error message&#8221;)<br />
+#errorLogger.critical(&#8220;critical message&#8221;)</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

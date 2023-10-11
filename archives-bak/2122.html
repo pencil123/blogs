@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>内存使用 &#8211; 虚拟内存 | 青春部落    </title>
+    <meta name="keywords"  content="内存,用户空间,内核空间,内存管理" />
+    <meta name="description"  content="计算机内存使用管理包括用户空间和进程对内存的使用过程" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 内存使用 &#8211; 虚拟内存评论Feed" href="https://cn-blogs.cn/archives/2122.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='log user commands' href='https://cn-blogs.cn/archives/2090.html' />
+<link rel='next' title='硬盘说明' href='https://cn-blogs.cn/archives/2138.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2122.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2122' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2122.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2122.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2122 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2090.html" rel="prev">上一篇：log user commands</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2138.html" rel="next">下一篇：硬盘说明</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            内存使用 &#8211; 虚拟内存        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/05/21</span>
+            <span class="update is-hidden">2018-04-25</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>虚拟内存</h2>
+<p>虚拟内存是计算机系统内存管理的一种技术。<br />
+它使得应用程序认为它拥有<strong>连续可用的内存</strong>（一个连续完整的地址空间），而实际上，它通常是<strong>被分隔成多个物理内存碎片</strong>，还有部分<strong>暂时存储在外部磁盘存储器上</strong>，在需要时进行<strong>数据交换</strong>。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。</p>
+<p>虚拟内存不只是“用磁盘空间来扩展物理内存”的意思——这只是扩充内存级别以使其包含硬盘驱动器而已。<br />
+把内存扩展到磁盘只是使用虚拟内存技术的一个结果，它的作用也可以通过覆盖或者把处于不活动状态的程序以及它们的数据全部交换到磁盘上等方式来实现。<br />
+对虚拟内存的定义是基于对地址空间的重定义的，即把地址空间定义为“连续的虚拟内存地址”，以借此“欺骗”程序，使它们以为自己正在使用一大块的“连续”地址。</p>
+<p><span style="text-decoration: underline;">虚拟内存技术为每一个进程一定虚拟内存空间，而只有当虚拟内存实际被使用时，才分配物理内存。</span></p>
+<h4>扩展：</h4>
+<p>计算机的操作系统使用硬件和软件的组合，将程序使用的内存地址（虚拟地址）映射到计算机内存中的物理地址中。<br />
+进程或任务认为自己使用的内存存储是连续地址空间或连续段的集合。<br />
+操作系统管理虚拟地址空间和将物理内存（RAM）分配给虚拟内存。<br />
+CPU中的地址转换硬件，通常称为内存管理单元或MMU，自动将虚拟地址转换为物理地址。<br />
+操作系统内的软件可以扩展这些功能，以提供可以超过实际存储器容量的虚拟地址空间，因此进程可以引用更多比物理上存在于计算机中的内存。<br />
+虚拟内存的主要优点包括释放应用程序不必管理共享内存空间，由于内存隔离而增加的安全性，并且能够使用分页技术在概念上使用比物理可用更多的内存。</p>
+<h4>使用组成</h4>
+<p>现代计算机操作系统通常将虚拟内存分离为<strong>内核空间</strong>和<strong>用户空间</strong>。主要地，这种分离用于提供内存保护和硬件保护，防止恶意或错误的软件行为。<br />
+<strong>内核空间</strong>严格保留用于运行特权操作系统内核，内核扩展和大多数设备驱动程序。<br />
+<strong>用户空间</strong>是应用软件和一些驱动程序执行的内存区域。</p>
+<h2>用户空间</h2>
+<p>用户空间是指在操作系统内核之外运行的所有代码。<br />
+用户空间通常指操作系统与内核交互的各种程序和库：执行输入/输出的软件，操作文件系统对象，应用软件等。</p>
+<h4>内存保护</h4>
+<p><span style="text-decoration: underline;">每个用户空间进程通常运行在其自己的虚拟内存空间中</span>，除非明确允许，否则无法访问其他进程的内存。这是当今主流操作系统中内存保护的基础，也是特权分离的基石。<br />
+特殊情况下：进程可以请求内核将另一个进程的内存空间部分映射到自己的内存空间，就像调试器一样。程序也可以请求共享内存具有其他过程的区域，尽管其他技术也可用于允许进程间通信。</p>
+<h4>组成</h4>
+<p>一个程序结构由以下两部分而成:<br />
+<strong>代码区：</strong>存放应用程序的机器代码，CPU调用指令获得具体的计算命令。运行过程中代码区不能被修改，具有只读和固定大小的特点<br />
+<strong>数据区：</strong>存储程序内部本身设置的数据，例如常量字符串，像是GUI接口内部一些文字消息，或是程序设计时所放入的消息数据，数据可借由程序运行时由输入（input）的方式加入，或者经由程序运行的流程中被移除。</p>
+<h4>数据区部分</h4>
+<p>数据区存储的数据分为：固定数据区、堆区、未使用区、栈区。<br />
+<strong>固定数据区：</strong>程序全局数据、静态数据、常用字符串<br />
+<strong>堆区：</strong>运行时程序动态申请的空间，属于程序运行时直接申请、释放的内存资源。<br />
+<strong>未使用区：</strong>分配新内存空间的预备区域。<br />
+<strong>栈区：</strong>用来存放函数的传入参数、临时变量，以及返回地址等数据。</p>
+<h2>进程内存管理</h2>
+<p>软件运行时对计算机内存资源的分配和使用的技术。其最主要的目的是如何高效，快速的分配，并且在适当的时候释放和回收内存资源。<br />
+虚拟内存系统将进程使用的内存地址与实际物理地址分开，允许分离进程，并使用寻呼或交换到辅助存储将虚拟地址空间的大小增加到可用RAM数量之外。<br />
+虚拟内存管理器的质量可以对整体系统性能产生广泛的影响。</p>
+<h4>程序运行过程</h4>
+<p>当一个程序运行，操作系统将程序的数据区及代码区映射到虚拟内存空间内部。<br />
+CPU读取代码区获取指令，从数据区获取指令处理的value。</p>
+<h3>以JVM虚拟机为例</h3>
+<p>JVM本质就是一个进程，因此其内存模型也有进程的一般特点。但是，JVM又不是一个普通的进程，其在内存模型上有许多崭新的特点。<br />
+主要原因有两个：<br />
+1.JVM将许多本来属于操作系统管理范畴的东西，移植到了JVM内部，目的在于减少系统调用的次数；<br />
+2. Java NIO，目的在于减少用于读写IO的系统调用的开销。</p>
+<p><strong>JVM进程与普通进程内存模型比较图</strong><br />
+<img class="alignnone size-full wp-image-2139" src="http://www.cn-blogs.cn/wp-content/uploads/2017/10/05.jpg" alt="05" width="1864" height="400" srcset="https://cn-blogs.cn/wp-content/uploads/2017/10/05.jpg 1864w, https://cn-blogs.cn/wp-content/uploads/2017/10/05-300x64.jpg 300w, https://cn-blogs.cn/wp-content/uploads/2017/10/05-768x165.jpg 768w, https://cn-blogs.cn/wp-content/uploads/2017/10/05-1024x220.jpg 1024w" sizes="(max-width: 1864px) 100vw, 1864px" /><br />
+JVM进程内存模型之用户空间</p>
+<p>上图特别强调了JVM进程模型的代码区和数据区指的是JVM自身的，而非Java程序的。普通进程栈区，在JVM一般仅仅用做线程栈。JVM的堆区和普通进程的差别是最大的，下面具体详细说明：</p>
+<h4>永久代</h4>
+<p>本质上是Java程序的代码区和数据区。Java程序中类（class），会被加载到整个区域的不同数据结构中去，包括常量池、域、方法数据、方法体、构造函数、以及类中的专用方法、实例初始化、接口初始化等。<br />
+这个区域对于操作系统来说，是堆的一个部分；而对于Java程序来说，这是容纳程序本身及静态资源的空间，使得JVM能够解释执行Java程序。</p>
+<h4>新生代和老年代</h4>
+<p>新生代和老年代才是Java程序真正使用的堆空间，主要用于内存对象的存储；但是其管理方式和普通进程有本质的区别。<br />
+普通进程在运行时给内存对象分配空间时，比如C++执行new操作时，会触发一次分配内存空间的系统调用，由操作系统的线程根据对象的大小分配好空间后返回；<br />
+同时，程序释放对象时，比如C++执行delete操作时，也会触发一次系统调用，通知操作系统对象所占用的空间已经可以回收。</p>
+<h4>JVM对内存的使用和一般进程不同</h4>
+<p>JVM向操作系统申请一整段内存区域（具体大小可以在JVM参数调节）作为Java程序的堆（分为新生代和老年代）；<br />
+当Java程序申请内存空间，比如执行new操作，JVM将在这段空间中按所需大小分配给Java程序，并且Java程序不负责通知JVM何时可以释放这个对象的空间，垃圾对象内存空间的回收由JVM进行。</p>
+<p>JVM的内存管理方式的优点是显而易见的，包括：<br />
+第一，减少系统调用的次数，JVM在给Java程序分配内存空间时不需要操作系统干预，仅仅在Java堆大小变化时需要向操作系统申请内存或通知回收，而普通程序每次内存空间的分配回收都需要系统调用参与；<br />
+第二，减少内存泄漏，普通程序没有（或者没有及时）通知操作系统内存空间的释放是内存泄漏的重要原因之一，而由JVM统一管理，可以避免程序员带来的内存泄漏问题。</p>
+<h4>未使用区</h4>
+<p>分配新内存空间的预备区域。对于普通进程来说，这个区域被可用于堆和栈空间的申请及释放，每次堆内存分配都会使用这个区域，因此大小变动频繁；<br />
+对于JVM进程来说，调整堆大小及线程栈时会使用该区域，而堆大小一般较少调整，因此大小相对稳定。<br />
+操作系统会动态调整这个区域的大小，并且这个区域通常并没有被分配实际的物理内存，只是允许进程在这个区域申请堆或栈空间。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

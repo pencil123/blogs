@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL UDF 用户自定义函数 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,用户自定义函数,UDF" />
+    <meta name="description"  content="MySQL 数据库服务设置用户自定义函数:UDF" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL UDF 用户自定义函数评论Feed" href="https://cn-blogs.cn/archives/331.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='复制和最大接受包' href='https://cn-blogs.cn/archives/329.html' />
+<link rel='next' title='MySQL 开发UDF(C language)' href='https://cn-blogs.cn/archives/334.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/331.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=331' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F331.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F331.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-331 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/329.html" rel="prev">上一篇：复制和最大接受包</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/334.html" rel="next">下一篇：MySQL 开发UDF(C language)</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL UDF 用户自定义函数        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/12/20</span>
+            <span class="update is-hidden">2018-04-03</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>UDF(User defined Function) for Mysql</h2>
+<p>MySQL 服务已经提供了很多内置函数供用户使用。如果您还是有建立新函数的需求的话，可以使用UDF。</p>
+<h4>添加新函数的方法</h4>
+<p>1、通过用户定义的函数（UDF）接口添加函数。用户定义的函数被编译为库文件，然后使用CREATE FUNCTION和DROP FUNCTION语句动态地添加到服务器并从服务器中删除。<br />
+2、将函数添加为本地（内置）MySQL函数。原生函数被编译到 mysqld服务器中并永久可用。<br />
+3、创建存储函数。这些是使用SQL语句编写的，而不是编译目标代码。</p>
+<h4>用户定义函数</h4>
+<p>MySQL本身支持很多内建的函数，此外还可以通过创建存储方法来定义函数。UDF为用户提供了一种更高效的方式来创建函数。<br />
+UDF与普通函数类似，有参数，也有输出。分为两种类型：单次调用型和聚集函数。前者能够针对每一行数据进行处理，后者则用于处理Group By这样的情况。</p>
+<h4>为什么用UDF</h4>
+<p>既然MySQL本身提供了大量的函数，并且也支持定义函数，为什么我们还需要UDF呢？这主要基于以下几点：<br />
+1、UDF的兼容性很好，这得益于MySQL的UDF基本上没有变动<br />
+2、比存储方法具有更高的执行效率，并支持聚集函数<br />
+3、相比修改代码增加函数，更加方便简单<br />
+当然UDF也是有缺点的，这是因为UDF也处于mysqld的内存空间中，不谨慎的内存使用很容易导致mysqld crash掉。</p>
+<h4>编写UDF</h4>
+<p>UDF的API包括</p>
+<table>
+<tr>
+<th>name_init()</th>
+<th>在执行SQL之前会被调用，主要做一些初始化的工作，比如分配后续用到的内存、初始化变量、检查参数是否合法等。</th>
+</tr>
+<tr>
+<th>name_deinit()</th>
+<th>在执行完SQL后调用，大多用于内存清理等工作。init和deinit这两个函数都是可选的</th>
+</tr>
+<tr>
+<th>name()</th>
+<th>UDF的主要处理函数，当为单次调用型时，可以处理每一行的数据；当为聚集函数时，则返回Group by后的聚集结果。</th>
+</tr>
+<tr>
+<th>name_add()</th>
+<th>在每个分组中每行调用</th>
+</tr>
+<tr>
+<th>name_clear()</th>
+<th>在每个分组之后调用</th>
+</tr>
+</table>
+<p>两种UDF类型的API调用图：<a href="http://www.cn-blogs.cn/wp-content/uploads/2016/06/mysql_udf.png"><img class="alignnone size-full wp-image-332" src="http://www.cn-blogs.cn/wp-content/uploads/2016/06/mysql_udf.png" alt="mysql_udf" width="521" height="491" srcset="https://cn-blogs.cn/wp-content/uploads/2016/06/mysql_udf.png 521w, https://cn-blogs.cn/wp-content/uploads/2016/06/mysql_udf-300x283.png 300w" sizes="(max-width: 521px) 100vw, 521px" /></a></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

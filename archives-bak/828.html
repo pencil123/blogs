@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>os 融合操作系统接口 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; os 融合操作系统接口评论Feed" href="https://cn-blogs.cn/archives/828.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='赋值运算' href='https://cn-blogs.cn/archives/817.html' />
+<link rel='next' title='apscheduler 任务调度' href='https://cn-blogs.cn/archives/835.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/828.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=828' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F828.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F828.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-828 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/817.html" rel="prev">上一篇：赋值运算</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/835.html" rel="next">下一篇：apscheduler 任务调度</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            os 融合操作系统接口        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/02/20</span>
+            <span class="update is-hidden">2018-01-11</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>OS模块提供操作系统的相关功能。主要包括文件目录管理，环境变量和程序管理等。<br />
+文件对象;文件描述符;文件和目录<br />
+环境变量;系统参数;程序管理;调度器</p>
+<p><strong>属性：</strong><br />
+os.curdir 返回当前目录<br />
+os.pardir 获取父目录字符串名</p>
+<p><strong>方法：</strong><br />
+os.getcwd() 获取当前工作目录<br />
+os.chdir(&#8220;dirname&#8221;) 更改当前目录</p>
+<p>os.utime() 修改时间属性<br />
+os.stat(&#8216;path/filename&#8217;) 获取文件/目录信息<br />
+os.listdir(&#8216;dirname&#8217;) 列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印</p>
+<p>os.symlink(&#8216;path/filename&#8217;,&#8217;ln_filename&#8217;) 创建符号链接，源需绝对路径<br />
+os.mkdir(&#8216;dirname&#8217;) 生成单级目录<br />
+os.makedirs(&#8216;dirname1/dirname2&#8217;) 可生成多层递归目录</p>
+<p>os.remove() 删除一个文件<br />
+os.rmdir(&#8216;dirname&#8217;) 删除单级空目录，若目录不为空则无法删除<br />
+os.removedirs(&#8216;dirname1&#8217;) 若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推</p>
+<p>os.rename(&#8220;oldname&#8221;,&#8221;newname&#8221;) 重命名文件/目录</p>
+<p><strong>os.path常用模块</strong><br />
+os.path.abspath(path) 返回path规范化的绝对路径<br />
+os.path.split(path) 将path分割成目录和文件名二元组返回<br />
+os.path.dirname(path) 返回path的目录。其实就是os.path.split(path)的第一个元素<br />
+os.path.basename(path) 返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素<br />
+os.path.commonprefix(list) 返回list中，所有path共有的最长的路径，从左向右，相同字符<br />
+os.path.exists(path) 如果path存在，返回True；如果path不存在，返回False<br />
+os.path.isabs(path) 如果path是绝对路径，返回True<br />
+os.path.isfile(path) 如果path是一个存在的文件，返回True。否则返回False<br />
+os.path.isdir(path) 如果path是一个存在的目录，则返回True。否则返回False<br />
+os.path.join(path1[, path2[, &#8230;]]) 将多个路径组合后返回，第一个绝对路径之前的参数将被忽略<br />
+os.path.normcase(path) 在Linux下，该函数会原样返回path，在windows平台上会将路径中所有字符转换为小写，并将所有斜杠转换为反斜杠<br />
+os.path.normpath(path) 规范化路径<br />
+os.path.splitdrive(path) 拆分驱动器名和路径，主要对win，对linux元组第一个总是空的<br />
+os.path.splitext(path) 分离文件名与扩展名；默认返回(fname,fextension)元组，可做分片操作 ，以“.”为分隔符<br />
+os.path.getsize(path) 返回path的大小（字节）<br />
+os.path.getatime(path) 返回path所指向的文件或者目录的最后存取时间<br />
+os.path.getmtime(path) 返回path所指向的文件或者目录的最后修改时间</p>
+<p><strong>目录遍历</strong><br />
+os.walk() 生成一个目录树下的所有文件名<br />
+os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])<br />
+top表示需要遍历的目录树的路径<br />
+topdown的默认值是”True”,表示首先返回目录树下的文件，然后在遍历目录树的子目录.Topdown的值为”False”时，则表示先遍历目录树的子目录，返回子目录下的文件，最后返回根目录下的文件<br />
+onerror的默认值是”None”,表示忽略文件遍历时产生的错误.如果不为空，则提供一个自定义函数提示错误信息后继续遍历或抛出异常中止遍历<br />
+该函数返回一个元组，该元组有3个元素，这3个元素分别表示每次遍历的路径名，目录列表和文件列表</p>
+<p><strong>os.path.walk(top,func,arg)</strong><br />
+top表示需要遍历的目录树的路径<br />
+func表示回调函数，对遍历路径进行处理.所谓回调函数，是作为某个函数的参数使用，当某个时间触发时，程序将调用定义好的回调函数处理某个任务.<br />
+回调函数必须提供3个参数：第1个参数为walk()的参数tag，第2个参数表示目录列表，第3个参数表示文件列表<br />
+arg是传递给回调参数func的元组.回调函数的一个参数必须是arg，为回调函数提供处理参数.参数arg可以为空</p>
+<p><strong>os.path.walk()与os.walk()产生的文件名列表并不相同。<br />
+os.path.walk()产生目录树下的目录路径和文件路径，而os.walk()只产生文件路径</strong></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

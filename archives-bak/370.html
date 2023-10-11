@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>缓存打开的表 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,table_open_cache,table_open_cache_instances,table_definition_cache,打开表缓存,表定义缓存" />
+    <meta name="description"  content="MySQL 实例中缓存数据库打开的表文件描述符和表定义信息，从而提高服务器效率" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 缓存打开的表评论Feed" href="https://cn-blogs.cn/archives/370.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Mysql连接线程相关' href='https://cn-blogs.cn/archives/368.html' />
+<link rel='next' title='半连接数' href='https://cn-blogs.cn/archives/372.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/370.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=370' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F370.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F370.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-370 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/368.html" rel="prev">上一篇：Mysql连接线程相关</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/372.html" rel="next">下一篇：半连接数</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            缓存打开的表        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/12/27</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>MySQL 服务器会缓存下来数据库实例已经打开过的表文件和表定义文件。<br />
+其中优化设置主要是：<br />
+1、所有线程缓存打开的表的数量<br />
+2、数据库实例打开的表的缓存区分为多个小缓存区，提高使用效率<br />
+3、表定义缓存区中缓存多少表定义的信息数</p>
+<h2>table_open_cache</h2>
+<p>所有线程的打开表的数量<br />
+增加此值会增加mysqld所需的文件描述符的数量 。您可以通过检查Opened_tables状态变量来检查是否需要增加表缓存 。<br />
+如果值Opened_tables 很大，而且你不经常使用FLUSH TABLES（这只是强制所有表被关闭并重新打开），那么你应该增加table_open_cache 变量的值。<br />
+有关表缓存的更多信息，请参见 第8.4.3.1节“MySQL如何打开和关闭表”。</p>
+<h2>table_open_cache_instances</h2>
+<p>打开[表缓存实例]的数量<br />
+表缓存实例：将table_open_cache设置缓存的数量，分为多个区域进行管理。将大的打开表的缓存区划分为多个小缓存实例。<br />
+每个小的缓存实例可以缓存的数量：table_open_cache/table_open_cache_instances<br />
+减少会话之间对表缓存的争用，从而提高可伸缩性。</p>
+<p>会话只需锁定一个实例即可访问DML语句。<br />
+这样可以在实例中对高速缓存进行分段，从而在有许多会话访问表时允许使用高速缓存的操作具有更高的性能。（DDL语句仍然需要对整个缓存进行锁定，但这样的语句比DML语句要少得多。）</p>
+<p>在常规使用16个或更多内核的系统上，建议使用8或16的值。</p>
+<h2>table_definition_cache</h2>
+<p>可以存储在定义缓存中的表定义数（from .frm file）</p>
+<p>如果您使用大量的表，您可以创建一个大型的表定义缓存来加速打开表。<br />
+与普通表缓存不同，表定义缓存占用更少的空间，不使用文件描述符。<br />
+最小值为400.默认值基于以下公式，上限为2000：<br />
+<code>400 +（table_open_cache / 2）</code></p>
+<p>对于InnoDB，table_definition_cache充当InnoDB数据字典缓存中打开表实例的软限制。<br />
+如果打开的表实例的数量超过table_definition_cache设置，则LRU机制开始标记用于驱逐的表实例，并最终将其从数据字典高速缓存中移除。<br />
+该限制有助于解决在下次服务器重新启动之前将使用大量内存来缓存很少使用的表实例的情况。<br />
+具有缓存元数据的表实例的数量可能会高于table_definition_cache定义的限制，因为InnoDB系统表实例以及具有外键关系的父表和子表实例不会放在LRU列表中，也不会从内存中逐出。</p>
+<p>另外，table_definition_cache定义了一个可以同时打开的InnoDB每个表文件表空间的数量的软限制，这也是由innodb_open_files控制的。<br />
+如果同时设置了table_definition_cache和innodb_open_files，则使用最高设置。<br />
+如果两个变量均未设置，则使用具有较高默认值的table_definition_cache。<br />
+如果打开的表空间文件句柄的数量超过了由table_definition_cache或innodb_open_files定义的限制，则LRU机制将在表空间文件LRU列表中搜索完全刷新且当前未被扩展的文件。<br />
+每次打开新的表空间时都会执行此过程。如果没有“不活动的”表空间，则不关闭表空间文件。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

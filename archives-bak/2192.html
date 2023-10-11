@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>redis upstream module | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; redis upstream module评论Feed" href="https://cn-blogs.cn/archives/2192.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='nginx开发套件模块' href='https://cn-blogs.cn/archives/2189.html' />
+<link rel='next' title='lua模块' href='https://cn-blogs.cn/archives/2196.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2192.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2192' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2192.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2192.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2192 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2189.html" rel="prev">上一篇：nginx开发套件模块</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2196.html" rel="next">下一篇：lua模块</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            redis upstream module        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/06/23</span>
+            <span class="update is-hidden">2018-04-20</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Nginx upstream module for the Redis 2.0 protocol http://wiki.nginx.org/HttpRedis2Module<br />
+使用redis2.0协议访问上游模块</p>
+<p><strong>说明：</strong></p>
+<p>This is an Nginx upstream module that makes nginx talk to a Redis 2.x server in a non-blocking way. The full Redis 2.0 unified protocol has been implemented including the Redis pipelining support.<br />
+这是一个上游模块；使nignx以非阻塞访问连接reids 2.x服务器。已实施完整的Redis 2.0统一协议，包括Redis流水线支持。</p>
+<p>This module returns the raw TCP response from the Redis server. It&#8217;s recommended to use my lua-redis-parser (written in pure C) to parse these responses into lua data structure when combined with lua-nginx-module.<br />
+该模块从Redis服务器返回原始TCP响应。建议使用我的lua-redis-parser（用纯C编写）将这些响应解析成lua数据结构，并与lua-nginx-module结合使用。</p>
+<p>When used in conjunction with lua-nginx-module, it is recommended to use the lua-resty-redis library instead of this module though, because the former is much more flexible and memory-efficient.<br />
+当与lua-nginx-module一起使用时，建议使用lua-resty-redis库，而不是使用此模块，因为前者具有更高的灵活性和内存效率。</p>
+<p>If you only want to use the get redis command, you can try out the HttpRedisModule. It returns the parsed content part of the Redis response because only get is needed to implement.<br />
+如果只想使用get命令，可以尝试使用HttpRedisModule。它返回Redis响应的解析内容部分，因为只get需要实现。</p>
+<p>Another option is to parse the redis responses on your client side yourself.<br />
+另一个选择是自己解析客户端的redis响应。</p>
+<p><strong>Synopsis</strong><br />
+<code><br />
+location = /foo {<br />
+set $value 'first';<br />
+redis2_query set one $value;<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+# GET /get?key=some_key<br />
+location = /get {<br />
+set_unescape_uri $key $arg_key; # this requires ngx_set_misc<br />
+redis2_query get $key;<br />
+redis2_pass foo.com:6379;<br />
+}<br />
+#<br />
+# GET /set?key=one&amp;val=first%20value<br />
+location = /set {<br />
+set_unescape_uri $key $arg_key; # this requires ngx_set_misc<br />
+set_unescape_uri $val $arg_val; # this requires ngx_set_misc<br />
+redis2_query set $key $val;<br />
+redis2_pass foo.com:6379;<br />
+}<br />
+#<br />
+# multiple pipelined queries<br />
+location = /foo {<br />
+set $value 'first';<br />
+redis2_query set one $value;<br />
+redis2_query get one;<br />
+redis2_query set one two;<br />
+redis2_query get one;<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+location = /bar {<br />
+# $ is not special here...<br />
+redis2_literal_raw_query '*1\r\n$4\r\nping\r\n';<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+location = /bar {<br />
+# variables can be used below and $ is special<br />
+redis2_raw_query 'get one\r\n';<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+# GET /baz?get%20foo%0d%0a<br />
+location = /baz {<br />
+set_unescape_uri $query $query_string; # this requires the ngx_set_misc module<br />
+redis2_raw_query $query;<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+location = /init {<br />
+redis2_query del key1;<br />
+redis2_query lpush key1 C;<br />
+redis2_query lpush key1 B;<br />
+redis2_query lpush key1 A;<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+#<br />
+location = /get {<br />
+redis2_query lrange key1 0 -1;<br />
+redis2_pass 127.0.0.1:6379;<br />
+}<br />
+</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

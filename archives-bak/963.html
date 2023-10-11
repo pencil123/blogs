@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 内置变量 | 青春部落    </title>
+    <meta name="keywords"  content="Ngnx,内置变量" />
+    <meta name="description"  content="Nginx服务中的内置变量" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 内置变量评论Feed" href="https://cn-blogs.cn/archives/963.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='http keep-alive socket' href='https://cn-blogs.cn/archives/1119.html' />
+<link rel='next' title='Nginx 获取真实的访问IP' href='https://cn-blogs.cn/archives/966.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/963.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=963' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F963.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F963.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-963 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1119.html" rel="prev">上一篇：http keep-alive socket</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/966.html" rel="next">下一篇：Nginx 获取真实的访问IP</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 内置变量        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/05/04</span>
+            <span class="update is-hidden">2018-04-19</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>nginx内置变量存放在ngx_http_core_module 模块中</p>
+<h2><strong>客户端信息</strong></h2>
+<ul>
+<li>$remote_addr：客户端地址</li>
+<li>$remote_port：客户端端口</li>
+<li>$remote_user：用于HTTP基础认证服务的用户名</li>
+</ul>
+<h2><strong>请求信息</strong></h2>
+<ul>
+<li>$host 域名|主机IP：优先级如下：HTTP请求行的主机名&gt;”HOST”请求头字段&gt;符合请求的服务器名</li>
+<li>$binary_remote_addr：客户端地址的二进制形式, 固定长度为4个字节</li>
+<li>$https：如果开启了SSL安全模式，值为“on”，否则为空字符串。</li>
+<li>$scheme：请求使用的Web协议, “http” 或 “https”</li>
+<li>$uri |$document_uri：请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如”/foo/bar.html”。</li>
+<li>$request：代表客户端的请求地址</li>
+<li>$request_body：客户端的请求主体；此变量可在location中使用，将请求主体通过proxy_pass, fastcgi_pass, uwsgi_pass, 和 scgi_pass传递给下一级的代理服务器。</li>
+<li>$request_body_file：将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off, uwsgi_pass_request_body off, or scgi_pass_request_body off 。</li>
+<li>$request_completion：如果请求成功，值为”OK”，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空。</li>
+<li>$request_filename：当前连接请求的文件路径，由root或alias指令与URI请求生成。</li>
+<li>$request_length：请求的长度 (包括请求的地址, http请求头和请求主体) (1.3.12, 1.2.7)</li>
+<li>$request_method：HTTP请求方法，通常为“GET”或“POST”</li>
+<li>$request_time：处理客户端请求使用的时间 (1.3.9, 1.2.6); 从读取客户端的第一个字节开始计时。</li>
+<li>$request_uri：这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：”/cnphp/test.php?arg=freemouse”。</li>
+</ul>
+<h2><strong>处理信息</strong></h2>
+<ul>
+<li>$arg_name：请求中的的参数名，即“?”后面的arg_name=arg_value形式的arg_name</li>
+<li>$args |$query_string：请求中的参数值</li>
+<li>$http_name：匹配任意请求头字段；变量名中的后半部分“name”可以替换成任意请求头字段，如在配置文件中需要获取http请求头：“Accept-Language”，那么将“－”替换为下划线，大写字母替换为小写，形如：$http_accept_language即可。</li>
+<li>$is_args：如果请求中有参数，值为“?”，否则为空字符串。</li>
+<li>$limit_rate：用于设置响应的速度限制，详见 limit_rate。</li>
+<li>$proxy_protocol_addr：获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串。(1.5.12)</li>
+<li>$sent_http_name：可以设置任意http响应头字段； 变量名中的后半部分“name”可以替换成任意响应头字段，如需要设置响应头Content-length，那么将“－”替换为下划线，大写字母替换为小写，形如：$sent_http_content_length 4096即可。</li>
+</ul>
+<h2><strong>服务器端</strong></h2>
+<ul>
+<li>$hostname：主机名</li>
+<li>$server_addr：服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中。</li>
+<li>$server_name：虚拟主机中配置的第一个域名</li>
+<li>$server_port：服务器端口</li>
+<li>$server_protocol：服务器的HTTP版本, 通常为 “HTTP/1.0” 或 “HTTP/1.1”</li>
+<li>$msec：当前的Unix时间戳 (1.3.9, 1.2.6)</li>
+<li>$nginx_version：nginx版本</li>
+<li>$pid：工作进程的PID</li>
+<li>$pipe：如果请求来自管道通信，值为“p”，否则为“.” (1.3.12, 1.2.7)</li>
+<li>$tcpinfo_rtt, $tcpinfo_rttvar, $tcpinfo_snd_cwnd, $tcpinfo_rcv_space：客户端TCP连接的具体信息</li>
+<li>$time_iso8601：服务器时间的ISO 8610格式 (1.3.12, 1.2.7)</li>
+<li>$time_local：服务器时间（LOG Format 格式） (1.3.12, 1.2.7)</li>
+<li>$document_root：当前请求的文档根目录或别名</li>
+<li>$realpath_root：当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径。</li>
+</ul>
+<h2><strong>返回信息</strong></h2>
+<ul>
+<li>$status：HTTP响应代码 (1.3.2, 1.2.2)</li>
+<li>$body_bytes_sent：传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的“%B”参数保持兼容</li>
+<li>$bytes_sent：传输给客户端的字节数 (1.3.8, 1.2.5)</li>
+</ul>
+<h2><strong>连接信息</strong></h2>
+<ul>
+<li>$connection：TCP连接的序列号 (1.3.8, 1.2.5)</li>
+<li>$connection_requests：TCP连接当前的请求数量 (1.3.8, 1.2.5)</li>
+<li>$content_length：“Content-Length” 请求头字段长度</li>
+<li>$content_type：“Content-Type” 请求头字段类型</li>
+<li>$cookie_name：cookie名称</li>
+</ul>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

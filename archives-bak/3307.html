@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 数据库主从复制 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL 数据库,MySQL 主从配置" />
+    <meta name="description"  content="MySQL,数据库主从配置过程" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 数据库主从复制评论Feed" href="https://cn-blogs.cn/archives/3307.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL 数据库备份机制设定和注意细节' href='https://cn-blogs.cn/archives/3301.html' />
+<link rel='next' title='Percona 主从数据库一致性检查' href='https://cn-blogs.cn/archives/3312.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3307.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3307' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3307.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3307.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3307 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3301.html" rel="prev">上一篇：MySQL 数据库备份机制设定和注意细节</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3312.html" rel="next">下一篇：Percona 主从数据库一致性检查</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 数据库主从复制        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/01/25</span>
+            <span class="update is-hidden">2018-04-09</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>复制功能可将来自一台MySQL数据库服务器（主服务器）的数据复制到一台或多台MySQL数据库服务器（从服务器）。<br />
+默认情况下复制是异步的; SLAVE不需要永久连接以接收来自Master的更新。根据配置，您可以复制数据库中的所有数据库，选定数据库或甚至选定的表。</p>
+<h2>细节说明</h2>
+<h3>设定复制的数据</h3>
+<p>每个SLAVE都会收到MASTER二进制日志的全部内容的副本。<br />
+SLAVE可以决定执行二进制日志中的哪些语句。如特定的数据库或者选定的数据表。您无法配置MASTER仅记录特定事件的二进制日志。</p>
+<h3>管理复制的线程</h3>
+<p>每个SLAVE都保存二进制日志坐标的记录：文件名称和它从MASTER读取并处理的文件内的位置。<br />
+这意味着可以将多个SLAVE连接到MASTER并执行相同二进制日志的不同部分。<br />
+由于SLAVE控制此过程，因此各个SLAVE与MASTER连接或断开连接，都不会影响MASTER的运行。<br />
+另外，由于每个SLAVE都记录二进制日志中的当前位置，因此SLAVE可能会断开连接，重新连接并恢复处理。</p>
+<h3>复制机制要求</h3>
+<p>主站和每个从站必须配置一个唯一的ID（使用该server-id选项）。<br />
+另外，每个从站都必须配置有关主站名称，日志文件名以及该文件中的位置的信息。<br />
+这些细节可以使用从机上的CHANGE MASTER TO语句在MySQL会话中进行控制。</p>
+<h2>主从复制概述</h2>
+<p>有一些通用任务对所有设置都是通用的：<br />
+主从复制配置过程中需要做的工作<br />
+1、Master 启动二进制日志记录并配置唯一服务标识；需要重启服务。<br />
+2、Slave 服务配置唯一服务标识；需要重启服务。<br />
+3、为Slave 服务创建独立的用户，用于连接Master时做认证。<br />
+4、Master创建数据快照和Slave启动复制过程之前，要确认Master二进制日志的记录位置Pos。<br />
+5、如果Master服务已经记录了数据，需要对数据创建快照并复制到Slave服务中。不同的存储引擎创建快照方式不同。<br />
+6、在Slave服务设置连接Master的参数:user\password\logfile\logpos</p>
+<h2>Master 端配置</h2>
+<h3>Master 配置文件</h3>
+<p>主服务器配置为使用基于二进制日志文件位置的复制，您必须启用二进制日志记录并建立唯一的服务器ID。<br />
+<code>[mysqld]<br />
+log-bin=mysql-bin<br />
+server-id=1</code><br />
+如果你省略server-id（或明确地将其设置为其默认值0），Master 服务将拒绝来自Slave服务的任何连接。</p>
+<h4>设定Binary log记录的库</h4>
+<p><code>binlog-do-db= 记录的库(多个库，用逗号分开)<br />
+binlog-ignore-db=mysql,performance_schema,infomation_schema 忽略的数据库</code></p>
+<h3>创建复制用户</h3>
+<p>每个Slave都使用MySQL用户名和密码连接到Master，因此Master上必须有一个用户帐户，以便Slav可以使用该帐户进行连接。<br />
+任何帐户都可以用于此操作，只要它已被授予 REPLICATION SLAVE特权即可。您可以选择为每个Slave创建一个不同的帐户，或者使每个Slave使用相同的帐户连接到Master。<br />
+<code>CREATE USER 'repl'@'%.example.com' IDENTIFIED BY 'password';<br />
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.example.com';</code></p>
+<h3>Master 二进制日志位置</h3>
+<p>获取二进制日志的位置前，需要对Master 服务的表加共享锁(读锁)。<br />
+<code>MySQL&gt; FLUSH TABLES WITH READ LOCK;</code><br />
+需要确保对数据表添加共享锁的客户端保持运行状态，以便共享锁持续生效。如果此客户端退出，则锁定被释放。<br />
+显示的日志文件名称和位置值<br />
+SHOW MASTER STATUS<br />
+mysqldump &#8211;master-data</p>
+<h3>Master 创建数据快照</h3>
+<p>MyISAM 存储引擎的表，可以直接备份同步至Slave库。<br />
+InnoDB 存储引擎的表，需要使用逻辑备份功能mysqldump。<br />
+在获取到Master库的数据快照后，记得要释放之前设置的共享锁。</p>
+<h2>Slave 端配置</h2>
+<h3>Slave 配置文件</h3>
+<p>每个Slave都必须具有唯一的服务器标识。<br />
+如果您要设置多个Slave，则每个Slave的server-id必须与主站和其他Slave不同。<br />
+如果您省略server-id（或将其明确设置为默认值0），则从站拒绝连接到主站。<br />
+在Slave服务上是否启动二进制日志，更加情况而定。</p>
+<h4>设定复制的库或者表</h4>
+<p><code>replication-do-db=设定复制的库(多个库，用逗号分开)<br />
+replicate-ignore-db=设定要忽略的数据库<br />
+replicate-do-table=设定要复制的表<br />
+replicate-wild-do-table 复制的表，可以使用通配符<br />
+replicate-wild-ignore-table 忽略的表，可以使用通配符</code></p>
+<h3>连接Master服务</h3>
+<p>要设置Slave与Master进行通信以进行复制，请使用必要的连接信息配置Slave.<br />
+<code>CHANGE MASTER TO MASTER_HOST='master_host_name',MASTER_USER='replication_user_name',MASTER_PASSWORD='replication_password',MASTER_LOG_FILE='recorded_log_file_name',MASTER_LOG_POS=recorded_log_position;</code><br />
+复制不能使用Unix套接字文件。您必须能够使用TCP / IP连接到主MySQL服务器。</p>
+<h3>启动复制线程</h3>
+<p>将Master数据快照导入到Slave库后，并配置好Master服务连接。就可以开启复制线程了。<br />
+<code>MySQL&gt; START SLAVE;</code></p>
+<h2>基于全局事务标识符GTID复制</h2>
+<p>全局事务标识符（GTID）是创建的唯一标识符，并与源（主）服务器上提交的每个事务相关联。此标识符不仅是其源自的服务器唯一的，而且在给定的复制设置中的所有服务器上都是唯一的。所有交易和所有GTID之间都有一对一的映射关系。<br />
+后续在补充更新</p>
+<h2>主从复制任务管理</h2>
+<h3>检测复制状态</h3>
+<p><code>show slave status;</code></p>
+<h3>Slave暂停复制过程</h3>
+<p>Slave 服务中的复制过程包括两个线程：I/O线程和SQL线程。<br />
+I/O线程：从Master二进制日志读取时间并将它们写入中继日志。<br />
+SQL线程：从中继日志中读取事件并执行它们。<br />
+<code>MYSQL &gt; STOP SLAVE I0_THREAD;<br />
+MYSQL &gt; START SLAVE IO_THREAD;</code><br />
+暂停I/O线程，使SQL线程执行完中继日志中的事件。<br />
+<code>MYSQL &gt; STOP SLAVE SQL_THREAD;<br />
+MYSQL &gt; START SLAVE SQL_THREAD;</code><br />
+I/O线程继续读取事件并写入中继日志；SQL线程不读取和执行。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

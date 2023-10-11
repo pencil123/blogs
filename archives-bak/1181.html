@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Beautiful Soup  XML数据解析 | 青春部落    </title>
+    <meta name="keywords"  content="Python,Beautiful Soup,文档解析,爬虫,HTML,XML" />
+    <meta name="description"  content="Python爬虫编程时对HTML文档进行解析的扩展Beautiful Soup" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Beautiful Soup  XML数据解析评论Feed" href="https://cn-blogs.cn/archives/1181.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Python 爬虫模块 &#8211; urllib and urllib2' href='https://cn-blogs.cn/archives/1165.html' />
+<link rel='next' title='kibana  使用笔记' href='https://cn-blogs.cn/archives/1195.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1181.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1181' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1181.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1181.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1181 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/python" rel="category tag">Python</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1165.html" rel="prev">上一篇：Python 爬虫模块 &#8211; urllib and urllib2</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1195.html" rel="next">下一篇：kibana  使用笔记</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Beautiful Soup  XML数据解析        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/08/04</span>
+            <span class="update is-hidden">2018-05-25</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。<br />
+Beautiful Soup自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，Beautiful Soup就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。</p>
+<h4>解析器</h4>
+<p>Beautiful Soup支持Python标准库中的HTML解析器,还支持一些第三方的解析器,其中一个是 lxml。另一个可供选择的解析器是纯Python实现的 html5lib , html5lib的解析方式与浏览器相同。<br />
+<code>$ pip install lxml<br />
+$ pip install html5lib</code></p>
+<h3>四大对象种类</h3>
+<p>Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节点都是Python对象,所有对象可以归纳为4种:</p>
+<table>
+<tbody>
+<tr>
+<th>Tag</th>
+<th>标签(HTML语言中的标签元素)存在很多方法和属性</th>
+</tr>
+<tr>
+<th>NavigableString</th>
+<th>遍历的字符串（字符串常被包含在tag内.BS用NavigableString类来包装tag中的字符串）</th>
+</tr>
+<tr>
+<th>BeautifulSoup</th>
+<th>一个文档的全部内容(大部分时候,可以把它当作 Tag 对象)</th>
+</tr>
+<tr>
+<th>Comment</th>
+<th>注释及特殊字符串（文档的注释部分）</th>
+</tr>
+</tbody>
+</table>
+<h4>Tag 对象属性</h4>
+<table>
+<tbody>
+<tr>
+<th>.content</th>
+<th>以列表的形式列出直接子节点</th>
+</tr>
+<tr>
+<th>.children</th>
+<th>子节点列表生成器，可以用于遍历直接子节点</th>
+</tr>
+<tr>
+<th>.descendants</th>
+<th>上面两个属性只列出直接子节点；这个可以列出所有子节点</th>
+</tr>
+<tr>
+<th>.string</th>
+<th>节点内容（当tag对象中只有一个子节点）</th>
+</tr>
+<tr>
+<th>.strings</th>
+<th>多个节点内容遍历获取 （get_text()）</th>
+</tr>
+<tr>
+<th>.stripped_strings</th>
+<th>多节点内容 除去多余空白内容</th>
+</tr>
+<tr>
+<th>.parent</th>
+<th>获取某个元素的父节点</th>
+</tr>
+<tr>
+<th>.parents</th>
+<th>以递归得到元素的所有父辈节点</th>
+</tr>
+<tr>
+<th>.next_sibling</th>
+<th>下一个节点（兄弟节点）</th>
+</tr>
+<tr>
+<th>.previous_sibling</th>
+<th>上一个节点（兄弟节点）</th>
+</tr>
+<tr>
+<th>.next_siblings</th>
+<th>后面的节点迭代输出（兄弟节点）</th>
+</tr>
+<tr>
+<th>.previous_siblings</th>
+<th>前面的节点迭代输出（兄弟节点）</th>
+</tr>
+<tr>
+<th>.next_element</th>
+<th>当前节点的下一个解析对象</th>
+</tr>
+<tr>
+<th>.previous_element</th>
+<th>当前节点的上一个解析对象</th>
+</tr>
+<tr>
+<th>.next_elements</th>
+<th>迭代向前访问文档的解析对象</th>
+</tr>
+<tr>
+<th>.previous_elements</th>
+<th>迭代向后访问文档的解析对象</th>
+</tr>
+</tbody>
+</table>
+<h4>Tag 对象方法</h4>
+<p><code>find_all( name , attrs , recursive , text , **kwargs )</code><br />
+搜索当前tag的所有tag子节点,并判断是否符合过滤器的条件;返回一个列表</p>
+<p><code>find( name , attrs , recursive , text , **kwargs )</code><br />
+搜索当前tag对象，只返回一个匹配元素</p>
+<p><code>find_parents() find_parent()</code><br />
+搜索当前节点的父辈节点</p>
+<p><code>find_next_siblings() find_next_sibling()</code><br />
+对当 tag 的所有后面解析的兄弟 tag 节点进行迭代,返回所有|第一个符合条件的后面的兄弟节点</p>
+<p><code>find_previous_siblings() find_previous_sibling()</code><br />
+对当前 tag 的前面解析的兄弟 tag 节点进行迭代, 返回所有|第一个符合条件的前面的兄弟节点</p>
+<p><code>find_all_next() find_next()</code><br />
+对当前 tag 的之后的 tag 和字符串进行迭代, 返回所有|第一个符合条件的节点</p>
+<p><code>find_all_previous() 和 find_previous()</code><br />
+对当前节点前面的 tag 和字符串进行迭代,返回所有|第一个符合条件的节点</p>
+<h4>补充</h4>
+<p>1、Beautiful Soup 支持大部分的CSS选择器。<br />
+2、Beautiful Soup的强项是文档树的搜索,但同时也可以方便的修改文档树。<br />
+3、对修改的文档树进行输出方式</p>
+<h4>编码问题</h4>
+<p>任何HTML或XML文档都有自己的编码方式,比如ASCII 或 UTF-8,但是使用Beautiful Soup解析后,文档都被转换成了Unicode。</p>
+<p>Beautiful Soup用了 编码自动检测 子库来识别当前文档编码并转换成Unicode编码.<br />
+BeautifulSoup 对象的 .original_encoding 属性记录了自动识别编码的结果。</p>
+<p>编码自动检测 功能大部分时候都能猜对编码格式,但有时候也会出错。有时候即使猜测正确,也是在逐个字节的遍历整个文档后才猜对的,这样很慢。<br />
+如果预先知道文档编码,可以设置编码参数来减少自动检查编码出错的概率并且提高文档解析速度.在创建 BeautifulSoup 对象的时候设置 from_encoding 参数。<br />
+<strong>补充</strong><br />
+如果中文页面编码是gb2312，gbk，在BeautifulSoup构造器中传入fromEncoding=”gb18030″参数即可解决乱码问题，即使分析的页面是utf8的页面使用gb18030也不会出现乱码问题！<br />
+不过当页面编码为“iso-8859-1”时，还是会出现乱码。根本的解决方法还是根据具体页面编码，使用from_encoding参数传输给beautifulsoup。</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

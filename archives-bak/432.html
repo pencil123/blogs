@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>磁盘分区和分区挂载 | 青春部落    </title>
+    <meta name="keywords"  content="MBR,主引导记录,linux系统,硬盘分区工具,fdisk" />
+    <meta name="description"  content="主引导记录MBR说明和Linux系统主引导记录管理工具Fdisk" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 磁盘分区和分区挂载评论Feed" href="https://cn-blogs.cn/archives/432.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='系统分区 和文件系统' href='https://cn-blogs.cn/archives/423.html' />
+<link rel='next' title='Python 包管理工具' href='https://cn-blogs.cn/archives/438.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/432.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=432' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F432.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F432.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-432 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/423.html" rel="prev">上一篇：系统分区 和文件系统</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/438.html" rel="next">下一篇：Python 包管理工具</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            磁盘分区和分区挂载        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/07/12</span>
+            <span class="update is-hidden">2018-04-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>1、主引导记录MBR</h2>
+<p>MBR(Master Boot Record)也叫做主引导扇区。<br />
+1、计算机开机后访问硬盘时，必须要先读首个扇区的主引导记录。<br />
+2、主引导记录存储硬盘本身的相关信息和硬盘各个分区的大小以及位置信息，是数据信息的重要入口。<br />
+主引导记录的组成部分</p>
+<p><strong>1、启动代码</strong><br />
+主引导记录最开头的第一阶段引导代码。占用446个字节的存储。有时也被称为“主引导记录”。<br />
+检查分区表；并在硬件自检完成后，将控制权交给硬盘上的第二阶段引导程序。<br />
+<strong>2、硬盘分区表</strong><br />
+固定的存储位置；占用4*16个字节；4个分区信息，每个分区16个字节。<br />
+存储信息：分区状态、分区起始磁头号、分区起始扇区号、文件系统标志位、分区结束磁头号、分区结束扇区号、分区起始相对扇区号，分区总的扇区数<br />
+<strong>3、结束标志字</strong><br />
+MBR有效标志55AA；其他字符表示MBR异常。</p>
+<h4>Fdisk 命令</h4>
+<p>主引导记录管理工具；在linux 系统使用硬盘可以不建立MBR，直接进行磁盘格式化并挂载使用。不过这样的话对后期扩展不友好。<br />
+<strong>Usage:</strong><br />
+<code>fdisk [options] ；修改分区表<br />
+fdisk [options] -l ；打印分区表列表<br />
+fdisk -s ；设置块分区大小</code><br />
+<strong>Options:</strong><br />
+<code>-b ：扇区大小(512, 1024, 2048 or 4096)<br />
+-u ：设置扇区大小，而不是圆柱<br />
+-o ；create a new empty DOS partition table<br />
+-C ：specify the number of cylinders<br />
+-H ：specify the number of heads<br />
+-S ：specify the number of sectors per track</code></p>
+<h4>硬盘分区操作示例</h4>
+<p><strong>1、查看当前系统硬盘和分区情况</strong><br />
+<code>fdisk -l</code><br />
+<strong>2、对新硬盘进行分区</strong><br />
+<code>fdisk /dev/sdb<br />
+n:创建分区<br />
+t:指明分区格式<br />
+w:保存之前操作</code><br />
+<strong>3、格式化分区</strong><br />
+<code>mkfs -t ext3 -c /dev/sdb1</code><br />
+<strong>4、挂载分区</strong><br />
+<code>mount /dev/sdb1 /data</code></p>
+<h2>2、全局唯一标识分区表</h2>
+<p>GPT(GUID Partition Table)是一个实体硬盘的分区表的结构布局的标准。<br />
+它是可扩展固件接口（EFI）标准的一部分，被用于替代BIOS系统中的一32bits来存储逻辑块地址和大小信息的主引导记录（MBR）分区表。</p>
+<h4>补充说明</h4>
+<p>在MBR硬盘中，分区信息直接存储于主引导记录（MBR）中（主引导记录中还存储着系统的引导程序）。但在GPT硬盘中，分区表的位置信息储存在GPT头中。但出于兼容性考虑，硬盘的第一个扇区仍然用作MBR，之后才是GPT头。<br />
+跟现代的MBR一样，GPT也使用逻辑区块地址（LBA）取代了早期的CHS寻址方式。传统MBR信息存储于LBA 0，GPT头存储于LBA 1，接下来才是分区表本身。<br />
+为了减少分区表损坏的风险，GPT在硬盘最后保存了一份分区表的副本。</p>
+<h4>Parted 命令</h4>
+<p>全局唯一标识分区表管理工具；提供对数据修复和恢复的功能。<br />
+MBR 不支持大于2T的硬盘；需要使用GPT 对硬盘进行分区。linux 系统下分区工具Parted。<br />
+yum install -y parted<br />
+<strong>Usage:</strong><br />
+-i, 交互处理<br />
+-l, 列出所有硬盘的分区信息<br />
+-s, 脚本执行<br />
+<strong>管理命令：</strong></p>
+<table>
+<tbody>
+<tr>
+<th>check num</th>
+<th>文件系统简单检查</th>
+</tr>
+<tr>
+<th>cp from-num to-num</th>
+<th>拷贝文件系统到另一个分区</th>
+</tr>
+<tr>
+<th>mklabel</th>
+<th>新建磁盘分区表</th>
+</tr>
+<tr>
+<th>mkfs num fs-type</th>
+<th>设置分区文件系统</th>
+</tr>
+<tr>
+<th>mkpart</th>
+<th>新建分区</th>
+</tr>
+<tr>
+<th>mkpartfs</th>
+<th>新建分区</th>
+</tr>
+<tr>
+<th>move</th>
+<th>移动分区</th>
+</tr>
+<tr>
+<th>name</th>
+<th>为分区命名</th>
+</tr>
+<tr>
+<th>rescue start end</th>
+<th>修复指定区域数据</th>
+</tr>
+<tr>
+<th>resize</th>
+<th>调整分区大小</th>
+</tr>
+<tr>
+<th>rm</th>
+<th>删除分区ID</th>
+</tr>
+<tr>
+<th>select device</th>
+<th>选择设备编辑</th>
+</tr>
+<tr>
+<th>set</th>
+<th>更改分区的标志</th>
+</tr>
+<tr>
+<th>toggle</th>
+<th>切换分区的状态</th>
+</tr>
+<tr>
+<th>unit</th>
+<th>set the default unit to UNIT</th>
+</tr>
+</tbody>
+</table>
+<h4>硬盘分区操作示例</h4>
+<p><strong>1、对新磁盘进行分区</strong><br />
+<code>parted /dev/sdb<br />
+p 列出分区信息<br />
+mklable 创建分区表<br />
+mkpart 创建分区</code><br />
+<strong>2、格式化分区</strong><br />
+<code>mkfs -t ext4 /dev/sdb1<br />
+mkfs -t ext4 /dev/sdb2</code><br />
+<strong>3、挂载</strong><br />
+<code>mount /dev/sdb1 /data/part1</code></p>
+<h2>3、手动挂载分区：Mount</h2>
+<p>Linux 系统使用Mount命令手动挂载分区。</p>
+<h4>mount 命令说明</h4>
+<p>usage:<br />
+<code>mount [-t vfstype] [-o options] device dir</code><br />
+<strong>1、-t vfstype 指定文件系统的类型</strong><br />
+通常不必指定，mount 会自动选择正确的类型。常用类型有：<br />
+光盘或光盘镜像：iso9660<br />
+DOS fat16文件系统：msdos<br />
+Windows 9x fat32文件系统：vfat<br />
+Windows NT ntfs文件系统：ntfs<br />
+Mount Windows文件网络共享：smbfs<br />
+UNIX(LINUX) 文件网络共享：nfs<br />
+<strong>2、-o options 设备或档案的挂接方式</strong><br />
+常用的参数有：<br />
+loop：用来把一个文件当成硬盘分区挂接上系统<br />
+ro：采用只读方式挂接设备<br />
+rw：采用读写方式挂接设备<br />
+iocharset：指定访问文件系统所用字符集<br />
+<strong>3、device 设备</strong><br />
+挂载的分区设备；如：/dev/sdc1<br />
+<strong>4、挂载点(mount point)</strong><br />
+用来指定将分区设备挂载在系统的哪个目录下。</p>
+<h3>Mount 命令示例</h3>
+<h4>挂载光盘</h4>
+<p>将光盘镜像文件按照光盘挂载在目录中。<br />
+<code>mount -o loop -t iso9660 /home/sunky/mydisk.iso /mnt/vcdrom</code></p>
+<h4>挂载网络分区</h4>
+<p>挂载nfs文件系统时，需要先对mount命令安装nfs依赖包。若汉字文件名显示为乱码或不显示，请指定编码<br />
+<code>mount -t ntfs -o iocharset=cp936 /dev/sdc1 /mnt/usbhd1</code></p>
+<h4>挂载U盘</h4>
+<p>Linux系统把U盘也是当作SCSI设备对待的。<br />
+<code>mount -t vfat -o iocharset=cp936 /dev/sdd1 /mnt/usb</code></p>
+<h4>挂载Samba共享</h4>
+<p>在linux下要挂载windows的磁盘共享，就必须安装samba 软件包。<br />
+<code>mount -t smbfs -o username=administrator,password=pldy123 //10.140.133.23/c$ /mnt/samba</code><br />
+注：administrator 和 pldy123 是ip地址为10.140.133.23 windows计算机的一个用户名和密码，c$是这台计算机的一个磁盘共享</p>
+<h4>卸载分区</h4>
+<p><code>umount /mnt/cdrom</code></p>
+<h2>4、开机自动挂载分区</h2>
+<p>Linux 配置开机自动挂载分区的功能。涉及到的文件：/etc/fstab 和/etc/mtab</p>
+<h4>说明</h4>
+<p>根目录自然是最先挂载的；其他分区挂载都是相对于根目录而言。所有分区在同一时间之内﹐只能挂载一次。<br />
+/etc/fstab文件在开机时加载，进而挂载相应的分区。系统启动后，会将挂载信息存储在/etc/mtab和/proc/mounts 中。<br />
+如果对fstab文件修改错误，会导致系统无法启动，需要进入维护模式修复。</p>
+<h4>fstab 文件说明</h4>
+<table>
+<tbody>
+<tr>
+<th>/dev/mapper/vg_tempserver-lv_root</th>
+<th>/</th>
+<th>ext4</th>
+<th>defaults</th>
+<th>1</th>
+<th>1</th>
+</tr>
+<tr>
+<th>devpts</th>
+<th>/dev/pts</th>
+<th>devpts</th>
+<th>gid=5,mode=620</th>
+<th>0</th>
+<th>0</th>
+</tr>
+<tr>
+<th>分区名称</th>
+<th>挂载目录</th>
+<th>文件系统；如：ext3,ext4,nfs,vfat</th>
+<th>文件系统参数</th>
+<th>能否被dump备份指令作用</th>
+<th>是否以 fsck 检验磁区</th>
+</tr>
+</tbody>
+</table>
+<h4>挂载参数说明</h4>
+<table>
+<tbody>
+<tr>
+<th>async/sync</th>
+<th>异步/同步 默认async；分区写入方式</th>
+</tr>
+<tr>
+<th>auto/noauto</th>
+<th>自动/非自动 当下达 mount -a 时，此档案系统是否会被主动测试挂载。预设为 auto。</th>
+</tr>
+<tr>
+<th>rw/ro</th>
+<th>可读写/只读 对分区设置读写</th>
+</tr>
+<tr>
+<th>exec/noexec</th>
+<th>可执行/不可执行</th>
+</tr>
+<tr>
+<th>user/nouser</th>
+<th>允许/不允许使用者挂载</th>
+</tr>
+<tr>
+<th>suid/nosuid</th>
+<th>具有/不具有 suid 权限</th>
+</tr>
+<tr>
+<th>iocharset＝</th>
+<th>在＝号后面加入你的本地编码</th>
+</tr>
+<tr>
+<th>nls=</th>
+<th>在=号后面加入你的本地编码，你的中文就不会出现乱码。</th>
+</tr>
+<tr>
+<th>umask=</th>
+<th>这是关于读写权限的，</th>
+</tr>
+<tr>
+<th>defaults</th>
+<th>同时具有 rw, suid, dev, exec, auto, nouser, async 等参数</th>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

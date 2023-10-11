@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Gearman 工作过程详解 | 青春部落    </title>
+    <meta name="keywords"  content="任务管理,gearman,前台运行,后台运行" />
+    <meta name="description"  content="任务管理服务Gearman的前台运行和后台运行说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Gearman 工作过程详解评论Feed" href="https://cn-blogs.cn/archives/2745.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Gearman 任务管理' href='https://cn-blogs.cn/archives/2736.html' />
+<link rel='next' title='值类型和引用类型' href='https://cn-blogs.cn/archives/2762.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2745.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2745' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2745.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2745.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2745 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/baseservers" rel="category tag">基础服务</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2736.html" rel="prev">上一篇：Gearman 任务管理</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2762.html" rel="next">下一篇：值类型和引用类型</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Gearman 工作过程详解        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/11/24</span>
+            <span class="update is-hidden">2018-06-06</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>Gearman内部 Client,Job Server,Worker之间TCP协议的工作流程细解。</p>
+<h3>任务前台运行</h3>
+<p>Client提交任务前台运行，则会阻塞此Client；等Worker运行完任务后，将结果返回给Client后；Client继续向下执行。<br />
+<a href="https://cn-blogs.cn/archives/2745.html/gearman_frontground" rel="attachment wp-att-4514"><img class="alignnone size-full wp-image-4514" src="https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_frontground.png" alt="" width="550" height="610" srcset="https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_frontground.png 550w, https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_frontground-270x300.png 270w" sizes="(max-width: 550px) 100vw, 550px" /></a><br />
+1、worker向Gearman Server注册可以执行的功能function<br />
+2、worker尝试获取一个job<br />
+3、server通告worker暂无job<br />
+4、worker通告server：”我先睡会，有活干时再叫醒我”<br />
+5、client向server提交了一个job，建立tcp连接<br />
+6、server将job放入队列后向client返回了”Created”（已接收成功）状态<br />
+7、server唤醒可以完成这项工作的worker（可能会唤醒多个woker）<br />
+8、worker向server发起请求，尝试获得一个任务<br />
+9、server选定一个worker，将该job分配给选定的worker<br />
+10、在”Doing job”过程中，client向server发起job status查询<br />
+11、在”Doing job”过程中，server向client返回运行状态<br />
+12、worker辛苦工作一段时间后，向server通告“干完了”<br />
+13、server接受worker的结果并转发给client<br />
+14、client接受结果并关闭连接<br />
+Client端在job执行的整个过程中，与job server端的链接都是保持着的，这也给job完成后job server返回执行结果给client提供了通路。同时，在job执行过程当中，client端还可以发起job status的查询。当然，这需要worker端的支持的。</p>
+<h3>任务后台运行</h3>
+<p>Client提交任务后台运行，则Client端非阻塞继续执行后面的脚步。Job Server 将任务分发给Woker执行。Worker执行完成后，不能将执行结果返回给Client端。<br />
+<a href="https://cn-blogs.cn/archives/2745.html/gearman_background" rel="attachment wp-att-4515"><img class="alignnone size-full wp-image-4515" src="https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_background.png" alt="" width="550" height="610" srcset="https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_background.png 550w, https://cn-blogs.cn/wp-content/uploads/2017/11/gearman_background-270x300.png 270w" sizes="(max-width: 550px) 100vw, 550px" /></a><br />
+Client提交完job，job server成功接收后返回JOB_CREATED响应之后，client就断开与job server之间的连接了。后续无论发生什么事情，client都是不关心的。<br />
+同样，job的执行结果client端也没办法通过Gearman消息框架获得。</p>
+<h3>补充说明</h3>
+<h4>任务分类</h4>
+<p>按优先级分：普通（SUBMIT_JOB），高优先级（SUBMIT_JOB_HIGH），低优先级（SUBMIT_JOB_LOW）<br />
+按执行方式分：前台-同步阻塞（_JOB_HIGH,_JOB_LOW）,后台-异步非阻塞（_JOB_HIGH_BG,_JOB_LOW_BG）</p>
+<h4>前后台任务区别</h4>
+<p>”前台任务”发送job到job server后会一直等待work给它处理并返回结果，在此过程中，前台任务一直阻塞当前脚本往下执行，直到获取返回值<br />
+”后台任务”仅仅是发送job到job server这个过程就结束了，所以client可以跟踪前台任务的工作状态，而不能跟踪BG（后台）任务</p>
+<h4>时时通信</h4>
+<p>WORK_DATA<br />
+WORK_STATUS 对于长任务，worker应该每隔一段时间通告任务状态<br />
+WORK_COMPLETE<br />
+WORK_FAIL<br />
+WORK_EXCEPTION<br />
+WORK_WARNING<br />
+worker在执行job的过程中可以时时传送部分data或者处理status返回给client的，说明worker和client在处理的时候是可以时时通信的</p>
+<h4>Server 监控</h4>
+<p>Gearman有“Administrative Protocol”专门用于对Gearman Server的监控，主要涉及以下几方面：<br />
+status：所注册职能分类，worker总数目，处于工作状态的worker数目，可用worker数目等<br />
+worker的详细信息：所注册功能、IP<br />
+server的缓存任务最大队列长度：可以被查询也可以被设定</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

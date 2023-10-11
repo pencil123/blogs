@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>时间服务器 TimeServer | 青春部落    </title>
+    <meta name="keywords"  content="Linux,时间服务器,ntpd,timeserver" />
+    <meta name="description"  content="Linux 系统Ntpd时间服务器配置说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 时间服务器 TimeServer评论Feed" href="https://cn-blogs.cn/archives/81.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='crond 计划任务' href='https://cn-blogs.cn/archives/76.html' />
+<link rel='next' title='系统最大文件数' href='https://cn-blogs.cn/archives/89.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/81.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=81' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F81.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F81.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-81 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/centos" rel="category tag">CentOS发行版</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/76.html" rel="prev">上一篇：crond 计划任务</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/89.html" rel="next">下一篇：系统最大文件数</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            时间服务器 TimeServer        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/08/17</span>
+            <span class="update is-hidden">2018-04-28</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>时间的正确统一对服务器来说是很重要的，尤其是一些集群的系统架构。如果时间上出现问题，就会造成很大的隐患。<br />
+这里只先记录一下ntpdate和ntpd使用的笔记。不讨论其他方法：rdate</p>
+<h2>ntpdate 和 ntpd</h2>
+<p>ntpdate一步到位调整，根据时间服务器提供的时间，一次性的调整过来。每次要调整的时候，只需要执行命令就好。<br />
+ntpd服务慢慢地将时间校正过来；服务是运行在后台的。缺点：如果时间差大于1000s时，ntpd服务会停止工作；并且ntpd服务时间校正很慢</p>
+<h4>ntpdate 使用</h4>
+<p>如果使用9.3.149.107NTP服务器设置本地日期和时间，<br />
+命令：<code>ntpdate 9.3.149.107</code><br />
+参数 -d<br />
+指定调试方式。判断 ntpdate 命令会产生什么结果（不产生实际的结果）。结果再现在屏幕上。这个标志使用无特权的端口。</p>
+<h2>ntpd服务</h2>
+<p><strong>配置文件</strong>/etc/ntp.conf 启动参数文件/etc/sysconfig/ntpd<br />
+<strong>调试命令</strong>: ntpq -p | ntpstat | ntptrace</p>
+<h4>时间校正机制</h4>
+<table>
+<tbody>
+<tr>
+<td>Offset（与服务器的时间差）</td>
+<td>0-128ms</td>
+<td>128ms-600s</td>
+<td>600s-1000s</td>
+<td>1000s以上</td>
+</tr>
+<tr>
+<td>使用-X参数</td>
+<td>微调</td>
+<td>微调（速度大约是0.5ms/s，调整600秒要14天左右）</td>
+<td>跳跃</td>
+<td>退出（加-g参数可忽略）</td>
+</tr>
+<tr>
+<td>不使用-X参数</td>
+<td>微调</td>
+<td>跳跃</td>
+<td>跳跃</td>
+<td>退出（加-g参数可忽略）</td>
+</tr>
+</tbody>
+</table>
+<h3>配置文件</h3>
+<p>ntpd server 配置说明（注意服务器上的时区）</p>
+<h4>1、上层 NTP 伺服器</h4>
+<p>利用server设定上层NTP伺服器<br />
+<code>server [IP or hostname] [prefer]</code><br />
+在server后端可以接IP或主机名称，perfer表示[优先使用]的主机。</p>
+<h4>2、以driftfile记录时间差异</h4>
+<p><code>driftfile [可以被ntpd写入的目录与档案]</code><br />
+因为预设的NTP Server本身的时间计算是依据BIOS的晶片震荡周期频率来计算的，但是这个数值与上层Time Server有误差.所以NTP这个daemon(ntpd)会自动的去计算我们自己主机的频率与上层Time server的频率，并且将两个频率的误差记录下来，记录下来的档案就是在driftfile后面接的完整文件名中了！该文件所记录的数值单位为：百万分之一秒(ppm)。</p>
+<h4>3、安全配置</h4>
+<p><code>restrict [你的IP] mask [netmask_IP] [parameter]</code><br />
+其中parameter 的参数主要有底下这些：<br />
+ignore：拒绝所有类型的NTP连线<br />
+nomodify：用户端不能使用ntpc与ntpq 两支程式来修改伺服器的时间参数，但用户端仍可透过这部主机来进行网路校时的<br />
+noquery：用户端不能够使用ntpq, ntpc等指令来查询时间伺服器，等于不提供NTP的网路校时；<br />
+notrap：不提供trap这个远程事件登录(remote event logging)的功能。<br />
+notrust：拒绝没有认证的用户端。<br />
+nopeer：不与其他同一层的ntp服务器进行时间同步<br />
+如果你没有在parameter的地方加上任何参数的话，这表示该IP或网段不受任何限制。</p>
+<p>#默认的client拒绝所有的操作<br />
+<code>restrict default kod nomodify notrap nopeer noquery</code><br />
+#然后允许本机地址一切的操作<br />
+<code>restrict 127.0.0.1</code><br />
+#最后我们允许局域网内所有client连接到这台服务器同步时间.但是拒绝让他们修改服务器上的时间<br />
+<code>restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap</code><br />
+把这三条加入到/etc/ntp.conf中就完成了我们的简单配置。</p>
+<h4>4、备用方案</h4>
+<p>外部时间服务器不可用时，以本地时间作为时间服务<br />
+<code>server 127.127.1.0 # local clock<br />
+fudge 127.127.1.0 stratum 10</code></p>
+<h4>补充</h4>
+<p>可以在/etc/sysconfig/ntpd文件中修改启动参数，NTP一般只会同步system clock。如果要<strong>将时间同步到硬件时钟</strong>上：<br />
+<code>SYNC_HWCLOCK=yes</code></p>
+<h3>启动参数</h3>
+<p><strong>-x</strong> 设置使用微调的方式校正时间。当时间误差小于128ms或者大于600s时，这个参数不生效；-x校正时间很慢600s的时间需要14天才能校正过来。<br />
+<strong>-g</strong> Normally, ntpd exits if the offset exceeds the sanity limit, which is 1000 s by default. If the sanity limit is set to zero, no sanity checking is performed and any offset is acceptable. This option overrides the limit and allows the time to be set to any value without restriction; however, this can happen only once. After that, ntpd will exit if the limit is exceeded. This option can be used with the -q option。<br />
+当时间误差大于1000s时，ntpd将退出。使用-g命令可以忽略这个阀值。</p>
+<h3>调试参数</h3>
+<blockquote><p>ntpq -p Fri May 27 14:06:57 2011<br />
+remote refid st t when poll reach delay offset jitter<br />
+==============================================================================<br />
+Hshh.org 209.81.9.7 2 u 35 64 7 103.838 361.111 87.482<br />
+time.uni.net.th 202.28.214.2 2 u 98 64 6 450.107 343.325 137.580<br />
+LOCAL(0) .LOCL. 10 l 31 64 7 0.000 0.000 0.001</p></blockquote>
+<h4>输出参数说明</h4>
+<p>remote: 它指的就是本地机器所连接的远程NTP服务器<br />
+refid: 它指的是参考的上一层NTP主机的地址<br />
+st: 远程服务器的级别. 由于NTP是层型结构,有顶端的服务器,多层的Relay Server再到客户端. 所以服务器从高到低级别可以设定为1-16. 为了减缓负荷和网络堵塞,原则上应该避免直接连接到级别为1的服务器的.<br />
+when: 用做计时，用来告诉我们还有多久本地机器就需要和远程服务器进行一次时间同步<br />
+poll: 本地机和远程服务器多少时间进行一次同步(单位为秒). 在一开始运行NTP的时候这个poll值会比较小,那样和服务器同步的频率也就增加了,可以尽快调整到正确的时间范围.之后poll值会逐渐增大,同步的频率也就会相应减小<br />
+reach: 这是一个八进制值,表示已经向上层NTP伺服器要求更新的次数。每成功连接一次它的值就会增加。<br />
+delay: 网路传输过程当中延迟的时间，单位为 10^(-6) 秒<br />
+<strong>offset: 这是个最关键的值, 它告诉了我们本地机和服务器之间的时间差别. offset越接近于0,我们就和服务器的时间越接近。单位为10^(-3)秒</strong><br />
+jitter: Linux系统时间与BIOS硬件时间的差异时间，单位为10^(-6)秒。简单地说这个数值的绝对值越小我们和服务器的时间就越精确。</p>
+<h4>补充</h4>
+<p>那么大家细心的话就会发现两个问题:<br />
+第一我们连接的是1.cn.pool.ntp.org为什么和remote server不一样?<br />
+第二那个最前面的+和*都是什么意思呢?<br />
+第一个问题是因为NTP提供给我们的是一个cluster server所以每次连接的得到的服务器都有可能是不一样.同样这也告诉我们了在指定NTP Server的时候应该使用hostname而不是IP<br />
+第二个问题和第一个相关,既然有这么多的服务器就是为了在发生问题的时候其他的服务器还可以正常地给我们提供服务.那么如何知道这些服务器的状态呢? 这就是第一个记号会告诉我们的信息<br />
+*<br />
+它告诉我们远端的服务器已经被确认为我们的<strong>主NTP Server</strong>,我们系统的时间将由这台机器所提供<br />
++<br />
+它将作为辅助的NTP Server和带有*号的服务器一起为我们提供同步服务. 当*号服务器不可用时它就可以接管<br />
+&#8211;<br />
+远程服务器被clustering algorithm认为是不合格的NTP Server<br />
+x<br />
+远程服务器不可用</p>
+<h4>错误</h4>
+<p>在ntp客户端运行ntpdate serverIP，出现no server suitable for synchronization found的错误。<br />
+在ntp客户端用ntpdate –d serverIP查看，发现有“Server dropped: strata too high”的错误，并且显示“stratum 16”。而正常情况下stratum这个值得范围是“0~15”。<br />
+以下的定义是让NTP Server和其自身保持同步，如果在ntp.conf中定义的server都不可用时，将使用local时间作为ntp服务提供给ntp客户端。<br />
+<code>server 127.127.1.0<br />
+fudge 127.127.1.0 stratum 8</code><br />
+在ntp server上重新启动ntp服务后，ntp server自身或者与其server的同步的需要一个时间段，这个过程可能是5分钟，在这个时间之内在客户端运行ntpdate命令时会产生no server suitable for synchronization found的错误。</p>
+<h2>NTPD 服务安装脚本</h2>
+<p><code>#bin/bash<br />
+yum install -y ntp<br />
+sed -i -e '/server 3.centos.pool.ntp.org iburst/a\\nserver 192.168.3.5' /etc/ntp.conf<br />
+sed -i 's%OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g"%OPTIONS="-u  ntp:ntp -x -p /var/run/ntpd.pid -g"%' /etc/sysconfig/ntpd<br />
+sed -i 's%server 0.centos.pool.ntp.org iburst%#server 0.centos.pool.ntp.org iburst%' /etc/ntp.conf<br />
+sed -i 's%server 1.centos.pool.ntp.org iburst%#server 0.centos.pool.ntp.org iburst%' /etc/ntp.conf<br />
+sed -i 's%server 2.centos.pool.ntp.org iburst%#server 0.centos.pool.ntp.org iburst%' /etc/ntp.conf<br />
+sed -i 's%server 3.centos.pool.ntp.org iburst%#server 0.centos.pool.ntp.org iburst%' /etc/ntp.conf</code></p>
+<p><code>chkconfig --level 35 ntpd on<br />
+service ntpd start</code></p>
+<p><code>mkdir /opt/sbin<br />
+touch /opt/sbin/ntp.sh;chmod +x /opt/sbin/ntp.sh;vim /opt/sbin/ntp.sh<br />
+bash -x /opt/sbin/ntp.sh</code></p>
+<p><code>sed -i 's%server 192.168.3.5%server 10.8.0.151%' /etc/ntp.conf </code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

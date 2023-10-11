@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>wordpress 数据库说明 | 青春部落    </title>
+    <meta name="keywords"  content="wordpress框架,数据表说明,数据库使用" />
+    <meta name="description"  content="PHP框架wordpress框架数据库表使用说明" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; wordpress 数据库说明评论Feed" href="https://cn-blogs.cn/archives/3163.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='linux系统标准输入/输出和重定向' href='https://cn-blogs.cn/archives/3153.html' />
+<link rel='next' title='wordpress 目录层次简析' href='https://cn-blogs.cn/archives/3167.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/3163.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=3163' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3163.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F3163.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-3163 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/php-develop/wordpress" rel="category tag">WordPress</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/3153.html" rel="prev">上一篇：linux系统标准输入/输出和重定向</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/3167.html" rel="next">下一篇：wordpress 目录层次简析</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            wordpress 数据库说明        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2018/01/13</span>
+            <span class="update is-hidden">2018-03-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>全局信息</h2>
+<p>wp_options<br />
+存储在WordPress系统默认及后台中用户设置的系统选项、插件及主题配置信息，</p>
+<p>wp_links<br />
+存储友情链接信息，如友链名称、URL、打开方式、描述、是否可见等</p>
+<p>wp_comments<br />
+存储评论信息，如评论内容、评论所属文章、评论人昵称、邮箱、URL等</p>
+<p>wp_commentmeta<br />
+仅存储Akismet或手工审核的评论是否为垃圾评论的判断结果</p>
+<h2>用户信息</h2>
+<p>wp_users<br />
+存储用户名、密码、昵称、邮箱、注册时间等信息</p>
+<p>wp_usermeta<br />
+存储用户的姓名、昵称、权限等信息</p>
+<h2>文章信息</h2>
+<p>wp_posts<br />
+存储文章信息，如文章标题、正文、摘要、作者、发布时间、访问密码、评论数、修改时间、文章地址<br />
+&#8211;post_status/状态<br />
+WordPress默认使用8种主要的发布状态。</p>
+<table>
+<tbody>
+<tr>
+<th>Publish/发布</th>
+<th>每个人都可以看到。</th>
+</tr>
+<tr>
+<th>Future/未来</th>
+<th>计划在未来的日期发布。</th>
+</tr>
+<tr>
+<th>Draft/草案</th>
+<th>具有适当用户角色的任何人都可查看不完整的帖子。</th>
+</tr>
+<tr>
+<th>Pending/有待</th>
+<th>正在等待适当的人发布。</th>
+</tr>
+<tr>
+<th>Private/私人的</th>
+<th>仅在管理员级别对WordPress用户可见。</th>
+</tr>
+<tr>
+<th>Trash/垃圾</th>
+<th>垃圾箱中的帖子被分配垃圾箱状态。</th>
+</tr>
+<tr>
+<th>Auto-Draft/自动草案</th>
+<th>修改WordPress在编辑时自动保存的内容。</th>
+</tr>
+<tr>
+<th>Inherit/继承</th>
+<th>与子帖子（如附件和修订版）一起使用，以确定父帖子的实际状态。</th>
+</tr>
+</tbody>
+</table>
+<p>&#8211;post_type/帖子类型<br />
+7中系统自带帖子类型</p>
+<table>
+<tbody>
+<tr>
+<th>post</th>
+<th>文章</th>
+</tr>
+<tr>
+<th>page</th>
+<th>单独页面</th>
+</tr>
+<tr>
+<th>attachment</th>
+<th>附件</th>
+</tr>
+<tr>
+<th>revision</th>
+<th>修订版</th>
+</tr>
+<tr>
+<th>nav_menu_item</th>
+<th>导航栏菜单</th>
+</tr>
+<tr>
+<th>custom_css</th>
+<th>自定义CSS</th>
+</tr>
+<tr>
+<th>customize_changeset</th>
+<th>变更</th>
+</tr>
+</tbody>
+</table>
+<p>wp_postmeta<br />
+存储文章的一些相关信息，如文章缩略图地址、缩略图长宽高和alt信息、文章所在分类的URL、文章自定义的Description和<br />
+Keywords、文章访问次数等；</p>
+<h2>分类和标签</h2>
+<p>wp_terms<br />
+存储菜单分类、标签分类名称及URL信息</p>
+<p>wp_term_relationships<br />
+存储文章和分类、标签的相互对应关系</p>
+<p>wp_term_taxonomy<br />
+存储分类和标签的描述信息、父子关系、所属包含的文章数等</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

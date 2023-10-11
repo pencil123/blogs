@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP多进程 | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; PHP多进程评论Feed" href="https://cn-blogs.cn/archives/4417.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PHP foreach详解' href='https://cn-blogs.cn/archives/4415.html' />
+<link rel='next' title='PHP队列' href='https://cn-blogs.cn/archives/4419.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/4417.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=4417' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4417.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F4417.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-4417 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/development/php-develop" rel="category tag">PHP</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/4415.html" rel="prev">上一篇：PHP foreach详解</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/4419.html" rel="next">下一篇：PHP队列</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            PHP多进程        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/uptoyou" title="由uptoyou发布" rel="author">uptoyou</a></span>
+            <span class="entry-date">2018/05/11</span>
+            <span class="update is-hidden">2018-05-15</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>php多进程核心</p>
+<p>1.创建一个子进程<br />
+$pid = pcntl_fork();<br />
+//父进程和子进程都会执行下面代码<br />
+if ($pid &gt; 0) {<br />
+    //父进程会得到子进程号，所以这里是父进程执行的逻辑<br />
+    pcntl_wait($status); //等待子进程中断，防止子进程成为僵尸进程<br />
+} elseif ($pid == 0) {<br />
+	//子进程得到的$pid为0, 所以这里是子进程执行的逻辑<br />
+} else {<br />
+	//错误处理：创建子进程失败时返回-1<br />
+	die(&#8216;could not fork&#8217;);<br />
+}<br />
+//挂起主进程，等待一个子进程退出或被信号打断<br />
+int pcntl_wait ( int &amp;$status [, int $options = 0 ] )<br />
+2.创建多个进程<br />
+for ($i = 0; $i  0) {<br />
+	    //父进程会得到子进程号，所以这里是父进程执行的逻辑<br />
+	} elseif ($pid == 0) {<br />
+		//子进程得到的$pid为0, 所以这里是子进程执行的逻辑<br />
+        exit(0);<br />
+	} else {<br />
+		//错误处理：创建子进程失败时返回-1<br />
+		die(&#8216;could not fork&#8217;);<br />
+	}<br />
+}<br />
+注意，创建多个子进程的时候，不能在主进程中加入 pcntl_wait($status)，主进程执行到pcntl_fork后，会产生一个子进程，主进程和子进程会分开执行，当挂起主进程后，主进程会等待子进程结束后才继续执行下一个循环，所以会导致堵塞 子进程处理结束后必须加上exit(0)终止子进程，否则子进程将继续执行if之后的代码<br />
+3.多进程工作实例<br />
+for ($i = 0; $i  0) {<br />
+	    //父进程会得到子进程号，所以这里是父进程执行的逻辑<br />
+	} elseif ($pid == 0) {<br />
+		//子进程得到的$pid为0, 所以这里是子进程执行的逻辑<br />
+		call_user_func(&#8216;work_handler&#8217;);<br />
+		exit(0);<br />
+	} else {<br />
+		//错误处理：创建子进程失败时返回-1<br />
+		die(&#8216;could not fork&#8217;);<br />
+	}<br />
+}</p>
+<p>function work_handler() {<br />
+	//子进程执行的逻辑<br />
+}<br />
+信号</p>
+<p>涉及到进程管理的几个信号量</p>
+<p>//通知前台进程组终止进程<br />
+SIGINT<br />
+//供用户自定义<br />
+SIGUSR1<br />
+//供用户自定义<br />
+SIGUSR2<br />
+1.安装信号处理器<br />
+bool pcntl_signal ( int $signo , callback $handler [, bool $restart_syscalls = true ] )<br />
+//声明用于进程信号处理。如果注册了信号处理器，程序会每执行一行代码后自动检查是否有尚未处理的信号<br />
+declare(ticks = 1);</p>
+<p>//安装信号处理器<br />
+pcntl_signal(SIGTERM, &#8220;sig_handler&#8221;);<br />
+pcntl_signal(SIGHUP,  &#8220;sig_handler&#8221;);<br />
+pcntl_signal(SIGUSR1, &#8220;sig_handler&#8221;);</p>
+<p>//或者<br />
+pcntl_signal(SIGUSR1, array($obj, &#8220;do_something&#8221;);<br />
+信号处理器，顾名思义是当信号产生后（信号产生有多种方式，有用户产生也有系统产生）执行的函数<br />
+2.定义信号处理函数<br />
+//信号处理函数<br />
+function sig_handler($signo)<br />
+{<br />
+	switch ($signo) {<br />
+		case SIGTERM:<br />
+			//处理SIGTERM信号<br />
+			exit;<br />
+			break;<br />
+		case SIGHUP:<br />
+			//处理SIGHUP信号<br />
+			break;<br />
+		case SIGUSR1:<br />
+			echo &#8220;Caught SIGUSR1&#8230;\n&#8221;;<br />
+			break;<br />
+		default:<br />
+			//处理所有其他信号<br />
+	}<br />
+}<br />
+//发送信号<br />
+bool posix_kill ( int $pid , int $sig )<br />
+注意，以上的安装信号和处理信号函数只是绑定发送信号后的处理程序，其实如果需要关闭进程仅需使用posix_kill($pid, SIGINT)<br />
+通过信号来控制进程</p>
+<p>/**<br />
+ * 安装信号处理器<br />
+ * @return void<br />
+ */<br />
+protected function install_signal()<br />
+{<br />
+    // stop<br />
+    pcntl_signal(SIGINT, &#8216;signal_handler&#8217;, false);<br />
+    // reload<br />
+    pcntl_signal(SIGUSR1, &#8216;signal_handler&#8217;, false);<br />
+    // status<br />
+    pcntl_signal(SIGUSR2, &#8216;signal_handler&#8217;, false);<br />
+}</p>
+<p>/**<br />
+ * 信号处理函数<br />
+ * @return void<br />
+ */<br />
+public function signal_handler($signal) {<br />
+	switch ($signal) {<br />
+	    // stop<br />
+	    case SIGINT:<br />
+	        stop_all();<br />
+	        break;<br />
+	    // reload<br />
+	    case SIGUSR1:<br />
+	        echo &#8220;sreloadtop\n&#8221;;<br />
+	        break;<br />
+	    // show status<br />
+	    case SIGUSR2:<br />
+	        echo &#8220;status\n&#8221;;<br />
+	        break;<br />
+	}<br />
+}</p>
+<p>$_worker_pids = array();</p>
+<p>//开启多进程<br />
+for ($i = 0; $i  0)<br />
+    {<br />
+        $_worker_pids[$pid] = $pid;<br />
+    }<br />
+    // 子进程<br />
+    elseif(0 === $pid)<br />
+    {<br />
+        // 子进程逻辑</p>
+<p>        // 这里用0表示正常退出<br />
+        exit(0);<br />
+    }<br />
+    else<br />
+    {<br />
+        exit(&#8220;fork one worker fail&#8221;);<br />
+    }<br />
+}</p>
+<p>/**<br />
+ * 用信号依次关闭子进程<br />
+ * @return void<br />
+ */<br />
+public function stop_all()<br />
+{<br />
+    foreach ($_worker_pids as $worker_pid)<br />
+    {<br />
+        posix_kill($worker_pid, SIGINT);<br />
+    }<br />
+}<br />
+install_signal()安装信号处理器，把信号处理函数signal_handler()和三个信号绑定，当进程出现SIGINT信号的时候，会调用stop_all()函数，stop_all()函数会逐一对$_worker_pids记录的进程发送SIGINT信号<br />
+一个多进程类</p>
+<p>threads = [];<br />
+        $this-&gt;ignoreErrors = false;<br />
+        $this-&gt;memoryKey = round(microtime(true) * 1000);<br />
+    }</p>
+<p>    /**<br />
+     * Run some code in a thread.<br />
+     *<br />
+     * @param callable $func The function to execute<br />
+     * @param array|mixed $args The arguments (or a single argument) to pass to the function<br />
+     *<br />
+     * @return int The pid of the thread created to execute this code<br />
+     */<br />
+    public function call(callable $func, $args = null)<br />
+    {<br />
+        $pid = pcntl_fork();</p>
+<p>        if ($pid == -1) {<br />
+            throw new \Exception(&#8220;Failed to fork&#8221;);<br />
+        }</p>
+<p>        # If this is the child process, then run the requested function<br />
+        if (!$pid) {<br />
+            try {<br />
+                if ($args === null) {<br />
+                    $func();<br />
+                } else {<br />
+                    call_user_func_array($func, $args);<br />
+                }<br />
+            } catch(\Exception $e) {<br />
+                $memory = shmop_open($this-&gt;memoryKey, &#8220;c&#8221;, 0644, static::SHARED_MEMORY_LIMIT);<br />
+                $errors = shmop_read($memory, 0, static::SHARED_MEMORY_LIMIT);<br />
+                $errors = trim($errors);<br />
+                if ($errors) {<br />
+                    $errors .= &#8220;\n&#8221;;<br />
+                }<br />
+                $errors .= &#8220;Exception: &#8221; . $e-&gt;getMessage() . &#8221; (&#8221; . $e-&gt;getFile() . &#8220;:&#8221; . $e-&gt;getLine() . &#8220;)&#8221;;<br />
+                shmop_write($memory, $errors, 0);<br />
+                shmop_close($memory);<br />
+                exit(1);<br />
+            }</p>
+<p>            # Then we must exit or else we will end up the child process running the parent processes code<br />
+            die();<br />
+        }</p>
+<p>        $this-&gt;threads[$pid] = $pid;</p>
+<p>        return $pid;<br />
+    }</p>
+<p>    /**<br />
+     * Wait for the processes started via call().<br />
+     *<br />
+     * @param int $pid The pid to wait for, if none is passed then all threads created by this object will be waited for<br />
+     *<br />
+     * @return int The highest return status for each of the processes we&#8217;ve waited for<br />
+     */<br />
+    public function wait($pid = null)<br />
+    {<br />
+        if ($pid) {<br />
+            $threads = [$pid];<br />
+        } else {<br />
+            $threads = $this-&gt;threads;<br />
+        }</p>
+<p>        $error = false;<br />
+        $status = 0;<br />
+        foreach ($threads as $pid) {<br />
+            pcntl_waitpid($pid, $status);<br />
+            if ($status &gt; 0) {<br />
+                $error = $status;<br />
+            }<br />
+            unset($this-&gt;threads[$pid]);<br />
+        }</p>
+<p>        if (!$this-&gt;ignoreErrors &amp;&amp; $error) {<br />
+            $memory = shmop_open($this-&gt;memoryKey, &#8220;a&#8221;, 0, 0);<br />
+            $errors = shmop_read($memory, 0, static::SHARED_MEMORY_LIMIT);<br />
+            shmop_delete($memory);<br />
+            shmop_close($memory);</p>
+<p>            $error = &#8220;An error occurred within a thread, the return code was (&#8221; . $error . &#8220;)&#8221;;<br />
+            if ($errors = trim($errors)) {<br />
+                $error .= &#8220;\n&#8221; . $errors;<br />
+            }<br />
+            throw new \Exception($error);<br />
+        }</p>
+<p>        return $status;<br />
+    }</p>
+<p>    /**<br />
+     * If no call to wait() is made, then we wait for the threads on destruct<br />
+     */<br />
+    public function __destruct()<br />
+    {<br />
+        $this-&gt;wait();<br />
+    }<br />
+}</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>aggs cardinality | 青春部落    </title>
+    <meta name="keywords"  content="" />
+    <meta name="description"  content="" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; aggs cardinality评论Feed" href="https://cn-blogs.cn/archives/558.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='query和filter' href='https://cn-blogs.cn/archives/552.html' />
+<link rel='next' title='es aggs tips' href='https://cn-blogs.cn/archives/560.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/558.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=558' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F558.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F558.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-558 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/elk" rel="category tag">日志分析</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/552.html" rel="prev">上一篇：query和filter</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/560.html" rel="next">下一篇：es aggs tips</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            aggs cardinality        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2016/09/01</span>
+            <span class="update is-hidden">2016-09-01</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>获取字段的unique_count</p>
+<p>Cardinality Aggregationedit<br />
+A single-value metrics aggregation that calculates an approximate count of distinct values. Values can be extracted either from specific fields in the document or generated by a script.<br />
+Assume you are indexing books and would like to count the unique authors that match a query:<br />
+{<br />
+&#8220;aggs&#8221; : {<br />
+&#8220;author_count&#8221; : {<br />
+&#8220;cardinality&#8221; : {<br />
+&#8220;field&#8221; : &#8220;author&#8221;<br />
+}<br />
+}<br />
+}<br />
+}<br />
+Precision controledit<br />
+This aggregation also supports the precision_threshold option:</p>
+<p>Warning<br />
+The precision_threshold option is specific to the current internal implementation of the cardinality agg, which may change in the future.</p>
+<p>{<br />
+&#8220;aggs&#8221; : {<br />
+&#8220;author_count&#8221; : {<br />
+&#8220;cardinality&#8221; : {<br />
+&#8220;field&#8221; : &#8220;author_hash&#8221;,<br />
+&#8220;precision_threshold&#8221;: 100<br />
+}<br />
+}<br />
+}<br />
+}</p>
+<p>The precision_threshold options allows to trade memory for accuracy, and defines a unique count below which counts are expected to be close to accurate. Above this value, counts might become a bit more fuzzy. The maximum supported value is 40000, thresholds above this number will have the same effect as a threshold of 40000. Default value depends on the number of parent aggregations that multiple create buckets (such as terms or histograms).</p>
+<p>Counts are approximateedit<br />
+Computing exact counts requires loading values into a hash set and returning its size. This doesn’t scale when working on high-cardinality sets and/or large values as the required memory usage and the need to communicate those per-shard sets between nodes would utilize too many resources of the cluster.<br />
+This cardinality aggregation is based on the HyperLogLog++ algorithm, which counts based on the hashes of the values with some interesting properties:<br />
+configurable precision, which decides on how to trade memory for accuracy,<br />
+excellent accuracy on low-cardinality sets,<br />
+fixed memory usage: no matter if there are tens or billions of unique values, memory usage only depends on the configured precision.<br />
+For a precision threshold of c, the implementation that we are using requires about c * 8 bytes.<br />
+The following chart shows how the error varies before and after the threshold:<br />
+For all 3 thresholds, counts have been accurate up to the configured threshold (although not guaranteed, this is likely to be the case). Please also note that even with a threshold as low as 100, the error remains under 5%, even when counting millions of items.<br />
+Pre-computed hashesedit<br />
+On string fields that have a high cardinality, it might be faster to store the hash of your field values in your index and then run the cardinality aggregation on this field. This can either be done by providing hash values from client-side or by letting elasticsearch compute hash values for you by using the mapper-murmur3 plugin.<br />
+Note<br />
+Pre-computing hashes is usually only useful on very large and/or high-cardinality fields as it saves CPU and memory. However, on numeric fields, hashing is very fast and storing the original values requires as much or less memory than storing the hashes. This is also true on low-cardinality string fields, especially given that those have an optimization in order to make sure that hashes are computed at most once per unique value per segment.<br />
+Scriptedit<br />
+The cardinality metric supports scripting, with a noticeable performance hit however since hashes need to be computed on the fly.</p>
+<p>{<br />
+&#8220;aggs&#8221; : {<br />
+&#8220;author_count&#8221; : {<br />
+&#8220;cardinality&#8221; : {<br />
+&#8220;script&#8221;: &#8220;doc[&#8216;author.first_name&#8217;].value + &#8216; &#8216; + doc[&#8216;author.last_name&#8217;].value&#8221;<br />
+}<br />
+}<br />
+}<br />
+}<br />
+This will interpret the script parameter as an inline script with the default script language and no script parameters. To use a file script use the following syntax:<br />
+{<br />
+&#8220;aggs&#8221; : {<br />
+&#8220;author_count&#8221; : {<br />
+&#8220;cardinality&#8221; : {<br />
+&#8220;script&#8221; : {<br />
+&#8220;file&#8221;: &#8220;my_script&#8221;,<br />
+&#8220;params&#8221;: {<br />
+&#8220;first_name_field&#8221;: &#8220;author.first_name&#8221;,<br />
+&#8220;last_name_field&#8221;: &#8220;author.last_name&#8221;<br />
+}<br />
+}<br />
+}<br />
+}<br />
+}<br />
+}<br />
+Tip<br />
+for indexed scripts replace the file parameter with an id parameter.<br />
+Missing valueedit<br />
+The missing parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.<br />
+{<br />
+&#8220;aggs&#8221; : {<br />
+&#8220;tag_cardinality&#8221; : {<br />
+&#8220;cardinality&#8221; : {<br />
+&#8220;field&#8221; : &#8220;tag&#8221;,<br />
+&#8220;missing&#8221;: &#8220;N/A&#8221;<br />
+}<br />
+}<br />
+}<br />
+}<br />
+Documents without a value in the tag field will fall into the same bucket as documents that have the value N/A.</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

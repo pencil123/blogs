@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>磁盘读写和RAID | 青春部落    </title>
+    <meta name="keywords"  content="硬盘,局部性原理,磁盘预读,读写测速,RAID阵列" />
+    <meta name="description"  content="硬盘读写的局部性原理和读写测速及RAID阵列" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; 磁盘读写和RAID评论Feed" href="https://cn-blogs.cn/archives/2991.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='CSRF 跨站请求伪造' href='https://cn-blogs.cn/archives/2851.html' />
+<link rel='next' title='CI 404错误 和获取访问域名' href='https://cn-blogs.cn/archives/2994.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2991.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2991' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2991.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2991.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2991 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/kernel/hard-system" rel="category tag">内核&amp;硬件系统</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/2851.html" rel="prev">上一篇：CSRF 跨站请求伪造</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2994.html" rel="next">下一篇：CI 404错误 和获取访问域名</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            磁盘读写和RAID        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/12/21</span>
+            <span class="update is-hidden">2018-04-26</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h3>局部性原理与磁盘预读</h3>
+<p>由于存储介质的特性，磁盘本身存取就比主存慢很多，再加上机械运动耗费，磁盘的存取速度往往是主存的几百分分之一，因此为了提高效率，要尽量减少磁盘I/O。<br />
+为了达到这个目的，磁盘往往不是严格按需读取，而是每次都会预读，即使只需要一个字节，磁盘也会从这个位置开始，顺序向后读取一定长度的数据放入内存。<br />
+这样做的理论依据是计算机科学中著名的局部性原理：当一个数据被用到时，其附近的数据也通常会马上被使用。程序运行期间所需要的数据通常比较集中。</p>
+<p>由于磁盘顺序读取的效率很高（不需要寻道时间，只需很少的旋转时间），因此对于具有局部性的程序来说，预读可以提高I/O效率。<br />
+预读的长度一般为页（page）的整倍数。<br />
+页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（在许多操作系统中，页得大小通常为4k），主存和磁盘以页为单位交换数据。<br />
+当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。</p>
+<h3>系统读写测速</h3>
+<p>在管理系统中，如果服务运行比较慢；我们会需要检查是否因为磁盘读写慢导致的。<br />
+linux系统磁盘IO测速工具：hdparm和dd</p>
+<h4>hdparm</h4>
+<p>这是一个是用来获取ATA/IDE硬盘的参数的命令,是由早期Linux IDE驱动的开发和维护人员 Mark Lord开发编写的.<br />
+该命令应该也是仅用于Linux系统,对于UNIX系统，ATA/IDE硬盘用的可能比较少，一般大型的系统都是使用磁盘阵列的.</p>
+<p>使用方法很简单<br />
+<code># hdparm -Tt /dev/sda<br />
+/dev/sda:<br />
+Timing cached reads: 7860 MB in 2.00 seconds = 3933.30 MB/sec<br />
+Timing buffered disk reads: 746 MB in 3.00 seconds = 248.51 MB/sec</code></p>
+<h4>dd</h4>
+<p>这不是一个专业的测试工具，不过如果对于测试结果的要求不是很苛刻的话,平时可以使用来对磁盘的读写速度作一个简单的评估.</p>
+<p><strong>在使用前首先了解两个特殊设备</strong><br />
+/dev/null 伪设备,回收站.写该文件不会产生IO<br />
+/dev/zero 伪设备,会产生空字符流,对它不会产生IO</p>
+<p><strong>1.测试磁盘的IO写速度</strong><br />
+<code># time dd if=/dev/zero of=/test.dbf bs=8k count=300000<br />
+300000+0 records in<br />
+300000+0 records out<br />
+10.59s real 0.43s user 9.40s system<br />
+# du -sm /test.dbf<br />
+2347 /test.dbf</code></p>
+<p>可以看到,在10.59秒的时间里，生成2347M的一个文件,IO写的速度约为221.6MB/sec;<br />
+当然这个速度可以多测试几遍取一个平均值,符合概率统计.</p>
+<p><strong>2.测试磁盘的IO读速度</strong><br />
+<code># df -m<br />
+Filesystem 1M-blocks Used Available Use% Mounted on<br />
+/dev/mapper/VolGroup00-LogVol00<br />
+19214 9545 8693 53% /<br />
+/dev/sda1 99 13 82 14% /boot<br />
+none 506 0 506 0% /dev/shm</code><br />
+<code><br />
+# time dd if=/dev/mapper/VolGroup00-LogVol00 of=/dev/null bs=8k<br />
+2498560+0 records in<br />
+2498560+0 records out<br />
+247.99s real 1.92s user 48.64s system</code></p>
+<p>上面的试验在247.99秒的时间里读取了19214MB的文件,计算下来平均速度为77.48MB/sec</p>
+<p><strong>3.测试IO同时读和写的速度</strong><br />
+<code># time dd if=/dev/sda1 of=test.dbf bs=8k<br />
+13048+1 records in<br />
+13048+1 records out<br />
+3.73s real 0.04s user 2.39s system<br />
+# du -sm test.dbf<br />
+103 test.dbf</code></p>
+<p><strong>相比两种方法:</strong><br />
+前者是linux上专业的测试IDE/ATA磁盘的工具,但是使用范围有局限性;<br />
+后者可以通用,但不够专业,也没有考虑到缓存和物理读的区分，测试的数据也是仅作参考，不能算是权威.</p>
+<h3>硬盘RAID阵列</h3>
+<p>独立硬盘冗余阵列（RAID, Redundant Array of Independent Disks），旧称廉价磁盘冗余阵列（Redundant Array of Inexpensive Disks），简称磁盘阵列。<br />
+其基本思想就是把多个相对便宜的硬盘组合起来，成为一个硬盘阵列组，使性能达到甚至超过一个价格昂贵、容量巨大的硬盘。<br />
+根据选择的版本不同，RAID比单颗硬盘有以下一个或多个方面的好处：增强数据集成度，增强容错功能，增加处理量或容量。<br />
+另外，磁盘阵列对于电脑来说，看起来就像一个单独的硬盘或逻辑存储单元。分为RAID-0，RAID-1，RAID-1E，RAID-5，RAID-6，RAID-7，RAID-10，RAID-50，RAID-60。</p>
+<p>简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。<br />
+RAID常被用在服务器电脑上，并且常使用完全相同的硬盘作为组合。<br />
+由于硬盘价格的不断下降与RAID功能更加有效地与主板集成，它也成为玩家的一个选择，特别是需要大容量存储空间的工作，如：视频与音频制作。</p>
+<table>
+<tbody>
+<tr>
+<th>档次</th>
+<th>最少硬盘</th>
+<th>最大容错</th>
+<th>可用容量</th>
+<th>读取性能</th>
+<th>写入性能</th>
+<th>安全性</th>
+<th>目的</th>
+</tr>
+<tr>
+<td>JBOD</td>
+<td>1</td>
+<td>0</td>
+<td>n</td>
+<td>1</td>
+<td>1</td>
+<td>无</td>
+<td>增加容量</td>
+</tr>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>n</td>
+<td>n</td>
+<td>n</td>
+<td>一个硬盘异常，全部硬盘都会异常</td>
+<td>追求最大容量、速度</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>n-1</td>
+<td>n/2</td>
+<td>n</td>
+<td>1</td>
+<td>最高，一个正常即可</td>
+<td>追求最大安全性</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>n-1</td>
+<td>n-1</td>
+<td>n-1</td>
+<td>高</td>
+<td>追求最大容量、最小预算</td>
+</tr>
+<tr>
+<td>6</td>
+<td>4</td>
+<td>2</td>
+<td>n-2</td>
+<td>n-2</td>
+<td>n-2</td>
+<td>安全性较RAID 5高</td>
+<td>同RAID 5，但较安全</td>
+</tr>
+<tr>
+<td>10</td>
+<td>4</td>
+<td>n/2</td>
+<td>n/2</td>
+<td>n</td>
+<td>n/2</td>
+<td>安全性高</td>
+<td>综合RAID 0/1优点，理论速度较快</td>
+</tr>
+</tbody>
+</table>
+<p>1. n代表硬盘总数<br />
+2. JBOD可接到现有硬盘，直接增加容量</p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

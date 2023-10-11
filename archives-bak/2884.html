@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 体系结构 | 青春部落    </title>
+    <meta name="keywords"  content="MySQL,体系结构" />
+    <meta name="description"  content="MySQL数据库服务的体系结构" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; MySQL 体系结构评论Feed" href="https://cn-blogs.cn/archives/2884.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Git 文件忽略:gitignore' href='https://cn-blogs.cn/archives/1811.html' />
+<link rel='next' title='InnoDB体系结构' href='https://cn-blogs.cn/archives/2889.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/2884.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=2884' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2884.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F2884.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-2884 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/databases/mysql" rel="category tag">MySQL</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1811.html" rel="prev">上一篇：Git 文件忽略:gitignore</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/2889.html" rel="next">下一篇：InnoDB体系结构</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            MySQL 体系结构        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2017/02/10</span>
+            <span class="update is-hidden">2018-04-13</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <p>MySQL是由SQL接口，解析器，优化器，缓存，存储引擎组成</p>
+<p><a href="http://www.cn-blogs.cn/archives/2884.html/attachment/105018221" rel="attachment wp-att-2885"><img class="alignnone size-full wp-image-2885" src="http://www.cn-blogs.cn/wp-content/uploads/2017/12/105018221.png" alt="mysql" width="578" height="394" srcset="https://cn-blogs.cn/wp-content/uploads/2017/12/105018221.png 578w, https://cn-blogs.cn/wp-content/uploads/2017/12/105018221-300x204.png 300w" sizes="(max-width: 578px) 100vw, 578px" /></a></p>
+<h4>1 Connectors</h4>
+<p>指的是不同语言中与SQL的交互</p>
+<h4>2 Management Serveices &amp; Utilities</h4>
+<p>系统管理和控制工具</p>
+<h4>3 Connection Pool 连接池</h4>
+<p>管理缓冲用户连接，线程处理等需要缓存的需求</p>
+<h4>4 SQL Interface SQL接口</h4>
+<p>接受用户的SQL命令，并且返回用户需要查询的结果。比如select from就是调用SQL Interface</p>
+<h4>5 Parser 解析器</h4>
+<p>SQL命令传递到解析器的时候会被解析器验证和解析。解析器是由Lex和YACC实现的，是一个很长的脚本。<br />
+主要功能：<br />
+a . 将SQL语句分解成数据结构，并将这个结构传递到后续步骤，以后SQL语句的传递和处理就是基于这个结构的<br />
+b. 如果在分解构成中遇到错误，那么就说明这个sql语句是不合理的</p>
+<h4>6 Optimizer 查询优化器</h4>
+<p>SQL语句在查询之前会使用查询优化器对查询进行优化。他使用的是“选取-投影-联接”策略进行查询。<br />
+用一个例子就可以理解： select uid,name from user where gender = 1;<br />
+这个select 查询先根据where 语句进行选取，而不是先将表全部查询出来以后再进行gender过滤<br />
+这个select查询先根据uid和name进行属性投影，而不是将属性全部取出以后再进行过滤<br />
+将这两个查询条件联接起来生成最终查询结果</p>
+<h4>7 Cache和Buffer 查询缓存</h4>
+<p>如果查询缓存有命中的查询结果，查询语句就可以直接去查询缓存中取数据。<br />
+这个缓存机制是由一系列小缓存组成的。比如表缓存，记录缓存，key缓存，权限缓存等</p>
+<h4>8 Engine 存储引擎</h4>
+<p>存储引擎是MySql中具体的与文件打交道的子系统。也是Mysql最具有特色的一个地方。<br />
+Mysql的存储引擎是插件式的。它根据MySql AB公司提供的文件访问层的一个抽象接口来定制一种文件访问机制（这种访问机制就叫存储引擎）<br />
+现在有很多种存储引擎，各个存储引擎的优势各不一样，最常用的MyISAM,InnoDB,BDB<br />
+默认下MySql是使用MyISAM引擎，它查询速度快，有较好的索引优化和数据压缩技术。但是它不支持事务。<br />
+InnoDB支持事务，并且提供行级的锁定，应用也相当广泛。<br />
+Mysql也支持自己定制存储引擎，甚至一个库中不同的表使用不同的存储引擎，这些都是允许的。</p>
+<h3>查询过程说明</h3>
+<p>1、连接发往连接管理器；<br />
+2、连接管理器调用线程管理器，复制生成一个连接线程，响应用户请求；<br />
+3、由用户模块完成用户的授权和检查；(除非断开，否则回话会处于循环状态)<br />
+4、如果用户发送命令，则会到达命令派发器；<br />
+5、如果是查询请求，则发往查询请求，看缓存是否能命中，如果能命中，则将结果返回，并且记录日志；<br />
+6、如果缓存没有命中，则语句会发往分析器，由分析器完成语法分析、词法分析等，然后可以转换为存储引擎可以执行的语句；<br />
+7、优化器根据状态报告模块的报告，生成最有的访问路径，本次优化的结果也会报告给状态报告模块记录结果；<br />
+8、如果是修改语句，则由表修改模块执行；<br />
+9、如果是表维护语句，则由表维护模块运行；<br />
+10、复制模块实现跨实例的复制；<br />
+11、访问控制模块检查用户是否有访问权限；<br />
+12、如有权限，则交给表管理器，然后把用户请求转换为存储引擎可以执行的语句；<br />
+13、由特定的存储引擎加载文件和执行；(所以存储引擎是表级别的)<br />
+<a href="http://www.cn-blogs.cn/archives/2889.html/20151226101902_1599" rel="attachment wp-att-2890"><img class="size-full wp-image-2890" src="http://www.cn-blogs.cn/wp-content/uploads/2017/12/20151226101902_1599.png" alt="mysql结构" width="665" height="601" srcset="https://cn-blogs.cn/wp-content/uploads/2017/12/20151226101902_1599.png 665w, https://cn-blogs.cn/wp-content/uploads/2017/12/20151226101902_1599-300x271.png 300w" sizes="(max-width: 665px) 100vw, 665px" /></a></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>

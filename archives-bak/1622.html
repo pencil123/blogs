@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Nginx 用户认证和访问控制403 | 青春部落    </title>
+    <meta name="keywords"  content="Nginx,访问控制,deny,allow,用户认证" />
+    <meta name="description"  content="Nginx服务配置用户认证和访问控制以及403原因" />
+    <link rel="stylesheet" type="text/css" media="all" href="https://cn-blogs.cn/wp-content/themes/pencilone/style.css" />
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="https://cn-blogs.cn/xmlrpc.php">
+    <link id="favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="青春部落 &raquo; Nginx 用户认证和访问控制403评论Feed" href="https://cn-blogs.cn/archives/1622.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cn-blogs.cn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://cn-blogs.cn/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://cn-blogs.cn/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cn-blogs.cn/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Nginx 编译安装和增加扩展与升级' href='https://cn-blogs.cn/archives/1583.html' />
+<link rel='next' title='Nginx Index 和 AutoIndex 页面索引' href='https://cn-blogs.cn/archives/1625.html' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel="canonical" href="https://cn-blogs.cn/archives/1622.html" />
+<link rel='shortlink' href='https://cn-blogs.cn/?p=1622' />
+<link rel="alternate" type="application/json+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1622.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://cn-blogs.cn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcn-blogs.cn%2Farchives%2F1622.html&#038;format=xml" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://cn-blogs.cn/wp-content/uploads/2018/03/cropped-logo-270x270.png" />
+
+<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1622 single-format-standard">
+<header class="navbar">
+<div class="container">
+    <div class="navbar-brand">
+        <img src="/logo.png" width="73" height="88">
+        <div>
+        <h1 class="title2 is-3 navbar-item">
+            <a href="https://cn-blogs.cn/" rel="home">青春部落</a>
+        </h1>
+        <p class="has-text-right">
+            <a href="/">记录生活的足迹</a>
+        </p>
+        </div>
+    </div>
+    <div class="navbar-menu is-active">
+    <div class="navbar-end">
+    <div class="tabs is-right">
+    <a class="navbar-item" href="/pages/index.html">索引</a>
+    <a class="navbar-item" href="/about">About</a>
+    </div>
+    </div>
+    </div>
+</div>
+</header>
+
+
+<main class="container">
+        <article class="article margin-top20">
+
+        <!-- 文章分类和上一篇\下一篇 -->
+        <div class="box columns">
+            <!-- 文章分类 -->
+            <div class="column is-two-fifth">
+                <div class="categproe-name">分类：</div>
+                <ul class="post-categories">
+	<li><a href="https://cn-blogs.cn/archives/category/operation-tool/webserver/nginx" rel="category tag">Nginx</a></li></ul>            </div>
+            <!-- 文章分类结束 -->
+
+            <!-- 上一篇和下一篇 -->
+            <div class="column is-two-fifth is-offset-5">
+                
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://cn-blogs.cn/archives/1583.html" rel="prev">上一篇：Nginx 编译安装和增加扩展与升级</a></div><div class="nav-next"><a href="https://cn-blogs.cn/archives/1625.html" rel="next">下一篇：Nginx Index 和 AutoIndex 页面索引</a></div></div>
+	</nav>            </div>
+            <!-- 上一篇和下一篇结束 -->
+        </div>
+
+        <!-- 文章信息 -->
+        <!-- 文章标题 -->
+        <div class="title is-3 has-text-centered">
+            Nginx 用户认证和访问控制403        </div>
+        <!-- 文章标题结束 -->
+
+        <!-- 文章作者、发布时间、更新时间 -->
+        <div class="subtitle is-5 has-text-centered">
+            <span class="entry-author"><a href="https://cn-blogs.cn/archives/author/admin" title="由admin发布" rel="author">admin</a></span>
+            <span class="entry-date">2015/05/21</span>
+            <span class="update is-hidden">2018-05-10</span>
+        </div>
+        <!-- 文章作者、发布时间、更新时间结束 -->
+
+        <!-- 文章内容 -->
+        <div class="content article-body">
+            <div class="content">
+                <h2>访问控制</h2>
+<p>模块：ngx_http_access_module<br />
+设置整个nginx服务、单个虚拟主机、某个主机的某个路径 允许|拒绝访问的IP或者ip端；<br />
+如果拒绝访问返回403状态码</p>
+<h4>allow允许</h4>
+<p>语法: allow address | CIDR | unix: | all;<br />
+默认值: —<br />
+配置段: http, server, location, limit_except<br />
+允许某个ip或者一个ip段访问.如果指定unix:,那将允许socket的访问.</p>
+<h4>deny拒绝</h4>
+<p>语法: deny address | CIDR | unix: | all;<br />
+默认值: —<br />
+配置段: http, server, location, limit_except<br />
+禁止某个ip或者一个ip段访问.如果指定unix:,那将禁止socket的访问</p>
+<h2>403 forbidden 说明</h2>
+<p>Nginx访问出现&#8221;403 拒绝访问&#8221;状态的三种原因</p>
+<h4>1、缺少索引文件</h4>
+<p><code>index index.html index.php;<br />
+root /data/www;</code><br />
+如果目录中没有index.html 和index.php文件，则会403错误。</p>
+<h4>2、代码文件权限问题</h4>
+<p>Nginx服务运行用户，没有权限访问代码目录。</p>
+<h4>3、Nginx配置403拒绝访问</h4>
+<p>nginx 可以设置访问控制allow 和deny;<br />
+判断用户是否拒绝访问的维度也有很多；如：user_agent，request_uri，access_ip等</p>
+<h2>用户认证</h2>
+<p>模块:ngx_http_auth_basic_module<br />
+Nginx默认安装ngx_http_auth_basic_module模块；<br />
+如果要禁用次模块，编译按照中使用&#8211;without-http_auth_basic_module 。</p>
+<h4>auth_basic 对话框名称</h4>
+<p>语法: auth_basic string | off;<br />
+默认值: auth_basic off;<br />
+配置段: http, server, location, limit_except<br />
+默认表示不开启认证，后面如果跟上字符，这些字符会在弹窗中显示。</p>
+<h4>auth_basic_user_file 用户密码文件</h4>
+<p>语法: auth_basic_user_file file;<br />
+默认值: —<br />
+配置段: http, server, location, limit_except<br />
+用户密码文件；使用htpasswd或者perl创建密码。</p>
+<h3>配置案例：</h3>
+<p><code>location /<br />
+{<br />
+auth_basic "nginx basic http test for ttlsa.com";<br />
+auth_basic_user_file conf/htpasswd;<br />
+autoindex on;<br />
+}</code></p>
+<h2>Htpasswd 工具</h2>
+<p>由Apache软件提供的工具。htpasswd用于创建和更新用于存储HTTP用户基本身份验证用户名和密码的flat-files。</p>
+<h4>htpasswd选项参数</h4>
+<p><code>htpasswd [ -c ] [ -i ] [ -m | -B | -d | -s | -p ] [ -C cost ] [ -D ] [ -v ] passwdfile username<br />
+htpasswd -b [ -c ] [ -m | -B | -d | -s | -p ] [ -C cost ] [ -D ] [ -v ] passwdfile username password<br />
+htpasswd -n [ -i ] [ -m | -B | -d | -s | -p ] [ -C cost ] username<br />
+htpasswd -nb [ -m | -B | -d | -s | -p ] [ -C cost ] username password</code></p>
+<h4>常用参数说明</h4>
+<table>
+<tbody>
+<tr>
+<th>-c</th>
+<th>创建一个加密文件</th>
+</tr>
+<tr>
+<th>-n</th>
+<th>在标准输出上显示结果而不是更新文件</th>
+</tr>
+<tr>
+<th>-m</th>
+<th>使用MD5加密密码。这是默认值</th>
+</tr>
+<tr>
+<th>-d</th>
+<th>使用crypt()加密密码</th>
+</tr>
+<tr>
+<th>-p</th>
+<th>使用明文密码</th>
+</tr>
+<tr>
+<th>-s</th>
+<th>使用SHA加密密码</th>
+</tr>
+<tr>
+<th>-b</th>
+<th>从命令行获取密码而不是提示输入密码。应该非常小心地使用此选项，因为密码在命令行中清晰可见。</th>
+</tr>
+<tr>
+<th>-D</th>
+<th>删除用户。如果用户名存在于指定的htpasswd文件中，它将被删除。</th>
+</tr>
+</tbody>
+</table>
+<h4>使用示例</h4>
+<p>1、创建文件并创建用户<br />
+<code>htpasswd -bc .passwd username pass</code><br />
+创建.passwd文件，用户名username ，密码：pass，默认采用MD5加密方式</p>
+<p>2、原文件添加用户<br />
+<code>htpasswd -b .passwd onlyzq pass</code><br />
+去掉c选项,即添加用户</p>
+<p>3、取得加密密码<br />
+<code>htpasswd -nb username pass</code><br />
+在终端中输出username用户和pass加密后的密码</p>
+<p>4、删除用户<br />
+<code>htpasswd -D .passwd username</code></p>
+            </div>
+        </div>
+        <!-- 文章内容结束 -->
+    </article>
+
+
+</main><!-- .content-area -->
+
+<div class="footer">
+    <div class="container">
+
+<div class="has-text-centered">
+Copyright©2015-20178 cn-blogs.cn. All Rights Reserved. 鲁ICP备18001334号-2
+</div>
+    </div>
+  </div>
+
+</body>
+</html>
